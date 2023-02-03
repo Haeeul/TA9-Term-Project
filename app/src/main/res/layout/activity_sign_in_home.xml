@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignInHomeActivity">
+    tools:context=".ui.sign.SignInHomeActivity">
 
     <TextView
         android:id="@+id/txt_home_title"
@@ -25,11 +25,9 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/title_sign_In"
-        android:fontFamily="@font/gyeonggi_cheonnyeon_medium"
-        android:textSize="24dp"
-        android:includeFontPadding="false"
-        android:background="@drawable/round_square_line_grey_2"
+        android:text="@string/txt_sign_in"
+        style="@style/ButtonText"
+        android:background="@drawable/round_square_line_grey_32"
         app:layout_constraintBottom_toTopOf="@+id/btn_home_sign_up"
         app:layout_constraintEnd_toEndOf="@+id/btn_home_sign_up"
         app:layout_constraintStart_toStartOf="@+id/btn_home_sign_up" />
@@ -41,11 +39,9 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/round_square_fill_blue_2"
-        android:fontFamily="@font/gyeonggi_cheonnyeon_medium"
-        android:includeFontPadding="false"
-        android:text="@string/title_sign_up"
-        android:textSize="24dp"
+        android:text="@string/txt_sign_up"
+        style="@style/ButtonText"
+        android:background="@drawable/round_square_fill_blue_32"
         app:layout_constraintBottom_toTopOf="@+id/btn_home_sign_skip"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -57,7 +53,7 @@
         android:layout_marginBottom="50dp"
         android:fontFamily="@font/gyeonggi_cheonnyeon_medium"
         android:includeFontPadding="false"
-        android:text="@string/title_sign_skip"
+        android:text="@string/txt_sign_skip"
         android:textColor="@color/dark_grey"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
