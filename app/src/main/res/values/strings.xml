@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MH-Term-App</string>
+
+    // sign
+    <string name="title_sign_up">회원가입</string>
+    <string name="title_sign_In">로그인</string>
+    <string name="title_sign_skip">둘러보기</string>
 </resources>
