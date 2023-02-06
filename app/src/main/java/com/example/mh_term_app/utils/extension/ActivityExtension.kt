@@ -1,4 +1,4 @@
-package com.example.mh_term_app.util
+package com.example.mh_term_app.utils
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
