@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ActivityTitle">
+        <item name="fontFamily">@font/gyeonggi_cheonnyeon_bold</item>
+        <item name="android:textColor">@color/light_black</item>
+        <item name="android:textSize">24dp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="ButtonText">
+        <item name="fontFamily">@font/gyeonggi_cheonnyeon_medium</item>
+        <item name="android:textColor">@color/light_black</item>
+        <item name="android:textSize">24dp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="BoldText">
+        <item name="fontFamily">@font/gyeonggi_cheonnyeon_bold</item>
+        <item name="android:textColor">@color/light_black</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="MediumText">
+        <item name="fontFamily">@font/gyeonggi_cheonnyeon_medium</item>
+        <item name="android:textColor">@color/light_black</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="LightText">
+        <item name="fontFamily">@font/gyeonggi_cheonnyeon_light</item>
+        <item name="android:textColor">@color/light_black</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+</resources>

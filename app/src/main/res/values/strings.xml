@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">MH-Term-App</string>
+
+    <!-- sign home-->
+    <string name="txt_sign_up">회원가입</string>
+    <string name="txt_sign_in">로그인</string>
+    <string name="txt_sign_skip">둘러보기</string>
+
+    <!-- phone auth -->
+    <string name="txt_request_phone">인증요청</string>
+    <string name="txt_hint_phone_input">- 제외하고 숫자만 입력</string>
+    <string name="txt_hint_auth_num_input">인증번호를 입력해주세요.</string>
+
+    <!-- sign in -->
+    <string name="txt_desc_sign_in">휴대폰 번호로 로그인합니다.</string>
+    <string name="txt_desc_account_null">계정이 없으신가요?</string>
+
+    <!-- sign up -->
+    <string name="txt_desc_sign_up">휴대폰 번호로 회원가입합니다.</string>
+    <string name="txt_next">다음</string>
+
 </resources>
