@@ -22,7 +22,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
     private val signUpViewModel : SignViewModel by viewModels()
 
     val auth = Firebase.auth
-    val user = Firebase.auth.currentUser
     var verificationId = ""
     var phoneNum = ""
 
@@ -48,13 +47,30 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
         }
 
         val optionsCompat =  PhoneAuthOptions.newBuilder(auth)
-            .setPhoneNumber("+821012341234")
+            .setPhoneNumber(getPhoneNumber(viewDataBinding.edtSignUpPhone.text.toString()))
             .setTimeout(60L, TimeUnit.SECONDS)
             .setActivity(this)
             .setCallbacks(callbacks)
             .build()
         PhoneAuthProvider.verifyPhoneNumber(optionsCompat)
         auth.setLanguageCode("kr")
+    }
+
+    private fun getPhoneNumber(num : String) : String{
+        val firstNumber : String = num.substring(0,3)
+        var phoneEdit = num.substring(3)
+
+        when(firstNumber){
+            "010" -> phoneEdit = "+8210$phoneEdit"
+            "011" -> phoneEdit = "+8211$phoneEdit"
+            "016" -> phoneEdit = "+8216$phoneEdit"
+            "017" -> phoneEdit = "+8217$phoneEdit"
+            "018" -> phoneEdit = "+8218$phoneEdit"
+            "019" -> phoneEdit = "+8219$phoneEdit"
+            "106" -> phoneEdit = "+82106$phoneEdit"
+        }
+
+        return phoneEdit
     }
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
