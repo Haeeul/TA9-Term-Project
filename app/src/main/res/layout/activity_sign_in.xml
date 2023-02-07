@@ -107,6 +107,8 @@
             android:paddingHorizontal="16dp"
             android:textColorHint="@color/grey"
             android:textSize="18dp"
+            android:text="@={vm.authNumTxt}"
+            android:onTextChanged="@{vm::inputAuthNum}"
             app:layout_constraintEnd_toEndOf="@+id/btn_sign_in_request_auth"
             app:layout_constraintStart_toStartOf="@+id/edt_sign_in_phone"
             app:layout_constraintTop_toBottomOf="@+id/edt_sign_in_phone" />
@@ -135,7 +137,7 @@
             style="@style/MediumText"
             android:textSize="16dp"
             android:textColor="@color/red"
-            android:visibility="@{vm.isValidAuth ? View.VISIBLE : View.INVISIBLE}"
+            android:visibility="@{vm.isValidNotice ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintStart_toStartOf="@+id/edt_sigh_in_auth_num"
             app:layout_constraintTop_toBottomOf="@+id/edt_sigh_in_auth_num" />
 
@@ -160,9 +162,10 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/selector_sign_btn"
-            android:enabled="false"
             android:text="@string/txt_sign_in"
             android:textColor="@color/white"
+            android:enabled="@{vm.isValidAuth}"
+            android:onClick="checkAuth"
             app:layout_constraintBottom_toTopOf="@+id/textView4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

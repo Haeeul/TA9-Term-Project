@@ -3,7 +3,7 @@
 
     <!-- sign home-->
     <string name="txt_sign_up">회원가입</string>
-    <string name="txt_sign_in"><u>로그인</u></string>
+    <string name="txt_sign_in">로그인</string>
     <string name="txt_sign_skip">둘러보기</string>
 
     <!-- phone auth -->
