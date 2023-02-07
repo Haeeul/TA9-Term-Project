@@ -16,11 +16,11 @@ class SignViewModel(): ViewModel() {
     val authNumTxt = MutableLiveData<String>("")
 
     // 안내 문구
-    val authNotice = MutableLiveData<String>()
+    val authNotice = MutableLiveData<Int>()
     val timer = MutableLiveData<String>()
 
     // 타이머
-    var minute = 3
+    var minute = 2
     var second = 0
     private var timerTask: Timer? = null
 
@@ -85,8 +85,7 @@ class SignViewModel(): ViewModel() {
             if(minute==0&&second==0) {
                 this.cancel()
 
-                val str = MHApplication.getApplicationContext().getString(R.string.txt_auth_timeout)
-                authNotice.postValue(str)
+                authNotice.postValue(1)
                 _isValidNotice.postValue(true)
                 _isValidAuth.postValue(false)
             }
@@ -96,7 +95,7 @@ class SignViewModel(): ViewModel() {
     private fun stopAuthTimer(){
         setTimeVisibility(false)
 
-        minute = 3
+        minute = 2
         second = 0
 
         timerTask?.cancel()
@@ -108,7 +107,7 @@ class SignViewModel(): ViewModel() {
     }
 
     private fun checkAuthNumLength(){
-        _isValidAuth.value = authNumTxt.value?.length == 6 && _isValidTimer.value==true
+        _isValidAuth.value = authNumTxt.value?.length == 6 && _isValidTimer.value==true && authNotice.value !=1
     }
 
     // 인증 번호 확인
@@ -118,8 +117,7 @@ class SignViewModel(): ViewModel() {
             _isValidAuth.value = false
             _isValidNotice.value = true
 
-            val str = MHApplication.getApplicationContext().getString(R.string.txt_auth_fail)
-            authNotice.value = str
+            authNotice.value = 2
         }
     }
 

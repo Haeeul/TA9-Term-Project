@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivitySignUpBinding
 import com.example.mh_term_app.ui.sign.SignViewModel
+import com.example.mh_term_app.utils.extension.toast
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
@@ -23,7 +25,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
 
     val auth = Firebase.auth
     var verificationId = ""
-    var phoneNum = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,19 +37,20 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
     private fun requestPhoneAuth(){
         val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-                Log.d("명1", "완료")
+                Log.d("auth completed : ", "인증 완료")
             }
             override fun onVerificationFailed(e: FirebaseException) {
-                Log.d("명2",e.message.toString())
+                Log.d("auth failed : ",e.message.toString())
             }
             override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
                 this@SignUpActivity.verificationId = verificationId
+                toast(MHApplication.getApplicationContext().getString(R.string.txt_request_message))
             }
         }
 
         val optionsCompat =  PhoneAuthOptions.newBuilder(auth)
             .setPhoneNumber(getPhoneNumber(viewDataBinding.edtSignUpPhone.text.toString()))
-            .setTimeout(60L, TimeUnit.SECONDS)
+            .setTimeout(120L, TimeUnit.SECONDS)
             .setActivity(this)
             .setCallbacks(callbacks)
             .build()
@@ -77,12 +79,12 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Log.d("명3","성공")
+
                 }
                 else{
                     // 인증 번호 틀린 경우
                     signUpViewModel.setAuthFail()
-                    Log.d("명4",task.exception?.message.toString())
+                    Log.d("auth number wrong : ",task.exception?.message.toString())
                 }
             }
     }
