@@ -23,14 +23,14 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>() {
     }
 
     // 인증요청 버튼
-    fun postAuthRequest(view: View){
+    fun postSignInAuthRequest(view: View){
         signInViewModel.startAuthTimer()
         viewDataBinding.edtSighInAuthNum.requestFocus()
     }
 
     // 로그인 버튼
-    fun checkAuth(view: View){
-        signInViewModel.checkAuthNum()
+    fun checkSignInAuth(view: View){
+        signInViewModel.setAuthFail()
     }
 
     fun goToBackListener(view : View){

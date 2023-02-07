@@ -112,7 +112,7 @@ class SignViewModel(): ViewModel() {
     }
 
     // 인증 번호 확인
-    fun checkAuthNum(){
+    fun setAuthFail(){
         val test = false
         if(!test){
             _isValidAuth.value = false
