@@ -8,8 +8,11 @@
 
     <!-- phone auth -->
     <string name="txt_request_phone">인증요청</string>
+    <string name="txt_request_again"><u>인증재요청</u></string>
     <string name="txt_hint_phone_input">- 제외하고 숫자만 입력</string>
     <string name="txt_hint_auth_num_input">인증번호를 입력해주세요.</string>
+    <string name="txt_auth_fail">인증 번호가 유효하지 않습니다.</string>
+    <string name="txt_auth_timeout">인증 번호가 만료되었습니다.</string>
 
     <!-- sign in -->
     <string name="txt_desc_sign_in">휴대폰 번호로 로그인합니다.</string>
