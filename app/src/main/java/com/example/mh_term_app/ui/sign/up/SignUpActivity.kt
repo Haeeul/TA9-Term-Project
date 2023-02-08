@@ -10,6 +10,7 @@ import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivitySignUpBinding
 import com.example.mh_term_app.ui.sign.SignViewModel
 import com.example.mh_term_app.utils.extension.toast
+import com.example.mh_term_app.utils.startActivityWithFinish
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
@@ -104,6 +105,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     toast("인증 성공")
+                    startActivityWithFinish(UserInfoActivity::class.java)
                 } else {
                     // 인증 번호 틀린 경우
                     Log.w("auth number wrong : ", task.exception?.message.toString())
