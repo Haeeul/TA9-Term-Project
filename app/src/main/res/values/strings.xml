@@ -11,8 +11,9 @@
     <string name="txt_request_again"><u>인증재요청</u></string>
     <string name="txt_hint_phone_input">- 제외하고 숫자만 입력</string>
     <string name="txt_hint_auth_num_input">인증번호를 입력해주세요.</string>
-    <string name="txt_auth_fail">인증 번호가 유효하지 않습니다.</string>
+    <string name="txt_auth_fail">인증 번호를 다시 확인해주세요.</string>
     <string name="txt_auth_timeout">인증 번호가 만료되었습니다.</string>
+    <string name="txt_request_message">인증 번호 요청 완료</string>
 
     <!-- sign in -->
     <string name="txt_desc_sign_in">휴대폰 번호로 로그인합니다.</string>
@@ -21,5 +22,18 @@
     <!-- sign up -->
     <string name="txt_desc_sign_up">휴대폰 번호로 회원가입합니다.</string>
     <string name="txt_next">다음</string>
+
+    <!-- user info -->
+    <string name="txt_desc_user_info">리뷰 작성을 위해/n추가 정보를 입력해주세요.</string>
+    <string name="txt_nick_name">닉네임</string>
+    <string name="txt_hint_nick_name_input">닉네임을 입력해주세요.</string>
+    <string name="txt_double_check">중복확인</string>
+    <string name="txt_user_type">특이사항</string>
+    <string name="txt_user_type_wheelchair">휠체어 사용자</string>
+    <string name="txt_user_type_guardian">영유아 보호자</string>
+    <string name="txt_user_type_handicap">시각 장애인</string>
+    <string name="txt_user_type_injured">목발 사용 등 부상자</string>
+    <string name="txt_user_type_old">노약자</string>
+    <string name="txt_complete">완료</string>
 
 </resources>

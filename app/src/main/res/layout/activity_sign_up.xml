@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="vm"
+            type="com.example.mh_term_app.ui.sign.SignViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -65,21 +72,25 @@
             android:paddingHorizontal="16dp"
             android:textColorHint="@color/grey"
             android:textSize="18dp"
+            android:nextFocusDown="@id/edt_sign_up_auth_num"
+            android:text="@={vm.phoneNumTxt}"
+            android:onTextChanged="@{vm::inputPhoneNum}"
             app:layout_constraintEnd_toStartOf="@+id/btn_sign_up_request_auth"
             app:layout_constraintStart_toStartOf="@+id/textView5"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_sign_up_request_auth"
             style="@style/MediumText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:background="@drawable/selector_sign_request_btn"
-            android:enabled="false"
+            android:enabled="@{vm.isValidRequestBtn}"
             android:text="@string/txt_request_phone"
             android:textColor="@color/white"
             android:textSize="16dp"
+            android:onClick="postSignUpAuthRequest"
             app:layout_constraintBottom_toBottomOf="@+id/edt_sign_up_phone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/edt_sign_up_phone" />
@@ -93,12 +104,58 @@
             android:background="@drawable/round_square_line_grey_8"
             android:hint="@string/txt_hint_auth_num_input"
             android:inputType="number"
+            android:onTextChanged="@{vm::inputAuthNum}"
             android:paddingHorizontal="16dp"
+            android:text="@={vm.authNumTxt}"
             android:textColorHint="@color/grey"
             android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="@+id/btn_sign_up_request_auth"
             app:layout_constraintStart_toStartOf="@+id/edt_sign_up_phone"
             app:layout_constraintTop_toBottomOf="@+id/edt_sign_up_phone" />
+
+        <TextView
+            android:id="@+id/txt_sign_up_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/gyeonggi_cheonnyeon_medium"
+            android:includeFontPadding="false"
+            android:text="@{vm.timer}"
+            android:textColor="@color/red"
+            android:textSize="16dp"
+            android:visibility="@{vm.isValidTimer ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_sign_up_auth_num"
+            app:layout_constraintEnd_toEndOf="@+id/edt_sign_up_auth_num"
+            app:layout_constraintTop_toTopOf="@+id/edt_sign_up_auth_num" />
+
+        <TextView
+            android:id="@+id/txt_sign_up_notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            setAuthNotice="@{vm.authNotice}"
+            style="@style/MediumText"
+            android:textSize="16dp"
+            android:textColor="@color/red"
+            android:visibility="@{vm.isValidNotice ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintStart_toStartOf="@+id/edt_sign_up_auth_num"
+            app:layout_constraintTop_toBottomOf="@+id/edt_sign_up_auth_num" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/txt_sign_up_request_again"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@color/transparent"
+            android:onClick="postSignUpAuthResend"
+            android:text="@string/txt_request_again"
+            android:textColor="@color/dark_grey"
+            android:textSize="16dp"
+            android:visibility="@{vm.isValidTimer ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_sign_up_notice"
+            app:layout_constraintEnd_toEndOf="@+id/txt_sign_up_timer"
+            app:layout_constraintStart_toStartOf="@+id/txt_sign_up_timer"
+            app:layout_constraintTop_toTopOf="@+id/txt_sign_up_notice" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_sign_up_next"
@@ -109,12 +166,15 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="45dp"
             android:background="@drawable/selector_sign_btn"
-            android:enabled="false"
+            android:enabled="@{vm.isValidAuth}"
             android:text="@string/txt_next"
             android:textColor="@color/white"
+            android:onClick="checkSignUpAuth"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

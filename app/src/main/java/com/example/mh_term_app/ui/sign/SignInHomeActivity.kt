@@ -1,10 +1,7 @@
 package com.example.mh_term_app.ui.sign
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.view.View
-import androidx.databinding.DataBindingUtil
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivitySignInHomeBinding
