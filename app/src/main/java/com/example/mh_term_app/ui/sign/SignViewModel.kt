@@ -92,8 +92,11 @@ class SignViewModel(): ViewModel() {
         }
     }
 
-    private fun stopAuthTimer(){
+    fun stopAuthTimer(){
         setTimeVisibility(false)
+        authNumTxt.value = ""
+        authNotice.value = 0
+        _isValidAuth.value = false
 
         minute = 2
         second = 0

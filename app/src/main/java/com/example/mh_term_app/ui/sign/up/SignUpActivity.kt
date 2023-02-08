@@ -11,6 +11,8 @@ import com.example.mh_term_app.databinding.ActivitySignUpBinding
 import com.example.mh_term_app.ui.sign.SignViewModel
 import com.example.mh_term_app.utils.extension.toast
 import com.google.firebase.FirebaseException
+import com.google.firebase.FirebaseTooManyRequestsException
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
@@ -21,10 +23,43 @@ import java.util.concurrent.TimeUnit
 
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
     override val layoutResID: Int = R.layout.activity_sign_up
-    private val signUpViewModel : SignViewModel by viewModels()
+    private val signUpViewModel: SignViewModel by viewModels()
 
-    val auth = Firebase.auth
-    var verificationId = ""
+    private val auth = Firebase.auth
+    private var verificationId = ""
+    private var resendToken: PhoneAuthProvider.ForceResendingToken? = null
+
+    private val callbacks by lazy {
+        object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+            // 번호 인증 완료 상태
+            override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+                Log.d("auth Completed : ", "인증 완료")
+            }
+
+            // 번호 인증 실패 상태
+            override fun onVerificationFailed(e: FirebaseException) {
+                Log.w("auth Fail : ", "onVerificationFailed", e)
+                if (e is FirebaseAuthInvalidCredentialsException) {
+                    // Invalid request
+                } else if (e is FirebaseTooManyRequestsException) {
+                    // The SMS quota for the project has been exceeded
+                }
+            }
+
+            // 인증 코드 입력 대기 상태
+            override fun onCodeSent(
+                verificationId: String,
+                token: PhoneAuthProvider.ForceResendingToken
+            ) {
+                Log.d("auth request : ", "$verificationId / $token")
+                this@SignUpActivity.verificationId = verificationId
+                resendToken = token
+                signUpViewModel.stopAuthTimer()
+                signUpViewModel.startAuthTimer()
+                toast(MHApplication.getApplicationContext().getString(R.string.txt_request_message))
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,22 +69,10 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
         }
     }
 
-    private fun requestPhoneAuth(){
-        val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-            override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-                Log.d("auth completed : ", "인증 완료")
-            }
-            override fun onVerificationFailed(e: FirebaseException) {
-                Log.d("auth failed : ",e.message.toString())
-            }
-            override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
-                this@SignUpActivity.verificationId = verificationId
-                toast(MHApplication.getApplicationContext().getString(R.string.txt_request_message))
-            }
-        }
-
-        val optionsCompat =  PhoneAuthOptions.newBuilder(auth)
-            .setPhoneNumber(getPhoneNumber(viewDataBinding.edtSignUpPhone.text.toString()))
+    // 인증 요청
+    private fun requestPhoneAuth(phoneNumber : String) {
+        val optionsCompat = PhoneAuthOptions.newBuilder(auth)
+            .setPhoneNumber(phoneNumber)
             .setTimeout(120L, TimeUnit.SECONDS)
             .setActivity(this)
             .setCallbacks(callbacks)
@@ -58,51 +81,59 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
         auth.setLanguageCode("kr")
     }
 
-    private fun getPhoneNumber(num : String) : String{
-        val firstNumber : String = num.substring(0,3)
-        var phoneEdit = num.substring(3)
-
-        when(firstNumber){
-            "010" -> phoneEdit = "+8210$phoneEdit"
-            "011" -> phoneEdit = "+8211$phoneEdit"
-            "016" -> phoneEdit = "+8216$phoneEdit"
-            "017" -> phoneEdit = "+8217$phoneEdit"
-            "018" -> phoneEdit = "+8218$phoneEdit"
-            "019" -> phoneEdit = "+8219$phoneEdit"
-            "106" -> phoneEdit = "+82106$phoneEdit"
+    // 인증 재요청
+    private fun resendAuthCode(phoneNumber: String, token: PhoneAuthProvider.ForceResendingToken?) {
+        val optionsCompat = PhoneAuthOptions.newBuilder(auth)
+            .setPhoneNumber(phoneNumber)
+            .setTimeout(120L, TimeUnit.SECONDS)
+            .setActivity(this)
+            .setCallbacks(callbacks)
+        if (token != null) {
+            optionsCompat.setForceResendingToken(token) // callback's ForceResendingToken
         }
+        PhoneAuthProvider.verifyPhoneNumber(optionsCompat.build())
+        auth.setLanguageCode("kr")
+    }
 
-        return phoneEdit
+    private fun getPhoneNumber(num: String): String {
+        return "+82" +num.substring(1)
     }
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-
-                }
-                else{
+                    toast("인증 성공")
+                } else {
                     // 인증 번호 틀린 경우
+                    Log.w("auth number wrong : ", task.exception?.message.toString())
                     signUpViewModel.setAuthFail()
-                    Log.d("auth number wrong : ",task.exception?.message.toString())
                 }
             }
     }
 
     // 인증요청 버튼
-    fun postSignUpAuthRequest(view: View){
-        requestPhoneAuth()
-        signUpViewModel.startAuthTimer()
+    fun postSignUpAuthRequest(view: View) {
+        requestPhoneAuth(getPhoneNumber(viewDataBinding.edtSignUpPhone.text.toString()))
+        viewDataBinding.edtSignUpAuthNum.requestFocus()
+    }
+
+    // 인증재요청 버튼
+    fun postSignUpAuthResend(view: View){
+        resendAuthCode(getPhoneNumber(viewDataBinding.edtSignUpPhone.text.toString()), resendToken)
         viewDataBinding.edtSignUpAuthNum.requestFocus()
     }
 
     // 회원가입 버튼
-    fun checkSignUpAuth(view: View){
-        val credential = PhoneAuthProvider.getCredential(verificationId, viewDataBinding.edtSignUpAuthNum.text.toString())
+    fun checkSignUpAuth(view: View) {
+        val credential = PhoneAuthProvider.getCredential(
+            verificationId,
+            viewDataBinding.edtSignUpAuthNum.text.toString()
+        )
         signInWithPhoneAuthCredential(credential)
     }
 
-    fun goToBackListener(view : View){
+    fun goToBackListener(view: View) {
         finish()
     }
 }

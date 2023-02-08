@@ -141,14 +141,17 @@
             app:layout_constraintStart_toStartOf="@+id/edt_sigh_in_auth_num"
             app:layout_constraintTop_toBottomOf="@+id/edt_sigh_in_auth_num" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/txt_sign_in_request_again"
             style="@style/MediumText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
+            android:background="@color/transparent"
             android:text="@string/txt_request_again"
             android:textColor="@color/dark_grey"
+            android:textSize="16dp"
             android:visibility="@{vm.isValidTimer ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_sign_in_notice"
             app:layout_constraintEnd_toEndOf="@+id/txt_sign_in_timer"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/txt_sign_in_timer"
