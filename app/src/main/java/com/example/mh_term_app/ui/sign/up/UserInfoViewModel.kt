@@ -2,7 +2,6 @@ package com.example.mh_term_app.ui.sign.up
 
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -39,6 +38,11 @@ class UserInfoViewModel : ViewModel() {
     val isValidNickname : LiveData<Boolean>
         get() = _isValidNickname
 
+    // 인증 유효 검사
+    private val _isValidSignUp = MutableLiveData<Boolean>()
+    val isValidSignUp : LiveData<Boolean>
+        get() = _isValidSignUp
+
     // 닉네임 입력 확인
     fun inputNickname(s: CharSequence?, start: Int, before: Int, count: Int){
         Handler(Looper.getMainLooper()).postDelayed({ checkNicknameLength() }, 0L)
@@ -67,7 +71,9 @@ class UserInfoViewModel : ViewModel() {
     }
 
     fun postSignUp(){
-        Log.d("명2", auth.currentUser?.phoneNumber + nicknameTxt.value.toString() + typeTxt.value.toString())
+        viewModelScope.launch {
+            _isValidSignUp.value = userRepository.postSignUp(auth.currentUser?.phoneNumber.toString(), nicknameTxt.value.toString(), typeTxt.value.toString())
+        }
     }
 
 }

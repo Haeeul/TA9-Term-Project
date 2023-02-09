@@ -5,10 +5,13 @@ import androidx.activity.viewModels
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivityUserInfoBinding
+import com.example.mh_term_app.ui.sign.SignInHomeActivity
+import com.example.mh_term_app.utils.extension.toast
+import com.example.mh_term_app.utils.startActivityWithFinish
 
 class UserInfoActivity : BaseActivity<ActivityUserInfoBinding>() {
     override val layoutResID: Int = R.layout.activity_user_info
-    private val userInfoViewModel : UserInfoViewModel by viewModels()
+    private val userInfoViewModel: UserInfoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,16 +20,29 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding>() {
             vm = userInfoViewModel
         }
 
+        initObserver()
         initListener()
     }
 
-    private fun initListener(){
+    private fun initObserver() {
+        userInfoViewModel.isValidSignUp.observe(this
+        ) {
+            if (it) {
+                toast("회원가입 성공")
+                startActivityWithFinish(SignInHomeActivity::class.java)
+            } else {
+                toast("회원가입 실패")
+            }
+        }
+    }
+
+    private fun initListener() {
         getUserType()
     }
 
-    private fun getUserType(){
-        viewDataBinding.rgUserType.setOnCheckedChangeListener{ _, checkedId ->
-            when(checkedId){
+    private fun getUserType() {
+        viewDataBinding.rgUserType.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
                 R.id.rb_type_wheelchair -> userInfoViewModel.setTypeTxt(getString(R.string.txt_user_type_wheelchair))
                 R.id.rb_type_guardian -> userInfoViewModel.setTypeTxt(getString(R.string.txt_user_type_guardian))
                 R.id.rb_type_handicap -> userInfoViewModel.setTypeTxt(getString(R.string.txt_user_type_handicap))

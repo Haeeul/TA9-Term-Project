@@ -28,4 +28,31 @@ class RemoteDataSourceImpl : RemoteDataSource {
         }
         return valid
     }
+
+    override suspend fun postSignUp(phoneNum: String, nickname: String, type: String) : Boolean {
+        var result = false
+
+        val user = hashMapOf(
+            "phoneNum" to phoneNum,
+            "nickname" to nickname,
+            "type" to type
+        )
+
+        try {
+            db.collection("users")
+                .add(user)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                    result = true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error adding documents.", exception)
+                    result = false
+                }.await()
+        }catch (e:FirebaseException){
+            Log.e(TAG, e.message.toString())
+        }
+
+        return result
+    }
 }
