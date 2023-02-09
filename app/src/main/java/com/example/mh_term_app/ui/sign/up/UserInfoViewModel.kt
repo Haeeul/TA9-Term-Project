@@ -2,22 +2,24 @@ package com.example.mh_term_app.ui.sign.up
 
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mh_term_app.data.repository.UserRepository
-import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 
 class UserInfoViewModel : ViewModel() {
-    val db = Firebase.firestore
+    val auth = Firebase.auth
     private val TAG : String = "[UserInfoViewModel] "
     private val userRepository = UserRepository()
 
     // 사용자 입력 내용
     val nicknameTxt = MutableLiveData<String>()
+    val typeTxt = MutableLiveData<String>()
 
     // 안내 문구
     val nicknameNotice = MutableLiveData<String>()
@@ -56,10 +58,16 @@ class UserInfoViewModel : ViewModel() {
     }
 
     private fun resetValidNickname(){
-        if(_isValidNickname.value!!){
-            _isValidNickname.value = false
-            _isValidNickNotice.value = false
-        }
+        _isValidNickname.value = false
+        _isValidNickNotice.value = false
+    }
+
+    fun setTypeTxt(txt:String){
+        typeTxt.value = txt
+    }
+
+    fun postSignUp(){
+        Log.d("명2", auth.currentUser?.phoneNumber + nicknameTxt.value.toString() + typeTxt.value.toString())
     }
 
 }

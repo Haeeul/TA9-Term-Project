@@ -157,37 +157,38 @@
             android:id="@+id/rg_user_type"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
+            android:shadowColor="@color/light_grey"
             app:layout_constraintEnd_toEndOf="@+id/imageView6"
             app:layout_constraintTop_toBottomOf="@+id/textView10">
 
             <RadioButton
                 android:id="@+id/rb_type_wheelchair"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_weight="1" />
 
             <RadioButton
                 android:id="@+id/rb_type_guardian"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_weight="1" />
 
             <RadioButton
                 android:id="@+id/rb_type_handicap"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_weight="1" />
 
             <RadioButton
                 android:id="@+id/rb_type_injured"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_weight="1" />
 
             <RadioButton
                 android:id="@+id/rb_type_old"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_weight="1" />
         </RadioGroup>
 
@@ -199,7 +200,7 @@
             android:text="@string/txt_user_type_wheelchair"
             style="@style/MediumText"
             android:textColor="@color/deep_dark_grey"
-            android:textSize="18dp"
+            android:textSize="16dp"
             app:layout_constraintStart_toStartOf="@+id/textView10"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -222,7 +223,7 @@
             android:layout_marginTop="14dp"
             android:text="@string/txt_user_type_guardian"
             android:textColor="@color/deep_dark_grey"
-            android:textSize="18dp"
+            android:textSize="16dp"
             app:layout_constraintStart_toStartOf="@+id/textView10"
             app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
@@ -244,7 +245,7 @@
             android:text="@string/txt_user_type_handicap"
             style="@style/MediumText"
             android:textColor="@color/deep_dark_grey"
-            android:textSize="18dp"
+            android:textSize="16dp"
             app:layout_constraintStart_toStartOf="@+id/textView10"
             app:layout_constraintTop_toBottomOf="@+id/imageView7" />
 
@@ -262,11 +263,11 @@
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="16dp"
             android:text="@string/txt_user_type_injured"
             style="@style/MediumText"
             android:textColor="@color/deep_dark_grey"
-            android:textSize="18dp"
+            android:textSize="16dp"
             app:layout_constraintStart_toStartOf="@+id/textView10"
             app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
@@ -288,7 +289,7 @@
             android:text="@string/txt_user_type_old"
             style="@style/MediumText"
             android:textColor="@color/deep_dark_grey"
-            android:textSize="18dp"
+            android:textSize="16dp"
             app:layout_constraintStart_toStartOf="@+id/textView10"
             app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
@@ -303,6 +304,8 @@
             android:text="@string/txt_complete"
             android:textColor="@color/white"
             style="@style/ButtonText"
+            android:enabled="@{vm.isValidNickname}"
+            android:onClick="@{() -> vm.postSignUp()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

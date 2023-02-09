@@ -16,6 +16,24 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding>() {
         viewDataBinding.apply {
             vm = userInfoViewModel
         }
+
+        initListener()
+    }
+
+    private fun initListener(){
+        getUserType()
+    }
+
+    private fun getUserType(){
+        viewDataBinding.rgUserType.setOnCheckedChangeListener{ _, checkedId ->
+            when(checkedId){
+                R.id.rb_type_wheelchair -> userInfoViewModel.setTypeTxt(getString(R.string.txt_user_type_wheelchair))
+                R.id.rb_type_guardian -> userInfoViewModel.setTypeTxt(getString(R.string.txt_user_type_guardian))
+                R.id.rb_type_handicap -> userInfoViewModel.setTypeTxt(getString(R.string.txt_user_type_handicap))
+                R.id.rb_type_injured -> userInfoViewModel.setTypeTxt(getString(R.string.txt_user_type_injured))
+                R.id.rb_type_old -> userInfoViewModel.setTypeTxt(getString(R.string.txt_user_type_old))
+            }
+        }
     }
 
 }
