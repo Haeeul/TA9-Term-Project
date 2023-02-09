@@ -4,6 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="vm"
+            type="com.example.mh_term_app.ui.sign.up.UserInfoViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -59,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/txt_nick_name"
+            android:text="@string/txt_nickname"
             style="@style/MediumText"
             android:textSize="22dp"
             app:layout_constraintStart_toStartOf="@+id/textView7"
@@ -84,14 +91,27 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/round_square_line_grey_8"
-            android:hint="@string/txt_hint_nick_name_input"
+            android:hint="@string/txt_hint_nickname_input"
             android:inputType="textPersonName"
+            android:onTextChanged="@{vm.inputNickname}"
             android:paddingHorizontal="16dp"
+            android:text="@={vm.nicknameTxt}"
             android:textColorHint="@color/grey"
             android:textSize="18dp"
             app:layout_constraintEnd_toStartOf="@+id/btn_nick_double_check"
             app:layout_constraintStart_toStartOf="@+id/textView8"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <ImageView
+            android:id="@+id/imageView10"
+            setNicknameIcon="@{vm.isValidNickname}"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="@{vm.isValidNickNotice ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_user_info_nick"
+            app:layout_constraintEnd_toEndOf="@+id/edt_user_info_nick"
+            app:layout_constraintTop_toTopOf="@+id/edt_user_info_nick" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_nick_double_check"
@@ -103,56 +123,72 @@
             android:textColor="@color/white"
             android:textSize="16dp"
             style="@style/MediumText"
+            android:enabled="@{vm.isValidNickCheckBtn}"
+            android:onClick="@{() -> vm.checkDoubleNickname()}"
             app:layout_constraintBottom_toBottomOf="@+id/edt_user_info_nick"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/edt_user_info_nick" />
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/textView16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/txt_user_type"
+            android:layout_marginTop="12dp"
+            android:text="@{vm.nicknameNotice}"
             style="@style/MediumText"
+            android:textSize="16dp"
+            setNicknameNotice="@{vm.isValidNickname}"
+            android:visibility="@{vm.isValidNickNotice ? View.VISIBLE : View.GONE}"
+            app:layout_constraintStart_toStartOf="@+id/edt_user_info_nick"
+            app:layout_constraintTop_toBottomOf="@+id/edt_user_info_nick" />
+
+        <TextView
+            android:id="@+id/textView10"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/txt_user_type"
             android:textSize="22dp"
             app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/edt_user_info_nick" />
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
         <RadioGroup
             android:id="@+id/rg_user_type"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
+            android:shadowColor="@color/light_grey"
             app:layout_constraintEnd_toEndOf="@+id/imageView6"
             app:layout_constraintTop_toBottomOf="@+id/textView10">
 
             <RadioButton
                 android:id="@+id/rb_type_wheelchair"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_weight="1" />
 
             <RadioButton
                 android:id="@+id/rb_type_guardian"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_weight="1" />
 
             <RadioButton
                 android:id="@+id/rb_type_handicap"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_weight="1" />
 
             <RadioButton
                 android:id="@+id/rb_type_injured"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_weight="1" />
 
             <RadioButton
                 android:id="@+id/rb_type_old"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_weight="1" />
         </RadioGroup>
 
@@ -163,8 +199,8 @@
             android:layout_marginTop="16dp"
             android:text="@string/txt_user_type_wheelchair"
             style="@style/MediumText"
-            android:textColor="@color/light_black"
-            android:textSize="18dp"
+            android:textColor="@color/deep_dark_grey"
+            android:textSize="16dp"
             app:layout_constraintStart_toStartOf="@+id/textView10"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -186,8 +222,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:text="@string/txt_user_type_guardian"
-            android:textColor="#434343"
-            android:textSize="18dp"
+            android:textColor="@color/deep_dark_grey"
+            android:textSize="16dp"
             app:layout_constraintStart_toStartOf="@+id/textView10"
             app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
@@ -208,8 +244,8 @@
             android:layout_marginTop="14dp"
             android:text="@string/txt_user_type_handicap"
             style="@style/MediumText"
-            android:textColor="#434343"
-            android:textSize="18dp"
+            android:textColor="@color/deep_dark_grey"
+            android:textSize="16dp"
             app:layout_constraintStart_toStartOf="@+id/textView10"
             app:layout_constraintTop_toBottomOf="@+id/imageView7" />
 
@@ -227,11 +263,11 @@
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="16dp"
             android:text="@string/txt_user_type_injured"
             style="@style/MediumText"
-            android:textColor="#434343"
-            android:textSize="18dp"
+            android:textColor="@color/deep_dark_grey"
+            android:textSize="16dp"
             app:layout_constraintStart_toStartOf="@+id/textView10"
             app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
@@ -252,8 +288,8 @@
             android:layout_marginTop="14dp"
             android:text="@string/txt_user_type_old"
             style="@style/MediumText"
-            android:textColor="#434343"
-            android:textSize="18dp"
+            android:textColor="@color/deep_dark_grey"
+            android:textSize="16dp"
             app:layout_constraintStart_toStartOf="@+id/textView10"
             app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
@@ -268,8 +304,14 @@
             android:text="@string/txt_complete"
             android:textColor="@color/white"
             style="@style/ButtonText"
+            android:enabled="@{vm.isValidNickname}"
+            android:onClick="@{() -> vm.postSignUp()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
