@@ -24,7 +24,7 @@ class SignViewModel(): ViewModel() {
     var second = 0
     private var timerTask: Timer? = null
 
-    // 중복 확인 enable
+    // 인증요청 버튼 enable
     private val _isValidRequestBtn = MutableLiveData<Boolean>(false)
     val isValidRequestBtn : LiveData<Boolean>
         get() = _isValidRequestBtn
