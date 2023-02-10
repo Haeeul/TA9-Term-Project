@@ -14,6 +14,7 @@
     <string name="txt_auth_fail">인증 번호를 다시 확인해주세요.</string>
     <string name="txt_auth_timeout">인증 번호가 만료되었습니다.</string>
     <string name="txt_request_message">인증 번호 요청 완료</string>
+    <string name="txt_request_message_fail">인증 번호 요청 완료</string>
 
     <!-- sign in -->
     <string name="txt_desc_sign_in">휴대폰 번호로 로그인합니다.</string>
@@ -22,6 +23,10 @@
     <!-- sign up -->
     <string name="txt_desc_sign_up">휴대폰 번호로 회원가입합니다.</string>
     <string name="txt_next">다음</string>
+
+    <!-- sign guide dialog -->
+    <string name="txt_go_to_sign_up">해당 번호로 가입된 계정이 없습니다.\n회원가입으로 이동하시겠습니까?</string>
+    <string name="txt_go_to_sign_in">해당 번호로 가입된 계정이 있습니다.\n로그인으로 이동하시겠습니까?</string>
 
     <!-- user info -->
     <string name="txt_desc_user_info">리뷰 작성을 위해\n추가 정보를 입력해주세요.</string>

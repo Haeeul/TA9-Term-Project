@@ -150,10 +150,10 @@
             android:text="@string/txt_request_again"
             android:textColor="@color/dark_grey"
             android:textSize="16dp"
+            android:onClick="postSignIpAuthResend"
             android:visibility="@{vm.isValidTimer ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="@+id/txt_sign_in_notice"
-            app:layout_constraintEnd_toEndOf="@+id/txt_sign_in_timer"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintEnd_toEndOf="@+id/txt_sign_in_notice"
             app:layout_constraintStart_toStartOf="@+id/txt_sign_in_timer"
             app:layout_constraintTop_toTopOf="@+id/txt_sign_in_notice" />
 
