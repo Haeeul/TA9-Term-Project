@@ -17,3 +17,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "MH-Term-App"
 include ':app'
+include ':managerapplication'
