@@ -17,13 +17,6 @@
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="jbaxf1kim3" />
         <activity
-            android:name=".ui.map.MapActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".ui.sign.up.UserInfoActivity"
             android:exported="false">
             <meta-data

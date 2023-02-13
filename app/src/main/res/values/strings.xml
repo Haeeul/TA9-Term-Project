@@ -45,6 +45,6 @@
     <string name="txt_complete">완료</string>
 
     <!-- map -->
-    <string name="txt_search_space">장소 검색</string>
+    <string name="txt_hint_search_space">장소명, 주소 검색</string>
 
 </resources>

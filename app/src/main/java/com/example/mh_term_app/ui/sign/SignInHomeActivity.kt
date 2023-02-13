@@ -11,7 +11,8 @@ import com.example.mh_term_app.utils.extension.clearStartActivity
 import com.example.mh_term_app.utils.extension.startActivityWithAffinity
 
 class SignInHomeActivity : BaseActivity<ActivitySignInHomeBinding>() {
-    override val layoutResID: Int = R.layout.activity_sign_in_home
+    override val layoutResID: Int
+        get() = R.layout.activity_sign_in_home
 
     fun goToSignInListener(view : View){
         clearStartActivity(SignInActivity::class.java)
@@ -24,4 +25,5 @@ class SignInHomeActivity : BaseActivity<ActivitySignInHomeBinding>() {
     fun goToMapListener(view: View){
         startActivityWithAffinity(MainActivity::class.java)
     }
+
 }

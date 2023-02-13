@@ -25,8 +25,11 @@ abstract class BaseFragment<VB : ViewDataBinding> : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
+
         initView()
+        initListener()
     }
 
     open fun initView() {}
+    open fun initListener() {}
 }

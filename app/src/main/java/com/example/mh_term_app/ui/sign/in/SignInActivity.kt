@@ -26,7 +26,8 @@ import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 
 class SignInActivity : BaseActivity<ActivitySignInBinding>() {
-    override val layoutResID: Int = R.layout.activity_sign_in
+    override val layoutResID: Int
+        get() = R.layout.activity_sign_in
     private val signInViewModel : SignViewModel by viewModels()
 
     private var verificationId = ""
@@ -66,7 +67,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewDataBinding.apply {
+        binding.apply {
             vm = signInViewModel
             edtSignInPhone.requestFocus()
         }
@@ -86,10 +87,10 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>() {
             }else{ // 가입 이력이 있는 유저 : 인증 요청 진행
                 FirebaseAuth.requestPhoneAuth(
                     this,
-                    getPhoneNumber(viewDataBinding.edtSignInPhone.text.toString()),
+                    getPhoneNumber(binding.edtSignInPhone.text.toString()),
                     callbacks
                 )
-                viewDataBinding.edtSighInAuthNum.requestFocus()
+                binding.edtSighInAuthNum.requestFocus()
             }
         }
     }
@@ -111,20 +112,20 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>() {
 
     // 인증요청 버튼
     fun postSignInAuthRequest(view: View){
-        signInViewModel.checkValidUser(getPhoneNumber(viewDataBinding.edtSignInPhone.text.toString()))
+        signInViewModel.checkValidUser(getPhoneNumber(binding.edtSignInPhone.text.toString()))
     }
 
     // 인증재요청 버튼
     fun postSignIpAuthResend(view: View){
-        resendAuthCode(this,getPhoneNumber(viewDataBinding.edtSignInPhone.text.toString()),resendToken, callbacks)
-        viewDataBinding.edtSighInAuthNum.requestFocus()
+        resendAuthCode(this,getPhoneNumber(binding.edtSignInPhone.text.toString()),resendToken, callbacks)
+        binding.edtSighInAuthNum.requestFocus()
     }
 
     // 로그인 버튼
     fun checkSignInAuth(view: View){
         val credential = PhoneAuthProvider.getCredential(
             verificationId,
-            viewDataBinding.edtSighInAuthNum.text.toString()
+            binding.edtSighInAuthNum.text.toString()
         )
         signInWithPhoneAuthCredential(credential)
     }
