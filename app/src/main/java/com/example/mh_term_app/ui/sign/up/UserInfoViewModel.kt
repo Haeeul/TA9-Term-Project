@@ -24,7 +24,7 @@ class UserInfoViewModel : ViewModel() {
     val nicknameNotice = MutableLiveData<String>()
 
     // 중복확인 버튼 enable
-    private val _isValidNickCheckBtn = MutableLiveData<Boolean>(false)
+    private val _isValidNickCheckBtn = MutableLiveData(false)
     val isValidNickCheckBtn : LiveData<Boolean>
         get() = _isValidNickCheckBtn
 
@@ -34,7 +34,7 @@ class UserInfoViewModel : ViewModel() {
         get() = _isValidNickNotice
 
     // 인증 유효 검사
-    private val _isValidNickname = MutableLiveData<Boolean>(false)
+    private val _isValidNickname = MutableLiveData(false)
     val isValidNickname : LiveData<Boolean>
         get() = _isValidNickname
 
