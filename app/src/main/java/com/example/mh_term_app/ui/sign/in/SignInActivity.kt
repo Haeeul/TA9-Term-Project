@@ -8,6 +8,7 @@ import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivitySignInBinding
+import com.example.mh_term_app.ui.map.MapActivity
 import com.example.mh_term_app.ui.sign.SignViewModel
 import com.example.mh_term_app.ui.sign.up.SignUpActivity
 import com.example.mh_term_app.utils.etc.FirebaseAuth
@@ -15,6 +16,7 @@ import com.example.mh_term_app.utils.etc.FirebaseAuth.auth
 import com.example.mh_term_app.utils.etc.FirebaseAuth.getPhoneNumber
 import com.example.mh_term_app.utils.etc.FirebaseAuth.resendAuthCode
 import com.example.mh_term_app.utils.extension.createListenerDialog
+import com.example.mh_term_app.utils.extension.startActivityWithAffinity
 import com.example.mh_term_app.utils.extension.startActivityWithFinish
 import com.example.mh_term_app.utils.extension.toast
 import com.google.firebase.FirebaseException
@@ -74,14 +76,14 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>() {
 
     private fun initObserver(){
         signInViewModel.isValidPhone.observe(this){
-            if(it){ // 가입 이력이 있는 유저 : 인증 요청 진행
+            if(it){ // 가입 이력이 없는 유저 : 회원가입 유도
                 this.createListenerDialog(supportFragmentManager, "goToSignUp",
                     {
                         startActivityWithFinish(SignUpActivity::class.java)
                     },
                     null
                 )
-            }else{ // 가입 이력이 없는 유저 : 회원가입 유도
+            }else{ // 가입 이력이 있는 유저 : 인증 요청 진행
                 FirebaseAuth.requestPhoneAuth(
                     this,
                     getPhoneNumber(viewDataBinding.edtSignInPhone.text.toString()),
@@ -98,8 +100,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     toast("인증 성공")
-                    TODO("메인 지도 연결 필요")
-                    //startActivityWithAffinity(MapActivity::class.java)
+                    startActivityWithAffinity(MapActivity::class.java)
                 } else {
                     // 인증 번호 틀린 경우
                     Log.w("auth number wrong : ", task.exception?.message.toString())

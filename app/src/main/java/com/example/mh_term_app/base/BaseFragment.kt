@@ -28,5 +28,5 @@ abstract class BaseFragment<VB : ViewDataBinding> : Fragment(){
         initView()
     }
 
-    abstract fun initView()
+    open fun initView() {}
 }

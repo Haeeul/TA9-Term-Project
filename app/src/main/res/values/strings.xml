@@ -35,7 +35,7 @@
     <string name="txt_double_check">중복확인</string>
     <string name="txt_nickname_possible">해당 닉네임은 사용 가능합니다.</string>
     <string name="txt_nickname_impossible">해당 닉네임은 사용 불가능합니다.</string>
-    
+
     <string name="txt_user_type">특이사항</string>
     <string name="txt_user_type_wheelchair">휠체어 사용자</string>
     <string name="txt_user_type_guardian">영유아 보호자</string>

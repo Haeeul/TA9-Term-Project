@@ -15,5 +15,9 @@ abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
 
         viewDataBinding = DataBindingUtil.setContentView(this, layoutResID)
         viewDataBinding.lifecycleOwner = this@BaseActivity
+
+        initView()
     }
+
+    open fun initView() {}
 }
