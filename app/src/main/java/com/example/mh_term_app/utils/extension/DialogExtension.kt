@@ -6,17 +6,17 @@ import androidx.fragment.app.FragmentManager
 import com.example.mh_term_app.utils.view.SignGuideDialog
 
 
-fun Context.createDialog(fragmentManager: FragmentManager, title: String) {
+fun Context.createDialog(fragmentManager: FragmentManager, type: String) {
     val bundle = Bundle()
-    bundle.putString("title", title)
+    bundle.putString("type", type)
     val dialog: SignGuideDialog = SignGuideDialog().CustomDialogBuilder().getInstance()
     dialog.arguments = bundle
     dialog.show(fragmentManager, dialog.tag)
 }
 
-fun Context.createListenerDialog(fragmentManager: FragmentManager, title: String, positiveClicked:(() -> Unit)?, negativeClicked: (() -> Unit)?) {
+fun Context.createListenerDialog(fragmentManager: FragmentManager, type: String, positiveClicked:(() -> Unit)?, negativeClicked: (() -> Unit)?) {
     val bundle = Bundle()
-    bundle.putString("title", title)
+    bundle.putString("type", type)
     val dialog: SignGuideDialog = SignGuideDialog().CustomDialogBuilder()
         .setBtnClickListener(object : SignGuideDialog.CustomDialogListener {
             override fun onPositiveClicked() {
