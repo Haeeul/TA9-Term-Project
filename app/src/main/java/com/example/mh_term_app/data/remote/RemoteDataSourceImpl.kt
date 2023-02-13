@@ -11,6 +11,24 @@ class RemoteDataSourceImpl : RemoteDataSource {
     val db = Firebase.firestore
     private val TAG: String = "[RemoteDataSourceImpl] "
 
+    override suspend fun getValidatePhone(phoneNum: String): Boolean {
+        var valid = false
+        try {
+            db.collection("users")
+                .whereEqualTo("phoneNum", phoneNum)
+                .get()
+                .addOnSuccessListener { result ->
+                    valid = result.isEmpty
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
+                }.await()
+        }catch (e:FirebaseException){
+            Log.e(TAG, e.message.toString())
+        }
+        return valid
+    }
+
     override suspend fun getValidateNick(nickname: String): Boolean {
         var valid = false
         try {

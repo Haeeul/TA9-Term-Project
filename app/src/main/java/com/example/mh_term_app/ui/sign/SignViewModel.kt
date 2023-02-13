@@ -1,19 +1,22 @@
 package com.example.mh_term_app.ui.sign
 
+import android.os.Handler
 import android.os.Looper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import android.os.Handler
-import com.example.mh_term_app.MHApplication
-import com.example.mh_term_app.R
+import androidx.lifecycle.viewModelScope
+import com.example.mh_term_app.data.repository.UserRepository
+import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.concurrent.timer
 
 class SignViewModel(): ViewModel() {
+    private val userRepository = UserRepository()
+
     // 사용자 입력 내용
-    val phoneNumTxt = MutableLiveData<String>("")
-    val authNumTxt = MutableLiveData<String>("")
+    val phoneNumTxt = MutableLiveData("")
+    val authNumTxt = MutableLiveData("")
 
     // 안내 문구
     val authNotice = MutableLiveData<Int>()
@@ -25,22 +28,27 @@ class SignViewModel(): ViewModel() {
     private var timerTask: Timer? = null
 
     // 인증요청 버튼 enable
-    private val _isValidRequestBtn = MutableLiveData<Boolean>(false)
+    private val _isValidRequestBtn = MutableLiveData(false)
     val isValidRequestBtn : LiveData<Boolean>
         get() = _isValidRequestBtn
 
+    // 회원 유무 검사
+    private val _isValidPhone = MutableLiveData<Boolean>()
+    val isValidPhone : LiveData<Boolean>
+        get() = _isValidPhone
+
     // 타이머 표시
-    private val _isValidTimer = MutableLiveData<Boolean>(false)
+    private val _isValidTimer = MutableLiveData(false)
     val isValidTimer : LiveData<Boolean>
         get() = _isValidTimer
 
     // 안내 문구 표시
-    private val _isValidNotice = MutableLiveData<Boolean>(false)
+    private val _isValidNotice = MutableLiveData(false)
     val isValidNotice : LiveData<Boolean>
         get() = _isValidNotice
 
     // 인증 유효 검사
-    private val _isValidAuth = MutableLiveData<Boolean>(false)
+    private val _isValidAuth = MutableLiveData(false)
     val isValidAuth : LiveData<Boolean>
         get() = _isValidAuth
 
@@ -55,6 +63,12 @@ class SignViewModel(): ViewModel() {
         }else{
             _isValidRequestBtn.value = false
             stopAuthTimer()
+        }
+    }
+
+    fun checkValidUser(phoneNum : String){
+        viewModelScope.launch{
+            _isValidPhone.value = userRepository.getValidatePhone(phoneNum)
         }
     }
 

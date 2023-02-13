@@ -5,9 +5,7 @@ import androidx.activity.viewModels
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivityUserInfoBinding
-import com.example.mh_term_app.ui.sign.SignInHomeActivity
 import com.example.mh_term_app.utils.extension.toast
-import com.example.mh_term_app.utils.startActivityWithFinish
 
 class UserInfoActivity : BaseActivity<ActivityUserInfoBinding>() {
     override val layoutResID: Int = R.layout.activity_user_info
@@ -29,7 +27,8 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding>() {
         ) {
             if (it) {
                 toast("회원가입 성공")
-                startActivityWithFinish(SignInHomeActivity::class.java)
+                TODO("메인 지도 연결 필요")
+                //startActivityWithAffinity(MapActivity::class.java)
             } else {
                 toast("회원가입 실패")
             }

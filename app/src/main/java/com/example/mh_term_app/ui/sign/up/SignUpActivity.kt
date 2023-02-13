@@ -1,5 +1,6 @@
 package com.example.mh_term_app.ui.sign.up
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,24 +10,25 @@ import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivitySignUpBinding
 import com.example.mh_term_app.ui.sign.SignViewModel
+import com.example.mh_term_app.ui.sign.`in`.SignInActivity
+import com.example.mh_term_app.utils.etc.FirebaseAuth.auth
+import com.example.mh_term_app.utils.etc.FirebaseAuth.getPhoneNumber
+import com.example.mh_term_app.utils.etc.FirebaseAuth.requestPhoneAuth
+import com.example.mh_term_app.utils.etc.FirebaseAuth.resendAuthCode
+import com.example.mh_term_app.utils.extension.createListenerDialog
+import com.example.mh_term_app.utils.extension.startActivityWithFinish
 import com.example.mh_term_app.utils.extension.toast
-import com.example.mh_term_app.utils.startActivityWithFinish
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
-import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import java.util.concurrent.TimeUnit
 
 
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
     override val layoutResID: Int = R.layout.activity_sign_up
     private val signUpViewModel: SignViewModel by viewModels()
 
-    private val auth = Firebase.auth
     private var verificationId = ""
     private var resendToken: PhoneAuthProvider.ForceResendingToken? = null
 
@@ -40,6 +42,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
             // 번호 인증 실패 상태
             override fun onVerificationFailed(e: FirebaseException) {
                 Log.w("auth Fail : ", "onVerificationFailed", e)
+                toast(MHApplication.getApplicationContext().getString(R.string.txt_request_message_fail))
                 if (e is FirebaseAuthInvalidCredentialsException) {
                     // Invalid request
                 } else if (e is FirebaseTooManyRequestsException) {
@@ -68,36 +71,27 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
             vm = signUpViewModel
             edtSignUpPhone.requestFocus()
         }
+
+        initObserver()
     }
 
-    // 인증 요청
-    private fun requestPhoneAuth(phoneNumber : String) {
-        val optionsCompat = PhoneAuthOptions.newBuilder(auth)
-            .setPhoneNumber(phoneNumber)
-            .setTimeout(120L, TimeUnit.SECONDS)
-            .setActivity(this)
-            .setCallbacks(callbacks)
-            .build()
-        PhoneAuthProvider.verifyPhoneNumber(optionsCompat)
-        auth.setLanguageCode("kr")
-    }
-
-    // 인증 재요청
-    private fun resendAuthCode(phoneNumber: String, token: PhoneAuthProvider.ForceResendingToken?) {
-        val optionsCompat = PhoneAuthOptions.newBuilder(auth)
-            .setPhoneNumber(phoneNumber)
-            .setTimeout(120L, TimeUnit.SECONDS)
-            .setActivity(this)
-            .setCallbacks(callbacks)
-        if (token != null) {
-            optionsCompat.setForceResendingToken(token) // callback's ForceResendingToken
+    private fun initObserver(){
+        signUpViewModel.isValidPhone.observe(this){
+            if(it){ // 가입 이력이 없는 유저 : 인증 요청 진행
+                requestPhoneAuth(this, getPhoneNumber(viewDataBinding.edtSignUpPhone.text.toString()), callbacks)
+                viewDataBinding.edtSignUpAuthNum.requestFocus()
+            }else{ // 가입 이력이 있는 유저 : 로그인 유도
+                this.createListenerDialog(supportFragmentManager, "goToSignIn",
+                    {
+                        val signInIntent  = Intent(this, SignInActivity::class.java)
+                        signInIntent.putExtra("phoneNum", viewDataBinding.edtSignUpPhone.text.toString())
+                        startActivity(signInIntent)
+                        finish()
+                    },
+                    null
+                )
+            }
         }
-        PhoneAuthProvider.verifyPhoneNumber(optionsCompat.build())
-        auth.setLanguageCode("kr")
-    }
-
-    private fun getPhoneNumber(num: String): String {
-        return "+82" +num.substring(1)
     }
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
@@ -116,13 +110,13 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
 
     // 인증요청 버튼
     fun postSignUpAuthRequest(view: View) {
-        requestPhoneAuth(getPhoneNumber(viewDataBinding.edtSignUpPhone.text.toString()))
-        viewDataBinding.edtSignUpAuthNum.requestFocus()
+        signUpViewModel.checkValidUser(getPhoneNumber(viewDataBinding.edtSignUpPhone.text.toString()))
+
     }
 
     // 인증재요청 버튼
     fun postSignUpAuthResend(view: View){
-        resendAuthCode(getPhoneNumber(viewDataBinding.edtSignUpPhone.text.toString()), resendToken)
+        resendAuthCode(this, getPhoneNumber(viewDataBinding.edtSignUpPhone.text.toString()), resendToken, callbacks)
         viewDataBinding.edtSignUpAuthNum.requestFocus()
     }
 
