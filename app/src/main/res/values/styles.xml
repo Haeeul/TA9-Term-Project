@@ -32,4 +32,8 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <style name="EditHintText" parent="MediumText">
+        <item name="android:textColorHint">@color/grey</item>
+    </style>
+
 </resources>

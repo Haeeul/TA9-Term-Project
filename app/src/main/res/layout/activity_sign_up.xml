@@ -61,7 +61,7 @@
 
         <EditText
             android:id="@+id/edt_sign_up_phone"
-            style="@style/MediumText"
+            style="@style/EditHintText"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="24dp"
@@ -70,7 +70,6 @@
             android:hint="@string/txt_hint_phone_input"
             android:inputType="number"
             android:paddingHorizontal="16dp"
-            android:textColorHint="@color/grey"
             android:textSize="18dp"
             android:nextFocusDown="@id/edt_sign_up_auth_num"
             android:text="@={vm.phoneNumTxt}"
@@ -97,7 +96,7 @@
 
         <EditText
             android:id="@+id/edt_sign_up_auth_num"
-            style="@style/MediumText"
+            style="@style/EditHintText"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
@@ -107,7 +106,6 @@
             android:onTextChanged="@{vm::inputAuthNum}"
             android:paddingHorizontal="16dp"
             android:text="@={vm.authNumTxt}"
-            android:textColorHint="@color/grey"
             android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="@+id/btn_sign_up_request_auth"
             app:layout_constraintStart_toStartOf="@+id/edt_sign_up_phone"
