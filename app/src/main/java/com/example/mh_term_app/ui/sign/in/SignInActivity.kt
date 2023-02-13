@@ -5,10 +5,10 @@ import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import com.example.mh_term_app.MHApplication
+import com.example.mh_term_app.MainActivity
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivitySignInBinding
-import com.example.mh_term_app.ui.map.MapActivity
 import com.example.mh_term_app.ui.sign.SignViewModel
 import com.example.mh_term_app.ui.sign.up.SignUpActivity
 import com.example.mh_term_app.utils.etc.FirebaseAuth
@@ -100,7 +100,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     toast("인증 성공")
-                    startActivityWithAffinity(MapActivity::class.java)
+                    startActivityWithAffinity(MainActivity::class.java)
                 } else {
                     // 인증 번호 틀린 경우
                     Log.w("auth number wrong : ", task.exception?.message.toString())

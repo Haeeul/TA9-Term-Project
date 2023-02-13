@@ -2,10 +2,10 @@ package com.example.mh_term_app.ui.sign.up
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import com.example.mh_term_app.MainActivity
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivityUserInfoBinding
-import com.example.mh_term_app.ui.map.MapActivity
 import com.example.mh_term_app.utils.extension.startActivityWithAffinity
 import com.example.mh_term_app.utils.extension.toast
 
@@ -29,7 +29,7 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding>() {
         ) {
             if (it) {
                 toast("회원가입 성공")
-                startActivityWithAffinity(MapActivity::class.java)
+                startActivityWithAffinity(MainActivity::class.java)
             } else {
                 toast("회원가입 실패")
             }
