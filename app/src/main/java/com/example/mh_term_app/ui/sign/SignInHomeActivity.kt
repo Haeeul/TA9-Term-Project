@@ -1,23 +1,29 @@
 package com.example.mh_term_app.ui.sign
 
-import android.content.Intent
 import android.view.View
+import com.example.mh_term_app.MainActivity
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivitySignInHomeBinding
 import com.example.mh_term_app.ui.sign.`in`.SignInActivity
 import com.example.mh_term_app.ui.sign.up.SignUpActivity
+import com.example.mh_term_app.utils.extension.clearStartActivity
+import com.example.mh_term_app.utils.extension.startActivityWithAffinity
 
 class SignInHomeActivity : BaseActivity<ActivitySignInHomeBinding>() {
-    override val layoutResID: Int = R.layout.activity_sign_in_home
+    override val layoutResID: Int
+        get() = R.layout.activity_sign_in_home
 
     fun goToSignInListener(view : View){
-        val goToSignInIntent = Intent(this, SignInActivity::class.java)
-        startActivity(goToSignInIntent)
+        clearStartActivity(SignInActivity::class.java)
     }
 
     fun goToSignUpListener(view : View){
-        val goToSignUpIntent = Intent(this, SignUpActivity::class.java)
-        startActivity(goToSignUpIntent)
+        clearStartActivity(SignUpActivity::class.java)
     }
+
+    fun goToMapListener(view: View){
+        startActivityWithAffinity(MainActivity::class.java)
+    }
+
 }

@@ -26,7 +26,8 @@ import com.google.firebase.auth.PhoneAuthProvider
 
 
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
-    override val layoutResID: Int = R.layout.activity_sign_up
+    override val layoutResID: Int
+        get() = R.layout.activity_sign_up
     private val signUpViewModel: SignViewModel by viewModels()
 
     private var verificationId = ""
@@ -67,7 +68,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewDataBinding.apply {
+        binding.apply {
             vm = signUpViewModel
             edtSignUpPhone.requestFocus()
         }
@@ -78,13 +79,13 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
     private fun initObserver(){
         signUpViewModel.isValidPhone.observe(this){
             if(it){ // 가입 이력이 없는 유저 : 인증 요청 진행
-                requestPhoneAuth(this, getPhoneNumber(viewDataBinding.edtSignUpPhone.text.toString()), callbacks)
-                viewDataBinding.edtSignUpAuthNum.requestFocus()
+                requestPhoneAuth(this, getPhoneNumber(binding.edtSignUpPhone.text.toString()), callbacks)
+                binding.edtSignUpAuthNum.requestFocus()
             }else{ // 가입 이력이 있는 유저 : 로그인 유도
                 this.createListenerDialog(supportFragmentManager, "goToSignIn",
                     {
                         val signInIntent  = Intent(this, SignInActivity::class.java)
-                        signInIntent.putExtra("phoneNum", viewDataBinding.edtSignUpPhone.text.toString())
+                        signInIntent.putExtra("phoneNum", binding.edtSignUpPhone.text.toString())
                         startActivity(signInIntent)
                         finish()
                     },
@@ -110,21 +111,21 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
 
     // 인증요청 버튼
     fun postSignUpAuthRequest(view: View) {
-        signUpViewModel.checkValidUser(getPhoneNumber(viewDataBinding.edtSignUpPhone.text.toString()))
+        signUpViewModel.checkValidUser(getPhoneNumber(binding.edtSignUpPhone.text.toString()))
 
     }
 
     // 인증재요청 버튼
     fun postSignUpAuthResend(view: View){
-        resendAuthCode(this, getPhoneNumber(viewDataBinding.edtSignUpPhone.text.toString()), resendToken, callbacks)
-        viewDataBinding.edtSignUpAuthNum.requestFocus()
+        resendAuthCode(this, getPhoneNumber(binding.edtSignUpPhone.text.toString()), resendToken, callbacks)
+        binding.edtSignUpAuthNum.requestFocus()
     }
 
     // 회원가입 버튼
     fun checkSignUpAuth(view: View) {
         val credential = PhoneAuthProvider.getCredential(
             verificationId,
-            viewDataBinding.edtSignUpAuthNum.text.toString()
+            binding.edtSignUpAuthNum.text.toString()
         )
         signInWithPhoneAuthCredential(credential)
     }

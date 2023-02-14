@@ -35,7 +35,7 @@
     <string name="txt_double_check">중복확인</string>
     <string name="txt_nickname_possible">해당 닉네임은 사용 가능합니다.</string>
     <string name="txt_nickname_impossible">해당 닉네임은 사용 불가능합니다.</string>
-    
+
     <string name="txt_user_type">특이사항</string>
     <string name="txt_user_type_wheelchair">휠체어 사용자</string>
     <string name="txt_user_type_guardian">영유아 보호자</string>
@@ -43,5 +43,13 @@
     <string name="txt_user_type_injured">목발 사용 등 부상자</string>
     <string name="txt_user_type_old">노약자</string>
     <string name="txt_complete">완료</string>
+
+    <!-- map -->
+    <string name="txt_hint_search_place">장소명, 주소 검색</string>
+    <string name="txt_place_facility">시설물</string>
+    <string name="txt_place_store">매장</string>
+    <string name="txt_place_charging_station">충전소</string>
+    <string name="txt_place_movement_support_center">이동지원센터</string>
+    <string name="txt_place_restroom">화장실</string>
 
 </resources>

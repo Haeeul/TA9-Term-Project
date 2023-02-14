@@ -85,7 +85,7 @@
 
         <EditText
             android:id="@+id/edt_user_info_nick"
-            style="@style/MediumText"
+            style="@style/EditHintText"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
@@ -96,7 +96,6 @@
             android:onTextChanged="@{vm.inputNickname}"
             android:paddingHorizontal="16dp"
             android:text="@={vm.nicknameTxt}"
-            android:textColorHint="@color/grey"
             android:textSize="18dp"
             app:layout_constraintEnd_toStartOf="@+id/btn_nick_double_check"
             app:layout_constraintStart_toStartOf="@+id/textView8"

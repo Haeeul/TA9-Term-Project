@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import com.example.mh_term_app.MHApplication
+import com.example.mh_term_app.MainActivity
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivitySignInBinding
@@ -15,6 +16,7 @@ import com.example.mh_term_app.utils.etc.FirebaseAuth.auth
 import com.example.mh_term_app.utils.etc.FirebaseAuth.getPhoneNumber
 import com.example.mh_term_app.utils.etc.FirebaseAuth.resendAuthCode
 import com.example.mh_term_app.utils.extension.createListenerDialog
+import com.example.mh_term_app.utils.extension.startActivityWithAffinity
 import com.example.mh_term_app.utils.extension.startActivityWithFinish
 import com.example.mh_term_app.utils.extension.toast
 import com.google.firebase.FirebaseException
@@ -24,7 +26,8 @@ import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 
 class SignInActivity : BaseActivity<ActivitySignInBinding>() {
-    override val layoutResID: Int = R.layout.activity_sign_in
+    override val layoutResID: Int
+        get() = R.layout.activity_sign_in
     private val signInViewModel : SignViewModel by viewModels()
 
     private var verificationId = ""
@@ -64,7 +67,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewDataBinding.apply {
+        binding.apply {
             vm = signInViewModel
             edtSignInPhone.requestFocus()
         }
@@ -74,20 +77,20 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>() {
 
     private fun initObserver(){
         signInViewModel.isValidPhone.observe(this){
-            if(it){ // 가입 이력이 있는 유저 : 인증 요청 진행
+            if(it){ // 가입 이력이 없는 유저 : 회원가입 유도
                 this.createListenerDialog(supportFragmentManager, "goToSignUp",
                     {
                         startActivityWithFinish(SignUpActivity::class.java)
                     },
                     null
                 )
-            }else{ // 가입 이력이 없는 유저 : 회원가입 유도
+            }else{ // 가입 이력이 있는 유저 : 인증 요청 진행
                 FirebaseAuth.requestPhoneAuth(
                     this,
-                    getPhoneNumber(viewDataBinding.edtSignInPhone.text.toString()),
+                    getPhoneNumber(binding.edtSignInPhone.text.toString()),
                     callbacks
                 )
-                viewDataBinding.edtSighInAuthNum.requestFocus()
+                binding.edtSighInAuthNum.requestFocus()
             }
         }
     }
@@ -98,8 +101,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     toast("인증 성공")
-                    TODO("메인 지도 연결 필요")
-                    //startActivityWithAffinity(MapActivity::class.java)
+                    startActivityWithAffinity(MainActivity::class.java)
                 } else {
                     // 인증 번호 틀린 경우
                     Log.w("auth number wrong : ", task.exception?.message.toString())
@@ -110,20 +112,20 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>() {
 
     // 인증요청 버튼
     fun postSignInAuthRequest(view: View){
-        signInViewModel.checkValidUser(getPhoneNumber(viewDataBinding.edtSignInPhone.text.toString()))
+        signInViewModel.checkValidUser(getPhoneNumber(binding.edtSignInPhone.text.toString()))
     }
 
     // 인증재요청 버튼
     fun postSignIpAuthResend(view: View){
-        resendAuthCode(this,getPhoneNumber(viewDataBinding.edtSignInPhone.text.toString()),resendToken, callbacks)
-        viewDataBinding.edtSighInAuthNum.requestFocus()
+        resendAuthCode(this,getPhoneNumber(binding.edtSignInPhone.text.toString()),resendToken, callbacks)
+        binding.edtSighInAuthNum.requestFocus()
     }
 
     // 로그인 버튼
     fun checkSignInAuth(view: View){
         val credential = PhoneAuthProvider.getCredential(
             verificationId,
-            viewDataBinding.edtSighInAuthNum.text.toString()
+            binding.edtSighInAuthNum.text.toString()
         )
         signInWithPhoneAuthCredential(credential)
     }

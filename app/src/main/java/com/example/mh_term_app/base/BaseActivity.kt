@@ -6,14 +6,20 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 
 abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
-    lateinit var viewDataBinding: VB
+    lateinit var binding: VB
 
     abstract val layoutResID: Int
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewDataBinding = DataBindingUtil.setContentView(this, layoutResID)
-        viewDataBinding.lifecycleOwner = this@BaseActivity
+        binding = DataBindingUtil.setContentView(this, layoutResID)
+        binding.lifecycleOwner = this@BaseActivity
+
+        initView()
+        initListener()
     }
+
+    open fun initView() {}
+    open fun initListener() {}
 }

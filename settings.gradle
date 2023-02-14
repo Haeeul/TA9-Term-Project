@@ -10,7 +10,11 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url 'https://naver.jfrog.io/artifactory/maven/'
+        }
     }
 }
 rootProject.name = "MH-Term-App"
 include ':app'
+include ':managerapplication'

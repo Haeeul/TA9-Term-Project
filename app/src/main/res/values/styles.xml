@@ -32,4 +32,23 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <style name="EditHintText" parent="MediumText">
+        <item name="android:textColorHint">@color/grey</item>
+    </style>
+
+    <style name="categoryChip" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="android:textColor">@color/black</item>
+        <item name="chipBackgroundColor">@color/white</item>
+        <item name="chipStrokeColor">@color/back_ligth_grey</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipStartPadding">12dp</item>
+        <item name="chipEndPadding">8dp</item>
+    </style>
+
+    <style name="chipText" parent="TextAppearance.MaterialComponents.Chip">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">@font/gyeonggi_cheonnyeon_light</item>
+    </style>
+
 </resources>
