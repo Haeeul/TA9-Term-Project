@@ -17,7 +17,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/round_square_fill_white_8"
-            android:hint="@string/txt_hint_search_space"
+            android:hint="@string/txt_hint_search_place"
             android:inputType="textPersonName"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/btn_search_back"

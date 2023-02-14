@@ -45,6 +45,11 @@
     <string name="txt_complete">완료</string>
 
     <!-- map -->
-    <string name="txt_hint_search_space">장소명, 주소 검색</string>
+    <string name="txt_hint_search_place">장소명, 주소 검색</string>
+    <string name="txt_place_facility">시설물</string>
+    <string name="txt_place_store">매장</string>
+    <string name="txt_place_charging_station">충전소</string>
+    <string name="txt_place_movement_support_center">이동지원센터</string>
+    <string name="txt_place_restroom">화장실</string>
 
 </resources>

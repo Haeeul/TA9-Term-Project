@@ -16,5 +16,20 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>() {
             var  activity = activity as MainActivity
             activity.goToSearchListener()
         }
+
+        binding.chipFacility.setOnClickListener {
+        }
+
+        binding.chipStore.setOnClickListener {
+        }
+
+        binding.chipChargingStation.setOnClickListener {
+        }
+
+        binding.chipRestroom.setOnClickListener {
+        }
+
+        binding.chipSupportCenter.setOnClickListener {
+        }
     }
 }
