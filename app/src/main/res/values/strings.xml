@@ -16,6 +16,11 @@
     <string name="txt_request_message">인증 번호 요청 완료</string>
     <string name="txt_request_message_fail">인증 번호 요청 실패</string>
 
+    <!-- email auth -->
+    <string name="txt_hint_email_input">이메일을 입력해주세요.</string>
+    <string name="txt_hint_password_input">비밀번호를 입력해주세요.</string>
+    <string name="txt_email_form_check">이메일 형식이 맞지 않습니다.</string>
+
     <!-- sign in -->
     <string name="txt_desc_sign_in">휴대폰 번호로 로그인합니다.</string>
     <string name="txt_desc_account_null">계정이 없으신가요?</string>

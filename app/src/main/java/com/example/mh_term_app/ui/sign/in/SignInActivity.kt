@@ -76,7 +76,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>() {
     }
 
     private fun initObserver(){
-        signInViewModel.isValidPhone.observe(this){
+        signInViewModel.isValidEmail.observe(this){
             if(it){ // 가입 이력이 없는 유저 : 회원가입 유도
                 this.createListenerDialog(supportFragmentManager, "goToSignUp",
                     {

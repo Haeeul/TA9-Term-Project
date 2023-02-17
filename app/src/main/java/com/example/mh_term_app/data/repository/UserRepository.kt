@@ -9,4 +9,6 @@ class UserRepository() {
     suspend fun getValidatePhone(phoneNum: String) = remoteDataSource.getValidatePhone(phoneNum)
     suspend fun getValidateNick(nickname : String) = remoteDataSource.getValidateNick(nickname)
     suspend fun postSignUp(phoneNum : String, nickname: String, type : String) = remoteDataSource.postSignUp(phoneNum, nickname, type)
+
+    suspend fun createUser(email : String, password : String) = remoteDataSource.createUser(email, password)
 }

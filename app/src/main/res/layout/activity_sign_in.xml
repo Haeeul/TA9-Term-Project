@@ -72,8 +72,8 @@
             android:paddingHorizontal="16dp"
             android:textSize="18dp"
             android:nextFocusDown="@id/edt_sigh_in_auth_num"
-            android:text="@={vm.phoneNumTxt}"
-            android:onTextChanged="@{vm::inputPhoneNum}"
+            android:text="@={vm.emailTxt}"
+            android:onTextChanged="@{vm::inputEmail}"
             app:layout_constraintEnd_toStartOf="@+id/btn_sign_in_request_auth"
             app:layout_constraintStart_toStartOf="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -105,8 +105,8 @@
             android:inputType="number"
             android:paddingHorizontal="16dp"
             android:textSize="18dp"
-            android:text="@={vm.authNumTxt}"
-            android:onTextChanged="@{vm::inputAuthNum}"
+            android:text="@={vm.passwordTxt}"
+            android:onTextChanged="@{vm::inputPassword}"
             app:layout_constraintEnd_toEndOf="@+id/btn_sign_in_request_auth"
             app:layout_constraintStart_toStartOf="@+id/edt_sign_in_phone"
             app:layout_constraintTop_toBottomOf="@+id/edt_sign_in_phone" />
@@ -131,11 +131,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            setAuthNotice="@{vm.authNotice}"
+            setAuthNotice="@{vm.emailNotice}"
             style="@style/MediumText"
             android:textSize="16dp"
             android:textColor="@color/red"
-            android:visibility="@{vm.isValidNotice ? View.VISIBLE : View.INVISIBLE}"
+            android:visibility="@{vm.isValidEmailNotice ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintStart_toStartOf="@+id/edt_sigh_in_auth_num"
             app:layout_constraintTop_toBottomOf="@+id/edt_sigh_in_auth_num" />
 
