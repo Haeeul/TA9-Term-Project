@@ -14,7 +14,7 @@
     <string name="txt_auth_fail">인증 번호를 다시 확인해주세요.</string>
     <string name="txt_auth_timeout">인증 번호가 만료되었습니다.</string>
     <string name="txt_request_message">인증 번호 요청 완료</string>
-    <string name="txt_request_message_fail">인증 번호 요청 완료</string>
+    <string name="txt_request_message_fail">인증 번호 요청 실패</string>
 
     <!-- sign in -->
     <string name="txt_desc_sign_in">휴대폰 번호로 로그인합니다.</string>
@@ -51,5 +51,8 @@
     <string name="txt_place_charging_station">충전소</string>
     <string name="txt_place_movement_support_center">이동지원센터</string>
     <string name="txt_place_restroom">화장실</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="txt_add_review">리뷰 작성하기</string>
 
 </resources>
