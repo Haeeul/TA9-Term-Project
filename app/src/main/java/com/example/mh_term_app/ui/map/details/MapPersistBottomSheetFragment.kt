@@ -1,4 +1,4 @@
-package com.example.mh_term_app.ui.map
+package com.example.mh_term_app.ui.map.details
 
 import android.os.Bundle
 import android.view.View
@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentManager
 import com.example.mh_term_app.R
 import com.example.mh_term_app.databinding.LayoutInfoCollapseBinding
 import com.example.mh_term_app.databinding.LayoutInfoExpandBinding
+import com.example.mh_term_app.ui.map.ViewPagerAdapter
+import com.example.mh_term_app.ui.map.review.DetailReviewFragment
 import com.example.mh_term_app.utils.listener.TabSelectedListener
 import com.example.mh_term_app.utils.listener.changeTabsFont
 import kr.co.prnd.persistbottomsheetfragment.PersistBottomSheetFragment
@@ -44,8 +46,8 @@ class MapPersistBottomSheetFragment : PersistBottomSheetFragment<LayoutInfoColla
             childFragmentManager
         )
         viewPagerAdapter.fragments = listOf(
-            ReportDataDetailFragment(),
-            OpenDataDetailFragment()
+            DetailReportDataFragment(),
+            DetailReviewFragment()
         )
 
         expandBinding.vpInfoDetail.adapter = viewPagerAdapter

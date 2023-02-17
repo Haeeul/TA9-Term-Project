@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.example.mh_term_app.data.model.response.DetailReviewItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/round_square_fill_grey_8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="14dp">
+
+        <TextView
+            android:id="@+id/textView20"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@{item.name + '님'}"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView18"
+            style="@style/LightText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@{item.content}"
+            android:textColor="@color/deep_dark_grey"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView20"
+            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:rating="@{item.rating}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView18"
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+        <TextView
+            android:id="@+id/textView23"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="1dp"
+            android:text="@{Float.toString(item.rating)}"
+            android:textSize="14dp"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+            app:layout_constraintStart_toEndOf="@+id/ratingBar"
+            app:layout_constraintTop_toTopOf="@+id/ratingBar" />
+
+        <TextView
+            android:id="@+id/textView29"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{Integer.toString(item.likeCount)}"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView23"
+            app:layout_constraintEnd_toEndOf="@+id/textView18"
+            app:layout_constraintTop_toTopOf="@+id/textView23" />
+
+        <ImageView
+            android:id="@+id/imageView12"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView29"
+            app:layout_constraintEnd_toStartOf="@+id/textView29"
+            app:layout_constraintTop_toTopOf="@+id/textView29"
+            setReviewIcon="@{item.like}" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip4"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            setUserTypeChip="@{item.type}"
+            app:chipBackgroundColor="@color/green"
+            android:textAppearance="@style/UserChipText"
+            app:layout_constraintBottom_toBottomOf="@+id/textView20"
+            app:layout_constraintEnd_toEndOf="@+id/textView18"
+            app:layout_constraintTop_toTopOf="@+id/textView20" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

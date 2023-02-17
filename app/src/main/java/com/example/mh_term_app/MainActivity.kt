@@ -7,8 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivityMainBinding
-import com.example.mh_term_app.ui.map.MapPersistBottomSheetFragment
-import com.example.mh_term_app.utils.extension.toast
+import com.example.mh_term_app.ui.map.details.MapPersistBottomSheetFragment
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
@@ -52,7 +51,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback {
     override fun onBackPressed() {
         if (mapPersistBottomFragment?.handleBackKeyEvent() == true) {
             // no-op
-            toast("눌림")
         } else {
             super.onBackPressed()
         }
