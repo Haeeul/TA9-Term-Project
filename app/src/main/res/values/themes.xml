@@ -14,4 +14,14 @@
         <!-- Customize your theme here. -->
         <item name="android:windowLightStatusBar">true</item>
     </style>
+
+    <style name="Theme.RatingBar.info" parent="Widget.AppCompat.RatingBar.Small">
+        <item name="android:progressDrawable">@drawable/rating_bar_info_window</item>
+    </style>
+
+    <style name="Theme.info.Tab" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textSize">16dp</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
 </resources>

@@ -19,117 +19,125 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <fragment
+                android:id="@+id/fm_map"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:name="com.naver.maps.map.MapFragment"/>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/edt_map_search"
-                    style="@style/MediumText"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="@drawable/round_square_fill_white_8"
-                    android:gravity="center_vertical"
-                    android:paddingStart="64dp"
-                    android:text="@string/txt_hint_search_place"
-                    android:textColor="@color/grey"
-                    android:textSize="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/imageView11"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/edt_map_search"
-                    app:layout_constraintStart_toStartOf="@+id/edt_map_search"
-                    app:layout_constraintTop_toTopOf="@+id/edt_map_search"
-                    app:srcCompat="@drawable/ic_menu" />
-
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:scrollbars="none"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edt_map_search">
-
-                    <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/chip_group_category"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:paddingStart="22dp"
-                        android:paddingEnd="22dp"
-                        app:singleSelection="true"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/edt_map_search"
-                        app:singleLine="true">
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_facility"
-                            style="@style/categoryChip"
-                            android:clickable="true"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/txt_place_facility"
-                            android:textAppearance="@style/chipText"
-                            app:chipIcon="@drawable/ic_facility"
-                            app:chipIconSize="18dp" />
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_store"
-                            style="@style/categoryChip"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/txt_place_store"
-                            android:textAppearance="@style/chipText"
-                            app:chipIcon="@drawable/ic_store"
-                            app:chipIconSize="22dp" />
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_charging_station"
-                            style="@style/categoryChip"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:focusable="true"
-                            android:text="@string/txt_place_charging_station"
-                            android:textAppearance="@style/chipText"
-                            app:chipIcon="@drawable/ic_charging_station"
-                            app:chipIconSize="18dp" />
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_restroom"
-                            style="@style/categoryChip"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/txt_place_restroom"
-                            android:textAppearance="@style/chipText"
-                            app:chipIcon="@drawable/ic_restroom"
-                            app:chipIconSize="18dp" />
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_support_center"
-                            style="@style/categoryChip"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/txt_place_movement_support_center"
-                            android:textAppearance="@style/chipText"
-                            app:chipIcon="@drawable/ic_support_center" />
-
-                    </com.google.android.material.chip.ChipGroup>
-                </HorizontalScrollView>
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </FrameLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/edt_map_search"
+                style="@style/MediumText"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/round_square_fill_white_8"
+                android:gravity="center_vertical"
+                android:paddingStart="64dp"
+                android:text="@string/txt_hint_search_place"
+                android:textColor="@color/grey"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/edt_map_search"
+                app:layout_constraintStart_toStartOf="@+id/edt_map_search"
+                app:layout_constraintTop_toTopOf="@+id/edt_map_search"
+                app:srcCompat="@drawable/ic_menu" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edt_map_search">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chip_group_category"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:paddingStart="22dp"
+                    android:paddingEnd="22dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edt_map_search"
+                    app:singleLine="true"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_facility"
+                        style="@style/categoryChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:text="@string/txt_place_facility"
+                        android:textAppearance="@style/chipText"
+                        app:chipIcon="@drawable/ic_facility"
+                        app:chipIconSize="18dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_store"
+                        style="@style/categoryChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_place_store"
+                        android:textAppearance="@style/chipText"
+                        app:chipIcon="@drawable/ic_store"
+                        app:chipIconSize="22dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_charging_station"
+                        style="@style/categoryChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:focusable="true"
+                        android:text="@string/txt_place_charging_station"
+                        android:textAppearance="@style/chipText"
+                        app:chipIcon="@drawable/ic_charging_station"
+                        app:chipIconSize="18dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_restroom"
+                        style="@style/categoryChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_place_restroom"
+                        android:textAppearance="@style/chipText"
+                        app:chipIcon="@drawable/ic_restroom"
+                        app:chipIconSize="18dp" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_support_center"
+                        style="@style/categoryChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_place_movement_support_center"
+                        android:textAppearance="@style/chipText"
+                        app:chipIcon="@drawable/ic_support_center" />
+
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

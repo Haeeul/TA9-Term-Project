@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="700dp">
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageView16"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_btn_back" />
+
+                <TextView
+                    android:id="@+id/textView17"
+                    style="@style/ActivityTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="상세 보기"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/imageView16" />
+
+                <ImageView
+                    android:id="@+id/imageView17"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView16"
+                    app:srcCompat="@color/light_grey" />
+
+                <TextView
+                    android:id="@+id/txt_detail_name"
+                    style="@style/MediumText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="실외 | 점자 블록"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView17" />
+
+                <RatingBar
+                    android:id="@+id/rb_detail"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:rating="3.5"
+                    app:layout_constraintEnd_toStartOf="@+id/rating_detail"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_detail_name" />
+
+                <TextView
+                    android:id="@+id/rating_detail"
+                    style="@style/MediumText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="3.5"
+                    app:layout_constraintBottom_toBottomOf="@+id/rb_detail"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/rb_detail"
+                    app:layout_constraintTop_toTopOf="@+id/rb_detail" />
+
+                <ImageView
+                    android:id="@+id/btn_detail_call"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_detail_favorite"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rb_detail"
+                    app:srcCompat="@drawable/ic_call" />
+
+                <ImageView
+                    android:id="@+id/btn_detail_favorite"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btn_detail_call"
+                    app:layout_constraintTop_toTopOf="@+id/btn_detail_call"
+                    app:srcCompat="@drawable/ic_star_inactive" />
+
+                <TextView
+                    android:id="@+id/textView21"
+                    style="@style/MediumText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="전화"
+                    app:layout_constraintEnd_toEndOf="@+id/btn_detail_call"
+                    app:layout_constraintStart_toStartOf="@+id/btn_detail_call"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_detail_call" />
+
+                <TextView
+                    android:id="@+id/textView22"
+                    style="@style/MediumText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="즐겨찾기"
+                    app:layout_constraintEnd_toEndOf="@+id/btn_detail_favorite"
+                    app:layout_constraintStart_toStartOf="@+id/btn_detail_favorite"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_detail_favorite" />
+
+                <ImageView
+                    android:id="@+id/imageView20"
+                    android:layout_width="0dp"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView21"
+                    app:srcCompat="@color/light_grey" />
+
+                <ImageView
+                    android:id="@+id/imageView21"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView21"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_detail_favorite"
+                    app:layout_constraintStart_toEndOf="@+id/btn_detail_call"
+                    app:layout_constraintTop_toTopOf="@+id/btn_detail_call"
+                    app:srcCompat="@color/light_grey" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tl_info_detail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:tabIndicatorColor="@color/black"
+                    app:tabIndicatorGravity="bottom"
+                    app:tabIndicatorHeight="4dp"
+                    app:tabGravity="fill"
+                    app:tabMode="fixed"
+                    app:tabMaxWidth="0dp"
+                    android:contentDescription="tab"
+                    app:tabSelectedTextColor="@color/black"
+                    app:tabTextAppearance="@style/Theme.info.Tab"
+                    app:tabTextColor="@color/dark_grey"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView20" />
+
+                <com.example.mh_term_app.utils.view.MeasuredViewPager
+                    android:id="@+id/vp_info_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tl_info_detail" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
