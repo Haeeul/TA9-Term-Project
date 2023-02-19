@@ -103,7 +103,7 @@
 
         <ImageView
             android:id="@+id/imageView10"
-            setNicknameIcon="@{vm.isValidNickname}"
+            setValidSignInfoIcon="@{vm.isValidNickname}"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginEnd="16dp"

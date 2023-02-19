@@ -25,6 +25,18 @@ object BindingAdapter {
     }
 
     @JvmStatic
+    @BindingAdapter("setIdNotice")
+    fun TextView.setIdNotice(isValid: Boolean) {
+        if(isValid){
+            text = MHApplication.getApplicationContext().getString(R.string.txt_nickname_possible)
+            setTextColor(ContextCompat.getColor(this.context, R.color.dark_green))
+        }else{
+            text = MHApplication.getApplicationContext().getString(R.string.txt_nickname_impossible)
+            setTextColor(ContextCompat.getColor(this.context, R.color.red))
+        }
+    }
+
+    @JvmStatic
     @BindingAdapter("setNicknameNotice")
     fun TextView.setNicknameNotice(isValid: Boolean) {
         if(isValid){
@@ -37,8 +49,8 @@ object BindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("setNicknameIcon")
-    fun ImageView.setNicknameIcon(isValid: Boolean) {
+    @BindingAdapter("setValidSignInfoIcon")
+    fun ImageView.setValidSignInfoIcon(isValid: Boolean) {
         if(isValid){
             setImageResource(R.drawable.ic_nick_possible)
         }else{

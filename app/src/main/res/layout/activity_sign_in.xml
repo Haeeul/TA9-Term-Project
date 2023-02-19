@@ -15,202 +15,202 @@
         android:layout_height="match_parent"
         tools:context=".ui.sign.in.SignInActivity">
 
-        <ImageView
-            android:id="@+id/btn_sign_in_back"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:onClick="goToBackListener"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_btn_back" />
+<!--        <ImageView-->
+<!--            android:id="@+id/btn_sign_in_back"-->
+<!--            android:layout_width="32dp"-->
+<!--            android:layout_height="32dp"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:onClick="goToBackListener"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:srcCompat="@drawable/ic_btn_back" />-->
 
-        <TextView
-            android:id="@+id/textView"
-            style="@style/ActivityTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/txt_sign_in"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_sign_in_back"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btn_sign_in_back" />
+<!--        <TextView-->
+<!--            android:id="@+id/textView"-->
+<!--            style="@style/ActivityTitle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/txt_sign_in"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/btn_sign_in_back"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/btn_sign_in_back" />-->
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:src="@color/light_grey"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_sign_in_back" />
+<!--        <ImageView-->
+<!--            android:id="@+id/imageView2"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:src="@color/light_grey"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/btn_sign_in_back" />-->
 
-        <TextView
-            android:id="@+id/textView2"
-            style="@style/BoldText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="50dp"
-            android:text="@string/txt_desc_sign_in"
-            android:textSize="26dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+<!--        <TextView-->
+<!--            android:id="@+id/textView2"-->
+<!--            style="@style/BoldText"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="24dp"-->
+<!--            android:layout_marginTop="50dp"-->
+<!--            android:text="@string/txt_desc_sign_in"-->
+<!--            android:textSize="26dp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/imageView2" />-->
 
-        <EditText
-            android:id="@+id/edt_sign_in_phone"
-            style="@style/EditHintText"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/round_square_line_grey_8"
-            android:hint="@string/txt_hint_phone_input"
-            android:inputType="number"
-            android:paddingHorizontal="16dp"
-            android:textSize="18dp"
-            android:nextFocusDown="@id/edt_sigh_in_auth_num"
-            android:text="@={vm.emailTxt}"
-            android:onTextChanged="@{vm::inputEmail}"
-            app:layout_constraintEnd_toStartOf="@+id/btn_sign_in_request_auth"
-            app:layout_constraintStart_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+<!--        <EditText-->
+<!--            android:id="@+id/edt_sign_in_phone"-->
+<!--            style="@style/EditHintText"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_marginTop="24dp"-->
+<!--            android:layout_marginEnd="8dp"-->
+<!--            android:background="@drawable/round_square_line_grey_8"-->
+<!--            android:hint="@string/txt_hint_phone_input"-->
+<!--            android:inputType="number"-->
+<!--            android:paddingHorizontal="16dp"-->
+<!--            android:textSize="18dp"-->
+<!--            android:nextFocusDown="@id/edt_sigh_in_auth_num"-->
+<!--            android:text="@={vm.emailTxt}"-->
+<!--            android:onTextChanged="@{vm::inputEmail}"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/btn_sign_in_request_auth"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/textView2"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/textView2" />-->
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_sign_in_request_auth"
-            style="@style/MediumText"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/selector_sign_request_btn"
-            android:enabled="@{vm.isValidRequestBtn}"
-            android:text="@string/txt_request_phone"
-            android:textColor="@color/white"
-            android:textSize="16dp"
-            android:onClick="postSignInAuthRequest"
-            app:layout_constraintBottom_toBottomOf="@+id/edt_sign_in_phone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/edt_sign_in_phone" />
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:id="@+id/btn_sign_in_request_auth"-->
+<!--            style="@style/MediumText"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="24dp"-->
+<!--            android:background="@drawable/selector_sign_request_btn"-->
+<!--            android:enabled="@{vm.isValidRequestBtn}"-->
+<!--            android:text="@string/txt_request_phone"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="16dp"-->
+<!--            android:onClick="postSignInAuthRequest"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/edt_sign_in_phone"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/edt_sign_in_phone" />-->
 
-        <EditText
-            android:id="@+id/edt_sigh_in_auth_num"
-            style="@style/EditHintText"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/round_square_line_grey_8"
-            android:hint="@string/txt_hint_auth_num_input"
-            android:inputType="number"
-            android:paddingHorizontal="16dp"
-            android:textSize="18dp"
-            android:text="@={vm.passwordTxt}"
-            android:onTextChanged="@{vm::inputPassword}"
-            app:layout_constraintEnd_toEndOf="@+id/btn_sign_in_request_auth"
-            app:layout_constraintStart_toStartOf="@+id/edt_sign_in_phone"
-            app:layout_constraintTop_toBottomOf="@+id/edt_sign_in_phone" />
+<!--        <EditText-->
+<!--            android:id="@+id/edt_sigh_in_auth_num"-->
+<!--            style="@style/EditHintText"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:background="@drawable/round_square_line_grey_8"-->
+<!--            android:hint="@string/txt_hint_auth_num_input"-->
+<!--            android:inputType="number"-->
+<!--            android:paddingHorizontal="16dp"-->
+<!--            android:textSize="18dp"-->
+<!--            android:text="@={vm.passwordTxt}"-->
+<!--            android:onTextChanged="@{vm::inputPassword}"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/btn_sign_in_request_auth"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/edt_sign_in_phone"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/edt_sign_in_phone" />-->
 
-        <TextView
-            android:id="@+id/txt_sign_in_timer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="@font/gyeonggi_cheonnyeon_medium"
-            android:includeFontPadding="false"
-            android:textColor="@color/red"
-            android:textSize="16dp"
-            android:text="@{vm.timer}"
-            android:visibility="@{vm.isValidTimer ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintBottom_toBottomOf="@+id/edt_sigh_in_auth_num"
-            app:layout_constraintEnd_toEndOf="@+id/edt_sigh_in_auth_num"
-            app:layout_constraintTop_toTopOf="@+id/edt_sigh_in_auth_num" />
+<!--        <TextView-->
+<!--            android:id="@+id/txt_sign_in_timer"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:fontFamily="@font/gyeonggi_cheonnyeon_medium"-->
+<!--            android:includeFontPadding="false"-->
+<!--            android:textColor="@color/red"-->
+<!--            android:textSize="16dp"-->
+<!--            android:text="@{vm.timer}"-->
+<!--            android:visibility="@{vm.isValidTimer ? View.VISIBLE : View.INVISIBLE}"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/edt_sigh_in_auth_num"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/edt_sigh_in_auth_num"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/edt_sigh_in_auth_num" />-->
 
-        <TextView
-            android:id="@+id/txt_sign_in_notice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            setAuthNotice="@{vm.emailNotice}"
-            style="@style/MediumText"
-            android:textSize="16dp"
-            android:textColor="@color/red"
-            android:visibility="@{vm.isValidEmailNotice ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintStart_toStartOf="@+id/edt_sigh_in_auth_num"
-            app:layout_constraintTop_toBottomOf="@+id/edt_sigh_in_auth_num" />
+<!--        <TextView-->
+<!--            android:id="@+id/txt_sign_in_notice"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="12dp"-->
+<!--            setAuthNotice="@{vm.emailNotice}"-->
+<!--            style="@style/MediumText"-->
+<!--            android:textSize="16dp"-->
+<!--            android:textColor="@color/red"-->
+<!--            android:visibility="@{vm.isValidEmailNotice ? View.VISIBLE : View.INVISIBLE}"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/edt_sigh_in_auth_num"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/edt_sigh_in_auth_num" />-->
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/txt_sign_in_request_again"
-            style="@style/MediumText"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:background="@color/transparent"
-            android:onClick="postSignIpAuthResend"
-            android:text="@string/txt_request_again"
-            android:textColor="@color/dark_grey"
-            android:textSize="16dp"
-            android:visibility="@{vm.isValidTimer ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintBottom_toBottomOf="@+id/txt_sign_in_notice"
-            app:layout_constraintEnd_toEndOf="@+id/txt_sign_in_timer"
-            app:layout_constraintStart_toStartOf="@+id/txt_sign_in_timer"
-            app:layout_constraintTop_toTopOf="@+id/txt_sign_in_notice" />
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:id="@+id/txt_sign_in_request_again"-->
+<!--            style="@style/MediumText"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:background="@color/transparent"-->
+<!--            android:onClick="postSignIpAuthResend"-->
+<!--            android:text="@string/txt_request_again"-->
+<!--            android:textColor="@color/dark_grey"-->
+<!--            android:textSize="16dp"-->
+<!--            android:visibility="@{vm.isValidTimer ? View.VISIBLE : View.INVISIBLE}"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/txt_sign_in_notice"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/txt_sign_in_timer"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/txt_sign_in_timer"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/txt_sign_in_notice" />-->
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_sign_in"
-            style="@style/ButtonText"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/selector_sign_btn"
-            android:text="@string/txt_sign_in"
-            android:textColor="@color/white"
-            android:enabled="@{vm.isValidAuth}"
-            android:onClick="checkSignInAuth"
-            app:layout_constraintBottom_toTopOf="@+id/textView4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:id="@+id/btn_sign_in"-->
+<!--            style="@style/ButtonText"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_marginStart="24dp"-->
+<!--            android:layout_marginEnd="24dp"-->
+<!--            android:layout_marginBottom="16dp"-->
+<!--            android:background="@drawable/selector_sign_btn"-->
+<!--            android:text="@string/txt_sign_in"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:enabled="@{vm.isValidAuth}"-->
+<!--            android:onClick="checkSignInAuth"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/textView4"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent" />-->
 
-        <TextView
-            android:id="@+id/textView4"
-            style="@style/LightText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
-            android:text="@string/txt_desc_account_null"
-            android:textColor="@color/grey"
-            android:textSize="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView3"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent" />
+<!--        <TextView-->
+<!--            android:id="@+id/textView4"-->
+<!--            style="@style/LightText"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="32dp"-->
+<!--            android:text="@string/txt_desc_account_null"-->
+<!--            android:textColor="@color/grey"-->
+<!--            android:textSize="16dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/imageView3"-->
+<!--            app:layout_constraintHorizontal_chainStyle="packed"-->
+<!--            app:layout_constraintStart_toStartOf="parent" />-->
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:src="@color/dark_grey"
-            app:layout_constraintBottom_toBottomOf="@+id/textView4"
-            app:layout_constraintEnd_toStartOf="@+id/btn_sign_in_go_sign_up"
-            app:layout_constraintStart_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toTopOf="@+id/textView4" />
+<!--        <ImageView-->
+<!--            android:id="@+id/imageView3"-->
+<!--            android:layout_width="1dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:src="@color/dark_grey"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/textView4"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/btn_sign_in_go_sign_up"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/textView4"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/textView4" />-->
 
-        <TextView
-            android:id="@+id/btn_sign_in_go_sign_up"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/txt_sign_up"
-            android:onClick="goToSignUpListener"
-            style="@style/MediumText"
-            android:textSize="16dp"
-            android:textColor="@color/dark_grey"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toTopOf="@+id/imageView3" />
+<!--        <TextView-->
+<!--            android:id="@+id/btn_sign_in_go_sign_up"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:text="@string/txt_sign_up"-->
+<!--            android:onClick="goToSignUpListener"-->
+<!--            style="@style/MediumText"-->
+<!--            android:textSize="16dp"-->
+<!--            android:textColor="@color/dark_grey"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/imageView3"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/imageView3"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/imageView3" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

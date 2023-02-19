@@ -5,96 +5,103 @@ import android.os.Looper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.mh_term_app.MHApplication
-import com.example.mh_term_app.R
+import androidx.lifecycle.viewModelScope
 import com.example.mh_term_app.data.repository.UserRepository
-import java.util.*
+import kotlinx.coroutines.launch
 
-class SignViewModel(): ViewModel() {
+class SignViewModel : ViewModel() {
     private val userRepository = UserRepository()
 
     // 사용자 입력 내용
-    val emailTxt = MutableLiveData("")
+    val idTxt = MutableLiveData("")
     val passwordTxt = MutableLiveData("")
+    val checkPasswordTxt = MutableLiveData("")
 
     // 안내 문구
-    val emailNotice = MutableLiveData("")
+    val idNotice = MutableLiveData("")
     val passwordNotice = MutableLiveData("")
+    val checkPasswordNotice = MutableLiveData("")
 
-    // 이메일 유효성 검사
-    private val _isValidEmail = MutableLiveData<Boolean>()
-    val isValidEmail : LiveData<Boolean>
-        get() = _isValidEmail
+    // ID 중복확인 - 버튼 표시
+    private val _isValidIdBtn = MutableLiveData(false)
+    val isValidIdBtn : LiveData<Boolean>
+        get() = _isValidIdBtn
 
-    // 이메일 안내 문구 표시
-    private val _isValidEmailNotice = MutableLiveData(false)
-    val isValidEmailNotice : LiveData<Boolean>
-        get() = _isValidEmailNotice
+    // ID 유효성 검사
+    private val _isValidId = MutableLiveData<Boolean>()
+    val isValidId : LiveData<Boolean>
+        get() = _isValidId
+
+    // ID 중복확인 - 안내 문구 표시
+    private val _isValidIdNotice = MutableLiveData(false)
+    val isValidIdNotice : LiveData<Boolean>
+        get() = _isValidIdNotice
 
     // 비밀번호 유효성 검사
     private val _isValidPassword = MutableLiveData<Boolean>()
     val isValidPassword : LiveData<Boolean>
         get() = _isValidPassword
 
-    // 이메일 안내 문구 표시
+    // 비밀번호 안내 문구 표시
     private val _isValidPasswordNotice = MutableLiveData(false)
     val isValidPasswordNotice : LiveData<Boolean>
         get() = _isValidPasswordNotice
+
+    // 확인 비밀번호 안내 문구 표시
+    private val _isValidCheckPasswordNotice = MutableLiveData(false)
+    val isValidCheckPasswordNotice : LiveData<Boolean>
+        get() = _isValidCheckPasswordNotice
 
     // 인증 유효 검사
     private val _isValidAuth = MutableLiveData(false)
     val isValidAuth : LiveData<Boolean>
         get() = _isValidAuth
 
-    // 이메일 입력칸 확인
-    fun inputEmail(s: CharSequence?, start: Int, before: Int, count: Int){
-        Handler(Looper.getMainLooper()).postDelayed({ checkEmailForm() }, 0L)
-        Handler(Looper.getMainLooper()).postDelayed({ checkEmptyEmail() }, 0L)
+    // ID 입력칸 확인
+    fun inputId(s: CharSequence?, start: Int, before: Int, count: Int){
+        Handler(Looper.getMainLooper()).postDelayed({ checkVaildIdBtn() }, 0L)
     }
 
-    // 이메일 형식 확인
-    private fun checkEmailForm() {
-        emailNotice.value = MHApplication.getApplicationContext().getString(R.string.txt_email_form_check)
-        _isValidEmailNotice.value = !android.util.Patterns.EMAIL_ADDRESS.matcher(emailTxt.value.toString()).matches()
-
-//        if(_isValidEmailNotice.value == true){
-//            _isValidEmailBtn.postValue(false)
-//        }else{
-//            _isValidEmailBtn.postValue(true)
-//        }
+    // ID 입력칸 빈칸확인
+    private fun checkVaildIdBtn(){
+        _isValidIdBtn.value = idTxt.value?.length != 0
     }
 
-    // 이메일 빈칸확인
-    private fun checkEmptyEmail(){
-        if(emailTxt.value?.length == 0){
-            _isValidEmailNotice.postValue(false)
-        }
-    }
-
-    private fun resetValidateEmail(){
-        if(_isValidEmail.value == true){
-            _isValidEmail.postValue(false)
+    fun checkValidId(){
+        viewModelScope.launch {
+            _isValidId.value = userRepository.getValidateId(idTxt.value.toString())
+            _isValidIdNotice.value = true
         }
     }
 
     // 비밀번호 자릿수 확인
     fun inputPassword(s: CharSequence?, start: Int, before: Int, count: Int){
-        Handler(Looper.getMainLooper()).postDelayed({ checkAuthNumLength() }, 0L)
+        Handler(Looper.getMainLooper()).postDelayed({ checkPasswordForm() }, 0L)
     }
 
-    private fun checkAuthNumLength(){
-        _isValidAuth.value = passwordTxt.value?.length == 6 && _isValidTimer.value==true && emailNotice.value !=1
+    private fun checkPasswordForm() {
+        when(passwordTxt.value?.length){
+            0 -> _isValidPasswordNotice.value = false
+            in 1..3 -> {
+                _isValidPasswordNotice.value = true
+                _isValidPassword.value = false
+            }
+            else -> {
+                _isValidPasswordNotice.value = false
+                _isValidPassword.value = true
+
+//                if(!_againPasswordForm.value!!) _againPasswordForm.postValue(true)
+            }
+        }
     }
 
     // 비밀번호 일치 확인
-    fun setAuthFail(){
-        val test = false
-        if(!test){
-            _isValidAuth.value = false
-            _isValidEmailNotice.value = true
+    fun inputCheckPassword(s: CharSequence?, start: Int, before: Int, count: Int){
+        Handler(Looper.getMainLooper()).postDelayed({ checkPasswordEqual() }, 0L)
+    }
 
-            emailNotice.value = 2
-        }
+    private fun checkPasswordEqual(){
+        _isValidCheckPasswordNotice.value = passwordTxt.value != checkPasswordTxt.value
     }
 
 }

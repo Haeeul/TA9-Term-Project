@@ -9,5 +9,5 @@ interface RemoteDataSource {
     suspend fun postSignUp(phoneNum : String, nickname : String, type : String) : Boolean
 
     // new login
-    suspend fun createUser(email : String, password : String) : Boolean
+    suspend fun getValidateId(id : String) : Boolean
 }

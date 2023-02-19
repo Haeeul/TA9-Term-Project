@@ -75,26 +75,21 @@ class RemoteDataSourceImpl : RemoteDataSource {
         return result
     }
 
-    override suspend fun createUser(email: String, password: String): Boolean {
-        var result = false
-
+    override suspend fun getValidateId(id: String): Boolean {
+        var valid = false
         try {
-            FirebaseAuth.auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "createUserWithEmail:success")
-                        result = true
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                        result = false
-                    }
+            db.collection("users")
+                .whereEqualTo("id", id)
+                .get()
+                .addOnSuccessListener { result ->
+                    valid = result.isEmpty
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
                 }.await()
-        } catch (e: FirebaseException) {
+        }catch (e:FirebaseException){
             Log.e(TAG, e.message.toString())
         }
-
-        return result
+        return valid
     }
 }

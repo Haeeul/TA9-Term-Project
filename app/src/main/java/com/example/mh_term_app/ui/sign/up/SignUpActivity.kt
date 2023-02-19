@@ -31,65 +31,65 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
         super.onCreate(savedInstanceState)
         binding.apply {
             vm = signUpViewModel
-            edtSignUpPhone.requestFocus()
+            edtSignUpEmail.requestFocus()
         }
 
-        initObserver()
+//        initObserver()
     }
 
-    private fun initObserver(){
-        signUpViewModel.isValidEmail.observe(this){
-            if(it){ // 가입 이력이 없는 유저 : 인증 요청 진행
-                requestPhoneAuth(this, getPhoneNumber(binding.edtSignUpPhone.text.toString()), callbacks)
-                binding.edtSignUpAuthNum.requestFocus()
-            }else{ // 가입 이력이 있는 유저 : 로그인 유도
-                this.createListenerDialog(supportFragmentManager, "goToSignIn",
-                    {
-                        val signInIntent  = Intent(this, SignInActivity::class.java)
-                        signInIntent.putExtra("phoneNum", binding.edtSignUpPhone.text.toString())
-                        startActivity(signInIntent)
-                        finish()
-                    },
-                    null
-                )
-            }
-        }
-    }
-
-    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    toast("인증 성공")
-                    startActivityWithFinish(UserInfoActivity::class.java)
-                } else {
-                    // 인증 번호 틀린 경우
-                    Log.w("auth number wrong : ", task.exception?.message.toString())
-                    signUpViewModel.setAuthFail()
-                }
-            }
-    }
-
-    // 인증요청 버튼
-    fun postSignUpAuthRequest(view: View) {
-        signUpViewModel.checkValidUser(getPhoneNumber(binding.edtSignUpPhone.text.toString()))
-
-    }
-
-    // 인증재요청 버튼
-    fun postSignUpAuthResend(view: View){
-        resendAuthCode(this, getPhoneNumber(binding.edtSignUpPhone.text.toString()), resendToken, callbacks)
-        binding.edtSignUpAuthNum.requestFocus()
-    }
-
-    // 회원가입 버튼
-    fun checkSignUpAuth(view: View) {
-        val credential = PhoneAuthProvider.getCredential(
-            verificationId,
-            binding.edtSignUpAuthNum.text.toString()
-        )
-        signInWithPhoneAuthCredential(credential)
-    }
+//    private fun initObserver(){
+//        signUpViewModel.isValidEmail.observe(this){
+//            if(it){ // 가입 이력이 없는 유저 : 인증 요청 진행
+//                requestPhoneAuth(this, getPhoneNumber(binding.edtSignUpPhone.text.toString()), callbacks)
+//                binding.edtSignUpAuthNum.requestFocus()
+//            }else{ // 가입 이력이 있는 유저 : 로그인 유도
+//                this.createListenerDialog(supportFragmentManager, "goToSignIn",
+//                    {
+//                        val signInIntent  = Intent(this, SignInActivity::class.java)
+//                        signInIntent.putExtra("phoneNum", binding.edtSignUpPhone.text.toString())
+//                        startActivity(signInIntent)
+//                        finish()
+//                    },
+//                    null
+//                )
+//            }
+//        }
+//    }
+//
+//    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
+//        auth.signInWithCredential(credential)
+//            .addOnCompleteListener(this) { task ->
+//                if (task.isSuccessful) {
+//                    toast("인증 성공")
+//                    startActivityWithFinish(UserInfoActivity::class.java)
+//                } else {
+//                    // 인증 번호 틀린 경우
+//                    Log.w("auth number wrong : ", task.exception?.message.toString())
+//                    signUpViewModel.setAuthFail()
+//                }
+//            }
+//    }
+//
+//    // 인증요청 버튼
+//    fun postSignUpAuthRequest(view: View) {
+//        signUpViewModel.checkValidUser(getPhoneNumber(binding.edtSignUpPhone.text.toString()))
+//
+//    }
+//
+//    // 인증재요청 버튼
+//    fun postSignUpAuthResend(view: View){
+//        resendAuthCode(this, getPhoneNumber(binding.edtSignUpPhone.text.toString()), resendToken, callbacks)
+//        binding.edtSignUpAuthNum.requestFocus()
+//    }
+//
+//    // 회원가입 버튼
+//    fun checkSignUpAuth(view: View) {
+//        val credential = PhoneAuthProvider.getCredential(
+//            verificationId,
+//            binding.edtSignUpAuthNum.text.toString()
+//        )
+//        signInWithPhoneAuthCredential(credential)
+//    }
 
     fun goToBackListener(view: View) {
         finish()

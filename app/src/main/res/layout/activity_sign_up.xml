@@ -53,11 +53,22 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="50dp"
-            android:text="@string/txt_desc_sign_up"
+            android:text="@string/txt_desc_id"
             style="@style/BoldText"
-            android:textSize="26dp"
+            android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+        <TextView
+            android:id="@+id/textView"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:textColor="@color/red"
+            android:textSize="20dp"
+            app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintTop_toTopOf="@+id/textView5" />
 
         <EditText
             android:id="@+id/edt_sign_up_email"
@@ -65,61 +76,162 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/round_square_line_grey_8"
-            android:hint="@string/txt_hint_email_input"
-            android:inputType="number"
-            android:nextFocusDown="@id/edt_sign_up_password"
-            android:onTextChanged="@{vm::inputEmail}"
+            android:hint="@string/txt_hint_ID_input"
+            android:inputType="textEmailAddress"
+            android:onTextChanged="@{vm::inputId}"
             android:paddingHorizontal="16dp"
-            android:text="@={vm.emailTxt}"
+            android:text="@={vm.idTxt}"
             android:textSize="18dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="16dp"
+            setValidSignInfoIcon="@{vm.isValidId}"
+            android:visibility="@{vm.isValidIdNotice ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_sign_up_email"
+            app:layout_constraintEnd_toEndOf="@+id/edt_sign_up_email"
+            app:layout_constraintTop_toTopOf="@+id/edt_sign_up_email"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button"
+            style="@style/MediumText"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/selector_sign_request_btn"
+            android:enabled="@{vm.isValidIdBtn}"
+            android:onClick="@{() -> vm.checkValidId()}"
+            android:text="@string/txt_double_check"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/edt_sign_up_email"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/edt_sign_up_email" />
 
         <TextView
             android:id="@+id/textView30"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:text="@{vm.idNotice}"
             style="@style/MediumText"
-            android:textSize="16dp"
-            android:textColor="@color/red"
-            android:visibility="@{vm.isValidEmailNotice ? View.VISIBLE : View.GONE}"
+            android:textSize="14dp"
+            setIdNotice="@{vm.isValidId}"
+            android:visibility="@{vm.isValidIdNotice ? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toStartOf="@+id/edt_sign_up_email"
             app:layout_constraintTop_toBottomOf="@+id/edt_sign_up_email" />
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/BoldText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/txt_desc_password"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="@+id/edt_sign_up_email"
+            app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+        <TextView
+            android:id="@+id/textView4"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:textColor="@color/red"
+            android:textSize="20dp"
+            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toTopOf="@+id/textView2" />
 
         <EditText
             android:id="@+id/edt_sign_up_password"
             style="@style/EditHintText"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/round_square_line_grey_8"
             android:hint="@string/txt_hint_password_input"
-            android:inputType="number"
+            android:inputType="textPassword"
             android:onTextChanged="@{vm::inputPassword}"
             android:paddingHorizontal="16dp"
             android:text="@={vm.passwordTxt}"
             android:textSize="18dp"
-            app:layout_constraintEnd_toEndOf="@+id/edt_sign_up_email"
+            app:layout_constraintEnd_toEndOf="@+id/button"
             app:layout_constraintStart_toStartOf="@+id/edt_sign_up_email"
-            app:layout_constraintTop_toBottomOf="@+id/textView30" />
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <TextView
             android:id="@+id/txt_sign_up_notice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="@{vm.passwordNotice}"
+            android:text="@string/txt_password_notice"
             style="@style/MediumText"
-            android:textSize="16dp"
+            android:textSize="14dp"
             android:textColor="@color/red"
-            android:visibility="@{vm.isValidPasswordNotice ? View.VISIBLE : View.INVISIBLE}"
+            android:visibility="@{vm.isValidPasswordNotice ? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toStartOf="@+id/edt_sign_up_password"
             app:layout_constraintTop_toBottomOf="@+id/edt_sign_up_password" />
+
+        <TextView
+            android:id="@+id/textView31"
+            style="@style/BoldText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/txt_desc_check_password"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="@+id/txt_sign_up_notice"
+            app:layout_constraintTop_toBottomOf="@+id/txt_sign_up_notice" />
+
+        <TextView
+            android:id="@+id/textView32"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:textColor="@color/red"
+            android:textSize="20dp"
+            app:layout_constraintStart_toEndOf="@+id/textView31"
+            app:layout_constraintTop_toTopOf="@+id/textView31" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName2"
+            style="@style/EditHintText"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/round_square_line_grey_8"
+            android:hint="@string/txt_hint_check_password_input"
+            android:inputType="textPassword"
+            android:onTextChanged="@{vm::inputCheckPassword}"
+            android:paddingHorizontal="16dp"
+            android:text="@={vm.checkPasswordTxt}"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="@+id/edt_sign_up_password"
+            app:layout_constraintStart_toStartOf="@+id/textView31"
+            app:layout_constraintTop_toBottomOf="@+id/textView31" />
+
+        <TextView
+            android:id="@+id/textView33"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/txt_check_password_notice"
+            android:textColor="@color/red"
+            android:textSize="14dp"
+            android:visibility="@{vm.isValidCheckPasswordNotice ? View.VISIBLE : View.GONE}"
+            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_sign_up_next"
