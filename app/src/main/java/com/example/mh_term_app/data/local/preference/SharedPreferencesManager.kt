@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import com.example.mh_term_app.MHApplication
 
 class SharedPreferencesManager(context: Context) {
 
@@ -36,6 +37,10 @@ class SharedPreferencesManager(context: Context) {
     var userType: String
         get() = sharedPreferences.getString(USER_TYPE)
         set(value) = sharedPreferences.putString(USER_TYPE, value)
+
+    fun haveAccount(): Boolean {
+        return MHApplication.prefManager.userId != ""
+    }
 
     companion object {
         const val PREFERENCES_KEY = "preferences"
