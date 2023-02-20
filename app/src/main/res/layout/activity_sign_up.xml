@@ -48,16 +48,30 @@
             app:layout_constraintTop_toBottomOf="@+id/btn_sign_up_back" />
 
         <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
+            android:id="@+id/textView34"
+            style="@style/BoldText"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="50dp"
-            android:text="@string/txt_desc_id"
-            style="@style/BoldText"
-            android:textSize="20dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/txt_desc_sign_up"
+            android:textSize="26dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+        <TextView
+            android:id="@+id/textView5"
+            style="@style/BoldText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/txt_desc_id"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView34" />
 
         <TextView
             android:id="@+id/textView"
@@ -124,7 +138,7 @@
             android:layout_marginTop="12dp"
             android:text="@{vm.idNotice}"
             style="@style/MediumText"
-            android:textSize="14dp"
+            android:textSize="16dp"
             setIdNotice="@{vm.isValidId}"
             android:visibility="@{vm.isValidIdNotice ? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toStartOf="@+id/edt_sign_up_id"
@@ -177,7 +191,7 @@
             android:layout_marginTop="12dp"
             android:text="@string/txt_password_notice"
             style="@style/MediumText"
-            android:textSize="14dp"
+            android:textSize="16dp"
             android:textColor="@color/red"
             android:visibility="@{vm.isValidPasswordNotice ? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toStartOf="@+id/edt_sign_up_password"
@@ -230,7 +244,7 @@
             android:layout_marginTop="12dp"
             android:text="@string/txt_check_password_notice"
             android:textColor="@color/red"
-            android:textSize="14dp"
+            android:textSize="16dp"
             android:visibility="@{vm.isValidCheckPasswordNotice ? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toStartOf="@+id/edt_sign_up_check_password"
             app:layout_constraintTop_toBottomOf="@+id/edt_sign_up_check_password" />
