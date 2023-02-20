@@ -17,7 +17,7 @@
     <string name="txt_request_message_fail">인증 번호 요청 실패</string>
 
     <!-- ID auth -->
-    <string name="txt_hint_ID_input">아이디를 입력해주세요.</string>
+    <string name="txt_hint_id_input">아이디를 입력해주세요.</string>
     <string name="txt_id_possible">해당 아이디는 사용 가능합니다.</string>
     <string name="txt_id_impossible">해당 아이디는 사용 불가능합니다.</string>
     <string name="txt_hint_password_input">최소 4자리 이상 입력해주세요.</string>
@@ -27,7 +27,9 @@
 
     <!-- sign in -->
     <string name="txt_desc_sign_in">휴대폰 번호로 로그인합니다.</string>
+    <string name="txt_hint_password">비밀번호를 입력해주세요.</string>
     <string name="txt_desc_account_null">계정이 없으신가요?</string>
+    <string name="txt_desc_sign_in_fail">아이디 또는 비밀번호를 다시 확인하세요.</string>
 
     <!-- sign up -->
     <string name="txt_desc_id">아이디</string>

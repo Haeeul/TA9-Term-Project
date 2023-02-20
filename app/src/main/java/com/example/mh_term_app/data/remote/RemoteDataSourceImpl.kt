@@ -1,8 +1,11 @@
 package com.example.mh_term_app.data.remote
 
 import android.util.Log
+import com.example.mh_term_app.MHApplication
+import com.example.mh_term_app.data.model.response.ResponseUser
 import com.google.firebase.FirebaseException
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 
@@ -59,9 +62,10 @@ class RemoteDataSourceImpl : RemoteDataSource {
 
         try {
             db.collection("users")
-                .add(user)
+                .document(id)
+                .set(user)
                 .addOnSuccessListener { documentReference ->
-                    Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                    Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
                     result = true
                 }
                 .addOnFailureListener { exception ->
@@ -83,6 +87,32 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 .get()
                 .addOnSuccessListener { result ->
                     valid = result.isEmpty
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
+                }.await()
+        }catch (e:FirebaseException){
+            Log.e(TAG, e.message.toString())
+        }
+        return valid
+    }
+
+    override suspend fun postSignIn(id: String, password: String): Boolean {
+        var valid = false
+        try {
+            db.collection("users").document(id)
+                .get()
+                .addOnSuccessListener { result ->
+                    val user = result.toObject<ResponseUser>()
+                    valid = user?.password == password
+                    if(valid) {
+                        if (user != null) {
+                            MHApplication.prefManager.userId = user.id
+                            MHApplication.prefManager.userPassword = user.password
+                            MHApplication.prefManager.userNickname = user.nickname
+                            MHApplication.prefManager.userType = user.userType
+                        }
+                    }
                 }
                 .addOnFailureListener { exception ->
                     Log.w(TAG, "Error getting documents.", exception)

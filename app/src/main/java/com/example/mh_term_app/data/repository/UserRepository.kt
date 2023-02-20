@@ -7,8 +7,9 @@ class UserRepository() {
     private val remoteDataSource : RemoteDataSource = RemoteDataSourceImpl()
 
     suspend fun getValidatePhone(phoneNum: String) = remoteDataSource.getValidatePhone(phoneNum)
-    suspend fun getValidateNick(nickname : String) = remoteDataSource.getValidateNick(nickname)
-    suspend fun postSignUp(id : String, password : String, nickname: String, type : String) = remoteDataSource.postSignUp(id, password, nickname, type)
 
     suspend fun getValidateId(id : String) = remoteDataSource.getValidateId(id)
+    suspend fun getValidateNick(nickname : String) = remoteDataSource.getValidateNick(nickname)
+    suspend fun postSignUp(id : String, password : String, nickname: String, type : String) = remoteDataSource.postSignUp(id, password, nickname, type)
+    suspend fun postSignIn(id : String, password: String) = remoteDataSource.postSignIn(id, password)
 }

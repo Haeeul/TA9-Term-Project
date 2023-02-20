@@ -79,7 +79,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/round_square_line_grey_8"
-            android:hint="@string/txt_hint_ID_input"
+            android:hint="@string/txt_hint_id_input"
             android:inputType="textEmailAddress"
             android:onTextChanged="@{vm::inputId}"
             android:paddingHorizontal="16dp"
