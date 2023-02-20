@@ -17,9 +17,11 @@ abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
         binding.lifecycleOwner = this@BaseActivity
 
         initView()
+        initObserver()
         initListener()
     }
 
     open fun initView() {}
+    open fun initObserver() {}
     open fun initListener() {}
 }

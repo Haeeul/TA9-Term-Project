@@ -15,7 +15,7 @@ object FirebaseAuth {
         return "+82" +num.substring(1)
     }
 
-    // 인증 요청
+    // 휴대폰 인증 요청
     fun requestPhoneAuth(activity: Activity, phoneNumber : String, callbacks : OnVerificationStateChangedCallbacks) {
         val optionsCompat = PhoneAuthOptions.newBuilder(auth)
             .setPhoneNumber(phoneNumber)
@@ -27,7 +27,7 @@ object FirebaseAuth {
         auth.setLanguageCode("kr")
     }
 
-    // 인증 재요청
+    // 휴대폰 인증 재요청
     fun resendAuthCode(activity: Activity, phoneNumber: String, token: PhoneAuthProvider.ForceResendingToken?, callbacks : OnVerificationStateChangedCallbacks) {
         val optionsCompat = PhoneAuthOptions.newBuilder(auth)
             .setPhoneNumber(phoneNumber)

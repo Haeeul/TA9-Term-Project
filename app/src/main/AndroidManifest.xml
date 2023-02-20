@@ -19,7 +19,8 @@
             android:value="jbaxf1kim3" />
         <activity
             android:name=".ui.sign.up.UserInfoActivity"
-            android:exported="false">
+            android:exported="false"
+            android:windowSoftInputMode="stateVisible">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -27,7 +28,7 @@
         <activity
             android:name=".ui.sign.up.SignUpActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="stateVisible">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.data.repository.UserRepository
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -72,7 +73,14 @@ class UserInfoViewModel : ViewModel() {
 
     fun postSignUp(){
         viewModelScope.launch {
-            _isValidSignUp.value = userRepository.postSignUp(auth.currentUser?.phoneNumber.toString(), nicknameTxt.value.toString(), typeTxt.value.toString())
+            MHApplication.prefManager.userNickname = nicknameTxt.value.toString()
+            MHApplication.prefManager.userType = if(typeTxt.value.toString()== "null"){"none"} else {typeTxt.value.toString()}
+            _isValidSignUp.value = userRepository.postSignUp(
+                MHApplication.prefManager.userId,
+                MHApplication.prefManager.userPassword,
+                MHApplication.prefManager.userNickname,
+                MHApplication.prefManager.userType
+            )
         }
     }
 

@@ -22,6 +22,7 @@
             android:layout_height="32dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:onClick="goToBackListener"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_btn_back" />
@@ -103,7 +104,7 @@
 
         <ImageView
             android:id="@+id/imageView10"
-            setNicknameIcon="@{vm.isValidNickname}"
+            setValidSignInfoIcon="@{vm.isValidNickname}"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginEnd="16dp"

@@ -1,11 +1,13 @@
 package com.example.mh_term_app.ui.sign.up
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import com.example.mh_term_app.MainActivity
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivityUserInfoBinding
+import com.example.mh_term_app.utils.extension.setKeyboardObserver
 import com.example.mh_term_app.utils.extension.startActivityWithAffinity
 import com.example.mh_term_app.utils.extension.toast
 
@@ -19,15 +21,14 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding>() {
 
         binding.apply {
             vm = userInfoViewModel
+            edtUserInfoNick.requestFocus()
         }
-
-        initObserver()
-        initListener()
     }
 
-    private fun initObserver() {
-        userInfoViewModel.isValidSignUp.observe(this
-        ) {
+    override fun initObserver() {
+        setKeyboardObserver(userInfoViewModel.isValidNickname, false)
+
+        userInfoViewModel.isValidSignUp.observe(this) {
             if (it) {
                 toast("회원가입 성공")
                 startActivityWithAffinity(MainActivity::class.java)
@@ -55,4 +56,7 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding>() {
         }
     }
 
+    fun goToBackListener(view: View) {
+        finish()
+    }
 }

@@ -7,7 +7,7 @@
         <import type="android.view.View"/>
         <variable
             name="vm"
-            type="com.example.mh_term_app.ui.sign.SignViewModel" />
+            type="com.example.mh_term_app.ui.sign.in.SignInViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -60,100 +60,53 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <EditText
-            android:id="@+id/edt_sign_in_phone"
+            android:id="@+id/edt_sign_in_id"
             style="@style/EditHintText"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="24dp"
             android:background="@drawable/round_square_line_grey_8"
-            android:hint="@string/txt_hint_phone_input"
-            android:inputType="number"
+            android:hint="@string/txt_hint_id_input"
+            android:inputType="text"
+            android:nextFocusDown="@id/edt_sigh_in_password"
             android:paddingHorizontal="16dp"
+            android:text="@={vm.idTxt}"
             android:textSize="18dp"
-            android:nextFocusDown="@id/edt_sigh_in_auth_num"
-            android:text="@={vm.phoneNumTxt}"
-            android:onTextChanged="@{vm::inputPhoneNum}"
-            app:layout_constraintEnd_toStartOf="@+id/btn_sign_in_request_auth"
+            android:onTextChanged="@{vm.inputSignInInfo}"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_sign_in_request_auth"
-            style="@style/MediumText"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/selector_sign_request_btn"
-            android:enabled="@{vm.isValidRequestBtn}"
-            android:text="@string/txt_request_phone"
-            android:textColor="@color/white"
-            android:textSize="16dp"
-            android:onClick="postSignInAuthRequest"
-            app:layout_constraintBottom_toBottomOf="@+id/edt_sign_in_phone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/edt_sign_in_phone" />
-
         <EditText
-            android:id="@+id/edt_sigh_in_auth_num"
+            android:id="@+id/edt_sigh_in_password"
             style="@style/EditHintText"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/round_square_line_grey_8"
-            android:hint="@string/txt_hint_auth_num_input"
-            android:inputType="number"
+            android:hint="@string/txt_hint_password"
+            android:inputType="textPassword"
             android:paddingHorizontal="16dp"
+            android:text="@={vm.passwordTxt}"
             android:textSize="18dp"
-            android:text="@={vm.authNumTxt}"
-            android:onTextChanged="@{vm::inputAuthNum}"
-            app:layout_constraintEnd_toEndOf="@+id/btn_sign_in_request_auth"
-            app:layout_constraintStart_toStartOf="@+id/edt_sign_in_phone"
-            app:layout_constraintTop_toBottomOf="@+id/edt_sign_in_phone" />
-
-        <TextView
-            android:id="@+id/txt_sign_in_timer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="@font/gyeonggi_cheonnyeon_medium"
-            android:includeFontPadding="false"
-            android:textColor="@color/red"
-            android:textSize="16dp"
-            android:text="@{vm.timer}"
-            android:visibility="@{vm.isValidTimer ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintBottom_toBottomOf="@+id/edt_sigh_in_auth_num"
-            app:layout_constraintEnd_toEndOf="@+id/edt_sigh_in_auth_num"
-            app:layout_constraintTop_toTopOf="@+id/edt_sigh_in_auth_num" />
+            android:onTextChanged="@{vm.inputSignInInfo}"
+            app:layout_constraintEnd_toEndOf="@+id/edt_sign_in_id"
+            app:layout_constraintStart_toStartOf="@+id/edt_sign_in_id"
+            app:layout_constraintTop_toBottomOf="@+id/edt_sign_in_id" />
 
         <TextView
             android:id="@+id/txt_sign_in_notice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            setAuthNotice="@{vm.authNotice}"
             style="@style/MediumText"
             android:textSize="16dp"
             android:textColor="@color/red"
-            android:visibility="@{vm.isValidNotice ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintStart_toStartOf="@+id/edt_sigh_in_auth_num"
-            app:layout_constraintTop_toBottomOf="@+id/edt_sigh_in_auth_num" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/txt_sign_in_request_again"
-            style="@style/MediumText"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:background="@color/transparent"
-            android:onClick="postSignIpAuthResend"
-            android:text="@string/txt_request_again"
-            android:textColor="@color/dark_grey"
-            android:textSize="16dp"
-            android:visibility="@{vm.isValidTimer ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintBottom_toBottomOf="@+id/txt_sign_in_notice"
-            app:layout_constraintEnd_toEndOf="@+id/txt_sign_in_timer"
-            app:layout_constraintStart_toStartOf="@+id/txt_sign_in_timer"
-            app:layout_constraintTop_toTopOf="@+id/txt_sign_in_notice" />
+            android:text="@string/txt_desc_sign_in_fail"
+            android:visibility="@{vm.isValidSignInNotice ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintStart_toStartOf="@+id/edt_sigh_in_password"
+            app:layout_constraintTop_toBottomOf="@+id/edt_sigh_in_password" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_sign_in"
@@ -166,8 +119,8 @@
             android:background="@drawable/selector_sign_btn"
             android:text="@string/txt_sign_in"
             android:textColor="@color/white"
-            android:enabled="@{vm.isValidAuth}"
-            android:onClick="checkSignInAuth"
+            android:enabled="@{vm.isValidNextBtn}"
+            android:onClick="@{() -> vm.checkValidSignIn()}"
             app:layout_constraintBottom_toTopOf="@+id/textView4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
