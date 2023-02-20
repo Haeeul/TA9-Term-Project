@@ -18,7 +18,7 @@ class MHApplication  : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-//        prefManager = SharedPreferencesManager(applicationContext)
+        prefManager = SharedPreferencesManager(applicationContext)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 }

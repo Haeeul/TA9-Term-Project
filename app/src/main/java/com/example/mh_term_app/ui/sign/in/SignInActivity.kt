@@ -1,34 +1,16 @@
 package com.example.mh_term_app.ui.sign.`in`
 
-import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.activity.viewModels
-import com.example.mh_term_app.MHApplication
-import com.example.mh_term_app.MainActivity
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivitySignInBinding
-import com.example.mh_term_app.ui.sign.SignViewModel
-import com.example.mh_term_app.ui.sign.up.SignUpActivity
-import com.example.mh_term_app.utils.etc.FirebaseAuth
-import com.example.mh_term_app.utils.etc.FirebaseAuth.auth
-import com.example.mh_term_app.utils.etc.FirebaseAuth.getPhoneNumber
-import com.example.mh_term_app.utils.etc.FirebaseAuth.resendAuthCode
-import com.example.mh_term_app.utils.extension.createListenerDialog
-import com.example.mh_term_app.utils.extension.startActivityWithAffinity
-import com.example.mh_term_app.utils.extension.startActivityWithFinish
-import com.example.mh_term_app.utils.extension.toast
-import com.google.firebase.FirebaseException
-import com.google.firebase.FirebaseTooManyRequestsException
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.PhoneAuthCredential
+import com.example.mh_term_app.ui.sign.up.SignUpViewModel
 import com.google.firebase.auth.PhoneAuthProvider
 
 class SignInActivity : BaseActivity<ActivitySignInBinding>() {
     override val layoutResID: Int
         get() = R.layout.activity_sign_in
-    private val signInViewModel : SignViewModel by viewModels()
+    private val signInViewModel : SignUpViewModel by viewModels()
 
     private var verificationId = ""
     private var resendToken: PhoneAuthProvider.ForceResendingToken? = null

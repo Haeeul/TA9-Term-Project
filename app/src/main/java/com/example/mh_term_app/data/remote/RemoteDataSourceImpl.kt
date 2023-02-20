@@ -1,7 +1,6 @@
 package com.example.mh_term_app.data.remote
 
 import android.util.Log
-import com.example.mh_term_app.utils.etc.FirebaseAuth
 import com.google.firebase.FirebaseException
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -48,11 +47,12 @@ class RemoteDataSourceImpl : RemoteDataSource {
         return valid
     }
 
-    override suspend fun postSignUp(phoneNum: String, nickname: String, type: String) : Boolean {
+    override suspend fun postSignUp(id: String, password: String, nickname: String, type: String) : Boolean {
         var result = false
 
         val user = hashMapOf(
-            "phoneNum" to phoneNum,
+            "id" to id,
+            "password" to password,
             "nickname" to nickname,
             "type" to type
         )
