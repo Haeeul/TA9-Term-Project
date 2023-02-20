@@ -2,6 +2,7 @@ package com.example.mh_term_app.data.local.preference
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.annotation.CallSuper
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.example.mh_term_app.MHApplication
@@ -40,6 +41,17 @@ class SharedPreferencesManager(context: Context) {
 
     fun haveAccount(): Boolean {
         return MHApplication.prefManager.userId != ""
+    }
+
+    @CallSuper
+    fun clear() {
+        sharedPreferences.edit()
+            .remove(USER_IDX)
+            .remove(USER_ID)
+            .remove(USER_PASSWORD)
+            .remove(USER_NICKNAME)
+            .remove(USER_TYPE)
+            .apply()
     }
 
     companion object {

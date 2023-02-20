@@ -24,4 +24,9 @@
         <item name="android:lineSpacingExtra">6sp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
+
+    <style name="Theme.menu.text" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/gyeonggi_cheonnyeon_medium</item>
+        <item name="android:textSize">20dp</item>
+    </style>
 </resources>

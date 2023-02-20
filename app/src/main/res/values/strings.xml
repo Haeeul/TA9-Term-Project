@@ -68,4 +68,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txt_add_review">리뷰 작성하기</string>
 
+    <!-- menu -->
+    <string name="txt_menu_edit_user_info">사용자 정보 수정</string>
+    <string name="txt_menu_review_list">리뷰 내역</string>
+    <string name="txt_menu_favorite_list">즐겨찾기 내역</string>
+    <string name="txt_menu_report">신규 제보하기</string>
+    <string name="txt_menu_logout">로그아웃</string>
+    <string name="txt_menu_user_none">로그인 후\n이용해주세요:)</string>
+
 </resources>

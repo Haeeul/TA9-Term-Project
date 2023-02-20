@@ -39,6 +39,8 @@ android {
 
 dependencies {
 
+    //noinspection GradleCompatible
+    implementation 'com.android.support:design:28.0.0'
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
@@ -73,5 +75,8 @@ dependencies {
     implementation 'kr.co.prnd:persistBottomSheetFragment:1.0.0'
 
     // encryptedSharedPreferences
-    implementation 'androidx.security:security-crypto-ktx:1.1.0-alpha03'
+    implementation 'androidx.security:security-crypto-ktx:1.1.0-alpha04'
+
+    // drawerLayout
+    implementation 'androidx.drawerlayout:drawerlayout:1.1.1'
 }
