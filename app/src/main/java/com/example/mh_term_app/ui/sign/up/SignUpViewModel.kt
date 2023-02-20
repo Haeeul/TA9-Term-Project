@@ -1,4 +1,4 @@
-package com.example.mh_term_app.ui.sign
+package com.example.mh_term_app.ui.sign.up
 
 import android.os.Handler
 import android.os.Looper
@@ -6,10 +6,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.data.repository.UserRepository
 import kotlinx.coroutines.launch
 
-class SignViewModel : ViewModel() {
+class SignUpViewModel : ViewModel() {
     private val userRepository = UserRepository()
 
     // 사용자 입력 내용
@@ -19,8 +20,6 @@ class SignViewModel : ViewModel() {
 
     // 안내 문구
     val idNotice = MutableLiveData("")
-    val passwordNotice = MutableLiveData("")
-    val checkPasswordNotice = MutableLiveData("")
 
     // ID 중복확인 - 버튼 표시
     private val _isValidIdBtn = MutableLiveData(false)
@@ -52,18 +51,20 @@ class SignViewModel : ViewModel() {
     val isValidCheckPasswordNotice : LiveData<Boolean>
         get() = _isValidCheckPasswordNotice
 
-    // 인증 유효 검사
-    private val _isValidAuth = MutableLiveData(false)
-    val isValidAuth : LiveData<Boolean>
-        get() = _isValidAuth
+    // 다음 버튼 활성화
+    private val _isValidNextBtn = MutableLiveData(false)
+    val isValidNextBtn : LiveData<Boolean>
+        get() = _isValidNextBtn
 
     // ID 입력칸 확인
     fun inputId(s: CharSequence?, start: Int, before: Int, count: Int){
-        Handler(Looper.getMainLooper()).postDelayed({ checkVaildIdBtn() }, 0L)
+        Handler(Looper.getMainLooper()).postDelayed({ checkValidIdBtn() }, 0L)
+
+        resetValidId()
     }
 
     // ID 입력칸 빈칸확인
-    private fun checkVaildIdBtn(){
+    private fun checkValidIdBtn(){
         _isValidIdBtn.value = idTxt.value?.length != 0
     }
 
@@ -71,6 +72,14 @@ class SignViewModel : ViewModel() {
         viewModelScope.launch {
             _isValidId.value = userRepository.getValidateId(idTxt.value.toString())
             _isValidIdNotice.value = true
+        }
+    }
+
+    private fun resetValidId(){
+        if(_isValidIdNotice.value == true){
+            _isValidIdNotice.value = false
+            _isValidIdBtn.value = true
+            _isValidId.value = false
         }
     }
 
@@ -89,10 +98,9 @@ class SignViewModel : ViewModel() {
             else -> {
                 _isValidPasswordNotice.value = false
                 _isValidPassword.value = true
-
-//                if(!_againPasswordForm.value!!) _againPasswordForm.postValue(true)
             }
         }
+        checkPasswordEqual()
     }
 
     // 비밀번호 일치 확인
@@ -102,6 +110,28 @@ class SignViewModel : ViewModel() {
 
     private fun checkPasswordEqual(){
         _isValidCheckPasswordNotice.value = passwordTxt.value != checkPasswordTxt.value
+
+        when {
+            checkPasswordTxt.value == passwordTxt.value -> {
+                _isValidCheckPasswordNotice.value = false
+            }
+            checkPasswordTxt.value?.length == 0 -> {
+                _isValidCheckPasswordNotice.value = false
+            }
+            else -> {
+                _isValidCheckPasswordNotice.value = true
+            }
+        }
     }
 
+    // 다음 버튼 활성화 확인
+    fun checkValidNextBtn(){
+        _isValidNextBtn.value = _isValidId.value == true && passwordTxt.value?.length!! >= 4 && passwordTxt.value == checkPasswordTxt.value
+    }
+
+    // data 저장
+    fun addUserInfo(){
+        MHApplication.prefManager.userId = idTxt.value.toString()
+        MHApplication.prefManager.userPassword = passwordTxt.value.toString()
+    }
 }

@@ -7,7 +7,7 @@
         <import type="android.view.View"/>
         <variable
             name="vm"
-            type="com.example.mh_term_app.ui.sign.SignViewModel" />
+            type="com.example.mh_term_app.ui.sign.up.SignUpViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

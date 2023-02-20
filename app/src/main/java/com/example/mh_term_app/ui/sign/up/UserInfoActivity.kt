@@ -20,12 +20,9 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding>() {
         binding.apply {
             vm = userInfoViewModel
         }
-
-        initObserver()
-        initListener()
     }
 
-    private fun initObserver() {
+    override fun initObserver() {
         userInfoViewModel.isValidSignUp.observe(this
         ) {
             if (it) {
