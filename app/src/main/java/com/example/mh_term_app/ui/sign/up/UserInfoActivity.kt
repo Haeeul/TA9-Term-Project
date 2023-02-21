@@ -3,11 +3,13 @@ package com.example.mh_term_app.ui.sign.up
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.MainActivity
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivityUserInfoBinding
 import com.example.mh_term_app.utils.extension.setKeyboardObserver
+import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 import com.example.mh_term_app.utils.extension.startActivityWithAffinity
 import com.example.mh_term_app.utils.extension.toast
 
@@ -22,6 +24,17 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding>() {
         binding.apply {
             vm = userInfoViewModel
             edtUserInfoNick.requestFocus()
+        }
+    }
+
+    override fun initView() {
+        super.initView()
+
+        binding.tbUserInfo.apply {
+            title = MHApplication.getApplicationContext().getString(R.string.txt_sign_up)
+            btnTbBack.setSingleOnClickListener {
+                finish()
+            }
         }
     }
 

@@ -22,36 +22,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/btn_report_place_back"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_btn_back" />
-
-                <TextView
-                    android:id="@+id/textView36"
-                    style="@style/ActivityTitle"
-                    android:layout_width="wrap_content"
+                <include
+                    android:id="@+id/tb_report_place"
+                    layout="@layout/tb_title_with_btn"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/txt_menu_report"
-                    app:layout_constraintBottom_toBottomOf="@+id/btn_report_place_back"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/btn_report_place_back" />
-
-                <ImageView
-                    android:id="@+id/imageView31"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_report_place_back"
-                    app:srcCompat="@color/grey" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/txt_report_place_title"
@@ -65,7 +43,7 @@
                     android:textSize="26dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView31" />
+                    app:layout_constraintTop_toBottomOf="@+id/tb_report_place" />
 
                 <TextView
                     android:id="@+id/textView38"
@@ -175,7 +153,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/imageView33" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/button3"
+                    android:id="@+id/btn_report_place_next"
                     style="@style/ButtonText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -185,6 +163,7 @@
                     android:layout_marginBottom="35dp"
                     android:background="@drawable/selector_sign_btn"
                     android:text="@string/txt_next"
+                    android:onClick="goToReportType"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
