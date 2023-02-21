@@ -5,6 +5,7 @@ import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivityReportPlaceBinding
+import com.example.mh_term_app.ui.menu.report.store.ReportInfoStoreActivity
 import com.example.mh_term_app.utils.extension.clearStartActivity
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 
@@ -24,6 +25,6 @@ class ReportPlaceActivity : BaseActivity<ActivityReportPlaceBinding>(){
     }
 
     fun goToReportType(view : View){
-        this.clearStartActivity(ReportTypeActivity::class.java)
+        this.clearStartActivity(ReportInfoStoreActivity::class.java)
     }
 }
