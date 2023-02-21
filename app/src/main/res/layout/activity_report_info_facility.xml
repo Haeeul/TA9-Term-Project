@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.menu.report.ReportInfoFacilityActivity">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include
+                    android:id="@+id/tb_report_info_facility"
+                    layout="@layout/tb_title_with_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView45"
+                    style="@style/MediumText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="@string/desc_report_type_facility"
+                    android:textSize="26dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tb_report_info_facility" />
+
+                <TextView
+                    android:id="@+id/textView46"
+                    style="@style/MediumText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/sub_title_location_detail"
+                    android:textSize="22dp"
+                    app:layout_constraintStart_toStartOf="@+id/textView45"
+                    app:layout_constraintTop_toBottomOf="@+id/textView45" />
+
+                <TextView
+                    android:id="@+id/textView56"
+                    style="@style/MediumText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="@color/red"
+                    android:textSize="22dp"
+                    app:layout_constraintStart_toEndOf="@+id/textView46"
+                    app:layout_constraintTop_toTopOf="@+id/textView46" />
+
+                <RadioGroup
+                    android:id="@+id/rg_location_facility"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:shadowColor="@color/light_grey"
+                    app:layout_constraintStart_toStartOf="@+id/textView46"
+                    app:layout_constraintTop_toBottomOf="@+id/textView46">
+
+                    <RadioButton
+                        android:id="@+id/rb_facility_inside"
+                        style="@style/Theme.radioBtn.text"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:paddingRight="15dp"
+                        android:text="@string/txt_inside" />
+
+                    <RadioButton
+                        android:id="@+id/rb_facility_outside"
+                        style="@style/Theme.radioBtn.text"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:paddingRight="15dp"
+                        android:text="@string/txt_outside" />
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/textView57"
+                    style="@style/MediumText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/sub_title_type_detail"
+                    android:textSize="22dp"
+                    app:layout_constraintStart_toStartOf="@+id/textView46"
+                    app:layout_constraintTop_toBottomOf="@+id/rg_location_facility" />
+
+                <TextView
+                    android:id="@+id/textView58"
+                    style="@style/MediumText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="@color/red"
+                    android:textSize="22dp"
+                    app:layout_constraintStart_toEndOf="@+id/textView57"
+                    app:layout_constraintTop_toTopOf="@+id/textView57" />
+
+                <RadioGroup
+                    android:id="@+id/rg_facility_type_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:shadowColor="@color/light_grey"
+                    app:layout_constraintStart_toStartOf="@+id/textView57"
+                    app:layout_constraintTop_toBottomOf="@+id/textView57">
+
+                    <RadioButton
+                        android:id="@+id/rb_facility_bollard"
+                        style="@style/Theme.radioBtn.text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:paddingRight="15dp"
+                        android:text="@string/txt_bollard" />
+
+                    <RadioButton
+                        android:id="@+id/rb_facility_street"
+                        style="@style/Theme.radioBtn.text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:paddingRight="15dp"
+                        android:text="@string/txt_street" />
+
+                    <RadioButton
+                        android:id="@+id/rb_facility_block"
+                        style="@style/Theme.radioBtn.text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:paddingRight="15dp"
+                        android:text="@string/txt_block" />
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/rg_facility_type_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:shadowColor="@color/light_grey"
+                    app:layout_constraintStart_toStartOf="@+id/rg_facility_type_1"
+                    app:layout_constraintTop_toBottomOf="@+id/rg_facility_type_1">
+
+                    <RadioButton
+                        android:id="@+id/rb_facility_car_area"
+                        style="@style/Theme.radioBtn.text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:paddingRight="15dp"
+                        android:text="@string/txt_car_area" />
+
+                    <RadioButton
+                        android:id="@+id/rb_facility_crosswalk"
+                        style="@style/Theme.radioBtn.text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:paddingRight="15dp"
+                        android:text="@string/txt_crosswalk" />
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/rg_facility_type_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:shadowColor="@color/light_grey"
+                    app:layout_constraintStart_toStartOf="@+id/rg_facility_type_2"
+                    app:layout_constraintTop_toBottomOf="@+id/rg_facility_type_2">
+
+                    <RadioButton
+                        android:id="@+id/rb_facility_pass"
+                        style="@style/Theme.radioBtn.text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:paddingRight="15dp"
+                        android:text="@string/txt_pass" />
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/textView59"
+                    style="@style/MediumText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/sub_title_warning_target"
+                    android:textSize="22dp"
+                    app:layout_constraintStart_toStartOf="@+id/textView57"
+                    app:layout_constraintTop_toBottomOf="@+id/rg_facility_type_3" />
+
+                <CheckBox
+                    android:id="@+id/cb_facility_target_wheelchair"
+                    style="@style/buttonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/txt_user_type_wheelchair"
+                    app:layout_constraintStart_toStartOf="@+id/textView59"
+                    app:layout_constraintTop_toBottomOf="@+id/textView59" />
+
+                <CheckBox
+                    android:id="@+id/cb_facility_target_guardian"
+                    style="@style/buttonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/txt_user_type_guardian"
+                    app:layout_constraintStart_toEndOf="@+id/cb_facility_target_wheelchair"
+                    app:layout_constraintTop_toTopOf="@+id/cb_facility_target_wheelchair" />
+
+                <CheckBox
+                    android:id="@+id/cb_facility_target_handicap"
+                    style="@style/buttonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/txt_user_type_handicap"
+                    app:layout_constraintStart_toStartOf="@+id/cb_facility_target_wheelchair"
+                    app:layout_constraintTop_toBottomOf="@+id/cb_facility_target_wheelchair" />
+
+                <CheckBox
+                    android:id="@+id/cb_facility_target_injured"
+                    style="@style/buttonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/txt_user_type_injured"
+                    app:layout_constraintStart_toEndOf="@+id/cb_facility_target_handicap"
+                    app:layout_constraintTop_toBottomOf="@+id/cb_facility_target_guardian" />
+
+                <CheckBox
+                    android:id="@+id/cb_facility_target_old"
+                    style="@style/buttonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/txt_user_type_old"
+                    app:layout_constraintStart_toStartOf="@+id/cb_facility_target_handicap"
+                    app:layout_constraintTop_toBottomOf="@+id/cb_facility_target_handicap" />
+
+                <TextView
+                    android:id="@+id/textView60"
+                    style="@style/MediumText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/sub_title_warning"
+                    android:textSize="22dp"
+                    app:layout_constraintStart_toStartOf="@+id/textView59"
+                    app:layout_constraintTop_toBottomOf="@+id/cb_facility_target_old" />
+
+                <CheckBox
+                    android:id="@+id/cb_facility_warning_slope"
+                    style="@style/buttonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/txt_warning_slope"
+                    app:layout_constraintStart_toStartOf="@+id/textView60"
+                    app:layout_constraintTop_toBottomOf="@+id/textView60" />
+
+                <CheckBox
+                    android:id="@+id/cb_facility_warning_height"
+                    style="@style/buttonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/txt_warning_height"
+                    app:layout_constraintStart_toEndOf="@+id/cb_facility_warning_slope"
+                    app:layout_constraintTop_toTopOf="@+id/cb_facility_warning_slope" />
+
+                <CheckBox
+                    android:id="@+id/cb_facility_warning_offset"
+                    style="@style/buttonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/txt_warning_offset"
+                    app:layout_constraintStart_toEndOf="@+id/cb_facility_warning_height"
+                    app:layout_constraintTop_toTopOf="@+id/cb_facility_warning_height" />
+
+                <CheckBox
+                    android:id="@+id/cb_facility_warning_out"
+                    style="@style/buttonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/txt_warning_out"
+                    app:layout_constraintStart_toEndOf="@+id/cb_facility_warning_offset"
+                    app:layout_constraintTop_toTopOf="@+id/cb_facility_warning_offset" />
+
+                <CheckBox
+                    android:id="@+id/cb_facility_warning_finish"
+                    style="@style/buttonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/txt_warning_finish"
+                    app:layout_constraintStart_toStartOf="@+id/cb_facility_warning_slope"
+                    app:layout_constraintTop_toBottomOf="@+id/cb_facility_warning_slope" />
+
+                <CheckBox
+                    android:id="@+id/cb_facility_warning_info"
+                    style="@style/buttonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/txt_warning_info"
+                    app:layout_constraintStart_toEndOf="@+id/cb_facility_warning_finish"
+                    app:layout_constraintTop_toTopOf="@+id/cb_facility_warning_finish" />
+
+                <CheckBox
+                    android:id="@+id/cb_facility_warning_width"
+                    style="@style/buttonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/txt_warning_width"
+                    app:layout_constraintStart_toEndOf="@+id/cb_facility_warning_info"
+                    app:layout_constraintTop_toTopOf="@+id/cb_facility_warning_info" />
+
+                <TextView
+                    android:id="@+id/textView61"
+                    style="@style/MediumText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/sub_title_info_plus"
+                    android:textSize="22dp"
+                    app:layout_constraintStart_toStartOf="@+id/cb_facility_warning_finish"
+                    app:layout_constraintTop_toBottomOf="@+id/cb_facility_warning_finish" />
+
+                <TextView
+                    android:id="@+id/textView62"
+                    style="@style/MediumText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="@color/red"
+                    android:textSize="22dp"
+                    app:layout_constraintStart_toEndOf="@+id/textView61"
+                    app:layout_constraintTop_toTopOf="@+id/textView61" />
+
+                <EditText
+                    android:id="@+id/edt_report_info_facility_plus"
+                    style="@style/EditHintText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/round_square_line_grey_8"
+                    android:hint="@string/hint_info_plus_input"
+                    android:inputType="text"
+                    android:maxLines="10"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="16dp"
+                    android:textSize="18dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView61"
+                    app:layout_constraintTop_toBottomOf="@+id/textView61" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_report_info_facility_complete"
+                    style="@style/ButtonText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="35dp"
+                    android:background="@drawable/selector_sign_btn"
+                    android:onClick="goToReportType"
+                    android:text="@string/txt_complete"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="@+id/edt_report_info_facility_plus"
+                    app:layout_constraintStart_toStartOf="@+id/edt_report_info_facility_plus"
+                    app:layout_constraintTop_toBottomOf="@+id/edt_report_info_facility_plus" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
