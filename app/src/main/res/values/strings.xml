@@ -81,19 +81,40 @@
     <string name="hint_address_edt">주소를 입력해주세요.</string>
     <string name="sub_title_address">주소</string>
     <string name="sub_title_type">유형</string>
+    <string name="sub_title_store">매장</string>
+    <string name="sub_title_facility">도로 시설물</string>
     <string name="txt_inside">실내</string>
     <string name="txt_outside">실외</string>
 
-    <!-- menu : report/type -->
-    <string name="desc_report_type">제보 하시는 곳의 유형을\n알려주세요:)</string>
-    <string name="sub_title_store">매장</string>
-    <string name="sub_title_facility">도로 시설물</string>
-    <string name="sub_title_etc">기타</string>
+    <!-- menu : report/info/store -->
+    <string name="desc_report_type_store">제보 하시는 매장에 대해\n자세히 알려주세요:)</string>
+    <string name="sub_title_type_detail">세부유형</string>
     <string name="txt_restaurant">맛집</string>
     <string name="txt_cafe">카페</string>
+    <string name="sub_title_info_detail">상세정보</string>
+    <string name="txt_store_name">매장명</string>
+    <string name="txt_store_time">운영시간</string>
+    <string name="txt_store_phone">전화번호</string>
+    <string name="hint_store_name_input">매장명을 입력해주세요.</string>
+    <string name="hint_store_time_input">운영시간을 입력해주세요.</string>
+    <string name="hint_store_phone_input">매장전화번호를 입력해주세요.</string>
+    <string name="sub_title_warning">주의사항</string>
+    <string name="txt_warning_slope">경사</string>
+    <string name="txt_warning_height">높이</string>
+    <string name="txt_warning_offset">단차</string>
+    <string name="txt_warning_out">돌출물</string>
+    <string name="txt_warning_finish">마감</string>
+    <string name="txt_warning_info">안내시설</string>
+    <string name="txt_warning_width">통행폭</string>
+    <string name="sub_title_warning_target">주의대상</string>
+    <string name="sub_title_info_plus">추가설명</string>
+    <string name="hint_info_plus_input">자세한 설명일수록\n다른 사용자들에게 도움이 됩니다.</string>
+
+    <!-- menu : report/info/facility -->
+    <string name="desc_report_type_facility">제보 하시는 시설물에 대해\n자세히 알려주세요:)</string>
+
     <string name="txt_street">보도,인도</string>
     <string name="txt_block">점자블록</string>
     <string name="txt_pass">항목에 없거나 구분이 어려움</string>
-    <string name="hint_store_name_input">매장명을 입력해주세요.</string>
 
 </resources>

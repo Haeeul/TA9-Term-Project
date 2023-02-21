@@ -15,6 +15,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.menu.report.store.ReportInfoStoreActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.menu.report.ReportTypeActivity"
             android:exported="false">
             <meta-data
