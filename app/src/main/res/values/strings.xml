@@ -64,8 +64,6 @@
     <string name="txt_place_charging_station">충전소</string>
     <string name="txt_place_movement_support_center">이동지원센터</string>
     <string name="txt_place_restroom">화장실</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txt_add_review">리뷰 작성하기</string>
 
     <!-- menu -->
@@ -75,5 +73,13 @@
     <string name="txt_menu_report">신규 제보하기</string>
     <string name="txt_menu_logout">로그아웃</string>
     <string name="txt_menu_user_none">로그인 후\n이용해주세요:)</string>
+
+    <!-- menu : report -->
+    <string name="txt_desc_report">제보 하시는 매장/시설물의\n위치를 알려주세요:)</string>
+    <string name="txt_hint_address_input">지도를 움직여 위치를 설정하거나 직접 입력해주세요.</string>
+    <string name="txt_hint_address_edt">주소를 입력해주세요.</string>
+    <string name="txt_address">주소</string>
+    <string name="txt_inside">실내</string>
+    <string name="txt_outside">실외</string>
 
 </resources>

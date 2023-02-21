@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.menu.report.ReportPlaceActivity">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/btn_report_place_back"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_btn_back" />
+
+                <TextView
+                    android:id="@+id/textView36"
+                    style="@style/ActivityTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_menu_report"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_report_place_back"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/btn_report_place_back" />
+
+                <ImageView
+                    android:id="@+id/imageView31"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_report_place_back"
+                    app:srcCompat="@color/grey" />
+
+                <TextView
+                    android:id="@+id/txt_report_place_title"
+                    style="@style/MediumText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="@string/txt_desc_report"
+                    android:textSize="26dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView31" />
+
+                <TextView
+                    android:id="@+id/textView38"
+                    style="@style/MediumText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/txt_address"
+                    android:textSize="22dp"
+                    app:layout_constraintStart_toStartOf="@+id/txt_report_place_title"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_report_place_title" />
+
+                <TextView
+                    android:id="@+id/textView39"
+                    style="@style/LightText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="@string/txt_hint_address_input"
+                    android:textSize="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView38"
+                    app:layout_constraintTop_toBottomOf="@+id/textView38" />
+
+                <ImageView
+                    android:id="@+id/imageView32"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView39"
+                    app:srcCompat="@drawable/ic_launcher_background" />
+
+                <EditText
+                    android:id="@+id/edt_report_place_address"
+                    style="@style/EditHintText"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/round_square_line_grey_8"
+                    android:hint="@string/txt_hint_address_edt"
+                    android:inputType="text"
+                    android:paddingHorizontal="16dp"
+                    android:textSize="18dp"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView32"
+                    app:layout_constraintStart_toStartOf="@+id/imageView32"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView32" />
+
+                <RadioGroup
+                    android:id="@+id/rg_report_location_type"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:shadowColor="@color/light_grey"
+                    app:layout_constraintEnd_toEndOf="@+id/edt_report_place_address"
+                    app:layout_constraintTop_toBottomOf="@+id/edt_report_place_address">
+
+                    <RadioButton
+                        android:id="@+id/rd_report_type_inside"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_weight="1" />
+
+                    <RadioButton
+                        android:id="@+id/rd_report_type_outside"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_weight="1" />
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/textView40"
+                    style="@style/MediumText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/txt_inside"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="18dp"
+                    app:layout_constraintStart_toStartOf="@+id/edt_report_place_address"
+                    app:layout_constraintTop_toTopOf="@+id/rg_report_location_type" />
+
+                <ImageView
+                    android:id="@+id/imageView33"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="@+id/rg_report_location_type"
+                    app:layout_constraintStart_toStartOf="@+id/textView40"
+                    app:layout_constraintTop_toBottomOf="@+id/textView40"
+                    app:srcCompat="@color/grey" />
+
+                <TextView
+                    android:id="@+id/textView41"
+                    style="@style/MediumText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/txt_outside"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="18dp"
+                    app:layout_constraintStart_toStartOf="@+id/textView40"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView33" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button3"
+                    style="@style/ButtonText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="35dp"
+                    android:background="@drawable/selector_sign_btn"
+                    android:text="@string/txt_next"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rg_report_location_type" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

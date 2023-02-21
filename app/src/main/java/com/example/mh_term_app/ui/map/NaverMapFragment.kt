@@ -10,9 +10,9 @@ import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
 import com.example.mh_term_app.databinding.FragmentNaverMapBinding
 import com.example.mh_term_app.ui.menu.EditUserInfoActivity
-import com.example.mh_term_app.ui.menu.PlaceReportActivity
 import com.example.mh_term_app.ui.menu.UserFavotireActivity
 import com.example.mh_term_app.ui.menu.UserReviewActivity
+import com.example.mh_term_app.ui.menu.report.ReportPlaceActivity
 import com.example.mh_term_app.ui.sign.`in`.SignInActivity
 import com.example.mh_term_app.ui.sign.up.SignUpActivity
 import com.example.mh_term_app.utils.extension.intent
@@ -122,7 +122,7 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
                 R.id.edit_user_info -> intent(EditUserInfoActivity::class.java)
                 R.id.review_list -> intent(UserReviewActivity::class.java)
                 R.id.favorite_list -> intent(UserFavotireActivity::class.java)
-                R.id.report -> intent(PlaceReportActivity::class.java)
+                R.id.report -> intent(ReportPlaceActivity::class.java)
                 R.id.go_to_sign_in -> intent(SignInActivity::class.java)
                 R.id.go_to_sign_up -> intent(SignUpActivity::class.java)
                 else -> {
