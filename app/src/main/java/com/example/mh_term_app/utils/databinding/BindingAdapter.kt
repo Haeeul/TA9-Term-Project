@@ -28,10 +28,10 @@ object BindingAdapter {
     @BindingAdapter("setIdNotice")
     fun TextView.setIdNotice(isValid: Boolean) {
         if(isValid){
-            text = MHApplication.getApplicationContext().getString(R.string.txt_nickname_possible)
+            text = MHApplication.getApplicationContext().getString(R.string.notice_nickname_possible)
             setTextColor(ContextCompat.getColor(this.context, R.color.dark_green))
         }else{
-            text = MHApplication.getApplicationContext().getString(R.string.txt_nickname_impossible)
+            text = MHApplication.getApplicationContext().getString(R.string.notice_nickname_impossible)
             setTextColor(ContextCompat.getColor(this.context, R.color.red))
         }
     }
@@ -40,10 +40,10 @@ object BindingAdapter {
     @BindingAdapter("setNicknameNotice")
     fun TextView.setNicknameNotice(isValid: Boolean) {
         if(isValid){
-            text = MHApplication.getApplicationContext().getString(R.string.txt_nickname_possible)
+            text = MHApplication.getApplicationContext().getString(R.string.notice_nickname_possible)
             setTextColor(ContextCompat.getColor(this.context, R.color.dark_green))
         }else{
-            text = MHApplication.getApplicationContext().getString(R.string.txt_nickname_impossible)
+            text = MHApplication.getApplicationContext().getString(R.string.notice_nickname_impossible)
             setTextColor(ContextCompat.getColor(this.context, R.color.red))
         }
     }

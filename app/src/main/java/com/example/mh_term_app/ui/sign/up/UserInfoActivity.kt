@@ -31,7 +31,7 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding>() {
         super.initView()
 
         binding.tbUserInfo.apply {
-            title = MHApplication.getApplicationContext().getString(R.string.txt_sign_up)
+            title = MHApplication.getApplicationContext().getString(R.string.title_sign_up)
             btnTbBack.setSingleOnClickListener {
                 finish()
             }

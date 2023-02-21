@@ -16,7 +16,7 @@ class ReportPlaceActivity : BaseActivity<ActivityReportPlaceBinding>(){
         super.initView()
 
         binding.tbReportPlace.apply {
-            title = MHApplication.getApplicationContext().getString(R.string.txt_menu_report)
+            title = MHApplication.getApplicationContext().getString(R.string.title_menu_report)
             btnTbBack.setSingleOnClickListener {
                 finish()
             }

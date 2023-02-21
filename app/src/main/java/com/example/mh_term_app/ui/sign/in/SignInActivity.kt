@@ -32,7 +32,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>() {
         super.initView()
 
         binding.tbSignIn.apply {
-            title = MHApplication.getApplicationContext().getString(R.string.txt_sign_in)
+            title = MHApplication.getApplicationContext().getString(R.string.title_sign_in)
             btnTbBack.setSingleOnClickListener {
                 finish()
             }

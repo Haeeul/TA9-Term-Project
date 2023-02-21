@@ -41,10 +41,10 @@ class SignGuideDialog : DialogFragment(), View.OnClickListener {
         val bundle = arguments
         when (bundle?.getString("type", "")) {
             "goToSignIn" -> {
-                setContents(R.string.txt_go_to_sign_in, "이동")
+                setContents(R.string.desc_go_to_sign_in, "이동")
             }
             "goToSignUp" -> {
-                setContents(R.string.txt_go_to_sign_up, "이동")
+                setContents(R.string.desc_go_to_sign_up, "이동")
             }
         }
 

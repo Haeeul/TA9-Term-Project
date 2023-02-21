@@ -3,11 +3,11 @@
     <item
         android:id="@+id/go_to_sign_in"
         android:checked="false"
-        android:title="@string/txt_sign_in"/>
+        android:title="@string/title_sign_in"/>
 
     <item
         android:id="@+id/go_to_sign_up"
         android:checked="false"
-        android:title="@string/txt_sign_up"/>
+        android:title="@string/title_sign_up"/>
 
 </menu>

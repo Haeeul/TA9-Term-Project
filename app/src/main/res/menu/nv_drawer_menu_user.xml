@@ -2,23 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/edit_user_info"
-        android:title="@string/txt_menu_edit_user_info"
+        android:title="@string/title_menu_edit_user_info"
         android:checked="false"/>
     <item
         android:id="@+id/review_list"
-        android:title="@string/txt_menu_review_list"
+        android:title="@string/title_menu_review_list"
         android:checked="false"/>
     <item
         android:id="@+id/favorite_list"
-        android:title="@string/txt_menu_favorite_list"
+        android:title="@string/title_menu_favorite_list"
         android:checked="false"/>
     <item
         android:id="@+id/report"
-        android:title="@string/txt_menu_report"
+        android:title="@string/title_menu_report"
         android:checked="false"/>
     <item
         android:id="@+id/logout"
-        android:title="@string/txt_menu_logout"
+        android:title="@string/title_menu_logout"
         android:checked="false"/>
 
 </menu>

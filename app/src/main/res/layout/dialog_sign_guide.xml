@@ -11,7 +11,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="@string/txt_go_to_sign_in"
+            android:text="@string/desc_go_to_sign_in"
             style="@style/MediumText"
             android:textSize="16dp"
             android:gravity="center"
