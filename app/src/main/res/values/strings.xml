@@ -75,12 +75,24 @@
     <string name="title_menu_logout">로그아웃</string>
     <string name="desc_menu_user_none">로그인 후\n이용해주세요:)</string>
 
-    <!-- menu : report -->
+    <!-- menu : report/place -->
     <string name="desc_report_place">제보 하시는 매장/시설물의\n위치를 알려주세요:)</string>
     <string name="desc_address_input">지도를 움직여 위치를 설정하거나 직접 입력해주세요.</string>
     <string name="hint_address_edt">주소를 입력해주세요.</string>
     <string name="sub_title_address">주소</string>
     <string name="txt_inside">실내</string>
     <string name="txt_outside">실외</string>
+
+    <!-- menu : report/type -->
+    <string name="desc_report_type">제보 하시는 매장/시설물의\n유형을 알려주세요:)</string>
+    <string name="sub_title_store">매장</string>
+    <string name="sub_title_facility">도로 시설물</string>
+    <string name="sub_title_etc">기타</string>
+    <string name="txt_restaurant">맛집</string>
+    <string name="txt_cafe">카페</string>
+    <string name="txt_street">보도,인도</string>
+    <string name="txt_block">점자블록</string>
+    <string name="txt_pass">항목에 없거나 구분이 어려움</string>
+    <string name="hint_store_name_input">매장명을 입력해주세요.</string>
 
 </resources>
