@@ -1,8 +1,10 @@
 package com.example.mh_term_app.ui.menu.report
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.lifecycle.LiveData
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
@@ -43,7 +45,12 @@ class ReportPlaceActivity : BaseActivity<ActivityReportPlaceBinding>(){
     override fun initObserver() {
         super.initObserver()
 
-        reportPlaceViewModel.typeTxt.observe(this){
+        setPlaceObserver(reportPlaceViewModel.addressTxt)
+        setPlaceObserver(reportPlaceViewModel.typeTxt)
+    }
+
+    private fun setPlaceObserver(data : LiveData<String>){
+        data.observe(this){
             reportPlaceViewModel.checkValidNextBtn()
         }
     }
@@ -64,7 +71,12 @@ class ReportPlaceActivity : BaseActivity<ActivityReportPlaceBinding>(){
     }
 
     fun goToReportType(view : View){
-        if(binding.rbReportTypeStore.isChecked) this.clearStartActivity(ReportInfoStoreActivity::class.java)
+        if(binding.rbReportTypeStore.isChecked) {
+            val storeIntent = Intent(this, ReportInfoStoreActivity::class.java)
+            storeIntent.putExtra("type", reportPlaceViewModel.typeTxt.value)
+            storeIntent.putExtra("address", reportPlaceViewModel.addressTxt.value)
+            startActivity(storeIntent)
+        }
         else this.clearStartActivity(ReportInfoFacilityActivity::class.java)
     }
 }

@@ -1,11 +1,7 @@
 package com.example.mh_term_app.base
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
-import java.net.SocketException
-import java.net.UnknownHostException
 
 abstract class BaseViewModel : ViewModel(){
 //    protected val _fetchState = MutableLiveData<FetchState>()
@@ -22,4 +18,6 @@ abstract class BaseViewModel : ViewModel(){
 //            else -> _fetchState.postValue(FetchState.FAIL)
 //        }
 //    }
+
+    fun <T> MutableLiveData<T>.notifyObserver() { this.value = this.value }
 }

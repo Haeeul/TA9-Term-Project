@@ -8,10 +8,7 @@ import com.example.mh_term_app.MainActivity
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivityUserInfoBinding
-import com.example.mh_term_app.utils.extension.setKeyboardObserver
-import com.example.mh_term_app.utils.extension.setSingleOnClickListener
-import com.example.mh_term_app.utils.extension.startActivityWithAffinity
-import com.example.mh_term_app.utils.extension.toast
+import com.example.mh_term_app.utils.extension.*
 
 class UserInfoActivity : BaseActivity<ActivityUserInfoBinding>() {
     override val layoutResID: Int
@@ -46,7 +43,7 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding>() {
                 toast("회원가입 성공")
                 startActivityWithAffinity(MainActivity::class.java)
             } else {
-                toast("회원가입 실패")
+                errorToast()
             }
         }
     }

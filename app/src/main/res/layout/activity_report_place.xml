@@ -110,7 +110,6 @@
                     android:background="@drawable/round_square_line_grey_8"
                     android:hint="@string/hint_address_edt"
                     android:inputType="text"
-                    android:onTextChanged="@{vm.inputAddress}"
                     android:paddingHorizontal="16dp"
                     android:text="@={vm.addressTxt}"
                     android:textSize="18dp"

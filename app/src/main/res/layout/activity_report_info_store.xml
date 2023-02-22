@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="vm"
+            type="com.example.mh_term_app.ui.menu.report.ReportViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -84,9 +90,11 @@
                     android:layout_marginEnd="24dp"
                     android:background="@drawable/round_square_line_grey_8"
                     android:hint="@string/hint_store_name_input"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
+                    android:nextFocusDown="@id/edt_report_info_store_phone"
                     android:paddingHorizontal="16dp"
                     android:textSize="18dp"
+                    android:text="@={vm.storeNameTxt}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView48"
                     app:layout_constraintTop_toBottomOf="@+id/textView48" />
@@ -110,9 +118,11 @@
                     android:layout_marginTop="8dp"
                     android:background="@drawable/round_square_line_grey_8"
                     android:hint="@string/hint_store_phone_input"
-                    android:inputType="text"
+                    android:inputType="number"
+                    android:nextFocusDown="@id/edt_report_info_store_time"
                     android:paddingHorizontal="16dp"
                     android:textSize="18dp"
+                    android:text="@={vm.storePhoneTxt}"
                     app:layout_constraintEnd_toEndOf="@+id/edt_report_info_store_name"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/textView49"
@@ -137,9 +147,10 @@
                     android:layout_marginTop="8dp"
                     android:background="@drawable/round_square_line_grey_8"
                     android:hint="@string/hint_store_time_input"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     android:paddingHorizontal="16dp"
                     android:textSize="18dp"
+                    android:text="@={vm.storeTimeTxt}"
                     app:layout_constraintEnd_toEndOf="@+id/edt_report_info_store_phone"
                     app:layout_constraintStart_toStartOf="@+id/textView50"
                     app:layout_constraintTop_toBottomOf="@+id/textView50" />
@@ -210,6 +221,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_user_type_wheelchair"
+                    android:onClick="onStoreTargetClicked"
                     app:layout_constraintStart_toStartOf="@+id/textView51"
                     app:layout_constraintTop_toBottomOf="@+id/textView51" />
 
@@ -220,6 +232,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_user_type_guardian"
+                    android:onClick="onStoreTargetClicked"
                     app:layout_constraintStart_toEndOf="@+id/cb_store_target_wheelchair"
                     app:layout_constraintTop_toTopOf="@+id/cb_store_target_wheelchair" />
 
@@ -230,6 +243,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_user_type_handicap"
+                    android:onClick="onStoreTargetClicked"
                     app:layout_constraintStart_toStartOf="@+id/cb_store_target_wheelchair"
                     app:layout_constraintTop_toBottomOf="@+id/cb_store_target_wheelchair" />
 
@@ -240,6 +254,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_user_type_injured"
+                    android:onClick="onStoreTargetClicked"
                     app:layout_constraintStart_toEndOf="@+id/cb_store_target_handicap"
                     app:layout_constraintTop_toBottomOf="@+id/cb_store_target_guardian" />
 
@@ -250,6 +265,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_user_type_old"
+                    android:onClick="onStoreTargetClicked"
                     app:layout_constraintStart_toStartOf="@+id/cb_store_target_handicap"
                     app:layout_constraintTop_toBottomOf="@+id/cb_store_target_handicap" />
 
@@ -271,6 +287,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_slope"
+                    android:onClick="onStoreWaningClicked"
                     app:layout_constraintStart_toStartOf="@+id/textView40"
                     app:layout_constraintTop_toBottomOf="@+id/textView40" />
 
@@ -281,6 +298,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_height"
+                    android:onClick="onStoreWaningClicked"
                     app:layout_constraintStart_toEndOf="@+id/cb_store_warning_slope"
                     app:layout_constraintTop_toTopOf="@+id/cb_store_warning_slope" />
 
@@ -291,6 +309,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_offset"
+                    android:onClick="onStoreWaningClicked"
                     app:layout_constraintStart_toEndOf="@+id/cb_store_warning_height"
                     app:layout_constraintTop_toTopOf="@+id/cb_store_warning_height" />
 
@@ -301,6 +320,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_out"
+                    android:onClick="onStoreWaningClicked"
                     app:layout_constraintStart_toEndOf="@+id/cb_store_warning_offset"
                     app:layout_constraintTop_toTopOf="@+id/cb_store_warning_offset" />
 
@@ -311,6 +331,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_finish"
+                    android:onClick="onStoreWaningClicked"
                     app:layout_constraintStart_toStartOf="@+id/cb_store_warning_slope"
                     app:layout_constraintTop_toBottomOf="@+id/cb_store_warning_slope" />
 
@@ -321,6 +342,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_info"
+                    android:onClick="onStoreWaningClicked"
                     app:layout_constraintStart_toEndOf="@+id/cb_store_warning_finish"
                     app:layout_constraintTop_toTopOf="@+id/cb_store_warning_finish" />
 
@@ -331,6 +353,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_width"
+                    android:onClick="onStoreWaningClicked"
                     app:layout_constraintStart_toEndOf="@+id/cb_store_warning_info"
                     app:layout_constraintTop_toTopOf="@+id/cb_store_warning_info" />
 
@@ -365,11 +388,13 @@
                     android:layout_marginEnd="24dp"
                     android:background="@drawable/round_square_line_grey_8"
                     android:hint="@string/hint_info_plus_input"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     android:maxLines="10"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="16dp"
                     android:textSize="18dp"
+                    android:scrollHorizontally="false"
+                    android:text="@={vm.plusInfoTxt}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView41"
                     app:layout_constraintTop_toBottomOf="@+id/textView41" />
@@ -382,9 +407,10 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginBottom="35dp"
                     android:background="@drawable/selector_sign_btn"
-                    android:onClick="goToReportType"
+                    android:onClick="postReportStore"
                     android:text="@string/txt_complete"
                     android:textColor="@color/white"
+                    android:enabled="@{vm.isValidStoreCompleteBtn}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/edt_report_info_store_plus"
                     app:layout_constraintStart_toStartOf="@+id/edt_report_info_store_plus"
