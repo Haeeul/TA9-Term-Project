@@ -87,7 +87,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView38" />
 
                 <fragment
-                    android:id="@+id/imageView32"
+                    android:id="@+id/fl_report_map"
                     android:layout_width="0dp"
                     android:layout_height="200dp"
                     android:layout_marginStart="24dp"
@@ -97,6 +97,16 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/fl_report_map"
+                    app:layout_constraintEnd_toEndOf="@+id/fl_report_map"
+                    app:layout_constraintStart_toStartOf="@+id/fl_report_map"
+                    app:layout_constraintTop_toTopOf="@+id/fl_report_map"
+                    app:srcCompat="@drawable/ic_marker" />
 
                 <EditText
                     android:id="@+id/edt_report_place_address"
@@ -114,7 +124,7 @@
                     android:textSize="18dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView32" />
+                    app:layout_constraintTop_toBottomOf="@+id/fl_report_map" />
 
                 <TextView
                     android:id="@+id/textView3"
