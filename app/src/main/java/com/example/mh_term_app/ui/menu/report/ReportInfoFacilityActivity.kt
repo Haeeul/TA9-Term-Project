@@ -13,13 +13,16 @@ import com.example.mh_term_app.databinding.ActivityReportInfoFacilityBinding
 import com.example.mh_term_app.utils.extension.*
 
 
-class ReportInfoFacilityActivity : BaseActivity<ActivityReportInfoFacilityBinding>(){
+class ReportInfoFacilityActivity : BaseActivity<ActivityReportInfoFacilityBinding>() {
     override val layoutResID: Int
         get() = R.layout.activity_report_info_facility
-    private val reportPlaceViewModel : ReportViewModel by viewModels()
+    private val reportPlaceViewModel: ReportViewModel by viewModels()
 
     var storeType = ""
     var storeAddress = ""
+
+    private var isChecking = true
+    private var mCheckedId: Int = R.id.rb_facility_pass
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +31,11 @@ class ReportInfoFacilityActivity : BaseActivity<ActivityReportInfoFacilityBindin
 
         binding.apply {
             txtReportInfoFacilityTitle.changeKeywordColor(
-                MHApplication.getApplicationContext().getString(R.string.desc_report_type_facility_start),
-                MHApplication.getApplicationContext().getString(R.string.desc_report_type_facility_end),
-                7,10,0,3
+                MHApplication.getApplicationContext()
+                    .getString(R.string.desc_report_type_facility_start),
+                MHApplication.getApplicationContext()
+                    .getString(R.string.desc_report_type_facility_end),
+                7, 10, 0, 3
             )
         }
     }
@@ -39,7 +44,8 @@ class ReportInfoFacilityActivity : BaseActivity<ActivityReportInfoFacilityBindin
         super.initView()
 
         binding.tbReportInfoFacility.apply {
-            title = MHApplication.getApplicationContext().getString(R.string.title_menu_report)
+            title = MHApplication.getApplicationContext()
+                .getString(R.string.title_menu_report)
             btnTbBack.setSingleOnClickListener {
                 finish()
             }
@@ -53,15 +59,15 @@ class ReportInfoFacilityActivity : BaseActivity<ActivityReportInfoFacilityBindin
         setFacilityObserver(reportPlaceViewModel.detailTypeTxt)
         setFacilityObserver(reportPlaceViewModel.plusInfoTxt)
 
-        reportPlaceViewModel.isValidPost.observe(this){
-            if(it) toast("제보 완료")
+        reportPlaceViewModel.isValidPost.observe(this) {
+            if (it) toast("제보 완료")
             else errorToast()
             startActivityWithAffinity(MainActivity::class.java)
         }
     }
 
-    private fun setFacilityObserver(data : LiveData<String>){
-        data.observe(this){
+    private fun setFacilityObserver(data: LiveData<String>) {
+        data.observe(this) {
             reportPlaceViewModel.checkValidFacilityCompleteBtn()
         }
     }
@@ -74,7 +80,7 @@ class ReportInfoFacilityActivity : BaseActivity<ActivityReportInfoFacilityBindin
     }
 
     private fun getFacilityDetailLocation() {
-        binding.rgLocationFacility.setOnCheckedChangeListener{ _, checkedId ->
+        binding.rgLocationFacility.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.rb_facility_inside -> reportPlaceViewModel.locationTxt.value = (getString(R.string.txt_inside))
                 R.id.rb_facility_outside -> reportPlaceViewModel.locationTxt.value = (getString(R.string.txt_outside))
@@ -85,52 +91,73 @@ class ReportInfoFacilityActivity : BaseActivity<ActivityReportInfoFacilityBindin
     private fun getFacilityDetailType() {
 
         binding.rgFacilityType1.setOnCheckedChangeListener { _, checkedId ->
-            when (checkedId) {
-                R.id.rb_facility_bollard -> {
-                    reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_bollard))
-                    binding.rgFacilityType2.clearCheck()
-                    binding.rgFacilityType3.clearCheck()
-                }
-                R.id.rb_facility_street -> {
-                    reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_street))
-                    binding.rgFacilityType2.clearCheck()
-                    binding.rgFacilityType3.clearCheck()
-                }
-                R.id.rb_facility_block -> {
-                    reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_block))
-                    binding.rgFacilityType2.clearCheck()
-                    binding.rgFacilityType3.clearCheck()
-                }
+            if(checkedId != -1 && isChecking){
+                isChecking = false
+                binding.rgFacilityType1.clearCheck()
+                binding.rgFacilityType3.clearCheck()
+                mCheckedId = checkedId
             }
+            isChecking = true
+//            when (checkedId) {
+//                R.id.rb_facility_bollard -> {
+//                    reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_bollard))
+//                    binding.rgFacilityType2.clearCheck()
+//                    binding.rgFacilityType3.clearCheck()
+//                }
+//                R.id.rb_facility_street -> {
+//                    reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_street))
+//                    binding.rgFacilityType2.clearCheck()
+//                    binding.rgFacilityType3.clearCheck()
+//                }
+//                R.id.rb_facility_block -> {
+//                    reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_block))
+//                    binding.rgFacilityType2.clearCheck()
+//                    binding.rgFacilityType3.clearCheck()
+//                }
+//            }
         }
 
-        binding.rgFacilityType2.setOnCheckedChangeListener{ _, checkedId ->
-            when (checkedId) {
-                R.id.rb_facility_car_area -> {
-                    reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_car_area))
-                    binding.rgFacilityType1.clearCheck()
-                    binding.rgFacilityType3.clearCheck()
-                }
-                R.id.rb_facility_crosswalk -> {
-                    reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_crosswalk))
-                    binding.rgFacilityType1.clearCheck()
-                    binding.rgFacilityType3.clearCheck()
-                }
+        binding.rgFacilityType2.setOnCheckedChangeListener { _, checkedId ->
+            if(checkedId != -1 && isChecking){
+                isChecking = false
+                binding.rgFacilityType1.clearCheck()
+                binding.rgFacilityType3.clearCheck()
+                mCheckedId = checkedId
             }
+            isChecking = true
+//            when (checkedId) {
+//                R.id.rb_facility_car_area -> {
+//                    reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_car_area))
+//                    binding.rgFacilityType1.clearCheck()
+//                    binding.rgFacilityType3.clearCheck()
+//                }
+//                R.id.rb_facility_crosswalk -> {
+//                    reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_crosswalk))
+//                    binding.rgFacilityType1.clearCheck()
+//                    binding.rgFacilityType3.clearCheck()
+//                }
+//            }
         }
 
-        binding.rgFacilityType3.setOnCheckedChangeListener{ _, checkedId ->
-            when (checkedId) {
-                R.id.rb_facility_pass -> {
-                    reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_pass))
-                    setClearRadioGroup(3)
-                }
+        binding.rgFacilityType3.setOnCheckedChangeListener { _, checkedId ->
+            if(checkedId != -1 && isChecking){
+                isChecking = false
+                binding.rgFacilityType1.clearCheck()
+                binding.rgFacilityType2.clearCheck()
+                mCheckedId = checkedId
             }
+            isChecking = true
+//            when (checkedId) {
+//                R.id.rb_facility_pass -> {
+//                    reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_pass))
+//                    setClearRadioGroup(3)
+//                }
+//            }
         }
     }
 
-    private fun setClearRadioGroup(case : Int){
-        when(case){
+    private fun setClearRadioGroup(case: Int) {
+        when (case) {
             1 -> {
                 binding.rgFacilityType2.clearCheck()
                 binding.rgFacilityType3.clearCheck()
@@ -163,7 +190,7 @@ class ReportInfoFacilityActivity : BaseActivity<ActivityReportInfoFacilityBindin
         }
     }
 
-    fun postReportFacility(view: View){
-        reportPlaceViewModel.postReportFacility(storeType,storeAddress)
+    fun postReportFacility(view: View) {
+        reportPlaceViewModel.postReportFacility(storeType, storeAddress)
     }
 }
