@@ -10,7 +10,6 @@ import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivityReportPlaceBinding
 import com.example.mh_term_app.utils.extension.changeKeywordColor
-import com.example.mh_term_app.utils.extension.clearStartActivity
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 
 
@@ -71,12 +70,15 @@ class ReportPlaceActivity : BaseActivity<ActivityReportPlaceBinding>(){
     }
 
     fun goToReportType(view : View){
-        if(binding.rbReportTypeStore.isChecked) {
-            val storeIntent = Intent(this, ReportInfoStoreActivity::class.java)
-            storeIntent.putExtra("type", reportPlaceViewModel.typeTxt.value)
-            storeIntent.putExtra("address", reportPlaceViewModel.addressTxt.value)
-            startActivity(storeIntent)
+        val className : Class<*> = if(binding.rbReportTypeStore.isChecked) {
+            ReportInfoStoreActivity::class.java
+        } else {
+            ReportInfoFacilityActivity::class.java
         }
-        else this.clearStartActivity(ReportInfoFacilityActivity::class.java)
+
+        val reportIntent = Intent(this, className)
+        reportIntent.putExtra("type", reportPlaceViewModel.typeTxt.value)
+        reportIntent.putExtra("address", reportPlaceViewModel.addressTxt.value)
+        startActivity(reportIntent)
     }
 }
