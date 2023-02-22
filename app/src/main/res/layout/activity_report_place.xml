@@ -86,18 +86,17 @@
                     app:layout_constraintStart_toStartOf="@+id/textView38"
                     app:layout_constraintTop_toBottomOf="@+id/textView38" />
 
-                <ImageView
+                <fragment
                     android:id="@+id/imageView32"
                     android:layout_width="0dp"
                     android:layout_height="200dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="24dp"
-                    android:visibility="gone"
+                    android:name="com.naver.maps.map.MapFragment"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView39"
-                    app:srcCompat="@drawable/ic_launcher_background" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView39" />
 
                 <EditText
                     android:id="@+id/edt_report_place_address"

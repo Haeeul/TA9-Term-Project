@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="vm"
+            type="com.example.mh_term_app.ui.menu.report.ReportViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -208,6 +214,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_user_type_wheelchair"
+                    android:onClick="onFacilityTargetClicked"
                     app:layout_constraintStart_toStartOf="@+id/textView59"
                     app:layout_constraintTop_toBottomOf="@+id/textView59" />
 
@@ -218,6 +225,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_user_type_guardian"
+                    android:onClick="onFacilityTargetClicked"
                     app:layout_constraintStart_toEndOf="@+id/cb_facility_target_wheelchair"
                     app:layout_constraintTop_toTopOf="@+id/cb_facility_target_wheelchair" />
 
@@ -228,6 +236,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_user_type_handicap"
+                    android:onClick="onFacilityTargetClicked"
                     app:layout_constraintStart_toStartOf="@+id/cb_facility_target_wheelchair"
                     app:layout_constraintTop_toBottomOf="@+id/cb_facility_target_wheelchair" />
 
@@ -238,6 +247,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_user_type_injured"
+                    android:onClick="onFacilityTargetClicked"
                     app:layout_constraintStart_toEndOf="@+id/cb_facility_target_handicap"
                     app:layout_constraintTop_toBottomOf="@+id/cb_facility_target_guardian" />
 
@@ -248,6 +258,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_user_type_old"
+                    android:onClick="onFacilityTargetClicked"
                     app:layout_constraintStart_toStartOf="@+id/cb_facility_target_handicap"
                     app:layout_constraintTop_toBottomOf="@+id/cb_facility_target_handicap" />
 
@@ -269,6 +280,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_slope"
+                    android:onClick="onFacilityWaningClicked"
                     app:layout_constraintStart_toStartOf="@+id/textView60"
                     app:layout_constraintTop_toBottomOf="@+id/textView60" />
 
@@ -279,6 +291,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_height"
+                    android:onClick="onFacilityWaningClicked"
                     app:layout_constraintStart_toEndOf="@+id/cb_facility_warning_slope"
                     app:layout_constraintTop_toTopOf="@+id/cb_facility_warning_slope" />
 
@@ -289,6 +302,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_offset"
+                    android:onClick="onFacilityWaningClicked"
                     app:layout_constraintStart_toEndOf="@+id/cb_facility_warning_height"
                     app:layout_constraintTop_toTopOf="@+id/cb_facility_warning_height" />
 
@@ -299,6 +313,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_out"
+                    android:onClick="onFacilityWaningClicked"
                     app:layout_constraintStart_toEndOf="@+id/cb_facility_warning_offset"
                     app:layout_constraintTop_toTopOf="@+id/cb_facility_warning_offset" />
 
@@ -309,6 +324,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_finish"
+                    android:onClick="onFacilityWaningClicked"
                     app:layout_constraintStart_toStartOf="@+id/cb_facility_warning_slope"
                     app:layout_constraintTop_toBottomOf="@+id/cb_facility_warning_slope" />
 
@@ -319,6 +335,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_info"
+                    android:onClick="onFacilityWaningClicked"
                     app:layout_constraintStart_toEndOf="@+id/cb_facility_warning_finish"
                     app:layout_constraintTop_toTopOf="@+id/cb_facility_warning_finish" />
 
@@ -329,6 +346,7 @@
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_width"
+                    android:onClick="onFacilityWaningClicked"
                     app:layout_constraintStart_toEndOf="@+id/cb_facility_warning_info"
                     app:layout_constraintTop_toTopOf="@+id/cb_facility_warning_info" />
 
@@ -363,7 +381,7 @@
                     android:layout_marginEnd="24dp"
                     android:background="@drawable/round_square_line_grey_8"
                     android:hint="@string/hint_info_plus_input"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     android:maxLines="10"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="16dp"
@@ -380,9 +398,11 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginBottom="35dp"
                     android:background="@drawable/selector_sign_btn"
-                    android:onClick="goToReportType"
                     android:text="@string/txt_complete"
                     android:textColor="@color/white"
+                    android:enabled="@{vm.isValidStoreCompleteBtn}"
+                    android:onClick="postReportFacility"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/edt_report_info_facility_plus"
                     app:layout_constraintStart_toStartOf="@+id/edt_report_info_facility_plus"
                     app:layout_constraintTop_toBottomOf="@+id/edt_report_info_facility_plus" />

@@ -69,10 +69,10 @@ class ReportInfoStoreActivity : BaseActivity<ActivityReportInfoStoreBinding>() {
     override fun initListener() {
         super.initListener()
 
-        getPlaceDetailType()
+        getStoreDetailType()
     }
 
-    private fun getPlaceDetailType() {
+    private fun getStoreDetailType() {
         binding.rgReportInfoStoreType.setOnCheckedChangeListener{ _, checkedId ->
             when (checkedId) {
                 R.id.rb_store_restaurant -> reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_restaurant))

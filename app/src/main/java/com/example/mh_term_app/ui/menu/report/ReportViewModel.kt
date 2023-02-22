@@ -5,7 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mh_term_app.data.model.response.RequestReportStore
+import com.example.mh_term_app.data.model.request.RequestReportFacility
+import com.example.mh_term_app.data.model.request.RequestReportStore
 import com.example.mh_term_app.data.repository.MapRepository
 import kotlinx.coroutines.launch
 
@@ -14,6 +15,7 @@ class ReportViewModel : ViewModel() {
 
     // 위치, 유형, 상세 정보/상세위치, 상세 유형, 주의 대상, 주의사항, 추가 설명 입력
     val addressTxt = MutableLiveData<String>()
+    val locationTxt = MutableLiveData<String>()
     val typeTxt = MutableLiveData<String>()
 
     val storeNameTxt = MutableLiveData<String>()
@@ -33,14 +35,15 @@ class ReportViewModel : ViewModel() {
         get() = _isValidNextBtn
 
     // store - 완료 버튼 활성화
-    private val _isValidStoreCompleteBtn = MutableLiveData(false)
+    private val _isValidCompleteBtn = MutableLiveData(false)
     val isValidStoreCompleteBtn : LiveData<Boolean>
-        get() = _isValidStoreCompleteBtn
+        get() = _isValidCompleteBtn
 
     // 제보 결과
     private val _isValidPost = MutableLiveData<Boolean>()
     val isValidPost : LiveData<Boolean>
         get() = _isValidPost
+
 
     fun setTypeTxt(txt:String){
         typeTxt.value = txt
@@ -81,7 +84,7 @@ class ReportViewModel : ViewModel() {
     }
 
     fun checkValidStoreCompleteBtn(){
-        _isValidStoreCompleteBtn.value = storeNameTxt.value?.isNotEmpty() == true && detailTypeTxt.value?.isNotEmpty() == true && plusInfoTxt.value?.isNotEmpty() == true
+        _isValidCompleteBtn.value = storeNameTxt.value?.isNotEmpty() == true && detailTypeTxt.value?.isNotEmpty() == true && plusInfoTxt.value?.isNotEmpty() == true
     }
 
     fun postReportStore(type : String, address : String){
@@ -103,4 +106,24 @@ class ReportViewModel : ViewModel() {
         }
     }
 
+    fun checkValidFacilityCompleteBtn(){
+        _isValidCompleteBtn.value = locationTxt.value?.isNotEmpty() == true && detailTypeTxt.value?.isNotEmpty() == true && plusInfoTxt.value?.isNotEmpty() == true
+    }
+
+    fun postReportFacility(type : String, address : String){
+        viewModelScope.launch {
+            val store = RequestReportFacility(
+                type = type,
+                address = address,
+                location = locationTxt.value.toString(),
+                detailType = detailTypeTxt.value.toString(),
+                targetList = targetList.value,
+                warningList = warningList.value,
+                plusInfo = plusInfoTxt.value.toString()
+            )
+
+            Log.d("명",store.toString() +" / "+ store.targetList?.isEmpty().toString() +" / "+ store.warningList?.isEmpty().toString())
+//            _isValidPost.value = mapRepository.postReportFacility(store)
+        }
+    }
 }

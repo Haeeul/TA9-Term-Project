@@ -1,4 +1,4 @@
-package com.example.mh_term_app.data.model.response
+package com.example.mh_term_app.data.model.request
 
 data class RequestReportStore(
     val type : String,
