@@ -31,14 +31,13 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView45"
+                    android:id="@+id/txt_report_info_facility_title"
                     style="@style/MediumText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="24dp"
-                    android:text="@string/desc_report_type_facility"
                     android:textSize="26dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tb_report_info_facility" />
@@ -51,8 +50,8 @@
                     android:layout_marginTop="24dp"
                     android:text="@string/sub_title_location_detail"
                     android:textSize="22dp"
-                    app:layout_constraintStart_toStartOf="@+id/textView45"
-                    app:layout_constraintTop_toBottomOf="@+id/textView45" />
+                    app:layout_constraintStart_toStartOf="@+id/txt_report_info_facility_title"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_report_info_facility_title" />
 
                 <TextView
                     android:id="@+id/textView56"

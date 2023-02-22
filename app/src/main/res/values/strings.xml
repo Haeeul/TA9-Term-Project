@@ -76,7 +76,8 @@
     <string name="desc_menu_user_none">로그인 후\n이용해주세요:)</string>
 
     <!-- menu : report/place -->
-    <string name="desc_report_place">제보 하시는 곳의\n위치와 유형을 알려주세요:)</string>
+    <string name="desc_report_place_start">제보 하시는 곳의\n위치</string>
+    <string name="desc_report_place_end">와 유형을 알려주세요:)</string>
     <string name="desc_address_input">지도를 움직여 위치를 설정하거나 직접 입력해주세요.</string>
     <string name="hint_address_edt">주소를 입력해주세요.</string>
     <string name="sub_title_address">주소</string>
@@ -85,7 +86,8 @@
     <string name="sub_title_facility">도로 시설물</string>
 
     <!-- menu : report/info/store -->
-    <string name="desc_report_type_store">제보 하시는 매장에 대해\n자세히 알려주세요:)</string>
+    <string name="desc_report_type_store_start">제보 하시는 매장에 대해\n</string>
+    <string name="desc_report_type_store_end">자세히 알려주세요:)</string>
     <string name="sub_title_type_detail">상세유형</string>
     <string name="txt_restaurant">음식점</string>
     <string name="txt_cafe">카페</string>
@@ -109,7 +111,8 @@
     <string name="hint_info_plus_input">자세한 설명일수록 다른 사용자들에게\n도움이 됩니다.</string>
 
     <!-- menu : report/info/facility -->
-    <string name="desc_report_type_facility">제보 하시는 시설물에 대해\n자세히 알려주세요:)</string>
+    <string name="desc_report_type_facility_start">제보 하시는 시설물에 대해\n</string>
+    <string name="desc_report_type_facility_end">자세히 알려주세요:)</string>
     <string name="sub_title_location_detail">상세위치</string>
     <string name="txt_inside">실내</string>
     <string name="txt_outside">실외</string>
