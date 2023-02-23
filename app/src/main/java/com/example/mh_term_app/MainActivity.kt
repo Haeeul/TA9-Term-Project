@@ -2,7 +2,6 @@ package com.example.mh_term_app
 
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.annotation.UiThread
@@ -35,10 +34,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
 
     private lateinit var navController: NavController
 
-    var permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION)
-
     companion object {
-        private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
+        const val LOCATION_PERMISSION_REQUEST_CODE = 1000
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,8 +43,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
 
         locationSource =
             FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
-
-        Log.d("onCreate  locationSource.isActivated","${locationSource.isActivated}")
 
         mapPersistBottomFragment =
             MapPersistBottomSheetFragment.show(supportFragmentManager, R.id.fl_bottom_container)
