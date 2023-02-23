@@ -13,13 +13,9 @@ import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivityReportPlaceBinding
 import com.example.mh_term_app.utils.extension.changeKeywordColor
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
-import com.example.mh_term_app.utils.extension.toast
-import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
-import com.naver.maps.map.overlay.Marker
-import com.naver.maps.map.util.MarkerIcons
 
 
 class ReportPlaceActivity : BaseActivity<ActivityReportPlaceBinding>(), OnMapReadyCallback {
@@ -62,7 +58,7 @@ class ReportPlaceActivity : BaseActivity<ActivityReportPlaceBinding>(), OnMapRea
     @UiThread
     override fun onMapReady(naverMap: NaverMap) {
         naverMap.addOnCameraIdleListener {
-            toast("카메라 움직임 종료")
+//            toast(naverMap.cameraPosition.toString())
             Log.d("명",naverMap.cameraPosition.toString())
         }
     }

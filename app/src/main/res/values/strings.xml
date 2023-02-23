@@ -78,8 +78,8 @@
     <!-- menu : report/place -->
     <string name="desc_report_place_start">제보 하시는 곳의\n위치</string>
     <string name="desc_report_place_end">와 유형을 알려주세요:)</string>
-    <string name="desc_address_input">지도를 움직여 위치를 설정하거나 직접 입력해주세요.</string>
-    <string name="hint_address_edt">주소를 입력해주세요.</string>
+    <string name="desc_address_input">지도를 움직여 위치를 설정해주세요.</string>
+    <string name="hint_address_edt">상세 주소를 입력해주세요.</string>
     <string name="sub_title_address">주소</string>
     <string name="sub_title_type">유형</string>
     <string name="sub_title_store">매장</string>

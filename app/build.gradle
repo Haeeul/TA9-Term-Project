@@ -69,7 +69,7 @@ dependencies {
 
     // Naver map
     implementation 'com.naver.maps:map-sdk:3.16.2'
-    implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
 
     // persistBottomSheetFragment
     implementation 'kr.co.prnd:persistBottomSheetFragment:1.0.0'
@@ -79,4 +79,7 @@ dependencies {
 
     // drawerLayout
     implementation 'androidx.drawerlayout:drawerlayout:1.1.1'
+
+    // TedPermission
+    implementation 'io.github.ParkSangGwon:tedpermission-coroutine:3.3.0'
 }

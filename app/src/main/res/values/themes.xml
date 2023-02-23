@@ -32,7 +32,7 @@
 
     <style name="Theme.radioBtn.text" parent="Widget.AppCompat.CompoundButton.RadioButton">
         <item name="android:fontFamily">@font/gyeonggi_cheonnyeon_medium</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">14dp</item>
         <item name="android:textColor">@color/deep_dark_grey</item>
     </style>
 </resources>
