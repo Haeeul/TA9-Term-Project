@@ -1,6 +1,5 @@
 package com.example.mh_term_app.ui.menu.report
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -101,7 +100,6 @@ class ReportViewModel : ViewModel() {
                 plusInfo = plusInfoTxt.value.toString()
             )
 
-            Log.d("명",store.toString() +" / "+ store.targetList?.isEmpty().toString() +" / "+ store.warningList?.isEmpty().toString())
             _isValidPost.value = mapRepository.postReportStore(store)
         }
     }
@@ -112,7 +110,7 @@ class ReportViewModel : ViewModel() {
 
     fun postReportFacility(type : String, address : String){
         viewModelScope.launch {
-            val store = RequestReportFacility(
+            val facility = RequestReportFacility(
                 type = type,
                 address = address,
                 location = locationTxt.value.toString(),
@@ -122,8 +120,7 @@ class ReportViewModel : ViewModel() {
                 plusInfo = plusInfoTxt.value.toString()
             )
 
-            Log.d("명",store.toString() +" / "+ store.targetList?.isEmpty().toString() +" / "+ store.warningList?.isEmpty().toString())
-//            _isValidPost.value = mapRepository.postReportFacility(store)
+            _isValidPost.value = mapRepository.postReportFacility(facility)
         }
     }
 }
