@@ -1,11 +1,12 @@
 package com.example.mh_term_app
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.UiThread
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.mh_term_app.base.BaseActivity
@@ -62,8 +63,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
                 naverMap.locationTrackingMode = LocationTrackingMode.None
                 naverMap.locationOverlay.isVisible = false
             }else{
-                Log.d("명","2")
-                toast("2")
                 naverMap.locationTrackingMode = LocationTrackingMode.Follow
                 naverMap.locationOverlay.isVisible = true
             }
@@ -77,6 +76,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
 
         initNavigation()
         setNaverMap()
+    }
+
+    private fun initNavigation(){
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
     }
 
     fun setNaverMap(){
@@ -93,29 +96,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
     override fun onMapReady(naverMap: NaverMap) {
         this.naverMap = naverMap
         naverMap.locationSource = locationSource
-
-        Log.d("onMapReady  naverMap.locationSource","${locationSource.isActivated}")
-        if(locationSource.isActivated){
-            Log.d("명","3")
-            toast("3")
-            naverMap.locationTrackingMode = LocationTrackingMode.Follow
-            naverMap.locationOverlay.isVisible = true
-        }else{
-            Log.d("명","4")
-            toast("4")
-            naverMap.locationTrackingMode = LocationTrackingMode.None
-            naverMap.locationOverlay.isVisible = false
-        }
-
-        naverMap.locationOverlay.isVisible = true
+        checkPermission()
 
         val uiSettings = naverMap.uiSettings
         uiSettings.isLocationButtonEnabled = true
-
-        naverMap.addOnLocationChangeListener { location ->
-            Toast.makeText(this, "${location.latitude}, ${location.longitude}",
-                Toast.LENGTH_SHORT).show()
-        }
 
         marker = Marker()
         marker.position = LatLng(37.5670135, 126.9783740)
@@ -130,6 +114,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
         naverMap.setOnMapClickListener { _, _ ->
             setInfoWindowVisibility(false)
         }
+    }
+
+    private fun checkPermission(){
+        if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+            naverMap.locationTrackingMode = LocationTrackingMode.Follow
+        else
+            naverMap.locationTrackingMode = LocationTrackingMode.None
     }
 
     private fun setOnMarkerClickListener(latLng: LatLng, naverMap: NaverMap): Overlay.OnClickListener {
@@ -154,29 +146,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
         else binding.flBottomContainer.visibility = View.GONE
     }
 
-    override fun initListener() {
-        super.initListener()
-
-//        binding.btnMapGps.setSingleOnClickListener {
-//            if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
-//                && ContextCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-//
-////                naverMap.locationTrackingMode = LocationTrackingMode.Follow
-//                toast("권한 허용")
-//            }
-//
-//            // 권한이 없을 때 권한을 요구함
-//            else {
-//                ActivityCompat.requestPermissions(
-//                    this,
-//                    arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION,
-//                        android.Manifest.permission.ACCESS_FINE_LOCATION),
-//                    1
-//                )
-//            }
-//        }
-    }
-
     override fun onBackPressed() {
         if (mapPersistBottomFragment?.handleBackKeyEvent() == true) {
             // no-op
@@ -184,10 +153,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
             super.onBackPressed()
         }
 
-    }
-
-    private fun initNavigation(){
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
     }
 
     fun goToSearchListener(){
