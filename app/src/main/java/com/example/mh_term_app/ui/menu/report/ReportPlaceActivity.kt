@@ -45,7 +45,7 @@ class ReportPlaceActivity : BaseActivity<ActivityReportPlaceBinding>(), OnMapRea
             txtReportPlaceTitle.changeKeywordColor(
                 MHApplication.getApplicationContext().getString(R.string.desc_report_place_start),
                 MHApplication.getApplicationContext().getString(R.string.desc_report_place_end),
-                10, 12, 2, 4
+                3, 5, 2, 4
             )
         }
 
