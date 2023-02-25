@@ -114,11 +114,9 @@ class ReportPlaceActivity : BaseActivity<ActivityReportPlaceBinding>(), OnMapRea
         naverMap.cameraPosition = cameraPosition
 
         naverMap.addOnCameraIdleListener {
-            binding.edtReportPlaceAddress.setText(
-                getAddress(
-                    naverMap.cameraPosition.target.latitude,
-                    naverMap.cameraPosition.target.longitude
-                )
+            reportPlaceViewModel.getAddress(
+                naverMap.cameraPosition.target.latitude,
+                naverMap.cameraPosition.target.longitude
             )
         }
     }
@@ -136,23 +134,6 @@ class ReportPlaceActivity : BaseActivity<ActivityReportPlaceBinding>(), OnMapRea
             naverMap.locationTrackingMode = LocationTrackingMode.Follow
         else
             naverMap.locationTrackingMode = LocationTrackingMode.None
-    }
-
-    private fun getAddress(lat: Double, lng: Double): String {
-        val geoCoder = Geocoder(this, Locale.KOREA)
-        val address: ArrayList<Address>
-        var addressResult = "주소를 가져 올 수 없습니다."
-        try {
-            address = geoCoder.getFromLocation(lat, lng, 1) as ArrayList<Address>
-            if (address.size > 0) {
-                val currentLocationAddress = address[0].getAddressLine(0)
-                    .toString()
-                addressResult = currentLocationAddress
-            }
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-        return addressResult
     }
 
     override fun initObserver() {
@@ -192,7 +173,12 @@ class ReportPlaceActivity : BaseActivity<ActivityReportPlaceBinding>(), OnMapRea
 
         val reportIntent = Intent(this, className)
         reportIntent.putExtra("type", reportPlaceViewModel.typeTxt.value)
-        reportIntent.putExtra("address", reportPlaceViewModel.addressTxt.value)
+        reportIntent.putExtra(
+            "address",
+            reportPlaceViewModel.addressTxt.value + " " + reportPlaceViewModel.detailAddressTxt.value
+        )
+        reportIntent.putExtra("latitude", this.naverMap.cameraPosition.target.latitude.toString())
+        reportIntent.putExtra("longitude", this.naverMap.cameraPosition.target.longitude.toString())
         startActivity(reportIntent)
     }
 }

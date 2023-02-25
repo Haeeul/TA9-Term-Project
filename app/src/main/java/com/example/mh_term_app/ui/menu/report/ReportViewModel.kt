@@ -1,19 +1,25 @@
 package com.example.mh_term_app.ui.menu.report
 
+import android.location.Address
+import android.location.Geocoder
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.data.model.request.RequestReportFacility
 import com.example.mh_term_app.data.model.request.RequestReportStore
 import com.example.mh_term_app.data.repository.MapRepository
 import kotlinx.coroutines.launch
+import java.io.IOException
+import java.util.*
 
 class ReportViewModel : ViewModel() {
     private val mapRepository = MapRepository()
 
     // 위치, 유형, 상세 정보/상세위치, 상세 유형, 주의 대상, 주의사항, 추가 설명 입력
     val addressTxt = MutableLiveData<String>()
+    val detailAddressTxt = MutableLiveData<String>()
     val locationTxt = MutableLiveData<String>()
     val typeTxt = MutableLiveData<String>()
 
@@ -52,6 +58,23 @@ class ReportViewModel : ViewModel() {
         detailTypeTxt.value = txt
     }
 
+    fun getAddress(lat: Double, lng: Double) {
+        val geoCoder = Geocoder(MHApplication.getApplicationContext(), Locale.KOREA)
+        val address: ArrayList<Address>
+        var addressResult = "주소를 가져 올 수 없습니다."
+        try {
+            address = geoCoder.getFromLocation(lat, lng, 1) as ArrayList<Address>
+            if (address.size > 0) {
+                val currentLocationAddress = address[0].getAddressLine(0)
+                    .toString()
+                addressResult = currentLocationAddress
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        addressTxt.value = addressResult
+    }
+
     fun clickTargetBtn(checked : Boolean, target : String){
         var tempTargetList = mutableListOf<String>()
 
@@ -79,7 +102,7 @@ class ReportViewModel : ViewModel() {
     }
 
     fun checkValidNextBtn(){
-        _isValidNextBtn.value = addressTxt.value?.isNotEmpty() == true &&  typeTxt.value?.isNotEmpty() == true
+        _isValidNextBtn.value = typeTxt.value?.isNotEmpty() == true
     }
 
     fun checkValidStoreCompleteBtn(){

@@ -17,13 +17,17 @@ class ReportInfoStoreActivity : BaseActivity<ActivityReportInfoStoreBinding>() {
         get() = R.layout.activity_report_info_store
     private val reportPlaceViewModel : ReportViewModel by viewModels()
 
-    var storeType = ""
-    var storeAddress = ""
+    private var storeType = ""
+    private var storeAddress = ""
+    private var storeLatitude = ""
+    private var storeLongitude = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         storeType = intent.getStringExtra("type").toString()
         storeAddress = intent.getStringExtra("address").toString()
+        storeLatitude = intent.getStringExtra("latitude").toString()
+        storeLongitude = intent.getStringExtra("longitude").toString()
 
         binding.apply {
             vm = reportPlaceViewModel

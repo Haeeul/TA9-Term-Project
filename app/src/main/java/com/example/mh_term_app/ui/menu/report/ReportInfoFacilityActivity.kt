@@ -18,16 +18,20 @@ class ReportInfoFacilityActivity : BaseActivity<ActivityReportInfoFacilityBindin
         get() = R.layout.activity_report_info_facility
     private val reportPlaceViewModel: ReportViewModel by viewModels()
 
-    var storeType = ""
-    var storeAddress = ""
+    private var facilityType = ""
+    private var facilityAddress = ""
+    private var facilityLatitude = ""
+    private var facilityLongitude = ""
 
     private var checkedGroup : Int = 0
     private var checkedId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        storeType = intent.getStringExtra("type").toString()
-        storeAddress = intent.getStringExtra("address").toString()
+        facilityType = intent.getStringExtra("type").toString()
+        facilityAddress = intent.getStringExtra("address").toString()
+        facilityLatitude = intent.getStringExtra("latitude").toString()
+        facilityLongitude = intent.getStringExtra("longitude").toString()
 
         binding.apply {
             vm = reportPlaceViewModel
@@ -160,6 +164,6 @@ class ReportInfoFacilityActivity : BaseActivity<ActivityReportInfoFacilityBindin
     }
 
     fun postReportFacility(view: View) {
-        reportPlaceViewModel.postReportFacility(storeType, storeAddress)
+        reportPlaceViewModel.postReportFacility(facilityType, facilityAddress)
     }
 }
