@@ -15,27 +15,27 @@
         android:layout_height="match_parent"
         tools:context=".ui.sign.up.SignUpActivity">
 
+        <include
+            android:id="@+id/tb_sign_up"
+            layout="@layout/tb_title_with_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/tb_sign_up">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-                <include
-                    android:id="@+id/tb_sign_up"
-                    layout="@layout/tb_title_with_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/txt_menu_user_name"
@@ -43,13 +43,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="24dp"
                     android:layout_marginEnd="24dp"
                     android:text="@string/desc_sign_up"
-                    android:textSize="26dp"
+                    android:textSize="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tb_sign_up" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView5"
@@ -59,7 +59,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
                     android:text="@string/sub_title_id"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_menu_user_name" />
 
@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:text="*"
                     android:textColor="@color/red"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toEndOf="@+id/textView5"
                     app:layout_constraintTop_toTopOf="@+id/textView5" />
 
@@ -78,32 +78,32 @@
                     android:id="@+id/edt_sign_up_id"
                     style="@style/EditHintText"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="8dp"
                     android:background="@drawable/round_square_line_grey_8"
                     android:hint="@string/hint_id_input"
                     android:inputType="textEmailAddress"
+                    android:nextFocusDown="@id/edt_sign_up_password"
                     android:onTextChanged="@{vm::inputId}"
                     android:paddingHorizontal="16dp"
                     android:text="@={vm.idTxt}"
-                    android:textSize="18dp"
-                    android:nextFocusDown="@id/edt_sign_up_password"
+                    android:textSize="16dp"
                     app:layout_constraintEnd_toStartOf="@+id/button"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
                 <ImageView
                     android:id="@+id/imageView2"
+                    setValidSignInfoIcon="@{vm.isValidId}"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginEnd="16dp"
-                    setValidSignInfoIcon="@{vm.isValidId}"
                     android:visibility="@{vm.isValidIdNotice ? View.VISIBLE : View.GONE}"
                     app:layout_constraintBottom_toBottomOf="@+id/edt_sign_up_id"
                     app:layout_constraintEnd_toEndOf="@+id/edt_sign_up_id"
-                    app:layout_constraintTop_toTopOf="@+id/edt_sign_up_id"/>
+                    app:layout_constraintTop_toTopOf="@+id/edt_sign_up_id" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button"
@@ -123,13 +123,13 @@
 
                 <TextView
                     android:id="@+id/textView30"
+                    style="@style/MediumText"
+                    setIdNotice="@{vm.isValidId}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:text="@{vm.idNotice}"
-                    style="@style/MediumText"
-                    android:textSize="16dp"
-                    setIdNotice="@{vm.isValidId}"
+                    android:textSize="14dp"
                     android:visibility="@{vm.isValidIdNotice ? View.VISIBLE : View.GONE}"
                     app:layout_constraintStart_toStartOf="@+id/edt_sign_up_id"
                     app:layout_constraintTop_toBottomOf="@+id/edt_sign_up_id" />
@@ -141,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/sub_title_password"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="@+id/edt_sign_up_id"
                     app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
@@ -152,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:text="*"
                     android:textColor="@color/red"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toEndOf="@+id/textView2"
                     app:layout_constraintTop_toTopOf="@+id/textView2" />
 
@@ -160,29 +160,29 @@
                     android:id="@+id/edt_sign_up_password"
                     style="@style/EditHintText"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_marginTop="12dp"
                     android:background="@drawable/round_square_line_grey_8"
                     android:hint="@string/hint_password_input"
                     android:inputType="textPassword"
+                    android:nextFocusDown="@id/edt_sign_up_check_password"
                     android:onTextChanged="@{vm::inputPassword}"
                     android:paddingHorizontal="16dp"
                     android:text="@={vm.passwordTxt}"
                     android:textSize="18dp"
-                    android:nextFocusDown="@id/edt_sign_up_check_password"
                     app:layout_constraintEnd_toEndOf="@+id/button"
                     app:layout_constraintStart_toStartOf="@+id/edt_sign_up_id"
                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
                 <TextView
                     android:id="@+id/txt_sign_up_notice"
+                    style="@style/MediumText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:text="@string/notice_password_length"
-                    style="@style/MediumText"
-                    android:textSize="16dp"
                     android:textColor="@color/red"
+                    android:textSize="14dp"
                     android:visibility="@{vm.isValidPasswordNotice ? View.VISIBLE : View.GONE}"
                     app:layout_constraintStart_toStartOf="@+id/edt_sign_up_password"
                     app:layout_constraintTop_toBottomOf="@+id/edt_sign_up_password" />
@@ -194,7 +194,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/sub_title_check_password"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="@+id/txt_sign_up_notice"
                     app:layout_constraintTop_toBottomOf="@+id/txt_sign_up_notice" />
 
@@ -205,7 +205,7 @@
                     android:layout_height="wrap_content"
                     android:text="*"
                     android:textColor="@color/red"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toEndOf="@+id/textView31"
                     app:layout_constraintTop_toTopOf="@+id/textView31" />
 
@@ -213,7 +213,7 @@
                     android:id="@+id/edt_sign_up_check_password"
                     style="@style/EditHintText"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_marginTop="12dp"
                     android:background="@drawable/round_square_line_grey_8"
                     android:hint="@string/hint_check_password_input"
@@ -234,7 +234,7 @@
                     android:layout_marginTop="12dp"
                     android:text="@string/notice_check_password_fail"
                     android:textColor="@color/red"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:visibility="@{vm.isValidCheckPasswordNotice ? View.VISIBLE : View.GONE}"
                     app:layout_constraintStart_toStartOf="@+id/edt_sign_up_check_password"
                     app:layout_constraintTop_toBottomOf="@+id/edt_sign_up_check_password" />
@@ -245,7 +245,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="32dp"
                     android:layout_marginEnd="24dp"
                     android:layout_marginBottom="35dp"
                     android:background="@drawable/selector_sign_btn"
@@ -255,8 +254,7 @@
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView33" />
+                    app:layout_constraintStart_toStartOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
