@@ -14,27 +14,27 @@
         android:layout_height="match_parent"
         tools:context=".ui.menu.report.ReportInfoFacilityActivity">
 
+        <include
+            android:id="@+id/tb_report_info_facility"
+            layout="@layout/tb_title_with_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/tb_report_info_facility">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-                <include
-                    android:id="@+id/tb_report_info_facility"
-                    layout="@layout/tb_title_with_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/txt_report_info_facility_title"
@@ -42,11 +42,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="24dp"
                     android:layout_marginEnd="24dp"
-                    android:textSize="26dp"
+                    android:textSize="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tb_report_info_facility" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView46"
@@ -55,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:text="@string/sub_title_location_detail"
-                    android:textSize="22dp"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="@+id/txt_report_info_facility_title"
                     app:layout_constraintTop_toBottomOf="@+id/txt_report_info_facility_title" />
 
@@ -66,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:text="*"
                     android:textColor="@color/red"
-                    android:textSize="22dp"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toEndOf="@+id/textView46"
                     app:layout_constraintTop_toTopOf="@+id/textView46" />
 
@@ -103,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:text="@string/sub_title_type_detail"
-                    android:textSize="22dp"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="@+id/textView46"
                     app:layout_constraintTop_toBottomOf="@+id/rg_location_facility" />
 
@@ -114,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:text="*"
                     android:textColor="@color/red"
-                    android:textSize="22dp"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toEndOf="@+id/textView57"
                     app:layout_constraintTop_toTopOf="@+id/textView57" />
 
@@ -203,7 +204,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/sub_title_warning_target"
-                    android:textSize="22dp"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="@+id/textView57"
                     app:layout_constraintTop_toBottomOf="@+id/rg_facility_type_3" />
 
@@ -212,9 +213,9 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:onClick="onFacilityTargetClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_user_type_wheelchair"
-                    android:onClick="onFacilityTargetClicked"
                     app:layout_constraintStart_toStartOf="@+id/textView59"
                     app:layout_constraintTop_toBottomOf="@+id/textView59" />
 
@@ -223,9 +224,9 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:onClick="onFacilityTargetClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_user_type_guardian"
-                    android:onClick="onFacilityTargetClicked"
                     app:layout_constraintStart_toEndOf="@+id/cb_facility_target_wheelchair"
                     app:layout_constraintTop_toTopOf="@+id/cb_facility_target_wheelchair" />
 
@@ -234,9 +235,9 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:onClick="onFacilityTargetClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_user_type_handicap"
-                    android:onClick="onFacilityTargetClicked"
                     app:layout_constraintStart_toStartOf="@+id/cb_facility_target_wheelchair"
                     app:layout_constraintTop_toBottomOf="@+id/cb_facility_target_wheelchair" />
 
@@ -245,9 +246,9 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:onClick="onFacilityTargetClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_user_type_injured"
-                    android:onClick="onFacilityTargetClicked"
                     app:layout_constraintStart_toEndOf="@+id/cb_facility_target_handicap"
                     app:layout_constraintTop_toBottomOf="@+id/cb_facility_target_guardian" />
 
@@ -256,9 +257,9 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:onClick="onFacilityTargetClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_user_type_old"
-                    android:onClick="onFacilityTargetClicked"
                     app:layout_constraintStart_toStartOf="@+id/cb_facility_target_handicap"
                     app:layout_constraintTop_toBottomOf="@+id/cb_facility_target_handicap" />
 
@@ -269,7 +270,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/sub_title_warning"
-                    android:textSize="22dp"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="@+id/textView59"
                     app:layout_constraintTop_toBottomOf="@+id/cb_facility_target_old" />
 
@@ -278,9 +279,9 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:onClick="onFacilityWaningClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_slope"
-                    android:onClick="onFacilityWaningClicked"
                     app:layout_constraintStart_toStartOf="@+id/textView60"
                     app:layout_constraintTop_toBottomOf="@+id/textView60" />
 
@@ -289,9 +290,9 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:onClick="onFacilityWaningClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_height"
-                    android:onClick="onFacilityWaningClicked"
                     app:layout_constraintStart_toEndOf="@+id/cb_facility_warning_slope"
                     app:layout_constraintTop_toTopOf="@+id/cb_facility_warning_slope" />
 
@@ -300,9 +301,9 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:onClick="onFacilityWaningClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_offset"
-                    android:onClick="onFacilityWaningClicked"
                     app:layout_constraintStart_toEndOf="@+id/cb_facility_warning_height"
                     app:layout_constraintTop_toTopOf="@+id/cb_facility_warning_height" />
 
@@ -311,9 +312,9 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:onClick="onFacilityWaningClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_out"
-                    android:onClick="onFacilityWaningClicked"
                     app:layout_constraintStart_toEndOf="@+id/cb_facility_warning_offset"
                     app:layout_constraintTop_toTopOf="@+id/cb_facility_warning_offset" />
 
@@ -322,9 +323,9 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:onClick="onFacilityWaningClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_finish"
-                    android:onClick="onFacilityWaningClicked"
                     app:layout_constraintStart_toStartOf="@+id/cb_facility_warning_slope"
                     app:layout_constraintTop_toBottomOf="@+id/cb_facility_warning_slope" />
 
@@ -333,9 +334,9 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:onClick="onFacilityWaningClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_info"
-                    android:onClick="onFacilityWaningClicked"
                     app:layout_constraintStart_toEndOf="@+id/cb_facility_warning_finish"
                     app:layout_constraintTop_toTopOf="@+id/cb_facility_warning_finish" />
 
@@ -344,9 +345,9 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:onClick="onFacilityWaningClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_width"
-                    android:onClick="onFacilityWaningClicked"
                     app:layout_constraintStart_toEndOf="@+id/cb_facility_warning_info"
                     app:layout_constraintTop_toTopOf="@+id/cb_facility_warning_info" />
 
@@ -357,7 +358,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/sub_title_info_plus"
-                    android:textSize="22dp"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="@+id/cb_facility_warning_finish"
                     app:layout_constraintTop_toBottomOf="@+id/cb_facility_warning_finish" />
 
@@ -368,7 +369,7 @@
                     android:layout_height="wrap_content"
                     android:text="*"
                     android:textColor="@color/red"
-                    android:textSize="22dp"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toEndOf="@+id/textView61"
                     app:layout_constraintTop_toTopOf="@+id/textView61" />
 
@@ -385,8 +386,8 @@
                     android:maxLines="10"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="16dp"
-                    android:textSize="18dp"
                     android:text="@={vm.plusInfoTxt}"
+                    android:textSize="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView61"
                     app:layout_constraintTop_toBottomOf="@+id/textView61" />
@@ -399,10 +400,10 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginBottom="35dp"
                     android:background="@drawable/selector_sign_btn"
-                    android:text="@string/txt_complete"
-                    android:textColor="@color/white"
                     android:enabled="@{vm.isValidStoreCompleteBtn}"
                     android:onClick="postReportFacility"
+                    android:text="@string/txt_complete"
+                    android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/edt_report_info_facility_plus"
                     app:layout_constraintStart_toStartOf="@+id/edt_report_info_facility_plus"

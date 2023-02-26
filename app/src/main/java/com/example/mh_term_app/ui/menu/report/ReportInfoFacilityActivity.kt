@@ -40,7 +40,7 @@ class ReportInfoFacilityActivity : BaseActivity<ActivityReportInfoFacilityBindin
                     .getString(R.string.desc_report_type_facility_start),
                 MHApplication.getApplicationContext()
                     .getString(R.string.desc_report_type_facility_end),
-                7, 10, 0, 3
+                7, 10, 2, 5
             )
         }
     }

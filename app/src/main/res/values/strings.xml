@@ -115,8 +115,8 @@
     <string name="hint_info_plus_input">자세한 설명일수록 다른 사용자들에게 도움이 됩니다.</string>
 
     <!-- menu : report/info/facility -->
-    <string name="desc_report_type_facility_start">제보 하시는 시설물에 대해 </string>
-    <string name="desc_report_type_facility_end">자세히 알려주세요:)</string>
+    <string name="desc_report_type_facility_start">제보 하시는 시설물에 대</string>
+    <string name="desc_report_type_facility_end">해 자세히 알려주세요:)</string>
     <string name="sub_title_location_detail">상세위치</string>
     <string name="txt_inside">실내</string>
     <string name="txt_outside">실외</string>
