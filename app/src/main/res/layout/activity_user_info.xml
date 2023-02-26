@@ -29,37 +29,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:onClick="goToBackListener"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_btn_back" />
-
-                <TextView
-                    android:id="@+id/textView6"
-                    style="@style/ActivityTitle"
-                    android:layout_width="wrap_content"
+                <include
+                    android:id="@+id/tb_user_info"
+                    layout="@layout/tb_title_with_btn"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/txt_sign_up"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/imageView" />
-
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
-                    android:src="@color/grey"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView7"
@@ -69,11 +46,11 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="50dp"
                     android:layout_marginEnd="24dp"
-                    android:text="@string/txt_desc_user_info"
+                    android:text="@string/desc_user_info"
                     android:textSize="26dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+                    app:layout_constraintTop_toBottomOf="@+id/tb_user_info" />
 
                 <TextView
                     android:id="@+id/textView8"
@@ -81,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:text="@string/txt_nickname"
+                    android:text="@string/sub_title_nickname"
                     android:textSize="22dp"
                     app:layout_constraintStart_toStartOf="@+id/textView7"
                     app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -105,7 +82,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:background="@drawable/round_square_line_grey_8"
-                    android:hint="@string/txt_hint_nickname_input"
+                    android:hint="@string/hint_nickname_input"
                     android:inputType="textPersonName"
                     android:onTextChanged="@{vm.inputNickname}"
                     android:paddingHorizontal="16dp"

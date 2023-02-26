@@ -19,7 +19,7 @@ class UserInfoViewModel : ViewModel() {
 
     // 사용자 입력 내용
     val nicknameTxt = MutableLiveData<String>()
-    val typeTxt = MutableLiveData<String>()
+    private val typeTxt = MutableLiveData<String>()
 
     // 안내 문구
     val nicknameNotice = MutableLiveData<String>()

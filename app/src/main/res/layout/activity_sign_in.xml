@@ -15,37 +15,14 @@
         android:layout_height="match_parent"
         tools:context=".ui.sign.in.SignInActivity">
 
-        <ImageView
-            android:id="@+id/btn_sign_in_back"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:onClick="goToBackListener"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_btn_back" />
-
-        <TextView
-            android:id="@+id/textView"
-            style="@style/ActivityTitle"
-            android:layout_width="wrap_content"
+        <include
+            android:id="@+id/tb_sign_in"
+            layout="@layout/tb_title_with_btn"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/txt_sign_in"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_sign_in_back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btn_sign_in_back" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:src="@color/light_grey"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_sign_in_back" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView2"
@@ -55,11 +32,11 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="24dp"
-            android:text="@string/txt_desc_sign_in"
+            android:text="@string/desc_sign_in"
             android:textSize="26dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:layout_constraintTop_toBottomOf="@+id/tb_sign_in" />
 
         <EditText
             android:id="@+id/edt_sign_in_id"
@@ -69,7 +46,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/round_square_line_grey_8"
-            android:hint="@string/txt_hint_id_input"
+            android:hint="@string/hint_id_input"
             android:inputType="text"
             android:nextFocusDown="@id/edt_sigh_in_password"
             android:paddingHorizontal="16dp"
@@ -87,7 +64,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/round_square_line_grey_8"
-            android:hint="@string/txt_hint_password"
+            android:hint="@string/hint_password"
             android:inputType="textPassword"
             android:paddingHorizontal="16dp"
             android:text="@={vm.passwordTxt}"
@@ -105,7 +82,7 @@
             style="@style/MediumText"
             android:textSize="16dp"
             android:textColor="@color/red"
-            android:text="@string/txt_desc_sign_in_fail"
+            android:text="@string/notice_sign_in_fail"
             android:visibility="@{vm.isValidSignInNotice ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintStart_toStartOf="@+id/edt_sigh_in_password"
             app:layout_constraintTop_toBottomOf="@+id/edt_sigh_in_password" />
@@ -119,7 +96,7 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/selector_sign_btn"
-            android:text="@string/txt_sign_in"
+            android:text="@string/title_sign_in"
             android:textColor="@color/white"
             android:enabled="@{vm.isValidNextBtn}"
             android:onClick="@{() -> vm.checkValidSignIn()}"
@@ -133,7 +110,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
-            android:text="@string/txt_desc_account_null"
+            android:text="@string/desc_account_null"
             android:textColor="@color/grey"
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -157,7 +134,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="@string/txt_sign_up"
+            android:text="@string/title_sign_up"
             android:onClick="goToSignUpListener"
             style="@style/MediumText"
             android:textSize="16dp"

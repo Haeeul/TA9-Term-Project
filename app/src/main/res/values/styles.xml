@@ -3,14 +3,14 @@
     <style name="ActivityTitle">
         <item name="fontFamily">@font/gyeonggi_cheonnyeon_bold</item>
         <item name="android:textColor">@color/light_black</item>
-        <item name="android:textSize">24dp</item>
+        <item name="android:textSize">22dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="ButtonText">
         <item name="fontFamily">@font/gyeonggi_cheonnyeon_medium</item>
         <item name="android:textColor">@color/light_black</item>
-        <item name="android:textSize">24dp</item>
+        <item name="android:textSize">20dp</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
@@ -60,6 +60,13 @@
         <item name="android:includeFontPadding">false</item>
         <item name="android:textSize">14dp</item>
         <item name="android:fontFamily">@font/gyeonggi_cheonnyeon_light</item>
+    </style>
+
+    <style name="checkBoxText">
+        <item name="android:fontFamily">@font/gyeonggi_cheonnyeon_medium</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/deep_dark_grey</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
 </resources>

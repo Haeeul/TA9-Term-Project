@@ -2,9 +2,9 @@
     <string name="app_name">MH-Term-App</string>
 
     <!-- sign home-->
-    <string name="txt_sign_up">회원가입</string>
-    <string name="txt_sign_in">로그인</string>
-    <string name="txt_sign_skip">둘러보기</string>
+    <string name="title_sign_up">회원가입</string>
+    <string name="title_sign_in">로그인</string>
+    <string name="title_sign_skip">둘러보기</string>
 
     <!-- phone auth -->
     <string name="txt_request_phone">인증요청</string>
@@ -16,39 +16,39 @@
     <string name="txt_request_message">인증 번호 요청 완료</string>
     <string name="txt_request_message_fail">인증 번호 요청 실패</string>
 
-    <!-- ID auth -->
-    <string name="txt_hint_id_input">아이디를 입력해주세요.</string>
-    <string name="txt_id_possible">해당 아이디는 사용 가능합니다.</string>
-    <string name="txt_id_impossible">해당 아이디는 사용 불가능합니다.</string>
-    <string name="txt_hint_password_input">최소 4자리 이상 입력해주세요.</string>
-    <string name="txt_password_notice">4자리 이상 입력해주세요.</string>
-    <string name="txt_hint_check_password_input">틀리지 않도록 주의해주세요.</string>
-    <string name="txt_check_password_notice">비밀번호가 일치하지 않습니다.</string>
+    <!-- ID,PW auth -->
+    <string name="hint_id_input">아이디를 입력해주세요.</string>
+    <string name="notice_id_possible">해당 아이디는 사용 가능합니다.</string>
+    <string name="notice_id_impossible">해당 아이디는 사용 불가능합니다.</string>
+    <string name="hint_password_input">최소 4자리 이상 입력해주세요.</string>
+    <string name="notice_password_length">4자리 이상 입력해주세요.</string>
+    <string name="hint_check_password_input">틀리지 않도록 주의해주세요.</string>
+    <string name="notice_check_password_fail">비밀번호가 일치하지 않습니다.</string>
 
     <!-- sign in -->
-    <string name="txt_desc_sign_in">로그인 정보를 입력해주세요.</string>
-    <string name="txt_hint_password">비밀번호를 입력해주세요.</string>
-    <string name="txt_desc_account_null">계정이 없으신가요?</string>
-    <string name="txt_desc_sign_in_fail">아이디 또는 비밀번호를 다시 확인하세요.</string>
+    <string name="desc_sign_in">로그인 정보를 입력해주세요.</string>
+    <string name="hint_password">비밀번호를 입력해주세요.</string>
+    <string name="desc_account_null">계정이 없으신가요?</string>
+    <string name="notice_sign_in_fail">아이디 또는 비밀번호를 다시 확인하세요.</string>
 
     <!-- sign up -->
-    <string name="txt_desc_sign_up">회원가입 정보를 입력해주세요.</string>
-    <string name="txt_desc_id">아이디</string>
-    <string name="txt_desc_password">비밀번호</string>
-    <string name="txt_desc_check_password">비밀번호 확인</string>
-    <string name="txt_next">다음</string>
+    <string name="desc_sign_up">회원가입 정보를 입력해주세요.</string>
+    <string name="sub_title_id">아이디</string>
+    <string name="sub_title_password">비밀번호</string>
+    <string name="sub_title_check_password">비밀번호 확인</string>
+    <string name="sub_title_next">다음</string>
 
     <!-- sign guide dialog -->
-    <string name="txt_go_to_sign_up">해당 번호로 가입된 계정이 없습니다.\n회원가입으로 이동하시겠습니까?</string>
-    <string name="txt_go_to_sign_in">해당 번호로 가입된 계정이 있습니다.\n로그인으로 이동하시겠습니까?</string>
+    <string name="desc_go_to_sign_up">해당 번호로 가입된 계정이 없습니다.\n회원가입으로 이동하시겠습니까?</string>
+    <string name="desc_go_to_sign_in">해당 번호로 가입된 계정이 있습니다.\n로그인으로 이동하시겠습니까?</string>
 
     <!-- user info -->
-    <string name="txt_desc_user_info">리뷰 작성을 위해\n추가 정보를 입력해주세요.</string>
-    <string name="txt_nickname">닉네임</string>
-    <string name="txt_hint_nickname_input">닉네임을 입력해주세요.</string>
+    <string name="desc_user_info">리뷰 작성을 위해\n추가 정보를 입력해주세요.</string>
+    <string name="sub_title_nickname">닉네임</string>
+    <string name="hint_nickname_input">닉네임을 입력해주세요.</string>
     <string name="txt_double_check">중복확인</string>
-    <string name="txt_nickname_possible">해당 닉네임은 사용 가능합니다.</string>
-    <string name="txt_nickname_impossible">해당 닉네임은 사용 불가능합니다.</string>
+    <string name="notice_nickname_possible">해당 닉네임은 사용 가능합니다.</string>
+    <string name="notice_nickname_impossible">해당 닉네임은 사용 불가능합니다.</string>
 
     <string name="txt_user_type">특이사항</string>
     <string name="txt_user_type_wheelchair">휠체어 사용자</string>
@@ -59,14 +59,75 @@
     <string name="txt_complete">완료</string>
 
     <!-- map -->
-    <string name="txt_hint_search_place">장소명, 주소 검색</string>
+    <string name="hint_search_place">장소명, 주소 검색</string>
     <string name="txt_place_facility">시설물</string>
     <string name="txt_place_store">매장</string>
     <string name="txt_place_charging_station">충전소</string>
     <string name="txt_place_movement_support_center">이동지원센터</string>
     <string name="txt_place_restroom">화장실</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txt_add_review">리뷰 작성하기</string>
+
+    <!-- menu -->
+    <string name="user_nickname_format" formatted="false">%s 님</string>
+    <string name="title_menu_edit_user_info">사용자 정보 수정</string>
+    <string name="title_menu_review_list">리뷰 내역</string>
+    <string name="title_menu_favorite_list">즐겨찾기 내역</string>
+    <string name="title_menu_report">신규 제보하기</string>
+    <string name="title_menu_logout">로그아웃</string>
+    <string name="desc_menu_user_none">로그인 후\n이용해주세요:)</string>
+
+    <!-- menu : report/place -->
+    <string name="desc_report_place_start">제보 위치</string>
+    <string name="desc_report_place_end">와 유형에 대해 알려주세요:)</string>
+    <string name="desc_address_input">지도를 움직여 위치를 설정해주세요.</string>
+    <string name="hint_address_edt">상세 주소를 입력해주세요.</string>
+    <string name="sub_title_address">주소</string>
+    <string name="sub_title_type">유형</string>
+    <string name="sub_title_store">매장</string>
+    <string name="sub_title_facility">도로 시설물</string>
+
+    <!-- menu : report/info/store -->
+    <string name="desc_report_type_store_start">제보 하시는 매장에 대</string>
+    <string name="desc_report_type_store_end">해 자세히 알려주세요:)</string>
+    <string name="sub_title_type_detail">상세유형</string>
+    <string name="txt_restaurant">음식점</string>
+    <string name="txt_cafe">카페</string>
+    <string name="sub_title_info_detail">상세정보</string>
+    <string name="txt_store_name">매장명</string>
+    <string name="txt_store_time">운영시간</string>
+    <string name="txt_store_phone">전화번호</string>
+    <string name="hint_store_name_input">매장명을 입력해주세요.</string>
+    <string name="hint_open_time_input">오픈 시간 선택</string>
+    <string name="hint_close_time_input">마감 시간 선택</string>
+    <string name="hint_week_time_input">평일 시간 선택</string>
+    <string name="hint_saturday_time_input">토요일 시간 선택</string>
+    <string name="hint_monday_time_input">일요일 시간 선택</string>
+    <string name="hint_store_phone_input">전화번호를 입력해주세요.</string>
+    <string name="sub_title_warning">주의사항</string>
+    <string name="txt_warning_slope">경사</string>
+    <string name="txt_warning_height">높이</string>
+    <string name="txt_warning_offset">단차</string>
+    <string name="txt_warning_out">돌출물</string>
+    <string name="txt_warning_finish">마감</string>
+    <string name="txt_warning_info">안내시설</string>
+    <string name="txt_warning_width">통행폭</string>
+    <string name="sub_title_warning_target">주의대상</string>
+    <string name="sub_title_info_plus">추가설명</string>
+    <string name="hint_info_plus_input">자세한 설명일수록 다른 사용자들에게 도움이 됩니다.</string>
+
+    <!-- menu : report/info/facility -->
+    <string name="desc_report_type_facility_start">제보 하시는 시설물에 대</string>
+    <string name="desc_report_type_facility_end">해 자세히 알려주세요:)</string>
+    <string name="sub_title_location_detail">상세위치</string>
+    <string name="txt_inside">실내</string>
+    <string name="txt_outside">실외</string>
+    <string name="txt_bollard">볼라드</string>
+    <string name="txt_street">인도</string>
+    <string name="txt_block">점자블록</string>
+    <string name="txt_car_area">차량 진입구역</string>
+    <string name="txt_crosswalk">횡단보도</string>
+    <string name="txt_pass">항목에 없거나 구분이 어려움</string>
+
+    <string name="txt_server_error">서버 점검중입니다.</string>
 
 </resources>

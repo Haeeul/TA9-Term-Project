@@ -4,5 +4,5 @@ data class ResponseUser(
     val id : String = "",
     val password : String = "",
     val nickname : String = "",
-    val userType : String = "none"
+    val type : String = "none"
 )

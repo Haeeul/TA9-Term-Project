@@ -11,7 +11,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="@string/txt_go_to_sign_in"
+            android:text="@string/desc_go_to_sign_in"
             style="@style/MediumText"
             android:textSize="16dp"
             android:gravity="center"
@@ -47,7 +47,7 @@
             android:insetTop="0dp"
             android:insetBottom="0dp"
             app:cornerRadius="0dp"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="@color/blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btn_sign_guide_cancel"
             app:layout_constraintTop_toTopOf="@+id/btn_sign_guide_cancel" />

@@ -1,5 +1,8 @@
 package com.example.mh_term_app.data.remote
 
+import com.example.mh_term_app.data.model.request.RequestReportFacility
+import com.example.mh_term_app.data.model.request.RequestReportStore
+
 interface RemoteDataSource {
     // phone auth
     suspend fun getValidatePhone(phoneNum: String) : Boolean
@@ -11,4 +14,8 @@ interface RemoteDataSource {
 
     // sign in
     suspend fun postSignIn(id : String, password : String) : Boolean
+
+    // new report
+    suspend fun postReportStore(store : RequestReportStore) : Boolean
+    suspend fun postReportFacility(facility: RequestReportFacility) : Boolean
 }

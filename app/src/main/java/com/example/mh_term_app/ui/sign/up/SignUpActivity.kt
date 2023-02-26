@@ -3,11 +3,13 @@ package com.example.mh_term_app.ui.sign.up
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivitySignUpBinding
 import com.example.mh_term_app.utils.extension.clearStartActivity
 import com.example.mh_term_app.utils.extension.setKeyboardObserver
+import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 
 
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
@@ -21,6 +23,17 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
         binding.apply {
             vm = signUpViewModel
             edtSignUpId.requestFocus()
+        }
+    }
+
+    override fun initView() {
+        super.initView()
+
+        binding.tbSignUp.apply {
+            title = MHApplication.getApplicationContext().getString(R.string.title_sign_up)
+            btnTbBack.setSingleOnClickListener {
+                finish()
+            }
         }
     }
 

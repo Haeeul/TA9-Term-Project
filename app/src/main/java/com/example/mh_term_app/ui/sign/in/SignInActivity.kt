@@ -10,6 +10,7 @@ import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivitySignInBinding
 import com.example.mh_term_app.ui.sign.up.SignUpActivity
+import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 import com.example.mh_term_app.utils.extension.startActivityWithAffinity
 import com.example.mh_term_app.utils.extension.startActivityWithFinish
 import com.example.mh_term_app.utils.extension.toast
@@ -24,6 +25,17 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>() {
         binding.apply {
             vm = signInViewModel
             edtSignInId.requestFocus()
+        }
+    }
+
+    override fun initView() {
+        super.initView()
+
+        binding.tbSignIn.apply {
+            title = MHApplication.getApplicationContext().getString(R.string.title_sign_in)
+            btnTbBack.setSingleOnClickListener {
+                finish()
+            }
         }
     }
 
