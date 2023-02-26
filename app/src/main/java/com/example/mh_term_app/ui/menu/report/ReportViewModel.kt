@@ -33,9 +33,11 @@ class ReportViewModel : ViewModel() {
     val storeSaturdayTimeTxt = MutableLiveData<String>()
     val storeMondayTimeTxt = MutableLiveData<String>()
 
-    var storeTime = MutableLiveData<StoreTime>(StoreTime(Time("","","",""),Time("","","",""),Time("","","","")))
+    private var storeTime = MutableLiveData(StoreTime(Time("-2","-2","-2","-2"),
+        Time("-2","-2","-2","-2"),Time("-2","-2","-2","-2")))
 
     val detailTypeTxt = MutableLiveData<String>()
+    val etcTypeTxt = MutableLiveData<String>()
 
     private val targetList = MutableLiveData<MutableList<String>>()
     private val warningList = MutableLiveData<MutableList<String>>()
@@ -164,14 +166,16 @@ class ReportViewModel : ViewModel() {
         _isValidCompleteBtn.value = storeNameTxt.value?.isNotEmpty() == true && detailTypeTxt.value?.isNotEmpty() == true && plusInfoTxt.value?.isNotEmpty() == true
     }
 
-    fun postReportStore(type : String, address : String){
+    fun postReportStore(type : String, address : String, latitude : String, longitude : String){
         viewModelScope.launch {
             val store = RequestReportStore(
                 type = type,
                 address = address,
+                latitude = latitude,
+                longitude = longitude,
                 name = storeNameTxt.value.toString(),
                 phone = if(storePhoneTxt.value.toString()== "null"){"none"} else {storePhoneTxt.value.toString()},
-                time = if(storeSaturdayTimeTxt.value.toString()== "null"){"none"} else {storeSaturdayTimeTxt.value.toString()},
+                time = storeTime.value!!,
                 detailType = detailTypeTxt.value.toString(),
                 targetList = targetList.value,
                 warningList = warningList.value,
@@ -186,11 +190,13 @@ class ReportViewModel : ViewModel() {
         _isValidCompleteBtn.value = locationTxt.value?.isNotEmpty() == true && detailTypeTxt.value?.isNotEmpty() == true && plusInfoTxt.value?.isNotEmpty() == true
     }
 
-    fun postReportFacility(type : String, address : String){
+    fun postReportFacility(type : String, address : String, latitude : String, longitude : String){
         viewModelScope.launch {
             val facility = RequestReportFacility(
                 type = type,
                 address = address,
+                latitude = latitude,
+                longitude = longitude,
                 location = locationTxt.value.toString(),
                 detailType = detailTypeTxt.value.toString(),
                 targetList = targetList.value,

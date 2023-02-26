@@ -164,6 +164,6 @@ class ReportInfoFacilityActivity : BaseActivity<ActivityReportInfoFacilityBindin
     }
 
     fun postReportFacility(view: View) {
-        reportPlaceViewModel.postReportFacility(facilityType, facilityAddress)
+        reportPlaceViewModel.postReportFacility(facilityType, facilityAddress, facilityLatitude, facilityLongitude)
     }
 }

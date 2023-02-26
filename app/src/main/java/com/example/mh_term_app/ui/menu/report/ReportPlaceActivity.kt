@@ -175,10 +175,19 @@ class ReportPlaceActivity : BaseActivity<ActivityReportPlaceBinding>(), OnMapRea
         reportIntent.putExtra("type", reportPlaceViewModel.typeTxt.value)
         reportIntent.putExtra(
             "address",
-            reportPlaceViewModel.addressTxt.value + " " + reportPlaceViewModel.detailAddressTxt.value
+            getAddress()
         )
         reportIntent.putExtra("latitude", this.naverMap.cameraPosition.target.latitude.toString())
         reportIntent.putExtra("longitude", this.naverMap.cameraPosition.target.longitude.toString())
         startActivity(reportIntent)
+    }
+
+    private fun getAddress() : String {
+        val address = if(reportPlaceViewModel.detailAddressTxt.value == null) {
+            reportPlaceViewModel.addressTxt.value
+        }else{
+            reportPlaceViewModel.addressTxt.value + " " + reportPlaceViewModel.detailAddressTxt.value
+        }
+        return address!!
     }
 }

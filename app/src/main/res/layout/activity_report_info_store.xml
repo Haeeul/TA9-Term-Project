@@ -27,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tb_report_info_store">
@@ -149,8 +150,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="(평일, 토요일, 일요일)"
-                    android:textSize="12dp"
                     android:textColor="@color/deep_dark_grey"
+                    android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView50"
                     app:layout_constraintStart_toEndOf="@+id/textView50"
                     app:layout_constraintTop_toTopOf="@+id/textView50" />
@@ -179,12 +180,12 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/round_square_line_grey_8"
+                    android:gravity="center_vertical"
                     android:hint="@string/hint_saturday_time_input"
                     android:inputType="textMultiLine"
                     android:paddingHorizontal="16dp"
                     android:text="@={vm.storeSaturdayTimeTxt}"
                     android:textSize="16dp"
-                    android:gravity="center_vertical"
                     app:layout_constraintEnd_toEndOf="@+id/txt_report_info_store_week_time"
                     app:layout_constraintStart_toStartOf="@+id/txt_report_info_store_week_time"
                     app:layout_constraintTop_toBottomOf="@+id/txt_report_info_store_week_time" />
@@ -196,12 +197,12 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/round_square_line_grey_8"
+                    android:gravity="center_vertical"
                     android:hint="@string/hint_monday_time_input"
                     android:inputType="textMultiLine"
                     android:paddingHorizontal="16dp"
                     android:text="@={vm.storeMondayTimeTxt}"
                     android:textSize="16dp"
-                    android:gravity="center_vertical"
                     app:layout_constraintEnd_toEndOf="@+id/txt_report_info_store_saturday_time"
                     app:layout_constraintStart_toStartOf="@+id/txt_report_info_store_saturday_time"
                     app:layout_constraintTop_toBottomOf="@+id/txt_report_info_store_saturday_time" />
@@ -252,7 +253,35 @@
                         android:layout_height="50dp"
                         android:paddingRight="15dp"
                         android:text="@string/txt_cafe" />
+
+                    <RadioButton
+                        android:id="@+id/rb_store_etc"
+                        style="@style/Theme.radioBtn.text"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:paddingRight="15dp"
+                        android:text="기타" />
                 </RadioGroup>
+
+                <EditText
+                    android:id="@+id/edt_report_store_etc_type"
+                    style="@style/EditHintText"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/round_square_line_grey_8"
+                    android:hint="@string/hint_store_name_input"
+                    android:inputType="text"
+                    android:maxLength="20"
+                    android:nextFocusDown="@id/edt_report_info_store_phone"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="8dp"
+                    android:text="@={vm.etcTypeTxt}"
+                    android:textSize="16dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/rg_report_info_store_type"
+                    app:layout_constraintTop_toBottomOf="@+id/rg_report_info_store_type" />
 
                 <TextView
                     android:id="@+id/textView51"
@@ -263,7 +292,7 @@
                     android:text="@string/sub_title_warning_target"
                     android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="@+id/textView43"
-                    app:layout_constraintTop_toBottomOf="@+id/rg_report_info_store_type" />
+                    app:layout_constraintTop_toBottomOf="@+id/edt_report_store_etc_type" />
 
                 <CheckBox
                     android:id="@+id/cb_store_target_wheelchair"

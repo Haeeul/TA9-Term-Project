@@ -63,6 +63,10 @@ class ReportInfoStoreActivity : BaseActivity<ActivityReportInfoStoreBinding>() {
             else errorToast()
             startActivityWithAffinity(MainActivity::class.java)
         }
+
+        reportPlaceViewModel.etcTypeTxt.observe(this){
+            if(binding.rbStoreEtc.isChecked) reportPlaceViewModel.setDetailTypeTxt(it)
+        }
     }
 
     private fun setStoreObserver(data : LiveData<String>){
@@ -90,8 +94,17 @@ class ReportInfoStoreActivity : BaseActivity<ActivityReportInfoStoreBinding>() {
     private fun getStoreDetailType() {
         binding.rgReportInfoStoreType.setOnCheckedChangeListener{ _, checkedId ->
             when (checkedId) {
-                R.id.rb_store_restaurant -> reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_restaurant))
-                R.id.rb_store_cafe -> reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_cafe))
+                R.id.rb_store_restaurant -> {
+                    reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_restaurant))
+                    binding.edtReportStoreEtcType.visibility = View.GONE
+                }
+                R.id.rb_store_cafe -> {
+                    reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_cafe))
+                    binding.edtReportStoreEtcType.visibility = View.GONE
+                }
+                R.id.rb_store_etc -> {
+                    binding.edtReportStoreEtcType.visibility = View.VISIBLE
+                }
             }
         }
     }
@@ -113,7 +126,7 @@ class ReportInfoStoreActivity : BaseActivity<ActivityReportInfoStoreBinding>() {
     }
 
     fun postReportStore(view: View){
-        reportPlaceViewModel.postReportStore(storeType,storeAddress)
+        reportPlaceViewModel.postReportStore(storeType,storeAddress,storeLatitude,storeLongitude)
     }
 
 }
