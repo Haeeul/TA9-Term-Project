@@ -47,7 +47,7 @@
             android:insetTop="0dp"
             android:insetBottom="0dp"
             app:cornerRadius="0dp"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="@color/blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btn_sign_guide_cancel"
             app:layout_constraintTop_toTopOf="@+id/btn_sign_guide_cancel" />

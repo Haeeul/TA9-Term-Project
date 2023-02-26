@@ -2,14 +2,18 @@ package com.example.mh_term_app.ui.menu.report
 
 import android.location.Address
 import android.location.Geocoder
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mh_term_app.MHApplication
+import com.example.mh_term_app.data.model.StoreTime
+import com.example.mh_term_app.data.model.Time
 import com.example.mh_term_app.data.model.request.RequestReportFacility
 import com.example.mh_term_app.data.model.request.RequestReportStore
 import com.example.mh_term_app.data.repository.MapRepository
+import com.google.common.primitives.UnsignedBytes.toInt
 import kotlinx.coroutines.launch
 import java.io.IOException
 import java.util.*
@@ -25,7 +29,11 @@ class ReportViewModel : ViewModel() {
 
     val storeNameTxt = MutableLiveData<String>()
     val storePhoneTxt = MutableLiveData<String>()
-    val storeTimeTxt = MutableLiveData<String>()
+    var storeWeekTimeTxt = MutableLiveData<String>()
+    val storeSaturdayTimeTxt = MutableLiveData<String>()
+    val storeMondayTimeTxt = MutableLiveData<String>()
+
+    var storeTime = MutableLiveData<StoreTime>(StoreTime(Time("","","",""),Time("","","",""),Time("","","","")))
 
     val detailTypeTxt = MutableLiveData<String>()
 
@@ -75,6 +83,53 @@ class ReportViewModel : ViewModel() {
         addressTxt.value = addressResult
     }
 
+    fun setTimeValue(type : String, time: Time){
+        when(type){
+            "week" -> {
+                storeTime.value?.weekTime = time
+                storeWeekTimeTxt.value = storeTime.value?.weekTime?.let { checkTimeType(it) }
+            }
+            "saturday" -> {
+                storeTime.value?.saturdayTime = time
+                storeSaturdayTimeTxt.value = storeTime.value?.saturdayTime?.let { checkTimeType(it) }
+            }
+            "monday" -> {
+                storeTime.value?.mondayTime = time
+                storeMondayTimeTxt.value = storeTime.value?.mondayTime?.let { checkTimeType(it) }
+            }
+        }
+    }
+
+    private fun checkTimeType(time: Time) : String{
+        var timeTxt = ""
+        timeTxt = if(time.openHourTxt == "-1" ) "휴무"
+        else {
+            setTimePickerValue(time.openHourTxt.toInt(),time.openMinuteTxt.toInt()) + " ~ " + setTimePickerValue(time.closeHourTxt.toInt(),time.closeMinuteTxt.toInt())
+        }
+
+        return timeTxt
+    }
+
+    private fun setTimePickerValue(hour : Int, minute : Int) : String{
+        var timeTxt = ""
+        var h = hour
+        val m = minute
+
+        if (h > 12) {
+            h -= 12
+            timeTxt = "오후 " + h + "시 " + m + "분"
+        }else{
+            timeTxt = "오전 " + h + "시 " + m + "분"
+        }
+
+        return timeTxt
+    }
+
+    private fun checkPickTime(txt: String) : Int{
+        return if(txt.isEmpty()) 0
+        else txt.toString().toInt()
+    }
+
     fun clickTargetBtn(checked : Boolean, target : String){
         var tempTargetList = mutableListOf<String>()
 
@@ -116,7 +171,7 @@ class ReportViewModel : ViewModel() {
                 address = address,
                 name = storeNameTxt.value.toString(),
                 phone = if(storePhoneTxt.value.toString()== "null"){"none"} else {storePhoneTxt.value.toString()},
-                time = if(storeTimeTxt.value.toString()== "null"){"none"} else {storeTimeTxt.value.toString()},
+                time = if(storeSaturdayTimeTxt.value.toString()== "null"){"none"} else {storeSaturdayTimeTxt.value.toString()},
                 detailType = detailTypeTxt.value.toString(),
                 targetList = targetList.value,
                 warningList = warningList.value,

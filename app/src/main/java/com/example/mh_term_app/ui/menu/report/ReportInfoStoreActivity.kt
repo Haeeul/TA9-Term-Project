@@ -3,6 +3,7 @@ package com.example.mh_term_app.ui.menu.report
 import android.os.Bundle
 import android.view.View
 import android.widget.CheckBox
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.lifecycle.LiveData
 import com.example.mh_term_app.MHApplication
@@ -34,7 +35,7 @@ class ReportInfoStoreActivity : BaseActivity<ActivityReportInfoStoreBinding>() {
             txtReportInfoStoreTitle.changeKeywordColor(
                 MHApplication.getApplicationContext().getString(R.string.desc_report_type_store_start),
                 MHApplication.getApplicationContext().getString(R.string.desc_report_type_store_end),
-                7,9,0,3
+                7,9,2,5
             )
         }
     }
@@ -73,7 +74,17 @@ class ReportInfoStoreActivity : BaseActivity<ActivityReportInfoStoreBinding>() {
     override fun initListener() {
         super.initListener()
 
+        onClickTimeListener("week", binding.txtReportInfoStoreWeekTime)
+        onClickTimeListener("saturday", binding.txtReportInfoStoreSaturdayTime)
+        onClickTimeListener("monday", binding.txtReportInfoStoreMondayTime)
+
         getStoreDetailType()
+    }
+
+    private fun onClickTimeListener(type: String, txt : TextView){
+        txt.setSingleOnClickListener {
+            createStoreTimeDialog(supportFragmentManager, type, reportPlaceViewModel)
+        }
     }
 
     private fun getStoreDetailType() {

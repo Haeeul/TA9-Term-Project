@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.MHTermApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -32,7 +32,13 @@
 
     <style name="Theme.radioBtn.text" parent="Widget.AppCompat.CompoundButton.RadioButton">
         <item name="android:fontFamily">@font/gyeonggi_cheonnyeon_medium</item>
-        <item name="android:textSize">14dp</item>
+        <item name="android:textSize">16dp</item>
         <item name="android:textColor">@color/deep_dark_grey</item>
+    </style>
+
+    <style name="Theme.store.timePicker" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">@font/gyeonggi_cheonnyeon_medium</item>
+        <item name="colorControlNormal">@color/blue</item>
     </style>
 </resources>

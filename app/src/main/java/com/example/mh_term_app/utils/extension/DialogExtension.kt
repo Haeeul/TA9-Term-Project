@@ -2,8 +2,14 @@ package com.example.mh_term_app.utils.extension
 
 import android.content.Context
 import android.os.Bundle
+import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.FragmentManager
+import com.example.mh_term_app.ui.menu.report.ReportViewModel
+import com.example.mh_term_app.utils.view.DialogViewModel
 import com.example.mh_term_app.utils.view.SignGuideDialog
+import com.example.mh_term_app.utils.view.StoreTimeDialog
+import com.example.mh_term_app.utils.view.TimePickerDialog
 
 
 fun Context.createDialog(fragmentManager: FragmentManager, type: String) {
@@ -14,11 +20,11 @@ fun Context.createDialog(fragmentManager: FragmentManager, type: String) {
     dialog.show(fragmentManager, dialog.tag)
 }
 
-fun Context.createListenerDialog(fragmentManager: FragmentManager, type: String, positiveClicked:(() -> Unit)?, negativeClicked: (() -> Unit)?) {
-    val bundle = Bundle()
-    bundle.putString("type", type)
-    val dialog: SignGuideDialog = SignGuideDialog().CustomDialogBuilder()
-        .setBtnClickListener(object : SignGuideDialog.CustomDialogListener {
+fun Context.createStoreTimeDialog(fragmentManager: FragmentManager, type: String, vm : ReportViewModel, positiveClicked:(() -> Unit)?, negativeClicked: (() -> Unit)?) {
+//    val bundle = Bundle()
+//    bundle.putString("type", type)
+    val dialog: StoreTimeDialog = StoreTimeDialog(type, vm).CustomDialogBuilder()
+        .setBtnClickListener(object : StoreTimeDialog.CustomDialogListener {
             override fun onPositiveClicked() {
                 if (positiveClicked != null) {
                     positiveClicked()
@@ -31,6 +37,16 @@ fun Context.createListenerDialog(fragmentManager: FragmentManager, type: String,
             }
         })
         .getInstance()
-    dialog.arguments = bundle
+//    dialog.arguments = bundle
+    dialog.show(fragmentManager, dialog.tag)
+}
+
+fun Context.createStoreTimeDialog(fragmentManager: FragmentManager, type: String, vm : ReportViewModel) {
+    val dialog: StoreTimeDialog = StoreTimeDialog(type, vm).CustomDialogBuilder().getInstance()
+    dialog.show(fragmentManager, dialog.tag)
+}
+
+fun Context.createTimePickerDialog(fragmentManager: FragmentManager, type: String, vm : DialogViewModel) {
+    val dialog: TimePickerDialog = TimePickerDialog(type, vm).CustomDialogBuilder().getInstance()
     dialog.show(fragmentManager, dialog.tag)
 }

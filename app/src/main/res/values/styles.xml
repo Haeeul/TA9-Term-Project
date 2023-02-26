@@ -62,9 +62,9 @@
         <item name="android:fontFamily">@font/gyeonggi_cheonnyeon_light</item>
     </style>
 
-    <style name="buttonText">
+    <style name="checkBoxText">
         <item name="android:fontFamily">@font/gyeonggi_cheonnyeon_medium</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">16dp</item>
         <item name="android:textColor">@color/deep_dark_grey</item>
         <item name="android:includeFontPadding">false</item>
     </style>

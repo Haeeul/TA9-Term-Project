@@ -209,7 +209,7 @@
 
                 <CheckBox
                     android:id="@+id/cb_facility_target_wheelchair"
-                    style="@style/buttonText"
+                    style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
@@ -220,7 +220,7 @@
 
                 <CheckBox
                     android:id="@+id/cb_facility_target_guardian"
-                    style="@style/buttonText"
+                    style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
@@ -231,7 +231,7 @@
 
                 <CheckBox
                     android:id="@+id/cb_facility_target_handicap"
-                    style="@style/buttonText"
+                    style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
@@ -242,7 +242,7 @@
 
                 <CheckBox
                     android:id="@+id/cb_facility_target_injured"
-                    style="@style/buttonText"
+                    style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
@@ -253,7 +253,7 @@
 
                 <CheckBox
                     android:id="@+id/cb_facility_target_old"
-                    style="@style/buttonText"
+                    style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
@@ -275,7 +275,7 @@
 
                 <CheckBox
                     android:id="@+id/cb_facility_warning_slope"
-                    style="@style/buttonText"
+                    style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
@@ -286,7 +286,7 @@
 
                 <CheckBox
                     android:id="@+id/cb_facility_warning_height"
-                    style="@style/buttonText"
+                    style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
@@ -297,7 +297,7 @@
 
                 <CheckBox
                     android:id="@+id/cb_facility_warning_offset"
-                    style="@style/buttonText"
+                    style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
@@ -308,7 +308,7 @@
 
                 <CheckBox
                     android:id="@+id/cb_facility_warning_out"
-                    style="@style/buttonText"
+                    style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
@@ -319,7 +319,7 @@
 
                 <CheckBox
                     android:id="@+id/cb_facility_warning_finish"
-                    style="@style/buttonText"
+                    style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
@@ -330,7 +330,7 @@
 
                 <CheckBox
                     android:id="@+id/cb_facility_warning_info"
-                    style="@style/buttonText"
+                    style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:paddingRight="15dp"
@@ -341,7 +341,7 @@
 
                 <CheckBox
                     android:id="@+id/cb_facility_warning_width"
-                    style="@style/buttonText"
+                    style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:paddingRight="15dp"

@@ -1,12 +1,14 @@
 package com.example.mh_term_app.utils.databinding
 
 import android.annotation.SuppressLint
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
+import com.example.mh_term_app.utils.databinding.BindingAdapter.setStoreTime
 import com.google.android.material.chip.Chip
 
 object BindingAdapter {
@@ -82,5 +84,18 @@ object BindingAdapter {
 //            "노약자" -> this.setChipBackgroundColorResource(ContextCompat.getColor(this.context, R.color.beige))
 //            else -> this.setChipBackgroundColorResource(ContextCompat.getColor(this.context, R.color.black))
 //        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("setStoreTime")
+    fun TextView.setStoreTime(isEnabled: Boolean) {
+        this.isEnabled = isEnabled
+        if(isEnabled){
+            setBackgroundResource(R.drawable.round_square_line_grey_8)
+            setTextColor(ContextCompat.getColor(this.context, R.color.light_black))
+        }else{
+            setBackgroundResource(R.drawable.round_square_line_fill_grey_8)
+            setTextColor(ContextCompat.getColor(this.context, R.color.dark_grey))
+        }
     }
 }

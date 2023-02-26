@@ -86,8 +86,8 @@
     <string name="sub_title_facility">도로 시설물</string>
 
     <!-- menu : report/info/store -->
-    <string name="desc_report_type_store_start">제보 하시는 매장에 대해\n</string>
-    <string name="desc_report_type_store_end">자세히 알려주세요:)</string>
+    <string name="desc_report_type_store_start">제보 하시는 매장에 대</string>
+    <string name="desc_report_type_store_end">해 자세히 알려주세요:)</string>
     <string name="sub_title_type_detail">상세유형</string>
     <string name="txt_restaurant">음식점</string>
     <string name="txt_cafe">카페</string>
@@ -96,8 +96,12 @@
     <string name="txt_store_time">운영시간</string>
     <string name="txt_store_phone">전화번호</string>
     <string name="hint_store_name_input">매장명을 입력해주세요.</string>
-    <string name="hint_store_time_input">운영시간을 입력해주세요.</string>
-    <string name="hint_store_phone_input">매장전화번호를 입력해주세요.</string>
+    <string name="hint_open_time_input">오픈 시간 선택</string>
+    <string name="hint_close_time_input">마감 시간 선택</string>
+    <string name="hint_week_time_input">평일 시간 선택</string>
+    <string name="hint_saturday_time_input">토요일 시간 선택</string>
+    <string name="hint_monday_time_input">일요일 시간 선택</string>
+    <string name="hint_store_phone_input">전화번호를 입력해주세요.</string>
     <string name="sub_title_warning">주의사항</string>
     <string name="txt_warning_slope">경사</string>
     <string name="txt_warning_height">높이</string>
@@ -108,10 +112,10 @@
     <string name="txt_warning_width">통행폭</string>
     <string name="sub_title_warning_target">주의대상</string>
     <string name="sub_title_info_plus">추가설명</string>
-    <string name="hint_info_plus_input">자세한 설명일수록 다른 사용자들에게\n도움이 됩니다.</string>
+    <string name="hint_info_plus_input">자세한 설명일수록 다른 사용자들에게 도움이 됩니다.</string>
 
     <!-- menu : report/info/facility -->
-    <string name="desc_report_type_facility_start">제보 하시는 시설물에 대해\n</string>
+    <string name="desc_report_type_facility_start">제보 하시는 시설물에 대해 </string>
     <string name="desc_report_type_facility_end">자세히 알려주세요:)</string>
     <string name="sub_title_location_detail">상세위치</string>
     <string name="txt_inside">실내</string>
