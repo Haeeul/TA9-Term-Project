@@ -112,7 +112,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                             MHApplication.prefManager.userId = user.id
                             MHApplication.prefManager.userPassword = user.password
                             MHApplication.prefManager.userNickname = user.nickname
-                            MHApplication.prefManager.userType = user.userType
+                            MHApplication.prefManager.userType = user.type
                         }
                     }
                 }

@@ -1,23 +1,31 @@
 package com.example.mh_term_app.ui.map
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
+import androidx.databinding.DataBindingUtil
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.MainActivity
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
 import com.example.mh_term_app.databinding.FragmentNaverMapBinding
+import com.example.mh_term_app.databinding.NvDrawerHeaderUserBinding
 import com.example.mh_term_app.ui.menu.EditUserInfoActivity
 import com.example.mh_term_app.ui.menu.UserFavotireActivity
 import com.example.mh_term_app.ui.menu.UserReviewActivity
 import com.example.mh_term_app.ui.menu.report.ReportPlaceActivity
 import com.example.mh_term_app.ui.sign.`in`.SignInActivity
 import com.example.mh_term_app.ui.sign.up.SignUpActivity
+import com.example.mh_term_app.utils.databinding.BindingAdapter.setUserTypeChip
 import com.example.mh_term_app.utils.extension.intent
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 import com.example.mh_term_app.utils.extension.toast
+import com.google.android.material.chip.Chip
 
 class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
     override val layoutResID
@@ -90,6 +98,8 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
     private fun initDrawer() {
         binding.btnMapMenu.setOnClickListener {
             binding.drawerLayout.openDrawer(GravityCompat.START)
+            val activity = activity as MainActivity
+            activity.setInfoWindowVisibility(false)
         }
 
         inflateMenu()
@@ -97,12 +107,23 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
         clickBtnCancel()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun inflateMenu(){
         binding.nvDrawerMenu.removeHeaderView(binding.nvDrawerMenu.getHeaderView(0))
 
         if(MHApplication.prefManager.haveAccount()) {
             binding.nvDrawerMenu.inflateMenu(R.menu.nv_drawer_menu_user)
             binding.nvDrawerMenu.inflateHeaderView(R.layout.nv_drawer_header_user)
+            binding.nvDrawerMenu.getHeaderView(0).findViewById<TextView>(R.id.txt_menu_user_name).text = MHApplication.prefManager.userNickname+" 님"
+            binding.nvDrawerMenu.getHeaderView(0).findViewById<Chip>(R.id.chip_menu_user_type).apply {
+                if(MHApplication.prefManager.userType != "none"){
+                    this.setUserTypeChip(MHApplication.prefManager.userType)
+                    visibility = View.VISIBLE
+                }else{
+                    visibility = View.GONE
+                }
+            }
+
         }else{
             binding.nvDrawerMenu.menu.removeItem(R.id.edit_user_info)
             binding.nvDrawerMenu.menu.removeItem(R.id.review_list)
