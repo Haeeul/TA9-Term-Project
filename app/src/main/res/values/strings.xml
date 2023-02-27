@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">MH-Term-App</string>
+    <string name="app_title">길라잡이</string>
 
     <!-- sign home-->
     <string name="title_sign_up">회원가입</string>
@@ -29,7 +30,7 @@
     <string name="desc_sign_in">로그인 정보를 입력해주세요.</string>
     <string name="hint_password">비밀번호를 입력해주세요.</string>
     <string name="desc_account_null">계정이 없으신가요?</string>
-    <string name="notice_sign_in_fail">아이디 또는 비밀번호를 다시 확인하세요.</string>
+    <string name="notice_sign_in_fail">아이디 또는 비밀번호를 다시 확인해주세요.</string>
 
     <!-- sign up -->
     <string name="desc_sign_up">회원가입 정보를 입력해주세요.</string>

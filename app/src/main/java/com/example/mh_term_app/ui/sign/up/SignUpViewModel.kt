@@ -68,6 +68,10 @@ class SignUpViewModel : ViewModel() {
         _isValidIdBtn.value = idTxt.value?.length != 0
     }
 
+    fun setDeleteBtnListener(){
+        if(_isValidId.value == false) idTxt.value = ""
+    }
+
     fun checkValidId(){
         viewModelScope.launch {
             _isValidId.value = userRepository.getValidateId(idTxt.value.toString())
