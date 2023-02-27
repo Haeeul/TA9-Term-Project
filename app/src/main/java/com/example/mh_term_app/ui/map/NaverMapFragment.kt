@@ -2,7 +2,6 @@ package com.example.mh_term_app.ui.map
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -84,12 +83,10 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
         }
 
         binding.chipFacility.setOnClickListener {
-            context?.toast("시설물 클릭")
             mapViewModel.getCategoryList("시설물")
         }
 
         binding.chipStore.setOnClickListener {
-            context?.toast("매장 클릭")
             mapViewModel.getCategoryList("매장")
         }
 

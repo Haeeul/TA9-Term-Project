@@ -25,6 +25,9 @@ import com.naver.maps.map.util.MarkerIcons
 
 
 class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
+    private final var FINISH_INTERVAL_TIME: Long = 2000
+    private var backPressedTime: Long = 0
+
     override val layoutResID = R.layout.activity_main
     private val mapViewModel: MapViewModel by viewModels()
 
@@ -183,8 +186,24 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
 
     override fun onBackPressed() {
         if (mapPersistBottomFragment?.handleBackKeyEvent() == true) {
+
         } else {
-            super.onBackPressed()
+            if (binding.flBottomContainer.visibility == View.VISIBLE) {
+                setInfoWindowVisibility(false)
+            } else {
+                if (supportFragmentManager.backStackEntryCount == 0) {
+                    var tempTime = System.currentTimeMillis()
+                    var intervalTime = tempTime - backPressedTime
+                    if (intervalTime in 0..FINISH_INTERVAL_TIME) {
+                        super.onBackPressed()
+                    } else {
+                        backPressedTime = tempTime
+                        toast("'뒤로' 버튼을 한 번 더 누르면 종료됩니다.")
+                        return
+                    }
+                }
+                super.onBackPressed()
+            }
         }
     }
 
