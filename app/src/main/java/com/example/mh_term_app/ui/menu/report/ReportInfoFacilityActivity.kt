@@ -20,8 +20,8 @@ class ReportInfoFacilityActivity : BaseActivity<ActivityReportInfoFacilityBindin
 
     private var facilityType = ""
     private var facilityAddress = ""
-    private var facilityLatitude = ""
-    private var facilityLongitude = ""
+    private var facilityLatitude = 0.0
+    private var facilityLongitude = 0.0
 
     private var checkedGroup : Int = 0
     private var checkedId: Int = 0
@@ -30,8 +30,8 @@ class ReportInfoFacilityActivity : BaseActivity<ActivityReportInfoFacilityBindin
         super.onCreate(savedInstanceState)
         facilityType = intent.getStringExtra("type").toString()
         facilityAddress = intent.getStringExtra("address").toString()
-        facilityLatitude = intent.getStringExtra("latitude").toString()
-        facilityLongitude = intent.getStringExtra("longitude").toString()
+        facilityLatitude = intent.getDoubleExtra("latitude",0.0)
+        facilityLongitude = intent.getDoubleExtra("longitude",0.0)
 
         binding.apply {
             vm = reportPlaceViewModel

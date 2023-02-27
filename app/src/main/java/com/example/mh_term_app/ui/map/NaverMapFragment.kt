@@ -2,6 +2,7 @@ package com.example.mh_term_app.ui.map
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -61,9 +62,9 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
     override fun initObserver() {
         super.initObserver()
 
-        mapViewModel.storeList.observe(this){
+        mapViewModel.categoryList.observe(this){
             val activity = activity as MainActivity
-            activity.setMarkerList(it)
+            activity.setCategoryMarkerList(it)
         }
     }
 
@@ -83,12 +84,13 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
         }
 
         binding.chipFacility.setOnClickListener {
-            context?.toast("장소 준비중")
+            context?.toast("시설물 클릭")
+            mapViewModel.getCategoryList("시설물")
         }
 
         binding.chipStore.setOnClickListener {
             context?.toast("매장 클릭")
-            mapViewModel.getStoreList()
+            mapViewModel.getCategoryList("매장")
         }
 
         binding.chipChargingStation.setOnClickListener {

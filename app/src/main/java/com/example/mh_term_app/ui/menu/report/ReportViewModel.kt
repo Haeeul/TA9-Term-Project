@@ -164,7 +164,7 @@ class ReportViewModel : ViewModel() {
         _isValidCompleteBtn.value = storeNameTxt.value?.isNotEmpty() == true && detailTypeTxt.value?.isNotEmpty() == true && plusInfoTxt.value?.isNotEmpty() == true
     }
 
-    fun postReportStore(type : String, address : String, latitude : String, longitude : String){
+    fun postReportStore(type : String, address : String, latitude : Double, longitude : Double){
         viewModelScope.launch {
             val store = RequestPlaceStore(
                 type = type,
@@ -188,7 +188,7 @@ class ReportViewModel : ViewModel() {
         _isValidCompleteBtn.value = locationTxt.value?.isNotEmpty() == true && detailTypeTxt.value?.isNotEmpty() == true && plusInfoTxt.value?.isNotEmpty() == true
     }
 
-    fun postReportFacility(type : String, address : String, latitude : String, longitude : String){
+    fun postReportFacility(type : String, address : String, latitude : Double, longitude : Double){
         viewModelScope.launch {
             val facility = RequestReportFacility(
                 type = type,

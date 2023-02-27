@@ -129,6 +129,11 @@
     <string name="txt_crosswalk">횡단보도</string>
     <string name="txt_pass">항목에 없거나 구분이 어려움</string>
 
+    <!--Details : store-->
+    <string name="txt_weekday">평일</string>
+    <string name="txt_saturday">토요일</string>
+    <string name="txt_monday">일요일</string>
+
     <string name="txt_server_error">서버 점검중입니다.</string>
 
 </resources>

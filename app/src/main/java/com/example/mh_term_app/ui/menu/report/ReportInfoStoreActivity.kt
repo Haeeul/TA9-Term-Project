@@ -20,15 +20,15 @@ class ReportInfoStoreActivity : BaseActivity<ActivityReportInfoStoreBinding>() {
 
     private var storeType = ""
     private var storeAddress = ""
-    private var storeLatitude = ""
-    private var storeLongitude = ""
+    private var storeLatitude = 0.0
+    private var storeLongitude = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         storeType = intent.getStringExtra("type").toString()
         storeAddress = intent.getStringExtra("address").toString()
-        storeLatitude = intent.getStringExtra("latitude").toString()
-        storeLongitude = intent.getStringExtra("longitude").toString()
+        storeLatitude = intent.getDoubleExtra("latitude",0.0)
+        storeLongitude = intent.getDoubleExtra("longitude",0.0)
 
         binding.apply {
             vm = reportPlaceViewModel

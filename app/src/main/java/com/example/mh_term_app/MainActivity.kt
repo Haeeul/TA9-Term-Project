@@ -1,6 +1,7 @@
 package com.example.mh_term_app
 
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -10,7 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.data.model.MarkerList
-import com.example.mh_term_app.data.model.response.ResponsePlaceStore
+import com.example.mh_term_app.data.model.response.ResponseCategoryList
 import com.example.mh_term_app.databinding.ActivityMainBinding
 import com.example.mh_term_app.ui.map.MapViewModel
 import com.example.mh_term_app.ui.map.details.MapPersistBottomSheetFragment
@@ -29,11 +30,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
 
     private lateinit var locationSource: FusedLocationSource
     private lateinit var naverMap: NaverMap
-    private var markers : MutableList<MarkerList<ResponsePlaceStore>> = mutableListOf()
+    private var categoryMarkers : MutableList<MarkerList<ResponseCategoryList>> = mutableListOf()
 
     private var mapPersistBottomFragment: MapPersistBottomSheetFragment? = null
     private lateinit var mapFragment : MapFragment
-    lateinit var marker : Marker
+
 
     private lateinit var navController: NavController
 
@@ -112,20 +113,42 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
         }
     }
 
-    fun setMarkerList(data: MutableList<ResponsePlaceStore>){
+    fun setCategoryMarkerList(data: MutableList<ResponseCategoryList>){
+        resetMarkers()
+
         data.forEach {
             val marker = Marker().apply {
-                position = LatLng(it.data.latitude.toDouble(), it.data.longitude.toDouble())
+                position = LatLng(it.data.latitude, it.data.longitude)
                 icon = MarkerIcons.RED
+                icon = MarkerIcons.BLACK
+                iconTintColor = setMarkerColor(it.data.type)
             }
-            markers.add(MarkerList(marker,it))
+            categoryMarkers.add(MarkerList(marker,it))
         }
 
-        markers.forEach {
+        categoryMarkers.forEach {
             it.marker.apply {
                 map = naverMap
-                onClickListener = setOnMarkerClickListener(it.data, position)
+                onClickListener = setStoreMarkerClickListener(it.data, position)
             }
+        }
+    }
+
+    private fun resetMarkers(){
+        categoryMarkers.forEach {
+            it.marker.apply {
+                map = null
+            }
+        }
+
+        categoryMarkers.clear()
+    }
+
+    private fun setMarkerColor(type: String) : Int{
+        return when(type){
+            "매장" -> Color.RED
+            "시설물" -> Color.MAGENTA
+            else -> Color.BLACK
         }
     }
 
@@ -137,13 +160,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
             naverMap.locationTrackingMode = LocationTrackingMode.None
     }
 
-    private fun setOnMarkerClickListener(data : ResponsePlaceStore, latLng: LatLng): Overlay.OnClickListener {
+    private fun setStoreMarkerClickListener(data : ResponseCategoryList, latLng: LatLng): Overlay.OnClickListener {
         return Overlay.OnClickListener { overlay ->
             mapPersistBottomFragment?.apply {
                 setPlaceData(data)
                 setPlaceDetailData(data)
             }
-//            binding.data = mapViewModel.centerData.value?.get(id-1)
             setInfoWindowVisibility(true)
 
             val cameraUpdate = CameraUpdate.scrollTo(latLng)
@@ -155,19 +177,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
     }
 
     fun setInfoWindowVisibility(isValid : Boolean){
-//        if(binding.flBottomContainer.visibility == View.VISIBLE) binding.flBottomContainer.visibility =View.GONE
-//        else binding.flBottomContainer.visibility = View.VISIBLE
         if(isValid) binding.flBottomContainer.visibility = View.VISIBLE
         else binding.flBottomContainer.visibility = View.GONE
     }
 
     override fun onBackPressed() {
         if (mapPersistBottomFragment?.handleBackKeyEvent() == true) {
-            // no-op
         } else {
             super.onBackPressed()
         }
-
     }
 
     fun goToSearchListener(){

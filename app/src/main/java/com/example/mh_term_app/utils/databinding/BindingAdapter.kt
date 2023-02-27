@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
+import com.example.mh_term_app.data.model.Time
 import com.google.android.material.chip.Chip
 
 object BindingAdapter {
@@ -99,8 +100,8 @@ object BindingAdapter {
 
     @SuppressLint("SetTextI18n")
     @JvmStatic
-    @BindingAdapter("setPlaceName")
-    fun TextView.setPlaceName(type: String, name: String) {
-        text = "$type | $name"
+    @BindingAdapter("setPlaceTime")
+    fun TextView.setPlaceTime(time : Time) {
+        text = time.openHourTxt + " : " + time.openMinuteTxt + " ~ " + time.closeHourTxt + " : " + time.closeMinuteTxt
     }
 }

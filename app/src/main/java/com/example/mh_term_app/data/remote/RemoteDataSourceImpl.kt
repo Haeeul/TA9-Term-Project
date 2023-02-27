@@ -4,7 +4,9 @@ import android.util.Log
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.data.model.request.RequestPlaceStore
 import com.example.mh_term_app.data.model.request.RequestReportFacility
-import com.example.mh_term_app.data.model.response.ResponsePlaceStore
+import com.example.mh_term_app.data.model.response.PlaceInfo
+import com.example.mh_term_app.data.model.response.ResponseCategoryList
+import com.example.mh_term_app.data.model.response.ResponsePlaceFacility
 import com.example.mh_term_app.data.model.response.ResponseUser
 import com.google.firebase.FirebaseException
 import com.google.firebase.firestore.ktx.firestore
@@ -168,15 +170,29 @@ class RemoteDataSourceImpl : RemoteDataSource {
         return result
     }
 
-    override suspend fun getStoreList(type: String): MutableList<ResponsePlaceStore> {
-        var storeList = mutableListOf<ResponsePlaceStore>()
+    override suspend fun getCategoryList(type: String): MutableList<ResponseCategoryList> {
+        var placeList = mutableListOf<ResponseCategoryList>()
         try {
             db.collection("places")
                 .whereEqualTo("type", type)
                 .get()
                 .addOnSuccessListener { result ->
-                    for(store in result){
-                        storeList.add(ResponsePlaceStore(store.id,store.toObject<RequestPlaceStore>()))
+                    for(place in result){
+                        placeList.add(
+                            ResponseCategoryList(
+                                place.id,
+                                PlaceInfo(
+                                    place.data["type"].toString(),
+                                    place.data["address"].toString(),
+                                    place.data["latitude"].toString().toDouble(),
+                                    place.data["longitude"].toString().toDouble(),
+                                    place.data["name"].toString(),
+                                    place.data["phone"].toString(),
+                                    place.data["detailType"].toString(),
+                                    place.data["location"].toString()
+                                )
+                            )
+                        )
                     }
                 }
                 .addOnFailureListener { exception ->
@@ -185,6 +201,26 @@ class RemoteDataSourceImpl : RemoteDataSource {
         }catch (e:FirebaseException){
             Log.e(TAG, e.message.toString())
         }
-        return storeList
+        return placeList
+    }
+
+    override suspend fun getFacilityList(type: String): MutableList<ResponsePlaceFacility> {
+        var facilityList = mutableListOf<ResponsePlaceFacility>()
+        try {
+            db.collection("places")
+                .whereEqualTo("type", type)
+                .get()
+                .addOnSuccessListener { result ->
+                    for(facility in result){
+                        facilityList.add(ResponsePlaceFacility(facility.id,facility.toObject<RequestReportFacility>()))
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
+                }.await()
+        }catch (e:FirebaseException){
+            Log.e(TAG, e.message.toString())
+        }
+        return facilityList
     }
 }

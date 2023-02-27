@@ -1,16 +1,11 @@
 package com.example.mh_term_app.ui.map.details
 
-import android.app.Activity
-import android.graphics.Point
-import android.os.Build
 import android.os.Bundle
-import android.view.Display
 import android.view.View
 import androidx.annotation.IdRes
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentManager
 import com.example.mh_term_app.R
-import com.example.mh_term_app.data.model.response.ResponsePlaceStore
+import com.example.mh_term_app.data.model.response.ResponseCategoryList
 import com.example.mh_term_app.databinding.LayoutInfoCollapseBinding
 import com.example.mh_term_app.databinding.LayoutInfoExpandBinding
 import com.example.mh_term_app.ui.map.ViewPagerAdapter
@@ -20,11 +15,12 @@ import com.example.mh_term_app.utils.listener.changeTabsFont
 import kr.co.prnd.persistbottomsheetfragment.PersistBottomSheetFragment
 
 
-class MapPersistBottomSheetFragment : PersistBottomSheetFragment<LayoutInfoCollapseBinding, LayoutInfoExpandBinding>(
+class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCollapseBinding, LayoutInfoExpandBinding>(
     R.layout.layout_info_collapse,
     R.layout.layout_info_expand
 ) {
     lateinit var viewPagerAdapter: ViewPagerAdapter
+    lateinit var markerId : String
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -70,20 +66,32 @@ class MapPersistBottomSheetFragment : PersistBottomSheetFragment<LayoutInfoColla
         expandBinding.tlInfoDetail.changeTabsFont(0)
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    fun getScreenHeight(activity: Activity): Int {
-        val display: Display = activity.windowManager.defaultDisplay // in Activity
-        /* getActivity().getWindowManager().getDefaultDisplay() */ // in Fragment
-        val size = Point()
-        display.getRealSize(size) // or getSize(size)
-        return size.y
-    }
-
-    fun setPlaceData(item : ResponsePlaceStore){
+    fun setPlaceData(item : ResponseCategoryList){
         collapseBinding.item = item
+        collapseBinding.apply {
+            txtBottomInfoName.text = when(item.data.type){
+                "매장" -> item.data.name
+                "시설물" -> item.data.location + " | " + item.data.detailType
+                else -> ""
+            }
+        }
     }
 
-    fun setPlaceDetailData(item : ResponsePlaceStore){
+    fun setPlaceDetailData(item : ResponseCategoryList) {
         expandBinding.item = item
+        when (item.data.type) {
+            "매장" -> {
+                setTypeName(item.data.detailType, item.data.name)
+            }
+            "시설물" -> {
+                setTypeName(item.data.location, item.data.detailType)
+            }
+        }
     }
+
+    private fun setTypeName(type:String, name:String){
+        expandBinding.txtDetailType.text = type
+        expandBinding.txtDetailName.text = name
+    }
+
 }

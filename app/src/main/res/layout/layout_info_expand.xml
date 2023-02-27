@@ -7,7 +7,7 @@
     <data>
         <variable
             name="item"
-            type="com.example.mh_term_app.data.model.response.ResponsePlaceStore" />
+            type="com.example.mh_term_app.data.model.response.ResponseCategoryList" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -65,7 +65,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:textSize="20dp"
-                    android:text="@{item.data.detailType}"
                     app:layout_constraintEnd_toStartOf="@+id/imageView19"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +87,6 @@
                     style="@style/MediumText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{item.data.name}"
                     android:textSize="20dp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView19"
                     app:layout_constraintEnd_toEndOf="parent"
