@@ -69,6 +69,8 @@
             android:paddingHorizontal="16dp"
             android:text="@={vm.passwordTxt}"
             android:textSize="16dp"
+            android:imeOptions="actionDone"
+            android:singleLine="false"
             android:onTextChanged="@{vm.inputSignInInfo}"
             app:layout_constraintEnd_toEndOf="@+id/edt_sign_in_id"
             app:layout_constraintStart_toStartOf="@+id/edt_sign_in_id"

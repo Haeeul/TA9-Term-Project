@@ -100,6 +100,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginEnd="16dp"
+                    android:onClick="@{() -> vm.setDeleteBtnListener()}"
                     android:visibility="@{vm.isValidIdNotice ? View.VISIBLE : View.GONE}"
                     app:layout_constraintBottom_toBottomOf="@+id/edt_sign_up_id"
                     app:layout_constraintEnd_toEndOf="@+id/edt_sign_up_id"
@@ -222,6 +223,7 @@
                     android:paddingHorizontal="16dp"
                     android:text="@={vm.checkPasswordTxt}"
                     android:textSize="18dp"
+                    android:imeOptions="actionDone"
                     app:layout_constraintEnd_toEndOf="@+id/edt_sign_up_password"
                     app:layout_constraintStart_toStartOf="@+id/textView31"
                     app:layout_constraintTop_toBottomOf="@+id/textView31" />
