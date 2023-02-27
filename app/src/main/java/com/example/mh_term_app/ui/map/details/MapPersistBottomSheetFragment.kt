@@ -49,7 +49,7 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
             childFragmentManager
         )
         viewPagerAdapter.fragments = listOf(
-            DetailReportDataFragment(),
+            DetailReportStoreDataFragment(),
             DetailReviewFragment()
         )
 
