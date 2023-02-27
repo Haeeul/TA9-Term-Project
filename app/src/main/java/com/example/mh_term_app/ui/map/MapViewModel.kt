@@ -1,38 +1,23 @@
 package com.example.mh_term_app.ui.map
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mh_term_app.MHApplication
-import com.example.mh_term_app.utils.extension.toast
-import com.gun0912.tedpermission.PermissionListener
-import com.gun0912.tedpermission.coroutine.TedPermission
+import com.example.mh_term_app.data.model.response.ResponsePlaceStore
+import com.example.mh_term_app.data.repository.MapRepository
 import kotlinx.coroutines.launch
 
 class MapViewModel : ViewModel() {
+    private val mapRepository = MapRepository()
 
-    private fun setUserInfo(){
+    private val _storeList = MutableLiveData<MutableList<ResponsePlaceStore>>()
+    val storeList : LiveData<MutableList<ResponsePlaceStore>>
+        get() = _storeList
 
-    }
-
-    suspend fun checkPermission(){
+    fun getStoreList(){
         viewModelScope.launch {
-            TedPermission.create()
-                .setPermissionListener(permissionlistener)
-                .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
-                .setPermissions(android.Manifest.permission.ACCESS_COARSE_LOCATION,
-                    android.Manifest.permission.ACCESS_FINE_LOCATION)
-                .check()
-        }
-
-    }
-
-    val permissionlistener: PermissionListener = object : PermissionListener {
-        override fun onPermissionGranted() {
-            MHApplication.getApplicationContext().toast("권한 확인")
-        }
-
-        override fun onPermissionDenied(deniedPermissions: List<String>) {
-            MHApplication.getApplicationContext().toast("권한 거절")
+            _storeList.value = mapRepository.getStoreList("매장")
         }
     }
 }

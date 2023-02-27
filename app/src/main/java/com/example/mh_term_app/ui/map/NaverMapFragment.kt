@@ -2,19 +2,17 @@ package com.example.mh_term_app.ui.map
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
-import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.MainActivity
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
 import com.example.mh_term_app.databinding.FragmentNaverMapBinding
-import com.example.mh_term_app.databinding.NvDrawerHeaderUserBinding
 import com.example.mh_term_app.ui.menu.EditUserInfoActivity
 import com.example.mh_term_app.ui.menu.UserFavotireActivity
 import com.example.mh_term_app.ui.menu.UserReviewActivity
@@ -31,6 +29,7 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
     override val layoutResID
         get() = R.layout.fragment_naver_map
     private lateinit var callback: OnBackPressedCallback
+    private val mapViewModel : MapViewModel by viewModels()
 
     override fun onResume() {
         super.onResume()
@@ -59,6 +58,15 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
         callback.remove()
     }
 
+    override fun initObserver() {
+        super.initObserver()
+
+        mapViewModel.storeList.observe(this){
+            val activity = activity as MainActivity
+            activity.setMarkerList(it)
+        }
+    }
+
     override fun initView() {
         super.initView()
 
@@ -79,7 +87,8 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
         }
 
         binding.chipStore.setOnClickListener {
-            context?.toast("장소 준비중")
+            context?.toast("매장 클릭")
+            mapViewModel.getStoreList()
         }
 
         binding.chipChargingStation.setOnClickListener {

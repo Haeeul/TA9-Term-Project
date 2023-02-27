@@ -2,8 +2,9 @@ package com.example.mh_term_app.data.remote
 
 import android.util.Log
 import com.example.mh_term_app.MHApplication
+import com.example.mh_term_app.data.model.request.RequestPlaceStore
 import com.example.mh_term_app.data.model.request.RequestReportFacility
-import com.example.mh_term_app.data.model.request.RequestReportStore
+import com.example.mh_term_app.data.model.response.ResponsePlaceStore
 import com.example.mh_term_app.data.model.response.ResponseUser
 import com.google.firebase.FirebaseException
 import com.google.firebase.firestore.ktx.firestore
@@ -125,7 +126,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
         return valid
     }
 
-    override suspend fun postReportStore(store: RequestReportStore): Boolean {
+    override suspend fun postReportStore(store: RequestPlaceStore): Boolean {
         var result = false
 
         try {
@@ -165,5 +166,25 @@ class RemoteDataSourceImpl : RemoteDataSource {
         }
 
         return result
+    }
+
+    override suspend fun getStoreList(type: String): MutableList<ResponsePlaceStore> {
+        var storeList = mutableListOf<ResponsePlaceStore>()
+        try {
+            db.collection("places")
+                .whereEqualTo("type", type)
+                .get()
+                .addOnSuccessListener { result ->
+                    for(store in result){
+                        storeList.add(ResponsePlaceStore(store.id,store.toObject<RequestPlaceStore>()))
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
+                }.await()
+        }catch (e:FirebaseException){
+            Log.e(TAG, e.message.toString())
+        }
+        return storeList
     }
 }

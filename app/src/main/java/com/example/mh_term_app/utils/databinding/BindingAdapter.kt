@@ -96,4 +96,11 @@ object BindingAdapter {
             setTextColor(ContextCompat.getColor(this.context, R.color.dark_grey))
         }
     }
+
+    @SuppressLint("SetTextI18n")
+    @JvmStatic
+    @BindingAdapter("setPlaceName")
+    fun TextView.setPlaceName(type: String, name: String) {
+        text = "$type | $name"
+    }
 }

@@ -4,6 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="item"
+            type="com.example.mh_term_app.data.model.response.ResponsePlaceStore" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@color/white"
         android:layout_width="match_parent"
@@ -22,24 +28,27 @@
         <TextView
             android:id="@+id/txt_bottom_info_name"
             style="@style/BoldText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="실외 | 점자블록"
+            android:layout_marginEnd="16dp"
+            android:text="@{item.data.name}"
             android:textSize="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView15" />
 
         <TextView
             android:id="@+id/txt_bottom_info_address"
             style="@style/MediumText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="서울 중구 퇴계로 123"
-            android:textSize="18dp"
+            android:layout_marginTop="12dp"
+            android:text="@{item.data.address}"
             android:textColor="@color/deep_dark_grey"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="@+id/txt_bottom_info_name"
             app:layout_constraintStart_toStartOf="@+id/txt_bottom_info_name"
             app:layout_constraintTop_toBottomOf="@+id/txt_bottom_info_name" />
 

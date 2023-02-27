@@ -1,7 +1,8 @@
 package com.example.mh_term_app.data.remote
 
+import com.example.mh_term_app.data.model.request.RequestPlaceStore
 import com.example.mh_term_app.data.model.request.RequestReportFacility
-import com.example.mh_term_app.data.model.request.RequestReportStore
+import com.example.mh_term_app.data.model.response.ResponsePlaceStore
 
 interface RemoteDataSource {
     // phone auth
@@ -16,6 +17,9 @@ interface RemoteDataSource {
     suspend fun postSignIn(id : String, password : String) : Boolean
 
     // new report
-    suspend fun postReportStore(store : RequestReportStore) : Boolean
+    suspend fun postReportStore(store : RequestPlaceStore) : Boolean
     suspend fun postReportFacility(facility: RequestReportFacility) : Boolean
+
+    // place
+    suspend fun getStoreList(type: String) : MutableList<ResponsePlaceStore>
 }

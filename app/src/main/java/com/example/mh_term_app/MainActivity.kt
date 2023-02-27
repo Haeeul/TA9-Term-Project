@@ -9,6 +9,8 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.mh_term_app.base.BaseActivity
+import com.example.mh_term_app.data.model.MarkerList
+import com.example.mh_term_app.data.model.response.ResponsePlaceStore
 import com.example.mh_term_app.databinding.ActivityMainBinding
 import com.example.mh_term_app.ui.map.MapViewModel
 import com.example.mh_term_app.ui.map.details.MapPersistBottomSheetFragment
@@ -27,6 +29,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
 
     private lateinit var locationSource: FusedLocationSource
     private lateinit var naverMap: NaverMap
+    private var markers : MutableList<MarkerList<ResponsePlaceStore>> = mutableListOf()
 
     private var mapPersistBottomFragment: MapPersistBottomSheetFragment? = null
     private lateinit var mapFragment : MapFragment
@@ -96,18 +99,33 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
         val uiSettings = naverMap.uiSettings
         uiSettings.isLocationButtonEnabled = true
 
-        marker = Marker()
-        marker.position = LatLng(37.5670135, 126.9783740)
-        marker.icon = MarkerIcons.RED
-//        marker.icon = OverlayImage.fromResource(R.drawable.ic_facility)
-//        marker.width = 60
-//        marker.height = 80
-//        marker.iconTintColor = Color.RED
-        marker.map = naverMap
-        marker.onClickListener = setOnMarkerClickListener(marker.position, naverMap)
+        val cameraPosition = CameraPosition(
+            LatLng(
+                naverMap.cameraPosition.target.latitude,
+                naverMap.cameraPosition.target.longitude
+            ), 15.0
+        )
+        naverMap.cameraPosition = cameraPosition
 
         naverMap.setOnMapClickListener { _, _ ->
             setInfoWindowVisibility(false)
+        }
+    }
+
+    fun setMarkerList(data: MutableList<ResponsePlaceStore>){
+        data.forEach {
+            val marker = Marker().apply {
+                position = LatLng(it.data.latitude.toDouble(), it.data.longitude.toDouble())
+                icon = MarkerIcons.RED
+            }
+            markers.add(MarkerList(marker,it))
+        }
+
+        markers.forEach {
+            it.marker.apply {
+                map = naverMap
+                onClickListener = setOnMarkerClickListener(it.data, position)
+            }
         }
     }
 
@@ -119,12 +137,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
             naverMap.locationTrackingMode = LocationTrackingMode.None
     }
 
-    private fun setOnMarkerClickListener(latLng: LatLng, naverMap: NaverMap): Overlay.OnClickListener {
+    private fun setOnMarkerClickListener(data : ResponsePlaceStore, latLng: LatLng): Overlay.OnClickListener {
         return Overlay.OnClickListener { overlay ->
+            mapPersistBottomFragment?.apply {
+                setPlaceData(data)
+                setPlaceDetailData(data)
+            }
 //            binding.data = mapViewModel.centerData.value?.get(id-1)
             setInfoWindowVisibility(true)
-
-            val marker = overlay as Marker
 
             val cameraUpdate = CameraUpdate.scrollTo(latLng)
                 .animate(CameraAnimation.Fly, 1000)

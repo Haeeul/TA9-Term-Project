@@ -27,10 +27,12 @@ abstract class BaseFragment<VB : ViewDataBinding> : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
 
+        initObserver()
         initView()
         initListener()
     }
 
+    open fun initObserver(){}
     open fun initView() {}
     open fun initListener() {}
 }
