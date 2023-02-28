@@ -76,35 +76,42 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
     override fun initListener() {
         super.initListener()
 
-        binding.edtMapSearch.setOnClickListener {
+        binding.edtMapSearch.setSingleOnClickListener {
             val activity = activity as MainActivity
             activity.goToSearchListener()
             activity.setInfoWindowVisibility(false)
         }
 
-        binding.chipFacility.setOnClickListener {
-            mapViewModel.getCategoryList("시설물")
+        binding.chipFacility.setSingleOnClickListener {
+            setOnChipListener("시설물")
         }
 
-        binding.chipStore.setOnClickListener {
-            mapViewModel.getCategoryList("매장")
+        binding.chipStore.setSingleOnClickListener {
+            setOnChipListener("매장")
         }
 
-        binding.chipChargingStation.setOnClickListener {
+        binding.chipChargingStation.setSingleOnClickListener {
             context?.toast("장소 준비중")
         }
 
-        binding.chipRestroom.setOnClickListener {
+        binding.chipRestroom.setSingleOnClickListener {
             context?.toast("장소 준비중")
         }
 
-        binding.chipSupportCenter.setOnClickListener {
+        binding.chipSupportCenter.setSingleOnClickListener {
             context?.toast("장소 준비중")
         }
     }
 
+    private fun setOnChipListener(type : String){
+        mapViewModel.getCategoryList(type)
+
+        val activity = activity as MainActivity
+        activity.setInfoWindowVisibility(false)
+    }
+
     private fun initDrawer() {
-        binding.btnMapMenu.setOnClickListener {
+        binding.btnMapMenu.setSingleOnClickListener {
             binding.drawerLayout.openDrawer(GravityCompat.START)
             val activity = activity as MainActivity
             activity.setInfoWindowVisibility(false)

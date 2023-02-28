@@ -150,7 +150,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
     private fun setMarkerColor(type: String) : Int{
         return when(type){
             "매장" -> Color.RED
-            "시설물" -> Color.MAGENTA
+            "시설물" -> ContextCompat.getColor(this, R.color.yellow)
             else -> Color.BLACK
         }
     }

@@ -1,7 +1,5 @@
 package com.example.mh_term_app.ui.map.details
 
-import android.os.Bundle
-import android.view.View
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
 import com.example.mh_term_app.R
@@ -22,13 +20,6 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
     lateinit var viewPagerAdapter: ViewPagerAdapter
     lateinit var markerId : String
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        initViewPager()
-        initTab()
-    }
-
     companion object {
         private val TAG = MapPersistBottomSheetFragment::class.simpleName
 
@@ -44,22 +35,22 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
                 }
     }
 
-    private fun initViewPager(){
+    private fun initViewPager(type: String){
         viewPagerAdapter = ViewPagerAdapter(
             childFragmentManager
         )
         viewPagerAdapter.fragments = listOf(
-            DetailReportStoreDataFragment(),
+            if(type == "매장") DetailReportStoreDataFragment() else DetailReportFacilityDataFragment(),
             DetailReviewFragment()
         )
 
         expandBinding.vpInfoDetail.adapter = viewPagerAdapter
     }
 
-    private fun initTab(){
+    private fun initTab(type: String){
         expandBinding.tlInfoDetail.setupWithViewPager(expandBinding.vpInfoDetail)
         expandBinding.tlInfoDetail.apply {
-            getTabAt(0)?.text = "시설물 정보"
+            getTabAt(0)?.text = if(type == "매장") "매장 정보" else "시설물 정보"
             getTabAt(1)?.text = "리뷰"
         }
         expandBinding.tlInfoDetail.addOnTabSelectedListener(TabSelectedListener(expandBinding.tlInfoDetail))
@@ -79,14 +70,18 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
 
     fun setPlaceDetailData(item : ResponseCategoryList) {
         expandBinding.item = item
+
         when (item.data.type) {
             "매장" -> {
                 setTypeName(item.data.detailType, item.data.name)
+
             }
             "시설물" -> {
                 setTypeName(item.data.location, item.data.detailType)
             }
         }
+        initViewPager(item.data.type)
+        initTab(item.data.type)
     }
 
     private fun setTypeName(type:String, name:String){
