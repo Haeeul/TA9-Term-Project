@@ -65,7 +65,7 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
             binding.apply {
                 item = it
 
-                checkData(it)
+                checkStoreData(it)
 
                 txtStoreDetailWeekdayTime.text = setStoreTime(it.time.weekTime, "weekday")
                 txtStoreDetailSaturdayTime.text = setStoreTime(it.time.saturdayTime, "saturday")
@@ -112,7 +112,7 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
         return when(time.openHourTxt){
             "-1" -> "휴무"
             "-2" -> {
-                setDataVisibility(type)
+                setStoreDataVisibility(type)
                 ""
             }
             else -> {
@@ -128,7 +128,7 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
         else time
     }
 
-    private fun setDataVisibility(type: String){
+    private fun setStoreDataVisibility(type: String){
         when(type){
             "weekday" -> binding.inStoreDetailWeekdayNone.root.visibility = View.VISIBLE
             "saturday" -> binding.inStoreDetailSaturdayNone.root.visibility = View.VISIBLE
@@ -148,9 +148,9 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
         }
     }
 
-    private fun checkData(data : RequestPlaceStore){
-        if(data.phone == "none") setDataVisibility("phone")
-        if(data.targetList == null) setDataVisibility("target")
-        if(data.warningList == null) setDataVisibility("warning")
+    private fun checkStoreData(data : RequestPlaceStore){
+        if(data.phone == "none") setStoreDataVisibility("phone")
+        if(data.targetList == null || data.targetList.isEmpty()) setStoreDataVisibility("target")
+        if(data.warningList == null || data.warningList.isEmpty()) setStoreDataVisibility("warning")
     }
 }

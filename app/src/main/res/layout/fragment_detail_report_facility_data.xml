@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="item"
             type="com.example.mh_term_app.data.model.request.RequestReportFacility" />
@@ -37,17 +37,38 @@
             app:layout_constraintStart_toEndOf="@+id/imageView31"
             app:layout_constraintTop_toTopOf="@+id/imageView31" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_facility_detail_target"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_facility_detail_target"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView31"
-            app:layout_constraintStart_toStartOf="@+id/textView29"
-            app:layout_constraintTop_toBottomOf="@+id/imageView31"
-            tools:listitem="@layout/rv_item_detail_chip" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView31">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_facility_detail_target"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/rv_item_detail_chip" />
+
+            <include
+                android:id="@+id/in_facility_target_none"
+                layout="@layout/view_place_info_item_none"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:id="@+id/imageView32"
@@ -57,7 +78,7 @@
             android:layout_marginEnd="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/imageView31"
-            app:layout_constraintTop_toBottomOf="@+id/rv_facility_detail_target"
+            app:layout_constraintTop_toBottomOf="@+id/cl_facility_detail_target"
             app:srcCompat="@color/light_grey" />
 
         <ImageView
@@ -81,16 +102,38 @@
             app:layout_constraintStart_toEndOf="@+id/imageView33"
             app:layout_constraintTop_toTopOf="@+id/imageView33" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_facility_detail_warning"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_facility_detail_warning"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="24dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView30"
-            app:layout_constraintTop_toBottomOf="@+id/imageView33"
-            tools:listitem="@layout/rv_item_detail_chip" />
+            app:layout_constraintStart_toEndOf="@+id/imageView33"
+            app:layout_constraintTop_toBottomOf="@+id/imageView33">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_facility_detail_warning"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/rv_item_detail_chip" />
+
+            <include
+                android:id="@+id/in_faility_detail_warning_none"
+                layout="@layout/view_place_info_item_none"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:id="@+id/imageView34"
@@ -108,7 +151,7 @@
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="@+id/imageView32"
             app:layout_constraintStart_toStartOf="@+id/imageView32"
-            app:layout_constraintTop_toBottomOf="@+id/rv_facility_detail_warning"
+            app:layout_constraintTop_toBottomOf="@+id/cl_facility_detail_warning"
             app:srcCompat="@color/light_grey" />
 
         <TextView
