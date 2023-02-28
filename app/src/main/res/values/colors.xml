@@ -23,6 +23,7 @@
     <color name="green">#AACB73</color>
     <color name="pink">#FFC4DD</color>
     <color name="yellow">#FFBF00</color>
-    <color name="purple">#A555EC</color>
-    <color name="beige">#FAAB78</color>
+    <color name="purple">#CEADEC</color>
+    <color name="beige">#CCC8C6</color>
+    <color name="light_red">#FAAB78</color>
 </resources>

@@ -2,19 +2,17 @@ package com.example.mh_term_app.ui.map
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
-import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.MainActivity
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
 import com.example.mh_term_app.databinding.FragmentNaverMapBinding
-import com.example.mh_term_app.databinding.NvDrawerHeaderUserBinding
 import com.example.mh_term_app.ui.menu.EditUserInfoActivity
 import com.example.mh_term_app.ui.menu.UserFavotireActivity
 import com.example.mh_term_app.ui.menu.UserReviewActivity
@@ -31,6 +29,7 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
     override val layoutResID
         get() = R.layout.fragment_naver_map
     private lateinit var callback: OnBackPressedCallback
+    private val mapViewModel : MapViewModel by viewModels()
 
     override fun onResume() {
         super.onResume()
@@ -59,6 +58,15 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
         callback.remove()
     }
 
+    override fun initObserver() {
+        super.initObserver()
+
+        mapViewModel.categoryList.observe(this){
+            val activity = activity as MainActivity
+            activity.setCategoryMarkerList(it)
+        }
+    }
+
     override fun initView() {
         super.initView()
 
@@ -68,35 +76,42 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
     override fun initListener() {
         super.initListener()
 
-        binding.edtMapSearch.setOnClickListener {
+        binding.edtMapSearch.setSingleOnClickListener {
             val activity = activity as MainActivity
             activity.goToSearchListener()
             activity.setInfoWindowVisibility(false)
         }
 
-        binding.chipFacility.setOnClickListener {
+        binding.chipFacility.setSingleOnClickListener {
+            setOnChipListener("시설물")
+        }
+
+        binding.chipStore.setSingleOnClickListener {
+            setOnChipListener("매장")
+        }
+
+        binding.chipChargingStation.setSingleOnClickListener {
             context?.toast("장소 준비중")
         }
 
-        binding.chipStore.setOnClickListener {
+        binding.chipRestroom.setSingleOnClickListener {
             context?.toast("장소 준비중")
         }
 
-        binding.chipChargingStation.setOnClickListener {
-            context?.toast("장소 준비중")
-        }
-
-        binding.chipRestroom.setOnClickListener {
-            context?.toast("장소 준비중")
-        }
-
-        binding.chipSupportCenter.setOnClickListener {
+        binding.chipSupportCenter.setSingleOnClickListener {
             context?.toast("장소 준비중")
         }
     }
 
+    private fun setOnChipListener(type : String){
+        mapViewModel.getCategoryList(type)
+
+        val activity = activity as MainActivity
+        activity.setInfoWindowVisibility(false)
+    }
+
     private fun initDrawer() {
-        binding.btnMapMenu.setOnClickListener {
+        binding.btnMapMenu.setSingleOnClickListener {
             binding.drawerLayout.openDrawer(GravityCompat.START)
             val activity = activity as MainActivity
             activity.setInfoWindowVisibility(false)
@@ -116,11 +131,11 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
             binding.nvDrawerMenu.inflateHeaderView(R.layout.nv_drawer_header_user)
             binding.nvDrawerMenu.getHeaderView(0).findViewById<TextView>(R.id.txt_menu_user_name).text = MHApplication.prefManager.userNickname+" 님"
             binding.nvDrawerMenu.getHeaderView(0).findViewById<Chip>(R.id.chip_menu_user_type).apply {
-                if(MHApplication.prefManager.userType != "none"){
+                visibility = if(MHApplication.prefManager.userType != "none"){
                     this.setUserTypeChip(MHApplication.prefManager.userType)
-                    visibility = View.VISIBLE
+                    View.VISIBLE
                 }else{
-                    visibility = View.GONE
+                    View.GONE
                 }
             }
 

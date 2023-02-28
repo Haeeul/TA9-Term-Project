@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.mh_term_app.R
 import com.example.mh_term_app.databinding.DialogSignGuideBinding
+import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 
 class SignGuideDialog : DialogFragment(), View.OnClickListener {
     lateinit var binding : DialogSignGuideBinding
@@ -48,12 +49,12 @@ class SignGuideDialog : DialogFragment(), View.OnClickListener {
             }
         }
 
-        binding.btnSignGuideConfirm.setOnClickListener {
+        binding.btnSignGuideConfirm.setSingleOnClickListener {
             dismiss()
             listener?.onPositiveClicked()
         }
 
-        binding.btnSignGuideCancel.setOnClickListener {
+        binding.btnSignGuideCancel.setSingleOnClickListener {
             dismiss()
         }
     }

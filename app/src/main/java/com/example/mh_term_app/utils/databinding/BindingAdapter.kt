@@ -74,14 +74,17 @@ object BindingAdapter {
     fun Chip.setUserTypeChip(type: String) {
         text = type
 
-//        when(type){
-//            "휠체어 사용자" -> this.setChipBackgroundColorResource(ContextCompat.getColor(this.context, R.color.red))
-//            "영유아 보호자" -> this.setChipBackgroundColorResource(ContextCompat.getColor(this.context, R.color.pink))
-//            "시각 장애인" -> this.setChipBackgroundColorResource(ContextCompat.getColor(this.context, R.color.yellow))
-//            "목발 사용 등 부상자" -> this.setChipBackgroundColorResource(ContextCompat.getColor(this.context, R.color.purple))
-//            "노약자" -> this.setChipBackgroundColorResource(ContextCompat.getColor(this.context, R.color.beige))
-//            else -> this.setChipBackgroundColorResource(ContextCompat.getColor(this.context, R.color.black))
-//        }
+        var color = R.color.light_red
+
+        when(type){
+            "휠체어 사용자" -> color = R.color.green
+            "영유아 보호자" -> color = R.color.pink
+            "시각 장애인" -> color = R.color.yellow
+            "목발 사용 등 부상자" -> color = R.color.purple
+            "노약자" -> color = R.color.back_light_grey
+        }
+
+        setChipBackgroundColorResource(color)
     }
 
     @JvmStatic
@@ -95,5 +98,13 @@ object BindingAdapter {
             setBackgroundResource(R.drawable.round_square_line_fill_grey_8)
             setTextColor(ContextCompat.getColor(this.context, R.color.dark_grey))
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    @JvmStatic
+    @BindingAdapter("setPhoneFormat")
+    fun TextView.setPhoneFormat(phone : String) {
+
+        TODO()
     }
 }

@@ -2,7 +2,6 @@ package com.example.mh_term_app.ui.menu.report
 
 import android.location.Address
 import android.location.Geocoder
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,10 +9,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.data.model.StoreTime
 import com.example.mh_term_app.data.model.Time
+import com.example.mh_term_app.data.model.request.RequestPlaceStore
 import com.example.mh_term_app.data.model.request.RequestReportFacility
-import com.example.mh_term_app.data.model.request.RequestReportStore
 import com.example.mh_term_app.data.repository.MapRepository
-import com.google.common.primitives.UnsignedBytes.toInt
 import kotlinx.coroutines.launch
 import java.io.IOException
 import java.util.*
@@ -166,9 +164,9 @@ class ReportViewModel : ViewModel() {
         _isValidCompleteBtn.value = storeNameTxt.value?.isNotEmpty() == true && detailTypeTxt.value?.isNotEmpty() == true && plusInfoTxt.value?.isNotEmpty() == true
     }
 
-    fun postReportStore(type : String, address : String, latitude : String, longitude : String){
+    fun postReportStore(type : String, address : String, latitude : Double, longitude : Double){
         viewModelScope.launch {
-            val store = RequestReportStore(
+            val store = RequestPlaceStore(
                 type = type,
                 address = address,
                 latitude = latitude,
@@ -190,7 +188,7 @@ class ReportViewModel : ViewModel() {
         _isValidCompleteBtn.value = locationTxt.value?.isNotEmpty() == true && detailTypeTxt.value?.isNotEmpty() == true && plusInfoTxt.value?.isNotEmpty() == true
     }
 
-    fun postReportFacility(type : String, address : String, latitude : String, longitude : String){
+    fun postReportFacility(type : String, address : String, latitude : Double, longitude : Double){
         viewModelScope.launch {
             val facility = RequestReportFacility(
                 type = type,

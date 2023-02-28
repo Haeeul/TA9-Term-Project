@@ -1,7 +1,6 @@
 package com.example.mh_term_app.ui.sign.`in`
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import com.example.mh_term_app.MHApplication
@@ -43,14 +42,9 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>() {
         signInViewModel.isValidSignIn.observe(this){
             if (it) {
                 toast("로그인 성공")
-                Log.d("명",MHApplication.prefManager.userId+"/"+MHApplication.prefManager.userPassword+"/"+MHApplication.prefManager.userNickname+"/"+MHApplication.prefManager.userType+"/")
                 startActivityWithAffinity(MainActivity::class.java)
             }
         }
-    }
-
-    fun goToBackListener(view : View){
-        finish()
     }
 
     fun goToSignUpListener(view : View){

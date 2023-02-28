@@ -2,10 +2,7 @@ package com.example.mh_term_app.ui.menu.report
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Address
-import android.location.Geocoder
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.annotation.UiThread
@@ -21,11 +18,7 @@ import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 import com.example.mh_term_app.utils.extension.toast
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
-import com.naver.maps.map.overlay.Marker
-import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
-import java.io.IOException
-import java.util.*
 
 
 class ReportPlaceActivity : BaseActivity<ActivityReportPlaceBinding>(), OnMapReadyCallback {
@@ -177,8 +170,8 @@ class ReportPlaceActivity : BaseActivity<ActivityReportPlaceBinding>(), OnMapRea
             "address",
             getAddress()
         )
-        reportIntent.putExtra("latitude", this.naverMap.cameraPosition.target.latitude.toString())
-        reportIntent.putExtra("longitude", this.naverMap.cameraPosition.target.longitude.toString())
+        reportIntent.putExtra("latitude", this.naverMap.cameraPosition.target.latitude)
+        reportIntent.putExtra("longitude", this.naverMap.cameraPosition.target.longitude)
         startActivity(reportIntent)
     }
 

@@ -1,38 +1,45 @@
 package com.example.mh_term_app.ui.map
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mh_term_app.MHApplication
-import com.example.mh_term_app.utils.extension.toast
-import com.gun0912.tedpermission.PermissionListener
-import com.gun0912.tedpermission.coroutine.TedPermission
+import com.example.mh_term_app.data.model.request.RequestPlaceStore
+import com.example.mh_term_app.data.model.request.RequestReportFacility
+import com.example.mh_term_app.data.model.response.ResponseCategoryList
+import com.example.mh_term_app.data.repository.MapRepository
 import kotlinx.coroutines.launch
 
 class MapViewModel : ViewModel() {
+    private val mapRepository = MapRepository()
 
-    private fun setUserInfo(){
+    private val _categoryList = MutableLiveData<MutableList<ResponseCategoryList>>()
+    val categoryList : LiveData<MutableList<ResponseCategoryList>>
+        get() = _categoryList
 
-    }
+    private val _storeInfo = MutableLiveData<RequestPlaceStore>()
+    val storeInfo : LiveData<RequestPlaceStore>
+        get() = _storeInfo
 
-    suspend fun checkPermission(){
+    private val _facilityInfo = MutableLiveData<RequestReportFacility>()
+    val facilityInfo : LiveData<RequestReportFacility>
+        get() = _facilityInfo
+
+    fun getCategoryList(type : String){
         viewModelScope.launch {
-            TedPermission.create()
-                .setPermissionListener(permissionlistener)
-                .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
-                .setPermissions(android.Manifest.permission.ACCESS_COARSE_LOCATION,
-                    android.Manifest.permission.ACCESS_FINE_LOCATION)
-                .check()
+            _categoryList.value = mapRepository.getCategoryList(type)
         }
-
     }
 
-    val permissionlistener: PermissionListener = object : PermissionListener {
-        override fun onPermissionGranted() {
-            MHApplication.getApplicationContext().toast("권한 확인")
+    fun getStoreInfo(id : String){
+        viewModelScope.launch {
+            _storeInfo.value = mapRepository.getStoreInfo(id)
         }
+    }
 
-        override fun onPermissionDenied(deniedPermissions: List<String>) {
-            MHApplication.getApplicationContext().toast("권한 거절")
+    fun getFacilityInfo(id : String){
+        viewModelScope.launch {
+            _facilityInfo.value = mapRepository.getFacilityInfo(id)
         }
     }
 }

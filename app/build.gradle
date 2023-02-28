@@ -82,4 +82,7 @@ dependencies {
 
     // TedPermission
     implementation 'io.github.ParkSangGwon:tedpermission-coroutine:3.3.0'
+
+    // flexbox
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
 }

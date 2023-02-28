@@ -1,6 +1,7 @@
 package com.example.mh_term_app
 
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -9,9 +10,11 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.mh_term_app.base.BaseActivity
+import com.example.mh_term_app.data.model.MarkerList
+import com.example.mh_term_app.data.model.response.ResponseCategoryList
 import com.example.mh_term_app.databinding.ActivityMainBinding
 import com.example.mh_term_app.ui.map.MapViewModel
-import com.example.mh_term_app.ui.map.details.MapPersistBottomSheetFragment
+import com.example.mh_term_app.ui.map.info.MapPersistBottomSheetFragment
 import com.example.mh_term_app.utils.extension.toast
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
@@ -22,15 +25,19 @@ import com.naver.maps.map.util.MarkerIcons
 
 
 class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
+    private final var FINISH_INTERVAL_TIME: Long = 2000
+    private var backPressedTime: Long = 0
+
     override val layoutResID = R.layout.activity_main
     private val mapViewModel: MapViewModel by viewModels()
 
     private lateinit var locationSource: FusedLocationSource
     private lateinit var naverMap: NaverMap
+    private var categoryMarkers : MutableList<MarkerList<ResponseCategoryList>> = mutableListOf()
 
     private var mapPersistBottomFragment: MapPersistBottomSheetFragment? = null
     private lateinit var mapFragment : MapFragment
-    lateinit var marker : Marker
+
 
     private lateinit var navController: NavController
 
@@ -96,18 +103,55 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
         val uiSettings = naverMap.uiSettings
         uiSettings.isLocationButtonEnabled = true
 
-        marker = Marker()
-        marker.position = LatLng(37.5670135, 126.9783740)
-        marker.icon = MarkerIcons.RED
-//        marker.icon = OverlayImage.fromResource(R.drawable.ic_facility)
-//        marker.width = 60
-//        marker.height = 80
-//        marker.iconTintColor = Color.RED
-        marker.map = naverMap
-        marker.onClickListener = setOnMarkerClickListener(marker.position, naverMap)
+        val cameraPosition = CameraPosition(
+            LatLng(
+                naverMap.cameraPosition.target.latitude,
+                naverMap.cameraPosition.target.longitude
+            ), 15.0
+        )
+        naverMap.cameraPosition = cameraPosition
 
         naverMap.setOnMapClickListener { _, _ ->
             setInfoWindowVisibility(false)
+        }
+    }
+
+    fun setCategoryMarkerList(data: MutableList<ResponseCategoryList>){
+        resetMarkers()
+
+        data.forEach {
+            val marker = Marker().apply {
+                position = LatLng(it.data.latitude, it.data.longitude)
+                icon = MarkerIcons.RED
+                icon = MarkerIcons.BLACK
+                iconTintColor = setMarkerColor(it.data.type)
+            }
+            categoryMarkers.add(MarkerList(marker,it))
+        }
+
+        categoryMarkers.forEach {
+            it.marker.apply {
+                map = naverMap
+                onClickListener = setStoreMarkerClickListener(it.data, position)
+            }
+        }
+    }
+
+    private fun resetMarkers(){
+        categoryMarkers.forEach {
+            it.marker.apply {
+                map = null
+            }
+        }
+
+        categoryMarkers.clear()
+    }
+
+    private fun setMarkerColor(type: String) : Int{
+        return when(type){
+            "매장" -> Color.RED
+            "시설물" -> ContextCompat.getColor(this, R.color.yellow)
+            else -> Color.BLACK
         }
     }
 
@@ -119,12 +163,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
             naverMap.locationTrackingMode = LocationTrackingMode.None
     }
 
-    private fun setOnMarkerClickListener(latLng: LatLng, naverMap: NaverMap): Overlay.OnClickListener {
+    private fun setStoreMarkerClickListener(data : ResponseCategoryList, latLng: LatLng): Overlay.OnClickListener {
         return Overlay.OnClickListener { overlay ->
-//            binding.data = mapViewModel.centerData.value?.get(id-1)
+            mapPersistBottomFragment?.apply {
+                setPlaceData(data)
+                setPlaceDetailData(data)
+            }
             setInfoWindowVisibility(true)
-
-            val marker = overlay as Marker
 
             val cameraUpdate = CameraUpdate.scrollTo(latLng)
                 .animate(CameraAnimation.Fly, 1000)
@@ -135,19 +180,31 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
     }
 
     fun setInfoWindowVisibility(isValid : Boolean){
-//        if(binding.flBottomContainer.visibility == View.VISIBLE) binding.flBottomContainer.visibility =View.GONE
-//        else binding.flBottomContainer.visibility = View.VISIBLE
         if(isValid) binding.flBottomContainer.visibility = View.VISIBLE
         else binding.flBottomContainer.visibility = View.GONE
     }
 
     override fun onBackPressed() {
         if (mapPersistBottomFragment?.handleBackKeyEvent() == true) {
-            // no-op
-        } else {
-            super.onBackPressed()
-        }
 
+        } else {
+            if (binding.flBottomContainer.visibility == View.VISIBLE) {
+                setInfoWindowVisibility(false)
+            } else {
+                if (supportFragmentManager.backStackEntryCount == 0) {
+                    var tempTime = System.currentTimeMillis()
+                    var intervalTime = tempTime - backPressedTime
+                    if (intervalTime in 0..FINISH_INTERVAL_TIME) {
+                        super.onBackPressed()
+                    } else {
+                        backPressedTime = tempTime
+                        toast("'뒤로' 버튼을 한 번 더 누르면 종료됩니다.")
+                        return
+                    }
+                }
+                super.onBackPressed()
+            }
+        }
     }
 
     fun goToSearchListener(){

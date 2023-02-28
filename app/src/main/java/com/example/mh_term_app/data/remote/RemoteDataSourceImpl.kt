@@ -2,8 +2,10 @@ package com.example.mh_term_app.data.remote
 
 import android.util.Log
 import com.example.mh_term_app.MHApplication
+import com.example.mh_term_app.data.model.request.RequestPlaceStore
 import com.example.mh_term_app.data.model.request.RequestReportFacility
-import com.example.mh_term_app.data.model.request.RequestReportStore
+import com.example.mh_term_app.data.model.response.PlaceInfo
+import com.example.mh_term_app.data.model.response.ResponseCategoryList
 import com.example.mh_term_app.data.model.response.ResponseUser
 import com.google.firebase.FirebaseException
 import com.google.firebase.firestore.ktx.firestore
@@ -13,7 +15,7 @@ import kotlinx.coroutines.tasks.await
 
 class RemoteDataSourceImpl : RemoteDataSource {
 
-    val db = Firebase.firestore
+    private val db = Firebase.firestore
     private val TAG: String = "[RemoteDataSourceImpl] "
 
     override suspend fun getValidatePhone(phoneNum: String): Boolean {
@@ -125,7 +127,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
         return valid
     }
 
-    override suspend fun postReportStore(store: RequestReportStore): Boolean {
+    override suspend fun postReportStore(store: RequestPlaceStore): Boolean {
         var result = false
 
         try {
@@ -165,5 +167,73 @@ class RemoteDataSourceImpl : RemoteDataSource {
         }
 
         return result
+    }
+
+    override suspend fun getCategoryList(type: String): MutableList<ResponseCategoryList> {
+        var placeList = mutableListOf<ResponseCategoryList>()
+        try {
+            db.collection("places")
+                .whereEqualTo("type", type)
+                .get()
+                .addOnSuccessListener { result ->
+                    for(place in result){
+                        placeList.add(
+                            ResponseCategoryList(
+                                place.id,
+                                PlaceInfo(
+                                    place.data["type"].toString(),
+                                    place.data["address"].toString(),
+                                    place.data["latitude"].toString().toDouble(),
+                                    place.data["longitude"].toString().toDouble(),
+                                    place.data["name"].toString(),
+                                    place.data["phone"].toString(),
+                                    place.data["detailType"].toString(),
+                                    place.data["location"].toString()
+                                )
+                            )
+                        )
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
+                }.await()
+        }catch (e:FirebaseException){
+            Log.e(TAG, e.message.toString())
+        }
+        return placeList
+    }
+
+    override suspend fun getStoreInfo(id: String): RequestPlaceStore {
+        var store = RequestPlaceStore()
+        try {
+            db.collection("places").document(id)
+                .get()
+                .addOnSuccessListener { result ->
+                    store = result.toObject<RequestPlaceStore>()!!
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
+                }.await()
+        }catch (e:FirebaseException){
+            Log.e(TAG, e.message.toString())
+        }
+        return store
+    }
+
+    override suspend fun getFacilityInfo(id: String): RequestReportFacility {
+        var facility = RequestReportFacility()
+        try {
+            db.collection("places").document(id)
+                .get()
+                .addOnSuccessListener { result ->
+                    facility = result.toObject<RequestReportFacility>()!!
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
+                }.await()
+        }catch (e:FirebaseException){
+            Log.e(TAG, e.message.toString())
+        }
+        return facility
     }
 }
