@@ -134,6 +134,11 @@
     <string name="txt_saturday">토요일</string>
     <string name="txt_monday">일요일</string>
 
+    <!-- update info-->
+    <string name="desc_add_info">정보를 추가해주세요.</string>
+    <string name="title_update_place_info">정보 수정 제안</string>
+
+    <!-- etc -->
     <string name="txt_server_error">서버 점검중입니다.</string>
 
 </resources>

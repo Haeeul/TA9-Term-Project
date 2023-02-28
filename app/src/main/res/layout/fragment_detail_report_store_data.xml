@@ -83,12 +83,24 @@
             app:layout_constraintStart_toStartOf="@+id/txt_store_detail_saturday_time"
             app:layout_constraintTop_toTopOf="@+id/textView34" />
 
+        <include
+            android:id="@+id/in_store_detail_weekday_none"
+            layout="@layout/view_place_info_item_none"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/textView34"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/in_store_detail_saturday_none"
+            app:layout_constraintTop_toTopOf="@+id/textView34" />
+
         <TextView
             android:id="@+id/textView44"
             style="@style/MediumText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="@string/txt_saturday"
             android:textSize="16dp"
             app:layout_constraintStart_toStartOf="@+id/textView34"
@@ -104,12 +116,24 @@
             app:layout_constraintStart_toStartOf="@+id/txt_store_detail_monday_time"
             app:layout_constraintTop_toTopOf="@+id/textView44" />
 
+        <include
+            android:id="@+id/in_store_detail_saturday_none"
+            layout="@layout/view_place_info_item_none"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/textView44"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/in_store_detail_monday_none"
+            app:layout_constraintTop_toTopOf="@+id/textView44" />
+
         <TextView
             android:id="@+id/textView52"
             style="@style/MediumText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="@string/txt_monday"
             android:textSize="16dp"
             app:layout_constraintStart_toStartOf="@+id/textView44"
@@ -123,6 +147,19 @@
             android:layout_marginStart="16dp"
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView52"
+            app:layout_constraintStart_toEndOf="@+id/textView52"
+            app:layout_constraintTop_toTopOf="@+id/textView52" />
+
+        <include
+            android:id="@+id/in_store_detail_monday_none"
+            layout="@layout/view_place_info_item_none"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="24dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/textView52"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView52"
             app:layout_constraintTop_toTopOf="@+id/textView52" />
 
@@ -155,7 +192,7 @@
             app:srcCompat="@drawable/ic_phone" />
 
         <TextView
-            android:id="@+id/textView27"
+            android:id="@+id/txt_store_detail_phone"
             style="@style/MediumText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -167,6 +204,19 @@
             app:layout_constraintStart_toEndOf="@+id/imageView38"
             app:layout_constraintTop_toTopOf="@+id/imageView38"
             app:layout_constraintVertical_bias="1.0" />
+
+        <include
+            android:id="@+id/in_store_detail_phone_none"
+            layout="@layout/view_place_info_item_none"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="24dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView38"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView38"
+            app:layout_constraintTop_toTopOf="@+id/imageView38" />
 
         <ImageView
             android:id="@+id/imageView39"
@@ -190,16 +240,36 @@
             app:layout_constraintStart_toEndOf="@+id/imageView23"
             app:layout_constraintTop_toTopOf="@+id/imageView23" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_store_detail_target"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_store_detail_target"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView23"
-            app:layout_constraintTop_toBottomOf="@+id/imageView23"
-            tools:listitem="@layout/rv_item_detail_chip" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView23">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_store_detail_target"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/in_store_detail_target_none"
+                layout="@layout/view_place_info_item_none"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:id="@+id/imageView25"
@@ -208,7 +278,7 @@
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="@+id/imageView24"
             app:layout_constraintStart_toStartOf="@+id/imageView24"
-            app:layout_constraintTop_toBottomOf="@+id/rv_store_detail_target"
+            app:layout_constraintTop_toBottomOf="@+id/cl_store_detail_target"
             app:srcCompat="@color/light_grey" />
 
         <ImageView
@@ -232,16 +302,36 @@
             app:layout_constraintStart_toEndOf="@+id/imageView26"
             app:layout_constraintTop_toTopOf="@+id/imageView26" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_store_detail_warning"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_store_detail_warning"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView26"
-            app:layout_constraintTop_toBottomOf="@+id/imageView26"
-            tools:listitem="@layout/rv_item_detail_chip" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView26">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_store_detail_warning"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/in_store_detail_warning_none"
+                layout="@layout/view_place_info_item_none"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:id="@+id/imageView27"
@@ -259,7 +349,7 @@
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="@+id/imageView25"
             app:layout_constraintStart_toStartOf="@+id/imageView25"
-            app:layout_constraintTop_toBottomOf="@+id/rv_store_detail_warning"
+            app:layout_constraintTop_toBottomOf="@+id/cl_store_detail_warning"
             app:srcCompat="@color/light_grey" />
 
         <TextView
