@@ -1,7 +1,6 @@
 package com.example.mh_term_app.ui.sign.up
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.MainActivity
@@ -64,9 +63,5 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding>() {
                 R.id.rb_type_old -> userInfoViewModel.setTypeTxt(getString(R.string.txt_user_type_old))
             }
         }
-    }
-
-    fun goToBackListener(view: View) {
-        finish()
     }
 }

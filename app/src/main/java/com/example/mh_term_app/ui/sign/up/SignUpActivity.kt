@@ -55,10 +55,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
         setKeyboardObserver(signUpViewModel.isValidNextBtn, false)
     }
 
-    fun goToBackListener(view: View) {
-        finish()
-    }
-
     fun goToUserInfoListener(view: View){
         signUpViewModel.addUserInfo()
         this.clearStartActivity(UserInfoActivity::class.java)

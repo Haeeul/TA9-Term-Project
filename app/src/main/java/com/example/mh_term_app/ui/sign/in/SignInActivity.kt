@@ -47,10 +47,6 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>() {
         }
     }
 
-    fun goToBackListener(view : View){
-        finish()
-    }
-
     fun goToSignUpListener(view : View){
         startActivityWithFinish(SignUpActivity::class.java)
     }
