@@ -1,4 +1,4 @@
-package com.example.mh_term_app.ui.map.details
+package com.example.mh_term_app.ui.map.info
 
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
@@ -6,7 +6,8 @@ import com.example.mh_term_app.R
 import com.example.mh_term_app.data.model.response.ResponseCategoryList
 import com.example.mh_term_app.databinding.LayoutInfoCollapseBinding
 import com.example.mh_term_app.databinding.LayoutInfoExpandBinding
-import com.example.mh_term_app.ui.map.ViewPagerAdapter
+import com.example.mh_term_app.ui.map.details.DetailReportFacilityDataFragment
+import com.example.mh_term_app.ui.map.details.DetailReportStoreDataFragment
 import com.example.mh_term_app.ui.map.review.DetailReviewFragment
 import com.example.mh_term_app.utils.listener.TabSelectedListener
 import com.example.mh_term_app.utils.listener.changeTabsFont
@@ -35,12 +36,12 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
                 }
     }
 
-    private fun initViewPager(type: String){
+    private fun initViewPager(type: String, id: String){
         viewPagerAdapter = ViewPagerAdapter(
             childFragmentManager
         )
         viewPagerAdapter.fragments = listOf(
-            if(type == "매장") DetailReportStoreDataFragment() else DetailReportFacilityDataFragment(),
+            if(type == "매장") DetailReportStoreDataFragment(id) else DetailReportFacilityDataFragment(),
             DetailReviewFragment()
         )
 
@@ -80,7 +81,7 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
                 setTypeName(item.data.location, item.data.detailType)
             }
         }
-        initViewPager(item.data.type)
+        initViewPager(item.data.type, item.id)
         initTab(item.data.type)
     }
 

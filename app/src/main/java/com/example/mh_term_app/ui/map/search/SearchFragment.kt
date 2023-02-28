@@ -1,4 +1,4 @@
-package com.example.mh_term_app.ui.map
+package com.example.mh_term_app.ui.map.search
 
 import android.os.Bundle
 import android.view.View

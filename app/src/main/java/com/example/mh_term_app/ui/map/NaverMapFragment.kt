@@ -131,11 +131,11 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
             binding.nvDrawerMenu.inflateHeaderView(R.layout.nv_drawer_header_user)
             binding.nvDrawerMenu.getHeaderView(0).findViewById<TextView>(R.id.txt_menu_user_name).text = MHApplication.prefManager.userNickname+" 님"
             binding.nvDrawerMenu.getHeaderView(0).findViewById<Chip>(R.id.chip_menu_user_type).apply {
-                if(MHApplication.prefManager.userType != "none"){
+                visibility = if(MHApplication.prefManager.userType != "none"){
                     this.setUserTypeChip(MHApplication.prefManager.userType)
-                    visibility = View.VISIBLE
+                    View.VISIBLE
                 }else{
-                    visibility = View.GONE
+                    View.GONE
                 }
             }
 

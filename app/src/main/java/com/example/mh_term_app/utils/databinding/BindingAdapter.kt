@@ -7,7 +7,6 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
-import com.example.mh_term_app.data.model.Time
 import com.google.android.material.chip.Chip
 
 object BindingAdapter {
@@ -75,14 +74,17 @@ object BindingAdapter {
     fun Chip.setUserTypeChip(type: String) {
         text = type
 
-//        when(type){
-//            "휠체어 사용자" -> this.setChipBackgroundColorResource(ContextCompat.getColor(this.context, R.color.red))
-//            "영유아 보호자" -> this.setChipBackgroundColorResource(ContextCompat.getColor(this.context, R.color.pink))
-//            "시각 장애인" -> this.setChipBackgroundColorResource(ContextCompat.getColor(this.context, R.color.yellow))
-//            "목발 사용 등 부상자" -> this.setChipBackgroundColorResource(ContextCompat.getColor(this.context, R.color.purple))
-//            "노약자" -> this.setChipBackgroundColorResource(ContextCompat.getColor(this.context, R.color.beige))
-//            else -> this.setChipBackgroundColorResource(ContextCompat.getColor(this.context, R.color.black))
-//        }
+        var color = R.color.light_red
+
+        when(type){
+            "휠체어 사용자" -> color = R.color.green
+            "영유아 보호자" -> color = R.color.pink
+            "시각 장애인" -> color = R.color.yellow
+            "목발 사용 등 부상자" -> color = R.color.purple
+            "노약자" -> color = R.color.back_light_grey
+        }
+
+        setChipBackgroundColorResource(color)
     }
 
     @JvmStatic
@@ -100,8 +102,9 @@ object BindingAdapter {
 
     @SuppressLint("SetTextI18n")
     @JvmStatic
-    @BindingAdapter("setPlaceTime")
-    fun TextView.setPlaceTime(time : Time) {
-        text = time.openHourTxt + " : " + time.openMinuteTxt + " ~ " + time.closeHourTxt + " : " + time.closeMinuteTxt
+    @BindingAdapter("setPhoneFormat")
+    fun TextView.setPhoneFormat(phone : String) {
+
+        TODO()
     }
 }

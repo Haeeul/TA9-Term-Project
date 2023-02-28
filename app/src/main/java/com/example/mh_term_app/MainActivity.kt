@@ -14,7 +14,7 @@ import com.example.mh_term_app.data.model.MarkerList
 import com.example.mh_term_app.data.model.response.ResponseCategoryList
 import com.example.mh_term_app.databinding.ActivityMainBinding
 import com.example.mh_term_app.ui.map.MapViewModel
-import com.example.mh_term_app.ui.map.details.MapPersistBottomSheetFragment
+import com.example.mh_term_app.ui.map.info.MapPersistBottomSheetFragment
 import com.example.mh_term_app.utils.extension.toast
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*

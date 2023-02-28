@@ -3,7 +3,6 @@ package com.example.mh_term_app.data.remote
 import com.example.mh_term_app.data.model.request.RequestPlaceStore
 import com.example.mh_term_app.data.model.request.RequestReportFacility
 import com.example.mh_term_app.data.model.response.ResponseCategoryList
-import com.example.mh_term_app.data.model.response.ResponsePlaceFacility
 
 interface RemoteDataSource {
     // phone auth
@@ -23,5 +22,5 @@ interface RemoteDataSource {
 
     // place
     suspend fun getCategoryList(type: String) : MutableList<ResponseCategoryList>
-    suspend fun getFacilityList(type: String) : MutableList<ResponsePlaceFacility>
+    suspend fun getStoreInfo(id : String) : RequestPlaceStore
 }

@@ -15,14 +15,18 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip5"
-            setUserTypeChip="@{item}"
+            android:id="@+id/rv_detail_chip"
+            style="@style/DetailChipStyle"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            setUserTypeChip="@{item}"
             android:textAppearance="@style/UserChipText"
             app:chipBackgroundColor="@color/green"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

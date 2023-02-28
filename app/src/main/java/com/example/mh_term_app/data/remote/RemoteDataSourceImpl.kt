@@ -6,7 +6,6 @@ import com.example.mh_term_app.data.model.request.RequestPlaceStore
 import com.example.mh_term_app.data.model.request.RequestReportFacility
 import com.example.mh_term_app.data.model.response.PlaceInfo
 import com.example.mh_term_app.data.model.response.ResponseCategoryList
-import com.example.mh_term_app.data.model.response.ResponsePlaceFacility
 import com.example.mh_term_app.data.model.response.ResponseUser
 import com.google.firebase.FirebaseException
 import com.google.firebase.firestore.ktx.firestore
@@ -204,16 +203,13 @@ class RemoteDataSourceImpl : RemoteDataSource {
         return placeList
     }
 
-    override suspend fun getFacilityList(type: String): MutableList<ResponsePlaceFacility> {
-        var facilityList = mutableListOf<ResponsePlaceFacility>()
+    override suspend fun getStoreInfo(id: String): RequestPlaceStore {
+        var store = RequestPlaceStore()
         try {
-            db.collection("places")
-                .whereEqualTo("type", type)
+            db.collection("places").document(id)
                 .get()
                 .addOnSuccessListener { result ->
-                    for(facility in result){
-                        facilityList.add(ResponsePlaceFacility(facility.id,facility.toObject<RequestReportFacility>()))
-                    }
+                    store = result.toObject<RequestPlaceStore>()!!
                 }
                 .addOnFailureListener { exception ->
                     Log.w(TAG, "Error getting documents.", exception)
@@ -221,6 +217,6 @@ class RemoteDataSourceImpl : RemoteDataSource {
         }catch (e:FirebaseException){
             Log.e(TAG, e.message.toString())
         }
-        return facilityList
+        return store
     }
 }

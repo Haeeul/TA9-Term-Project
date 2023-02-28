@@ -7,7 +7,7 @@
     <data>
         <variable
             name="item"
-            type="com.example.mh_term_app.data.model.response.ResponsePlaceStore" />
+            type="com.example.mh_term_app.data.model.response.ResponsePlace" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,7 +38,7 @@
             app:layout_constraintTop_toTopOf="@+id/imageView31" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/rv_store_detail_target"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -49,16 +49,16 @@
             app:layout_constraintStart_toEndOf="@+id/imageView31"
             app:layout_constraintStart_toStartOf="@+id/textView29"
             app:layout_constraintTop_toBottomOf="@+id/imageView31"
-            tools:listitem="@layout/rv_item_detail_warning" />
+            tools:listitem="@layout/rv_item_detail_chip" />
 
         <ImageView
             android:id="@+id/imageView32"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/recyclerView"
+            app:layout_constraintEnd_toEndOf="@+id/rv_store_detail_target"
             app:layout_constraintStart_toStartOf="@+id/imageView31"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+            app:layout_constraintTop_toBottomOf="@+id/rv_store_detail_target"
             app:srcCompat="@color/light_grey" />
 
         <ImageView
@@ -83,7 +83,7 @@
             app:layout_constraintTop_toTopOf="@+id/imageView33" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView2"
+            android:id="@+id/rv_store_detail_warning"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -93,7 +93,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView30"
             app:layout_constraintTop_toBottomOf="@+id/imageView33"
-            tools:listitem="@layout/rv_item_detail_warning" />
+            tools:listitem="@layout/rv_item_detail_chip" />
 
         <ImageView
             android:id="@+id/imageView34"
@@ -111,7 +111,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="@+id/imageView32"
             app:layout_constraintStart_toStartOf="@+id/imageView32"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView2"
+            app:layout_constraintTop_toBottomOf="@+id/rv_store_detail_warning"
             app:srcCompat="@color/light_grey" />
 
         <TextView

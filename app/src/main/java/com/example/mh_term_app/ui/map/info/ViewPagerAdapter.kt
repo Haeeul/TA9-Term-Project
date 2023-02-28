@@ -1,4 +1,4 @@
-package com.example.mh_term_app.ui.map
+package com.example.mh_term_app.ui.map.info
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

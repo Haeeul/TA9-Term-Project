@@ -12,5 +12,5 @@ class MapRepository {
     suspend fun postReportFacility(facility: RequestReportFacility) = remoteDataSource.postReportFacility(facility)
 
     suspend fun getCategoryList(type : String) = remoteDataSource.getCategoryList(type)
-    suspend fun getFacilityList(type: String) = remoteDataSource.getFacilityList(type)
+    suspend fun getStoreInfo(id : String) = remoteDataSource.getStoreInfo(id)
 }
