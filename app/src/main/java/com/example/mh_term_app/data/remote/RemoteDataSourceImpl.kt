@@ -15,7 +15,7 @@ import kotlinx.coroutines.tasks.await
 
 class RemoteDataSourceImpl : RemoteDataSource {
 
-    val db = Firebase.firestore
+    private val db = Firebase.firestore
     private val TAG: String = "[RemoteDataSourceImpl] "
 
     override suspend fun getValidatePhone(phoneNum: String): Boolean {
@@ -218,5 +218,22 @@ class RemoteDataSourceImpl : RemoteDataSource {
             Log.e(TAG, e.message.toString())
         }
         return store
+    }
+
+    override suspend fun getFacilityInfo(id: String): RequestReportFacility {
+        var facility = RequestReportFacility()
+        try {
+            db.collection("places").document(id)
+                .get()
+                .addOnSuccessListener { result ->
+                    facility = result.toObject<RequestReportFacility>()!!
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
+                }.await()
+        }catch (e:FirebaseException){
+            Log.e(TAG, e.message.toString())
+        }
+        return facility
     }
 }

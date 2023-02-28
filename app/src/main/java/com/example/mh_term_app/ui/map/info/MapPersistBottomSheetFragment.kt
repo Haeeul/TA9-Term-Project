@@ -41,7 +41,7 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
             childFragmentManager
         )
         viewPagerAdapter.fragments = listOf(
-            if(type == "매장") DetailReportStoreDataFragment(id) else DetailReportFacilityDataFragment(),
+            if(type == "매장") DetailReportStoreDataFragment(id) else DetailReportFacilityDataFragment(id),
             DetailReviewFragment()
         )
 

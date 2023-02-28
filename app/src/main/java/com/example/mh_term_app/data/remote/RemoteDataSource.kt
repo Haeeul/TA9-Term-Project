@@ -23,4 +23,5 @@ interface RemoteDataSource {
     // place
     suspend fun getCategoryList(type: String) : MutableList<ResponseCategoryList>
     suspend fun getStoreInfo(id : String) : RequestPlaceStore
+    suspend fun getFacilityInfo(id : String) : RequestReportFacility
 }

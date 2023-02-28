@@ -7,7 +7,7 @@
     <data>
         <variable
             name="item"
-            type="com.example.mh_term_app.data.model.response.ResponsePlace" />
+            type="com.example.mh_term_app.data.model.request.RequestReportFacility" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,13 +38,11 @@
             app:layout_constraintTop_toTopOf="@+id/imageView31" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_store_detail_target"
+            android:id="@+id/rv_facility_detail_target"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView31"
             app:layout_constraintStart_toStartOf="@+id/textView29"
@@ -55,17 +53,18 @@
             android:id="@+id/imageView32"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/rv_store_detail_target"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/imageView31"
-            app:layout_constraintTop_toBottomOf="@+id/rv_store_detail_target"
+            app:layout_constraintTop_toBottomOf="@+id/rv_facility_detail_target"
             app:srcCompat="@color/light_grey" />
 
         <ImageView
             android:id="@+id/imageView33"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="@+id/imageView31"
             app:layout_constraintTop_toBottomOf="@+id/imageView32"
             app:srcCompat="@drawable/ic_alert" />
@@ -83,13 +82,11 @@
             app:layout_constraintTop_toTopOf="@+id/imageView33" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_store_detail_warning"
+            android:id="@+id/rv_facility_detail_warning"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView30"
             app:layout_constraintTop_toBottomOf="@+id/imageView33"
@@ -97,9 +94,9 @@
 
         <ImageView
             android:id="@+id/imageView34"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="@+id/imageView33"
             app:layout_constraintTop_toBottomOf="@+id/imageView35"
             app:srcCompat="@drawable/ic_plus" />
@@ -108,10 +105,10 @@
             android:id="@+id/imageView35"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="@+id/imageView32"
             app:layout_constraintStart_toStartOf="@+id/imageView32"
-            app:layout_constraintTop_toBottomOf="@+id/rv_store_detail_warning"
+            app:layout_constraintTop_toBottomOf="@+id/rv_facility_detail_warning"
             app:srcCompat="@color/light_grey" />
 
         <TextView
@@ -120,32 +117,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="추가 설명"
+            android:text="@{item.plusInfo}"
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView34"
             app:layout_constraintStart_toEndOf="@+id/imageView34"
             app:layout_constraintTop_toTopOf="@+id/imageView34" />
 
-        <TextView
-            android:id="@+id/textView32"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:text="@{item.data.plusInfo}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView31"
-            app:layout_constraintTop_toBottomOf="@+id/imageView34" />
-
         <ImageView
             android:id="@+id/imageView36"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:src="@color/light_grey"
             app:layout_constraintEnd_toEndOf="@+id/imageView35"
             app:layout_constraintStart_toStartOf="@+id/imageView35"
-            app:layout_constraintTop_toBottomOf="@+id/textView32" />
+            app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
         <TextView
             android:id="@+id/textView33"
