@@ -1,6 +1,6 @@
 package com.example.managerapplication.data.model
 
-class PublicToiletListResponse(
+data class PublicToiletListResponse(
     val toiletType : String,
     val toiletNm : String,
     val rdnmadr : String,
@@ -21,13 +21,13 @@ class PublicToiletListResponse(
     val installationYear : String,
     val latitude : String,
     val longitude : String,
-    val toiletPossType : String,
-    val toiletPosiType : String,
-    val careSewerageType : String,
-    val emgBellYn : String,
-    val enterentCctvYn : String,
-    val dipersExchgPosi : String,
-    val modYear : String,
+//    val toiletPossType : String,
+//    val toiletPosiType : String,
+//    val careSewerageType : String,
+//    val emgBellYn : String,
+//    val enterentCctvYn : String,
+//    val dipersExchgPosi : String,
+//    val modYear : String,
     val referenceDate : String,
     val insttCode : String
 )

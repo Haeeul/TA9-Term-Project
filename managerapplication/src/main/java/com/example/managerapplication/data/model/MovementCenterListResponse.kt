@@ -1,6 +1,6 @@
 package com.example.managerapplication.data.model
 
-class MovementCenterListResponse(
+data class MovementCenterListResponse(
     val tfcwkerMvmnCnterNm : String,
     val rdnmadr : String,
     val lnmadr : String,
