@@ -1,6 +1,10 @@
 package com.example.managerapplication.data.model
 
 data class ChargingStationListResponse(
+    val items : MutableList<ChargingStation>
+)
+
+data class ChargingStation(
     val fcltyNm : String,
     val ctprvnNm : String,
     val signguNm : String,
@@ -21,5 +25,5 @@ data class ChargingStationListResponse(
     val institutionNm : String,
     val institutionPhoneNumber : String,
     val referenceDate : String,
-    val instt_code : String,
+    val instt_code : String
 )

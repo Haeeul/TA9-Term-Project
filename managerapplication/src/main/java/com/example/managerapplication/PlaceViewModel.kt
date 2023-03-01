@@ -11,14 +11,16 @@ import java.net.URLDecoder
 class PlaceViewModel : ViewModel() {
     private val repository = PlaceRepository()
 
-    val API_SERVICE_KEY = "JppmyKXYZ0shc7Ln4qsZ4wEGK5fxMmjUDHYym%2FCVj5ahFlGGAJkNnsrKOtXoRLfKe4v5kokwifID9KxyLaRIPg%3D%3D"
-    val decodingKey = "JppmyKXYZ0shc7Ln4qsZ4wEGK5fxMmjUDHYym/CVj5ahFlGGAJkNnsrKOtXoRLfKe4v5kokwifID9KxyLaRIPg=="
+    val API_SERVICE_KEY = "NiBhI42sA2qFT6izOTs7XMx%2FDYGfa7LwpVRLdrIcX80aQ4QL%2BdzxcwcgIuiFST6xprT6XZjaPwgP98Q6BE%2FaFg%3D%3D"
+    val decodingKey = "NiBhI42sA2qFT6izOTs7XMx/DYGfa7LwpVRLdrIcX80aQ4QL+dzxcwcgIuiFST6xprT6XZjaPwgP98Q6BE/aFg=="
 
 
     fun getChargingStationList(){
         viewModelScope.launch {
             try{
-                Log.d("명", repository.getChargingStation(URLDecoder.decode(API_SERVICE_KEY, "UTF-8")).toString()+" / "+URLDecoder.decode(API_SERVICE_KEY, "UTF-8"))
+                Log.d("명", repository.getChargingStation(decodingKey).toString())
+
+//                Log.d("명", repository.getChargingStation(URLDecoder.decode(API_SERVICE_KEY, "UTF-8")).toString()+" / "+URLDecoder.decode(API_SERVICE_KEY, "UTF-8"))
             }catch (e : HttpException){
                 Log.d("명1", e.message())
             }
