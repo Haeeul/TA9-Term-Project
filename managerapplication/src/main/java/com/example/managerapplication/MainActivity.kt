@@ -25,7 +25,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             viewModel.getMovementList()
         }
         binding.button3.setSingleOnClickListener {
-//            viewModel.getChargingStationList()
+            viewModel.getPublicToiletList()
         }
     }
 }

@@ -1,10 +1,6 @@
 package com.example.managerapplication.data.model
 
 class MovementCenterListResponse(
-    val items : MutableList<MovementCenter>
-)
-
-data class MovementCenter(
     val tfcwkerMvmnCnterNm : String,
     val rdnmadr : String,
     val lnmadr : String,
@@ -34,5 +30,5 @@ data class MovementCenter(
     val institutionNm : String,
     val phoneNumber : String,
     val referenceDate : String,
-    val insttCode : String,
+    val insttCode : String
 )

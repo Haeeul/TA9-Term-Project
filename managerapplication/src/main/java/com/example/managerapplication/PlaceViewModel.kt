@@ -31,11 +31,24 @@ class PlaceViewModel : ViewModel() {
     fun getMovementList(){
         viewModelScope.launch {
             try{
-                Log.d("getMovementList : ", repository.getMovementCenter(API_SERVICE_KEY).toString())
+                Log.d("getMovementList : ", repository.getMovementCenter(decodingKey).toString())
 
 //                Log.d("명", repository.getChargingStation(URLDecoder.decode(API_SERVICE_KEY, "UTF-8")).toString()+" / "+URLDecoder.decode(API_SERVICE_KEY, "UTF-8"))
             }catch (e : HttpException){
                 Log.w("getMovementList error : ", e.message())
+            }
+
+        }
+    }
+
+    fun getPublicToiletList(){
+        viewModelScope.launch {
+            try{
+                Log.d("getPublicToiletList : ", repository.getPublicToiletList(decodingKey).toString())
+
+//                Log.d("명", repository.getChargingStation(URLDecoder.decode(API_SERVICE_KEY, "UTF-8")).toString()+" / "+URLDecoder.decode(API_SERVICE_KEY, "UTF-8"))
+            }catch (e : HttpException){
+                Log.w("getPublicToiletList error : ", e.message())
             }
 
         }

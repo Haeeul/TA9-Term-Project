@@ -7,4 +7,5 @@ class PlaceRepository {
 
     suspend fun getChargingStation(key : String) = remoteDataSource.getChargingStationList(key)
     suspend fun getMovementCenter(key : String) = remoteDataSource.getMovementCenterList(key)
+    suspend fun getPublicToiletList(key : String) = remoteDataSource.getPublicToiletList(key)
 }

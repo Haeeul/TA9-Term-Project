@@ -6,11 +6,18 @@ data class BaseResponse<T>(
 
 data class Result<T>(
     val header : ResponseHeader,
-    val body : T
+    val body : ResponseBody<T>
 )
 
 data class ResponseHeader(
     val resultCode : String,
     val resultMsg : String,
     val type : String
+)
+
+data class ResponseBody<T>(
+    val items : MutableList<T>,
+    val totalCount : String,
+    val numOfRows : String,
+    val pageNo : String
 )
