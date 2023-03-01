@@ -6,4 +6,5 @@ class PlaceRepository {
     private val remoteDataSource = ManagerServiceImpl.service
 
     suspend fun getChargingStation(key : String) = remoteDataSource.getChargingStationList(key)
+    suspend fun getMovementCenter(key : String) = remoteDataSource.getMovementCenterList(key)
 }

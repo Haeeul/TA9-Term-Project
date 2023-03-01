@@ -18,11 +18,24 @@ class PlaceViewModel : ViewModel() {
     fun getChargingStationList(){
         viewModelScope.launch {
             try{
-                Log.d("명", repository.getChargingStation(decodingKey).toString())
+                Log.d("getChargingStationList : ", repository.getChargingStation(decodingKey).toString())
 
 //                Log.d("명", repository.getChargingStation(URLDecoder.decode(API_SERVICE_KEY, "UTF-8")).toString()+" / "+URLDecoder.decode(API_SERVICE_KEY, "UTF-8"))
             }catch (e : HttpException){
-                Log.d("명1", e.message())
+                Log.w("getChargingStationList error : ", e.message())
+            }
+
+        }
+    }
+
+    fun getMovementList(){
+        viewModelScope.launch {
+            try{
+                Log.d("getMovementList : ", repository.getMovementCenter(API_SERVICE_KEY).toString())
+
+//                Log.d("명", repository.getChargingStation(URLDecoder.decode(API_SERVICE_KEY, "UTF-8")).toString()+" / "+URLDecoder.decode(API_SERVICE_KEY, "UTF-8"))
+            }catch (e : HttpException){
+                Log.w("getMovementList error : ", e.message())
             }
 
         }

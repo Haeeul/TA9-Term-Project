@@ -2,6 +2,7 @@ package com.example.managerapplication.data.remote
 
 import com.example.managerapplication.data.model.BaseResponse
 import com.example.managerapplication.data.model.ChargingStationListResponse
+import com.example.managerapplication.data.model.MovementCenterListResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -14,4 +15,12 @@ interface ManagerService {
         @Query("type") type : String = "json",
         @Query("ctprvnNm") ctprvnNm : String = "서울특별시"
     ): BaseResponse<ChargingStationListResponse>
+
+    @GET("tn_pubr_public_tfcwker_mvmn_cnter_api")
+    suspend fun getMovementCenterList(
+        @Query("serviceKey") serviceKey : String,
+        @Query("pageNo") pageNo : Int = 0,
+        @Query("numOfRows") numOfRows : Int = 1,
+        @Query("type") type : String = "json"
+    ): BaseResponse<MovementCenterListResponse>
 }
