@@ -1,6 +1,5 @@
 package com.example.mh_term_app.ui.map.details.update
 
-import android.util.Log
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
@@ -17,13 +16,13 @@ class UpdatePlaceInfoActivity() : BaseActivity<ActivityUpdatePlaceInfoBinding>()
 
     private lateinit var viewPagerAdapter: ViewPagerAdapter
     private lateinit var placeAddressInfo : ReportPlaceAddress
+    private var placeId = ""
 
     override fun initView() {
         super.initView()
 
+        placeId = intent.getStringExtra("id").toString()
         placeAddressInfo = intent.getParcelableExtra<ReportPlaceAddress>("placeAddressInfo")!!
-
-        Log.d("명명",intent.getParcelableExtra<ReportPlaceAddress>("placeAddressInfo").toString())
 
         binding.tbUptaePlaceInfo.apply {
             title = MHApplication.getApplicationContext().getString(R.string.title_update_place_info)
@@ -42,7 +41,7 @@ class UpdatePlaceInfoActivity() : BaseActivity<ActivityUpdatePlaceInfoBinding>()
         )
         viewPagerAdapter.fragments = listOf(
             if(type == "매장") UpdateStoreInfoFragment() else UpdateFacilityInfoFragment(),
-            UpdateAddressFragment(placeAddressInfo)
+            UpdateAddressFragment(placeId, placeAddressInfo)
         )
 
         binding.vpUpdatePlaceInfo.adapter = viewPagerAdapter
@@ -64,5 +63,9 @@ class UpdatePlaceInfoActivity() : BaseActivity<ActivityUpdatePlaceInfoBinding>()
             "시설물" -> getString(R.string.txt_facility_info)
             else -> ""
         }
+    }
+
+    fun goToBack(){
+        finish()
     }
 }

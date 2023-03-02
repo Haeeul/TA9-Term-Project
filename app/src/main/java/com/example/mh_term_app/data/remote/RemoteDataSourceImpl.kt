@@ -2,6 +2,7 @@ package com.example.mh_term_app.data.remote
 
 import android.util.Log
 import com.example.mh_term_app.MHApplication
+import com.example.mh_term_app.data.model.UpdatePlaceAddress
 import com.example.mh_term_app.data.model.request.RequestPlaceFacility
 import com.example.mh_term_app.data.model.request.RequestPlaceStore
 import com.example.mh_term_app.data.model.response.PlaceInfo
@@ -235,5 +236,26 @@ class RemoteDataSourceImpl : RemoteDataSource {
             Log.e(TAG, e.message.toString())
         }
         return facility
+    }
+
+    override suspend fun postUpdateAddress(place : UpdatePlaceAddress): Boolean {
+        var result = false
+
+        try {
+            db.collection("updateInfo")
+                .add(place)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                    result = true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error adding documents.", exception)
+                    result = false
+                }.await()
+        }catch (e:FirebaseException){
+            Log.e(TAG, e.message.toString())
+        }
+
+        return result
     }
 }

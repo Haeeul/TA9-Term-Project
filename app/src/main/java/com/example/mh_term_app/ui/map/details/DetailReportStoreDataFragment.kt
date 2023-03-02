@@ -3,7 +3,6 @@ package com.example.mh_term_app.ui.map.details
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.mh_term_app.R
@@ -72,9 +71,8 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
 
     private fun goToUpdatePlaceInfo(){
         val updateIntent = Intent(context, UpdatePlaceInfoActivity::class.java)
-        updateIntent.putExtra("type","매장")
+        updateIntent.putExtra("id",storeId)
         updateIntent.putExtra("placeAddressInfo", storeAddressInfo)
-        Log.d("명", storeAddressInfo.toString())
         startActivity(updateIntent)
     }
 

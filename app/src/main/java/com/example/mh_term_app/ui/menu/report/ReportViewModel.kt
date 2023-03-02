@@ -10,6 +10,7 @@ import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.data.model.ReportPlaceAddress
 import com.example.mh_term_app.data.model.StoreTime
 import com.example.mh_term_app.data.model.Time
+import com.example.mh_term_app.data.model.UpdatePlaceAddress
 import com.example.mh_term_app.data.model.request.RequestPlaceFacility
 import com.example.mh_term_app.data.model.request.RequestPlaceStore
 import com.example.mh_term_app.data.repository.MapRepository
@@ -169,11 +170,11 @@ class ReportViewModel : ViewModel() {
             val store = RequestPlaceStore(
                 type = storeInfo.type,
                 address = storeInfo.address,
-                detailAddress = if(storeInfo.detailAddress == "null"){"none"} else {storeInfo.detailAddress},
+                detailAddress = checkDataValue(storeInfo.detailAddress),
                 latitude = storeInfo.latitude,
                 longitude = storeInfo.longitude,
                 name = storeNameTxt.value.toString(),
-                phone = if(storePhoneTxt.value.toString()== "null"){"none"} else {storePhoneTxt.value.toString()},
+                phone = checkDataValue(storePhoneTxt.value.toString()),
                 time = storeTime.value!!,
                 detailType = detailTypeTxt.value.toString(),
                 targetList = targetList.value,
@@ -194,7 +195,7 @@ class ReportViewModel : ViewModel() {
             val facility = RequestPlaceFacility(
                 type = facilityInfo.type,
                 address = facilityInfo.address,
-                detailAddress = if(facilityInfo.detailAddress == "null"){"none"} else {facilityInfo.detailAddress},
+                detailAddress = checkDataValue(facilityInfo.detailAddress),
                 latitude = facilityInfo.latitude,
                 longitude = facilityInfo.longitude,
                 location = locationTxt.value.toString(),
@@ -206,5 +207,33 @@ class ReportViewModel : ViewModel() {
 
             _isValidPost.value = mapRepository.postReportFacility(facility)
         }
+    }
+
+    // 위치 정보 수정 제안 결과
+    private val _isValidUpdateAddress = MutableLiveData<Boolean>()
+    val isValidUpdateAddress : LiveData<Boolean>
+        get() = _isValidUpdateAddress
+
+    fun postUpdateAddress(id : String, placeAddress: ReportPlaceAddress, latitude : Double, longitude : Double){
+        viewModelScope.launch {
+            val place = UpdatePlaceAddress(
+                id,
+                "위치",
+                placeAddress.address,
+                checkDataValue(placeAddress.detailAddress),
+                placeAddress.latitude,
+                placeAddress.longitude,
+                addressTxt.value.toString(),
+                checkDataValue(detailAddressTxt.value.toString()),
+                latitude,longitude
+            )
+
+            _isValidUpdateAddress.value = mapRepository.postUpdateAddress(place)
+        }
+    }
+
+    private fun checkDataValue(item : String):String{
+        return if(item == "null" || item.isBlank()) "none"
+        else item
     }
 }

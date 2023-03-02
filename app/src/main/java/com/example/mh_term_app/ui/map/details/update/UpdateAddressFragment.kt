@@ -1,7 +1,6 @@
 package com.example.mh_term_app.ui.map.details.update
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,13 +12,14 @@ import com.example.mh_term_app.base.BaseFragment
 import com.example.mh_term_app.data.model.ReportPlaceAddress
 import com.example.mh_term_app.databinding.FragmentUpdateAddressBinding
 import com.example.mh_term_app.ui.menu.report.ReportViewModel
+import com.example.mh_term_app.utils.extension.errorToast
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 import com.example.mh_term_app.utils.extension.toast
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.util.FusedLocationSource
 
-class UpdateAddressFragment(private val placeAddressInfo : ReportPlaceAddress) : BaseFragment<FragmentUpdateAddressBinding>(),
+class UpdateAddressFragment(private val placeId : String, private val placeAddressInfo : ReportPlaceAddress) : BaseFragment<FragmentUpdateAddressBinding>(),
     OnMapReadyCallback {
     override val layoutResID: Int
         get() = R.layout.fragment_update_address
@@ -38,6 +38,18 @@ class UpdateAddressFragment(private val placeAddressInfo : ReportPlaceAddress) :
             FusedLocationSource(this, MainActivity.LOCATION_PERMISSION_REQUEST_CODE)
 
         return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun initObserver() {
+        super.initObserver()
+
+        reportPlaceViewModel.isValidUpdateAddress.observe(this){
+            if(it) requireContext().toast("제안 완료")
+            else requireContext().errorToast()
+
+            val activity = activity as UpdatePlaceInfoActivity
+            activity.goToBack()
+        }
     }
 
     override fun initView() {
@@ -115,9 +127,7 @@ class UpdateAddressFragment(private val placeAddressInfo : ReportPlaceAddress) :
         super.initListener()
 
         binding.btnUpdatePlaceSend.setSingleOnClickListener {
-            Log.d("명",reportPlaceViewModel.addressTxt.value.toString() + " / " +
-                    reportPlaceViewModel.detailAddressTxt.value.toString() + " / " +
-                    this.naverMap.cameraPosition.target.toString())
+            reportPlaceViewModel.postUpdateAddress(placeId, placeAddressInfo, this.naverMap.cameraPosition.target.latitude,this.naverMap.cameraPosition.target.longitude)
         }
     }
 }

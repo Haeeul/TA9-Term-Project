@@ -7,6 +7,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
+import com.example.mh_term_app.data.model.ReportPlaceAddress
 import com.example.mh_term_app.data.model.request.RequestPlaceFacility
 import com.example.mh_term_app.databinding.FragmentDetailReportFacilityDataBinding
 import com.example.mh_term_app.databinding.ViewPlaceInfoItemNoneBinding
@@ -25,6 +26,8 @@ class DetailReportFacilityDataFragment(private val facilityId : String) : BaseFr
     private var rvFacilityTargetAdapter = DetailChipAdapter()
     private var rvFacilityWarningAdapter = DetailChipAdapter()
     private val mapViewModel : MapViewModel by viewModels()
+
+    lateinit var facilityAddressInfo : ReportPlaceAddress
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +66,8 @@ class DetailReportFacilityDataFragment(private val facilityId : String) : BaseFr
 
     private fun goToUpdatePlaceInfo(){
         val updateIntent = Intent(context, UpdatePlaceInfoActivity::class.java)
-        updateIntent.putExtra("type","시설물")
+        updateIntent.putExtra("id",facilityId)
+        updateIntent.putExtra("placeAddressInfo", facilityAddressInfo)
         startActivity(updateIntent)
     }
 
@@ -74,6 +78,14 @@ class DetailReportFacilityDataFragment(private val facilityId : String) : BaseFr
         mapViewModel.facilityInfo.observe(this){
             binding.apply {
                 item = it
+
+                facilityAddressInfo = ReportPlaceAddress(
+                    it.type,
+                    it.address,
+                    it.detailAddress,
+                    it.latitude,
+                    it.longitude
+                )
 
                 checkFacilityData(it)
 
