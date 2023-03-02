@@ -101,7 +101,7 @@ class ReportViewModel : ViewModel() {
         }
     }
 
-    private fun checkTimeType(time: Time) : String{
+    fun checkTimeType(time: Time) : String{
         var timeTxt = ""
         timeTxt = if(time.openHourTxt == "-1" ) "휴무"
         else {

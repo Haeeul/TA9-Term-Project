@@ -4,6 +4,7 @@ import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.data.model.ReportPlaceAddress
+import com.example.mh_term_app.data.model.UpdateStoreInfo
 import com.example.mh_term_app.databinding.ActivityUpdatePlaceInfoBinding
 import com.example.mh_term_app.ui.map.info.ViewPagerAdapter
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
@@ -16,6 +17,7 @@ class UpdatePlaceInfoActivity() : BaseActivity<ActivityUpdatePlaceInfoBinding>()
 
     private lateinit var viewPagerAdapter: ViewPagerAdapter
     private lateinit var placeAddressInfo : ReportPlaceAddress
+    private lateinit var storeDetailInfo : UpdateStoreInfo
     private var placeId = ""
 
     override fun initView() {
@@ -23,6 +25,7 @@ class UpdatePlaceInfoActivity() : BaseActivity<ActivityUpdatePlaceInfoBinding>()
 
         placeId = intent.getStringExtra("id").toString()
         placeAddressInfo = intent.getParcelableExtra<ReportPlaceAddress>("placeAddressInfo")!!
+        getDetailInfo(placeAddressInfo.type)
 
         binding.tbUptaePlaceInfo.apply {
             title = MHApplication.getApplicationContext().getString(R.string.title_update_place_info)
@@ -35,12 +38,18 @@ class UpdatePlaceInfoActivity() : BaseActivity<ActivityUpdatePlaceInfoBinding>()
         initTab(placeAddressInfo.type)
     }
 
+    private fun getDetailInfo(type: String){
+        when(type){
+            "매장" -> storeDetailInfo = intent.getParcelableExtra<UpdateStoreInfo>("storeDetailInfo")!!
+        }
+    }
+
     private fun initViewPager(type: String){
         viewPagerAdapter = ViewPagerAdapter(
             supportFragmentManager
         )
         viewPagerAdapter.fragments = listOf(
-            if(type == "매장") UpdateStoreInfoFragment() else UpdateFacilityInfoFragment(),
+            if(type == "매장") UpdateStoreInfoFragment(storeDetailInfo) else UpdateFacilityInfoFragment(),
             UpdateAddressFragment(placeId, placeAddressInfo)
         )
 

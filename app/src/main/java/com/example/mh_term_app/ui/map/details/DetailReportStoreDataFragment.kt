@@ -8,7 +8,9 @@ import androidx.fragment.app.viewModels
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
 import com.example.mh_term_app.data.model.ReportPlaceAddress
+import com.example.mh_term_app.data.model.StoreTime
 import com.example.mh_term_app.data.model.Time
+import com.example.mh_term_app.data.model.UpdateStoreInfo
 import com.example.mh_term_app.data.model.request.RequestPlaceStore
 import com.example.mh_term_app.databinding.FragmentDetailReportStoreDataBinding
 import com.example.mh_term_app.databinding.ViewPlaceInfoItemNoneBinding
@@ -30,6 +32,7 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
     private val mapViewModel : MapViewModel by viewModels()
 
     lateinit var storeAddressInfo : ReportPlaceAddress
+    lateinit var storeDetailInfo : UpdateStoreInfo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,6 +76,7 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
         val updateIntent = Intent(context, UpdatePlaceInfoActivity::class.java)
         updateIntent.putExtra("id",storeId)
         updateIntent.putExtra("placeAddressInfo", storeAddressInfo)
+        updateIntent.putExtra("storeDetailInfo", storeDetailInfo)
         startActivity(updateIntent)
     }
 
@@ -90,6 +94,16 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
                     it.detailAddress,
                     it.latitude,
                     it.longitude
+                )
+
+                storeDetailInfo = UpdateStoreInfo(
+                    it.name,
+                    it.phone,
+                    changeToListValue(it.time),
+                    it.detailType,
+                    it.targetList,
+                    it.warningList,
+                    it.plusInfo
                 )
 
                 checkStoreData(it)
@@ -111,6 +125,13 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
                 }
             }
         }
+    }
+
+    private fun changeToListValue(time : StoreTime):MutableList<MutableList<String>>{
+        return mutableListOf(
+            mutableListOf(time.weekTime.openHourTxt,time.weekTime.openMinuteTxt,time.weekTime.closeHourTxt,time.weekTime.closeMinuteTxt),
+            mutableListOf(time.weekTime.openHourTxt,time.weekTime.openMinuteTxt,time.weekTime.closeHourTxt,time.weekTime.closeMinuteTxt),
+            mutableListOf(time.weekTime.openHourTxt,time.weekTime.openMinuteTxt,time.weekTime.closeHourTxt,time.weekTime.closeMinuteTxt))
     }
 
     private fun initRv(){
