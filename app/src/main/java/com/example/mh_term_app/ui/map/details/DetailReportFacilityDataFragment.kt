@@ -7,7 +7,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
-import com.example.mh_term_app.data.model.request.RequestReportFacility
+import com.example.mh_term_app.data.model.request.RequestPlaceFacility
 import com.example.mh_term_app.databinding.FragmentDetailReportFacilityDataBinding
 import com.example.mh_term_app.databinding.ViewPlaceInfoItemNoneBinding
 import com.example.mh_term_app.ui.map.MapViewModel
@@ -67,7 +67,7 @@ class DetailReportFacilityDataFragment(private val facilityId : String) : BaseFr
         startActivity(updateIntent)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged", "SetTextI18n")
     override fun initObserver() {
         super.initObserver()
 
@@ -76,6 +76,8 @@ class DetailReportFacilityDataFragment(private val facilityId : String) : BaseFr
                 item = it
 
                 checkFacilityData(it)
+
+                txtFacilityAddress.text =if(it.detailAddress == "none") it.address else it.address + " " + it.detailAddress
 
                 rvFacilityTargetAdapter.run {
                     replaceAll(it.targetList as ArrayList<String>?)
@@ -127,7 +129,7 @@ class DetailReportFacilityDataFragment(private val facilityId : String) : BaseFr
         }
     }
 
-    private fun checkFacilityData(data : RequestReportFacility){
+    private fun checkFacilityData(data : RequestPlaceFacility){
         if(data.targetList == null || data.targetList.isEmpty()) setFacilityDataVisibility("target")
         if(data.warningList == null || data.warningList.isEmpty()) setFacilityDataVisibility("warning")
     }

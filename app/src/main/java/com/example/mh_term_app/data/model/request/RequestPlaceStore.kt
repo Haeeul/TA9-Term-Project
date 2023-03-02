@@ -6,6 +6,7 @@ import com.example.mh_term_app.data.model.Time
 data class RequestPlaceStore(
     val type: String = "",
     val address: String = "",
+    val detailAddress: String = "",
     val latitude: Double = 0.0,
     val longitude: Double = 0.0,
     val name: String = "",

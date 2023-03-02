@@ -1,8 +1,9 @@
 package com.example.mh_term_app.data.model.request
 
-data class RequestReportFacility(
+data class RequestPlaceFacility(
     val type : String = "",
     val address : String = "",
+    val detailAddress : String = "",
     val latitude: Double = 0.0,
     val longitude: Double = 0.0,
     val location : String = "",

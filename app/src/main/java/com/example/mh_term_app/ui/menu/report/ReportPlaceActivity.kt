@@ -12,6 +12,7 @@ import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.MainActivity
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
+import com.example.mh_term_app.data.model.ReportPlaceAddress
 import com.example.mh_term_app.databinding.ActivityReportPlaceBinding
 import com.example.mh_term_app.utils.extension.changeKeywordColor
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
@@ -165,22 +166,14 @@ class ReportPlaceActivity : BaseActivity<ActivityReportPlaceBinding>(), OnMapRea
         }
 
         val reportIntent = Intent(this, className)
-        reportIntent.putExtra("type", reportPlaceViewModel.typeTxt.value)
-        reportIntent.putExtra(
-            "address",
-            getAddress()
+        val placeAddressInfo = ReportPlaceAddress(
+            reportPlaceViewModel.typeTxt.value.toString(),
+            reportPlaceViewModel.addressTxt.value.toString(),
+            reportPlaceViewModel.detailAddressTxt.value.toString(),
+            this.naverMap.cameraPosition.target.latitude,
+            this.naverMap.cameraPosition.target.longitude
         )
-        reportIntent.putExtra("latitude", this.naverMap.cameraPosition.target.latitude)
-        reportIntent.putExtra("longitude", this.naverMap.cameraPosition.target.longitude)
+        reportIntent.putExtra("placeAddressInfo", placeAddressInfo)
         startActivity(reportIntent)
-    }
-
-    private fun getAddress() : String {
-        val address = if(reportPlaceViewModel.detailAddressTxt.value == null) {
-            reportPlaceViewModel.addressTxt.value
-        }else{
-            reportPlaceViewModel.addressTxt.value + " " + reportPlaceViewModel.detailAddressTxt.value
-        }
-        return address!!
     }
 }

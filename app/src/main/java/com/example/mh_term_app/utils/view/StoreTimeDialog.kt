@@ -2,11 +2,9 @@ package com.example.mh_term_app.utils.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.example.mh_term_app.R
@@ -91,7 +89,7 @@ class StoreTimeDialog(val type: String, val vm: ReportViewModel) : DialogFragmen
 
     private fun setTimeValue(type: String) {
         if(binding.rbStoreClose.isChecked) dialogViewModel.setAutoTime("-1","-1","-1","-1")
-        else if(binding.cbStoreAllTime.isChecked) dialogViewModel.setAutoTime("0","0","11","59")
+        else if(binding.cbStoreAllTime.isChecked) dialogViewModel.setAutoTime("0","0","23","59")
 
         val storeTime = Time(
             dialogViewModel.openHourTxt.value.toString(),

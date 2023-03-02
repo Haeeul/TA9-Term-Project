@@ -9,6 +9,7 @@ import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.MainActivity
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
+import com.example.mh_term_app.data.model.ReportPlaceAddress
 import com.example.mh_term_app.databinding.ActivityReportInfoFacilityBinding
 import com.example.mh_term_app.utils.extension.*
 
@@ -18,20 +19,15 @@ class ReportInfoFacilityActivity : BaseActivity<ActivityReportInfoFacilityBindin
         get() = R.layout.activity_report_info_facility
     private val reportPlaceViewModel: ReportViewModel by viewModels()
 
-    private var facilityType = ""
-    private var facilityAddress = ""
-    private var facilityLatitude = 0.0
-    private var facilityLongitude = 0.0
+    lateinit var facilityInfo : ReportPlaceAddress
 
     private var checkedGroup : Int = 0
     private var checkedId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        facilityType = intent.getStringExtra("type").toString()
-        facilityAddress = intent.getStringExtra("address").toString()
-        facilityLatitude = intent.getDoubleExtra("latitude",0.0)
-        facilityLongitude = intent.getDoubleExtra("longitude",0.0)
+
+        facilityInfo = intent.getParcelableExtra<ReportPlaceAddress>("placeAddressInfo")!!
 
         binding.apply {
             vm = reportPlaceViewModel
@@ -164,6 +160,6 @@ class ReportInfoFacilityActivity : BaseActivity<ActivityReportInfoFacilityBindin
     }
 
     fun postReportFacility(view: View) {
-        reportPlaceViewModel.postReportFacility(facilityType, facilityAddress, facilityLatitude, facilityLongitude)
+        reportPlaceViewModel.postReportFacility(facilityInfo)
     }
 }

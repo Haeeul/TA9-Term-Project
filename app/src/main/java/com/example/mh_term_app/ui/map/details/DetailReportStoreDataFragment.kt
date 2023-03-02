@@ -72,7 +72,7 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
         startActivity(updateIntent)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged", "SetTextI18n")
     override fun initObserver() {
         super.initObserver()
 
@@ -81,6 +81,8 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
                 item = it
 
                 checkStoreData(it)
+
+                txtStoreAddress.text = if(it.detailAddress == "none") it.address else it.address + " " + it.detailAddress
 
                 txtStoreDetailWeekdayTime.text = setStoreTime(it.time.weekTime, "weekday")
                 txtStoreDetailSaturdayTime.text = setStoreTime(it.time.saturdayTime, "saturday")
