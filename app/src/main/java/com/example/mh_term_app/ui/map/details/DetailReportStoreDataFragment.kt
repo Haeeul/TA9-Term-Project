@@ -3,10 +3,12 @@ package com.example.mh_term_app.ui.map.details
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
+import com.example.mh_term_app.data.model.ReportPlaceAddress
 import com.example.mh_term_app.data.model.Time
 import com.example.mh_term_app.data.model.request.RequestPlaceStore
 import com.example.mh_term_app.databinding.FragmentDetailReportStoreDataBinding
@@ -27,6 +29,8 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
     private var rvStoreTargetAdapter = DetailChipAdapter()
     private var rvStoreWarningAdapter = DetailChipAdapter()
     private val mapViewModel : MapViewModel by viewModels()
+
+    lateinit var storeAddressInfo : ReportPlaceAddress
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +73,8 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
     private fun goToUpdatePlaceInfo(){
         val updateIntent = Intent(context, UpdatePlaceInfoActivity::class.java)
         updateIntent.putExtra("type","매장")
+        updateIntent.putExtra("placeAddressInfo", storeAddressInfo)
+        Log.d("명", storeAddressInfo.toString())
         startActivity(updateIntent)
     }
 
@@ -79,6 +85,14 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
         mapViewModel.storeInfo.observe(this){
             binding.apply {
                 item = it
+
+                storeAddressInfo = ReportPlaceAddress(
+                    it.type,
+                    it.address,
+                    it.detailAddress,
+                    it.latitude,
+                    it.longitude
+                )
 
                 checkStoreData(it)
 

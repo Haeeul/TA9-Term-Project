@@ -1,8 +1,10 @@
 package com.example.mh_term_app.ui.map.details.update
 
+import android.util.Log
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
+import com.example.mh_term_app.data.model.ReportPlaceAddress
 import com.example.mh_term_app.databinding.ActivityUpdatePlaceInfoBinding
 import com.example.mh_term_app.ui.map.info.ViewPagerAdapter
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
@@ -13,13 +15,15 @@ class UpdatePlaceInfoActivity() : BaseActivity<ActivityUpdatePlaceInfoBinding>()
     override val layoutResID: Int
         get() = R.layout.activity_update_place_info
 
-    lateinit var viewPagerAdapter: ViewPagerAdapter
-    var type = ""
+    private lateinit var viewPagerAdapter: ViewPagerAdapter
+    private lateinit var placeAddressInfo : ReportPlaceAddress
 
     override fun initView() {
         super.initView()
 
-        type = intent.getStringExtra("type").toString()
+        placeAddressInfo = intent.getParcelableExtra<ReportPlaceAddress>("placeAddressInfo")!!
+
+        Log.d("명명",intent.getParcelableExtra<ReportPlaceAddress>("placeAddressInfo").toString())
 
         binding.tbUptaePlaceInfo.apply {
             title = MHApplication.getApplicationContext().getString(R.string.title_update_place_info)
@@ -28,8 +32,8 @@ class UpdatePlaceInfoActivity() : BaseActivity<ActivityUpdatePlaceInfoBinding>()
             }
         }
 
-        initViewPager(type)
-        initTab(type)
+        initViewPager(placeAddressInfo.type)
+        initTab(placeAddressInfo.type)
     }
 
     private fun initViewPager(type: String){
@@ -38,7 +42,7 @@ class UpdatePlaceInfoActivity() : BaseActivity<ActivityUpdatePlaceInfoBinding>()
         )
         viewPagerAdapter.fragments = listOf(
             if(type == "매장") UpdateStoreInfoFragment() else UpdateFacilityInfoFragment(),
-            UpdateAddressFragment()
+            UpdateAddressFragment(placeAddressInfo)
         )
 
         binding.vpUpdatePlaceInfo.adapter = viewPagerAdapter

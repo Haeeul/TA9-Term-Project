@@ -58,7 +58,6 @@ class ReportViewModel : ViewModel() {
     val isValidPost : LiveData<Boolean>
         get() = _isValidPost
 
-
     fun setTypeTxt(txt:String){
         typeTxt.value = txt
     }
