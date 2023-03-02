@@ -130,8 +130,8 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
     private fun changeToListValue(time : StoreTime):MutableList<MutableList<String>>{
         return mutableListOf(
             mutableListOf(time.weekTime.openHourTxt,time.weekTime.openMinuteTxt,time.weekTime.closeHourTxt,time.weekTime.closeMinuteTxt),
-            mutableListOf(time.weekTime.openHourTxt,time.weekTime.openMinuteTxt,time.weekTime.closeHourTxt,time.weekTime.closeMinuteTxt),
-            mutableListOf(time.weekTime.openHourTxt,time.weekTime.openMinuteTxt,time.weekTime.closeHourTxt,time.weekTime.closeMinuteTxt))
+            mutableListOf(time.saturdayTime.openHourTxt,time.saturdayTime.openMinuteTxt,time.saturdayTime.closeHourTxt,time.saturdayTime.closeMinuteTxt),
+            mutableListOf(time.mondayTime.openHourTxt,time.mondayTime.openMinuteTxt,time.mondayTime.closeHourTxt,time.mondayTime.closeMinuteTxt))
     }
 
     private fun initRv(){

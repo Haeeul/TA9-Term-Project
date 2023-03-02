@@ -2,15 +2,13 @@ package com.example.mh_term_app.ui.menu.report
 
 import android.location.Address
 import android.location.Geocoder
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mh_term_app.MHApplication
-import com.example.mh_term_app.data.model.ReportPlaceAddress
-import com.example.mh_term_app.data.model.StoreTime
-import com.example.mh_term_app.data.model.Time
-import com.example.mh_term_app.data.model.UpdatePlaceAddress
+import com.example.mh_term_app.data.model.*
 import com.example.mh_term_app.data.model.request.RequestPlaceFacility
 import com.example.mh_term_app.data.model.request.RequestPlaceStore
 import com.example.mh_term_app.data.repository.MapRepository
@@ -59,6 +57,20 @@ class ReportViewModel : ViewModel() {
     val isValidPost : LiveData<Boolean>
         get() = _isValidPost
 
+    fun setInfo(storeDetailInfo : UpdateStoreInfo){
+        storeNameTxt.value = storeDetailInfo.name
+        storePhoneTxt.value = storeDetailInfo.phone
+        plusInfoTxt.value = storeDetailInfo.plusInfo
+        storeWeekTimeTxt.value = checkTimeType(changeToTimeValue(storeDetailInfo.time!![0]))
+        storeSaturdayTimeTxt.value = checkTimeType(changeToTimeValue(storeDetailInfo.time[1]))
+        storeMondayTimeTxt.value = checkTimeType(changeToTimeValue(storeDetailInfo.time[2]))
+        Log.d("명",storeDetailInfo.time.toString())
+    }
+
+    private fun changeToTimeValue(data : MutableList<String>): Time {
+        return Time(data[0],data[1],data[2],data[3])
+    }
+
     fun setTypeTxt(txt:String){
         typeTxt.value = txt
     }
@@ -101,11 +113,14 @@ class ReportViewModel : ViewModel() {
         }
     }
 
-    fun checkTimeType(time: Time) : String{
+    private fun checkTimeType(time: Time) : String{
         var timeTxt = ""
-        timeTxt = if(time.openHourTxt == "-1" ) "휴무"
-        else {
-            setTimePickerValue(time.openHourTxt.toInt(),time.openMinuteTxt.toInt()) + " ~ " + setTimePickerValue(time.closeHourTxt.toInt(),time.closeMinuteTxt.toInt())
+        timeTxt = when (time.openHourTxt) {
+            "-1" -> "휴무"
+            "-2" -> ""
+            else -> {
+                setTimePickerValue(time.openHourTxt.toInt(),time.openMinuteTxt.toInt()) + " ~ " + setTimePickerValue(time.closeHourTxt.toInt(),time.closeMinuteTxt.toInt())
+            }
         }
 
         return timeTxt
