@@ -2,6 +2,7 @@ package com.example.mh_term_app.ui.map.info
 
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
+import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
 import com.example.mh_term_app.data.model.response.ResponseCategoryList
 import com.example.mh_term_app.databinding.LayoutInfoCollapseBinding
@@ -51,8 +52,8 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
     private fun initTab(type: String){
         expandBinding.tlInfoDetail.setupWithViewPager(expandBinding.vpInfoDetail)
         expandBinding.tlInfoDetail.apply {
-            getTabAt(0)?.text = if(type == "매장") "매장 정보" else "시설물 정보"
-            getTabAt(1)?.text = "리뷰"
+            getTabAt(0)?.text = if(type == "매장") MHApplication.getApplicationContext().getString(R.string.txt_store_info) else MHApplication.getApplicationContext().getString(R.string.txt_facility_info)
+            getTabAt(1)?.text = MHApplication.getApplicationContext().getString(R.string.txt_review)
         }
         expandBinding.tlInfoDetail.addOnTabSelectedListener(TabSelectedListener(expandBinding.tlInfoDetail))
         expandBinding.tlInfoDetail.changeTabsFont(0)

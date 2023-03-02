@@ -43,18 +43,33 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
     override fun initListener() {
         super.initListener()
 
-        goToUpdatePlaceInfo(binding.inStoreDetailWeekdayNone)
-        goToUpdatePlaceInfo(binding.inStoreDetailSaturdayNone)
-        goToUpdatePlaceInfo(binding.inStoreDetailMondayNone)
-        goToUpdatePlaceInfo(binding.inStoreDetailPhoneNone)
-        goToUpdatePlaceInfo(binding.inStoreDetailTargetNone)
-        goToUpdatePlaceInfo(binding.inStoreDetailWarningNone)
+        binding.txtUpdateStoreInfo.setSingleOnClickListener {
+            goToUpdatePlaceInfo()
+        }
+
+        binding.btnUpdateStoreInfo.setSingleOnClickListener {
+            goToUpdatePlaceInfo()
+        }
+
+        setNoneItemListener(binding.inStoreDetailWeekdayNone, getString(R.string.desc_add_time_info))
+        setNoneItemListener(binding.inStoreDetailSaturdayNone, getString(R.string.desc_add_time_info))
+        setNoneItemListener(binding.inStoreDetailMondayNone, getString(R.string.desc_add_time_info))
+        setNoneItemListener(binding.inStoreDetailPhoneNone, getString(R.string.desc_add_phone_info))
+        setNoneItemListener(binding.inStoreDetailTargetNone, getString(R.string.desc_add_target_info))
+        setNoneItemListener(binding.inStoreDetailWarningNone, getString(R.string.desc_add_warning_info))
     }
 
-    private fun goToUpdatePlaceInfo(view : ViewPlaceInfoItemNoneBinding){
+    private fun setNoneItemListener(view : ViewPlaceInfoItemNoneBinding, content : String){
         view.btnAddInfo.setSingleOnClickListener {
-            startActivity(Intent(context,UpdatePlaceInfoActivity::class.java))
+            goToUpdatePlaceInfo()
         }
+        view.txtInfoItemNoneContent.text = content
+    }
+
+    private fun goToUpdatePlaceInfo(){
+        val updateIntent = Intent(context, UpdatePlaceInfoActivity::class.java)
+        updateIntent.putExtra("type","매장")
+        startActivity(updateIntent)
     }
 
     @SuppressLint("NotifyDataSetChanged")

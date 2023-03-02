@@ -41,14 +41,30 @@ class DetailReportFacilityDataFragment(private val facilityId : String) : BaseFr
     override fun initListener() {
         super.initListener()
 
-        goToUpdatePlaceInfo(binding.inFacilityTargetNone)
-        goToUpdatePlaceInfo(binding.inFailityDetailWarningNone)
+        binding.txtUpdateFacilityInfo.setSingleOnClickListener {
+            goToUpdatePlaceInfo()
+        }
+
+        binding.btnUpdateFacilityInfo.setSingleOnClickListener {
+            goToUpdatePlaceInfo()
+        }
+
+        setNoneItemListener(binding.inFacilityTargetNone, getString(R.string.desc_add_target_info))
+        setNoneItemListener(binding.inFailityDetailWarningNone, getString(R.string.desc_add_warning_info))
     }
 
-    private fun goToUpdatePlaceInfo(view : ViewPlaceInfoItemNoneBinding){
+    private fun setNoneItemListener(view : ViewPlaceInfoItemNoneBinding, content : String){
         view.btnAddInfo.setSingleOnClickListener {
-            startActivity(Intent(context, UpdatePlaceInfoActivity::class.java))
+            goToUpdatePlaceInfo()
         }
+
+        view.txtInfoItemNoneContent.text = content
+    }
+
+    private fun goToUpdatePlaceInfo(){
+        val updateIntent = Intent(context, UpdatePlaceInfoActivity::class.java)
+        updateIntent.putExtra("type","시설물")
+        startActivity(updateIntent)
     }
 
     @SuppressLint("NotifyDataSetChanged")

@@ -177,7 +177,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
         <TextView
-            android:id="@+id/textView33"
+            android:id="@+id/txt_update_facility_info"
             style="@style/MediumText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -187,20 +187,20 @@
             android:textColor="@color/dark_grey"
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView37"
+            app:layout_constraintEnd_toStartOf="@+id/btn_update_facility_info"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView36" />
 
         <ImageView
-            android:id="@+id/imageView37"
+            android:id="@+id/btn_update_facility_info"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/ic_next"
-            app:layout_constraintBottom_toBottomOf="@+id/textView33"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_update_facility_info"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView33"
-            app:layout_constraintTop_toTopOf="@+id/textView33" />
+            app:layout_constraintStart_toEndOf="@+id/txt_update_facility_info"
+            app:layout_constraintTop_toTopOf="@+id/txt_update_facility_info" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -129,14 +129,21 @@
     <string name="txt_crosswalk">횡단보도</string>
     <string name="txt_pass">항목에 없거나 구분이 어려움</string>
 
-    <!--Details : store-->
+    <!-- details -->
+    <string name="txt_store_info">매장 정보</string>
+    <string name="txt_facility_info">시설물 정보</string>
+    <string name="txt_review">리뷰</string>
     <string name="txt_weekday">평일</string>
     <string name="txt_saturday">토요일</string>
     <string name="txt_monday">일요일</string>
 
     <!-- update info-->
-    <string name="desc_add_info">정보를 추가해주세요.</string>
+    <string name="desc_add_time_info">이용시간을 알려주세요.</string>
+    <string name="desc_add_phone_info">전화번호를 알려주세요.</string>
+    <string name="desc_add_target_info">주의 대상을 알려주세요.</string>
+    <string name="desc_add_warning_info">위험 요소를 알려주세요.</string>
     <string name="title_update_place_info">정보 수정 제안</string>
+    <string name="txt_transfer">위치ㆍ이전</string>
 
     <!-- etc -->
     <string name="txt_server_error">서버 점검중입니다.</string>
