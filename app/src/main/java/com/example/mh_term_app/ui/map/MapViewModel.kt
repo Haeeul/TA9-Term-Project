@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mh_term_app.data.model.request.RequestPlaceStore
-import com.example.mh_term_app.data.model.request.RequestReportFacility
+import com.example.mh_term_app.data.model.request.RequestPlaceFacility
 import com.example.mh_term_app.data.model.response.ResponseCategoryList
 import com.example.mh_term_app.data.repository.MapRepository
 import kotlinx.coroutines.launch
@@ -21,8 +21,8 @@ class MapViewModel : ViewModel() {
     val storeInfo : LiveData<RequestPlaceStore>
         get() = _storeInfo
 
-    private val _facilityInfo = MutableLiveData<RequestReportFacility>()
-    val facilityInfo : LiveData<RequestReportFacility>
+    private val _facilityInfo = MutableLiveData<RequestPlaceFacility>()
+    val facilityInfo : LiveData<RequestPlaceFacility>
         get() = _facilityInfo
 
     fun getCategoryList(type : String){

@@ -93,6 +93,7 @@
     <string name="sub_title_type_detail">상세유형</string>
     <string name="txt_restaurant">음식점</string>
     <string name="txt_cafe">카페</string>
+    <string name="txt_etc">기타</string>
     <string name="sub_title_info_detail">상세정보</string>
     <string name="txt_store_name">매장명</string>
     <string name="txt_store_time">운영시간</string>
@@ -104,6 +105,7 @@
     <string name="hint_saturday_time_input">토요일 시간 선택</string>
     <string name="hint_monday_time_input">일요일 시간 선택</string>
     <string name="hint_store_phone_input">전화번호를 입력해주세요.</string>
+    <string name="hint_store_type_input">매장 업종을 입력해주세요.</string>
     <string name="sub_title_warning">주의사항</string>
     <string name="txt_warning_slope">경사</string>
     <string name="txt_warning_height">높이</string>
@@ -129,14 +131,23 @@
     <string name="txt_crosswalk">횡단보도</string>
     <string name="txt_pass">항목에 없거나 구분이 어려움</string>
 
-    <!--Details : store-->
+    <!-- details -->
+    <string name="txt_store_info">매장 정보</string>
+    <string name="txt_facility_info">시설물 정보</string>
+    <string name="txt_review">리뷰</string>
     <string name="txt_weekday">평일</string>
     <string name="txt_saturday">토요일</string>
     <string name="txt_monday">일요일</string>
 
     <!-- update info-->
-    <string name="desc_add_info">정보를 추가해주세요.</string>
+    <string name="desc_add_time_info">이용시간을 알려주세요.</string>
+    <string name="desc_add_phone_info">전화번호를 알려주세요.</string>
+    <string name="desc_add_target_info">주의 대상을 알려주세요.</string>
+    <string name="desc_add_warning_info">위험 요소를 알려주세요.</string>
     <string name="title_update_place_info">정보 수정 제안</string>
+    <string name="txt_transfer">위치ㆍ이전</string>
+    <string name="desc_transfer_address">변경된 위치를 정확히 알려주세요.</string>
+    <string name="txt_send">보내기</string>
 
     <!-- etc -->
     <string name="txt_server_error">서버 점검중입니다.</string>

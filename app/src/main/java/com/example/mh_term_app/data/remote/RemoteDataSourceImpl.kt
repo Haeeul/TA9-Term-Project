@@ -2,8 +2,10 @@ package com.example.mh_term_app.data.remote
 
 import android.util.Log
 import com.example.mh_term_app.MHApplication
+import com.example.mh_term_app.data.model.request.RequestPlaceFacility
 import com.example.mh_term_app.data.model.request.RequestPlaceStore
-import com.example.mh_term_app.data.model.request.RequestReportFacility
+import com.example.mh_term_app.data.model.request.RequestUpdatePlaceAddress
+import com.example.mh_term_app.data.model.request.RequestUpdateStoreInfo
 import com.example.mh_term_app.data.model.response.PlaceInfo
 import com.example.mh_term_app.data.model.response.ResponseCategoryList
 import com.example.mh_term_app.data.model.response.ResponseUser
@@ -148,7 +150,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
         return result
     }
 
-    override suspend fun postReportFacility(facility: RequestReportFacility): Boolean {
+    override suspend fun postReportFacility(facility: RequestPlaceFacility): Boolean {
         var result = false
 
         try {
@@ -220,13 +222,13 @@ class RemoteDataSourceImpl : RemoteDataSource {
         return store
     }
 
-    override suspend fun getFacilityInfo(id: String): RequestReportFacility {
-        var facility = RequestReportFacility()
+    override suspend fun getFacilityInfo(id: String): RequestPlaceFacility {
+        var facility = RequestPlaceFacility()
         try {
             db.collection("places").document(id)
                 .get()
                 .addOnSuccessListener { result ->
-                    facility = result.toObject<RequestReportFacility>()!!
+                    facility = result.toObject<RequestPlaceFacility>()!!
                 }
                 .addOnFailureListener { exception ->
                     Log.w(TAG, "Error getting documents.", exception)
@@ -235,5 +237,47 @@ class RemoteDataSourceImpl : RemoteDataSource {
             Log.e(TAG, e.message.toString())
         }
         return facility
+    }
+
+    override suspend fun postUpdateAddress(place : RequestUpdatePlaceAddress): Boolean {
+        var result = false
+
+        try {
+            db.collection("updateInfo")
+                .add(place)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                    result = true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error adding documents.", exception)
+                    result = false
+                }.await()
+        }catch (e:FirebaseException){
+            Log.e(TAG, e.message.toString())
+        }
+
+        return result
+    }
+
+    override suspend fun postUpdateStoreInfo(store: RequestUpdateStoreInfo): Boolean {
+        var result = false
+
+        try {
+            db.collection("updateInfo")
+                .add(store)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                    result = true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error adding documents.", exception)
+                    result = false
+                }.await()
+        }catch (e:FirebaseException){
+            Log.e(TAG, e.message.toString())
+        }
+
+        return result
     }
 }

@@ -3,12 +3,9 @@ package com.example.mh_term_app.data.model.request
 import com.example.mh_term_app.data.model.StoreTime
 import com.example.mh_term_app.data.model.Time
 
-data class RequestPlaceStore(
-    val type: String = "",
-    val address: String = "",
-    val detailAddress: String = "",
-    val latitude: Double = 0.0,
-    val longitude: Double = 0.0,
+data class RequestUpdateStoreInfo (
+    val id : String = "",
+    val type : String = "",
     val name: String = "",
     val phone: String = "",
     val time: StoreTime = StoreTime(

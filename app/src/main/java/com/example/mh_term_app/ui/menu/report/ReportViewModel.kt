@@ -2,15 +2,20 @@ package com.example.mh_term_app.ui.menu.report
 
 import android.location.Address
 import android.location.Geocoder
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mh_term_app.MHApplication
+import com.example.mh_term_app.data.model.ReportPlaceAddress
 import com.example.mh_term_app.data.model.StoreTime
 import com.example.mh_term_app.data.model.Time
+import com.example.mh_term_app.data.model.UpdateStoreInfo
+import com.example.mh_term_app.data.model.request.RequestPlaceFacility
 import com.example.mh_term_app.data.model.request.RequestPlaceStore
-import com.example.mh_term_app.data.model.request.RequestReportFacility
+import com.example.mh_term_app.data.model.request.RequestUpdatePlaceAddress
+import com.example.mh_term_app.data.model.request.RequestUpdateStoreInfo
 import com.example.mh_term_app.data.repository.MapRepository
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -37,8 +42,8 @@ class ReportViewModel : ViewModel() {
     val detailTypeTxt = MutableLiveData<String>()
     val etcTypeTxt = MutableLiveData<String>()
 
-    private val targetList = MutableLiveData<MutableList<String>>()
-    private val warningList = MutableLiveData<MutableList<String>>()
+    val targetList = MutableLiveData<MutableList<String>?>()
+    val warningList = MutableLiveData<MutableList<String>?>()
 
     val plusInfoTxt = MutableLiveData<String>()
 
@@ -57,6 +62,75 @@ class ReportViewModel : ViewModel() {
     val isValidPost : LiveData<Boolean>
         get() = _isValidPost
 
+    // update - 보내기 버튼 활성화
+    private val _isValidSendBtn = MutableLiveData(false)
+    val isValidSendBtn : LiveData<Boolean>
+        get() = _isValidSendBtn
+
+    private var originStoreInfo = UpdateStoreInfo()
+
+    fun setInfo(storeDetailInfo : UpdateStoreInfo){
+        originStoreInfo = storeDetailInfo
+
+        storeNameTxt.value = storeDetailInfo.name
+        storePhoneTxt.value = checkNoneData(storeDetailInfo.phone)
+
+        setTimeValue("week", storeDetailInfo.time.weekTime)
+        setTimeValue("saturday", storeDetailInfo.time.saturdayTime)
+        setTimeValue("monday", storeDetailInfo.time.mondayTime)
+
+        if(storeDetailInfo.detailType != "음식점" && storeDetailInfo.detailType != "카페" ) etcTypeTxt.value = storeDetailInfo.detailType
+        detailTypeTxt.value = storeDetailInfo.detailType
+
+        setTargetList()
+        setWarningList()
+
+        plusInfoTxt.value = storeDetailInfo.plusInfo
+    }
+
+    private fun checkNoneData(data : String) : String{
+        return if(data == "none") ""
+        else data
+    }
+
+    private fun setTargetList(){
+        var tempList = mutableListOf<String>()
+
+        originStoreInfo.targetList?.forEach {
+            tempList.add(it)
+        }
+
+        targetList.value = tempList
+    }
+
+    private fun setWarningList(){
+        var tempList = mutableListOf<String>()
+
+        originStoreInfo.warningList?.forEach {
+            tempList.add(it)
+        }
+
+        warningList.value = tempList
+    }
+
+    fun checkStoreInfoUpdateBtn(){
+        _isValidSendBtn.value = (originStoreInfo.name != storeNameTxt.value || originStoreInfo.phone != storePhoneTxt.value ||
+                originStoreInfo.time != storeTime.value || originStoreInfo.detailType != detailTypeTxt.value ||
+                checkNewList(targetList.value,originStoreInfo.targetList) || checkNewList(warningList.value,originStoreInfo.warningList) ||
+                originStoreInfo.plusInfo != plusInfoTxt.value)
+
+    }
+
+    private fun checkNewList(new : MutableList<String>?, origin : MutableList<String>?) : Boolean {
+        if(new?.size != origin?.size) return true
+
+        new?.forEach {
+            Log.d("forEach", it)
+            Log.d("contains", origin?.contains(it).toString())
+            if(origin?.contains(it) != true) return true
+        }
+        return false
+    }
 
     fun setTypeTxt(txt:String){
         typeTxt.value = txt
@@ -102,9 +176,12 @@ class ReportViewModel : ViewModel() {
 
     private fun checkTimeType(time: Time) : String{
         var timeTxt = ""
-        timeTxt = if(time.openHourTxt == "-1" ) "휴무"
-        else {
-            setTimePickerValue(time.openHourTxt.toInt(),time.openMinuteTxt.toInt()) + " ~ " + setTimePickerValue(time.closeHourTxt.toInt(),time.closeMinuteTxt.toInt())
+        timeTxt = when (time.openHourTxt) {
+            "-1" -> "휴무"
+            "-2" -> ""
+            else -> {
+                setTimePickerValue(time.openHourTxt.toInt(),time.openMinuteTxt.toInt()) + " ~ " + setTimePickerValue(time.closeHourTxt.toInt(),time.closeMinuteTxt.toInt())
+            }
         }
 
         return timeTxt
@@ -154,6 +231,9 @@ class ReportViewModel : ViewModel() {
         else tempWarningList.remove(warning)
 
         warningList.value = tempWarningList
+
+        Log.d("주의 사항 클릭",originStoreInfo.warningList.toString())
+        Log.d("주의 사항 클릭",warningList.value.toString())
     }
 
     fun checkValidNextBtn(){
@@ -164,15 +244,16 @@ class ReportViewModel : ViewModel() {
         _isValidCompleteBtn.value = storeNameTxt.value?.isNotEmpty() == true && detailTypeTxt.value?.isNotEmpty() == true && plusInfoTxt.value?.isNotEmpty() == true
     }
 
-    fun postReportStore(type : String, address : String, latitude : Double, longitude : Double){
+    fun postReportStore(storeInfo : ReportPlaceAddress){
         viewModelScope.launch {
             val store = RequestPlaceStore(
-                type = type,
-                address = address,
-                latitude = latitude,
-                longitude = longitude,
+                type = storeInfo.type,
+                address = storeInfo.address,
+                detailAddress = checkDataValue(storeInfo.detailAddress),
+                latitude = storeInfo.latitude,
+                longitude = storeInfo.longitude,
                 name = storeNameTxt.value.toString(),
-                phone = if(storePhoneTxt.value.toString()== "null"){"none"} else {storePhoneTxt.value.toString()},
+                phone = checkDataValue(storePhoneTxt.value.toString()),
                 time = storeTime.value!!,
                 detailType = detailTypeTxt.value.toString(),
                 targetList = targetList.value,
@@ -188,13 +269,14 @@ class ReportViewModel : ViewModel() {
         _isValidCompleteBtn.value = locationTxt.value?.isNotEmpty() == true && detailTypeTxt.value?.isNotEmpty() == true && plusInfoTxt.value?.isNotEmpty() == true
     }
 
-    fun postReportFacility(type : String, address : String, latitude : Double, longitude : Double){
+    fun postReportFacility(facilityInfo : ReportPlaceAddress){
         viewModelScope.launch {
-            val facility = RequestReportFacility(
-                type = type,
-                address = address,
-                latitude = latitude,
-                longitude = longitude,
+            val facility = RequestPlaceFacility(
+                type = facilityInfo.type,
+                address = facilityInfo.address,
+                detailAddress = checkDataValue(facilityInfo.detailAddress),
+                latitude = facilityInfo.latitude,
+                longitude = facilityInfo.longitude,
                 location = locationTxt.value.toString(),
                 detailType = detailTypeTxt.value.toString(),
                 targetList = targetList.value,
@@ -203,6 +285,57 @@ class ReportViewModel : ViewModel() {
             )
 
             _isValidPost.value = mapRepository.postReportFacility(facility)
+        }
+    }
+
+    // 위치 정보 수정 제안 결과
+    private val _isValidUpdateAddress = MutableLiveData<Boolean>()
+    val isValidUpdateAddress : LiveData<Boolean>
+        get() = _isValidUpdateAddress
+
+    fun postUpdateAddress(id : String, placeAddress: ReportPlaceAddress, latitude : Double, longitude : Double){
+        viewModelScope.launch {
+            val place = RequestUpdatePlaceAddress(
+                id,
+                "위치",
+                placeAddress.address,
+                checkDataValue(placeAddress.detailAddress),
+                placeAddress.latitude,
+                placeAddress.longitude,
+                addressTxt.value.toString(),
+                checkDataValue(detailAddressTxt.value.toString()),
+                latitude,longitude
+            )
+
+            _isValidUpdateAddress.value = mapRepository.postUpdateAddress(place)
+        }
+    }
+
+    private fun checkDataValue(item : String):String{
+        return if(item == "null" || item.isBlank()) "none"
+        else item
+    }
+
+    // 매장 정보 수정 제안 결과
+    private val _isValidUpdateStore = MutableLiveData<Boolean>()
+    val isValidUpdateStore : LiveData<Boolean>
+        get() = _isValidUpdateStore
+
+    fun postUpdateStoreInfo(id : String){
+        viewModelScope.launch {
+            val store = RequestUpdateStoreInfo(
+                id,
+                "상세정보",
+                name = storeNameTxt.value.toString(),
+                phone = checkDataValue(storePhoneTxt.value.toString()),
+                time = storeTime.value!!,
+                detailType = detailTypeTxt.value.toString(),
+                targetList = targetList.value,
+                warningList = warningList.value,
+                plusInfo = plusInfoTxt.value.toString()
+            )
+
+            _isValidUpdateStore.value = mapRepository.postUpdateStoreInfo(store)
         }
     }
 }

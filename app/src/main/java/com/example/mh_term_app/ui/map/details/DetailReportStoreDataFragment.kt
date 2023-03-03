@@ -7,6 +7,9 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
+import com.example.mh_term_app.data.model.OriginStoreInfo
+import com.example.mh_term_app.data.model.ReportPlaceAddress
+import com.example.mh_term_app.data.model.StoreTime
 import com.example.mh_term_app.data.model.Time
 import com.example.mh_term_app.data.model.request.RequestPlaceStore
 import com.example.mh_term_app.databinding.FragmentDetailReportStoreDataBinding
@@ -28,6 +31,9 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
     private var rvStoreWarningAdapter = DetailChipAdapter()
     private val mapViewModel : MapViewModel by viewModels()
 
+    lateinit var storeAddressInfo : ReportPlaceAddress
+    lateinit var storeDetailInfo : OriginStoreInfo
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,21 +49,38 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
     override fun initListener() {
         super.initListener()
 
-        goToUpdatePlaceInfo(binding.inStoreDetailWeekdayNone)
-        goToUpdatePlaceInfo(binding.inStoreDetailSaturdayNone)
-        goToUpdatePlaceInfo(binding.inStoreDetailMondayNone)
-        goToUpdatePlaceInfo(binding.inStoreDetailPhoneNone)
-        goToUpdatePlaceInfo(binding.inStoreDetailTargetNone)
-        goToUpdatePlaceInfo(binding.inStoreDetailWarningNone)
-    }
-
-    private fun goToUpdatePlaceInfo(view : ViewPlaceInfoItemNoneBinding){
-        view.btnAddInfo.setSingleOnClickListener {
-            startActivity(Intent(context,UpdatePlaceInfoActivity::class.java))
+        binding.txtUpdateStoreInfo.setSingleOnClickListener {
+            goToUpdatePlaceInfo()
         }
+
+        binding.btnUpdateStoreInfo.setSingleOnClickListener {
+            goToUpdatePlaceInfo()
+        }
+
+        setNoneItemListener(binding.inStoreDetailWeekdayNone, getString(R.string.desc_add_time_info))
+        setNoneItemListener(binding.inStoreDetailSaturdayNone, getString(R.string.desc_add_time_info))
+        setNoneItemListener(binding.inStoreDetailMondayNone, getString(R.string.desc_add_time_info))
+        setNoneItemListener(binding.inStoreDetailPhoneNone, getString(R.string.desc_add_phone_info))
+        setNoneItemListener(binding.inStoreDetailTargetNone, getString(R.string.desc_add_target_info))
+        setNoneItemListener(binding.inStoreDetailWarningNone, getString(R.string.desc_add_warning_info))
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    private fun setNoneItemListener(view : ViewPlaceInfoItemNoneBinding, content : String){
+        view.btnAddInfo.setSingleOnClickListener {
+            goToUpdatePlaceInfo()
+        }
+        view.txtInfoItemNoneContent.text = content
+    }
+
+    private fun goToUpdatePlaceInfo(){
+        val updateIntent = Intent(context, UpdatePlaceInfoActivity::class.java)
+        updateIntent.putExtra("id",storeId)
+        updateIntent.putExtra("placeAddressInfo", storeAddressInfo)
+        updateIntent.putExtra("storeDetailInfo", storeDetailInfo)
+        startActivity(updateIntent)
+    }
+
+    @SuppressLint("NotifyDataSetChanged", "SetTextI18n")
     override fun initObserver() {
         super.initObserver()
 
@@ -65,7 +88,27 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
             binding.apply {
                 item = it
 
+                storeAddressInfo = ReportPlaceAddress(
+                    it.type,
+                    it.address,
+                    it.detailAddress,
+                    it.latitude,
+                    it.longitude
+                )
+
+                storeDetailInfo = OriginStoreInfo(
+                    it.name,
+                    if(it.phone== "none") "" else it.phone,
+                    changeToListValue(it.time),
+                    it.detailType,
+                    it.targetList ?: mutableListOf(),
+                    it.warningList ?: mutableListOf(),
+                    it.plusInfo
+                )
+
                 checkStoreData(it)
+
+                txtStoreAddress.text = if(it.detailAddress == "none") it.address else it.address + " " + it.detailAddress
 
                 txtStoreDetailWeekdayTime.text = setStoreTime(it.time.weekTime, "weekday")
                 txtStoreDetailSaturdayTime.text = setStoreTime(it.time.saturdayTime, "saturday")
@@ -82,6 +125,13 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
                 }
             }
         }
+    }
+
+    private fun changeToListValue(time : StoreTime):MutableList<MutableList<String>>{
+        return mutableListOf(
+            mutableListOf(time.weekTime.openHourTxt,time.weekTime.openMinuteTxt,time.weekTime.closeHourTxt,time.weekTime.closeMinuteTxt),
+            mutableListOf(time.saturdayTime.openHourTxt,time.saturdayTime.openMinuteTxt,time.saturdayTime.closeHourTxt,time.saturdayTime.closeMinuteTxt),
+            mutableListOf(time.mondayTime.openHourTxt,time.mondayTime.openMinuteTxt,time.mondayTime.closeHourTxt,time.mondayTime.closeMinuteTxt))
     }
 
     private fun initRv(){

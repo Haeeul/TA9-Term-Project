@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.example.mh_term_app.ui.menu.report.ReportViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.map.details.update.UpdateAddressFragment">
+
+        <EditText
+            android:id="@+id/edt_update_place_address"
+            style="@style/EditHintText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/round_square_line_grey_8"
+            android:enabled="false"
+            android:inputType="textMultiLine"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:text="@{vm.addressTxt}"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edt_update_place_address_detail"
+            style="@style/EditHintText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/round_square_line_grey_8"
+            android:hint="@string/hint_address_edt"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:textSize="16dp"
+            android:text="@={vm.detailAddressTxt}"
+            app:layout_constraintEnd_toEndOf="@+id/edt_update_place_address"
+            app:layout_constraintStart_toStartOf="@+id/edt_update_place_address"
+            app:layout_constraintTop_toBottomOf="@+id/edt_update_place_address" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fl_update_map"
+            android:name="com.naver.maps.map.MapFragment"
+            android:layout_width="0dp"
+            android:layout_height="400dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edt_update_place_address_detail" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toBottomOf="@+id/fl_update_map"
+            app:layout_constraintEnd_toEndOf="@+id/fl_update_map"
+            app:layout_constraintStart_toStartOf="@+id/fl_update_map"
+            app:layout_constraintTop_toTopOf="@+id/fl_update_map"
+            app:srcCompat="@drawable/ic_marker" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_update_place_send"
+            style="@style/ButtonText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/selector_sign_btn"
+            android:text="@string/txt_send"
+            android:textColor="@color/white"
+            android:onClick="postUpdatePlaceAddress"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fl_update_map" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
