@@ -99,6 +99,7 @@ class ReportInfoStoreActivity : BaseActivity<ActivityReportInfoStoreBinding>() {
                     binding.edtReportStoreEtcType.visibility = View.GONE
                 }
                 R.id.rb_store_etc -> {
+                    reportPlaceViewModel.setDetailTypeTxt(reportPlaceViewModel.etcTypeTxt.value.toString())
                     binding.edtReportStoreEtcType.visibility = View.VISIBLE
                 }
             }
@@ -113,7 +114,7 @@ class ReportInfoStoreActivity : BaseActivity<ActivityReportInfoStoreBinding>() {
         }
     }
 
-    fun onStoreWaningClicked(view: View) {
+    fun onStoreWarningClicked(view: View) {
         if (view is CheckBox) {
             val checked: Boolean = view.isChecked
 

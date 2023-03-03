@@ -37,8 +37,8 @@ class ReportViewModel : ViewModel() {
     val detailTypeTxt = MutableLiveData<String>()
     val etcTypeTxt = MutableLiveData<String>()
 
-    private val targetList = MutableLiveData<MutableList<String>>()
-    private val warningList = MutableLiveData<MutableList<String>>()
+    val targetList = MutableLiveData<MutableList<String>?>()
+    val warningList = MutableLiveData<MutableList<String>?>()
 
     val plusInfoTxt = MutableLiveData<String>()
 
@@ -57,18 +57,74 @@ class ReportViewModel : ViewModel() {
     val isValidPost : LiveData<Boolean>
         get() = _isValidPost
 
+    // update - 보내기 버튼 활성화
+    private val _isValidSendBtn = MutableLiveData(false)
+    val isValidSendBtn : LiveData<Boolean>
+        get() = _isValidSendBtn
+
+    private var originStoreInfo = UpdateStoreInfo()
+
     fun setInfo(storeDetailInfo : UpdateStoreInfo){
+        originStoreInfo = storeDetailInfo
+
         storeNameTxt.value = storeDetailInfo.name
-        storePhoneTxt.value = storeDetailInfo.phone
+        storePhoneTxt.value = checkNoneData(storeDetailInfo.phone)
+
+        setTimeValue("week", storeDetailInfo.time.weekTime)
+        setTimeValue("saturday", storeDetailInfo.time.saturdayTime)
+        setTimeValue("monday", storeDetailInfo.time.mondayTime)
+
+        if(storeDetailInfo.detailType != "음식점" || storeDetailInfo.detailType != "카페" ) etcTypeTxt.value = storeDetailInfo.detailType
+        detailTypeTxt.value = storeDetailInfo.detailType
+
+        setTargetList()
+        setWarningList()
+
         plusInfoTxt.value = storeDetailInfo.plusInfo
-        storeWeekTimeTxt.value = checkTimeType(changeToTimeValue(storeDetailInfo.time!![0]))
-        storeSaturdayTimeTxt.value = checkTimeType(changeToTimeValue(storeDetailInfo.time[1]))
-        storeMondayTimeTxt.value = checkTimeType(changeToTimeValue(storeDetailInfo.time[2]))
-        Log.d("명",storeDetailInfo.time.toString())
     }
 
-    private fun changeToTimeValue(data : MutableList<String>): Time {
-        return Time(data[0],data[1],data[2],data[3])
+    private fun checkNoneData(data : String) : String{
+        return if(data == "none") ""
+        else data
+    }
+
+    private fun setTargetList(){
+        var tempList = mutableListOf<String>()
+
+        originStoreInfo.targetList?.forEach {
+            tempList.add(it)
+        }
+
+        targetList.value = tempList
+    }
+
+    private fun setWarningList(){
+        var tempList = mutableListOf<String>()
+
+        originStoreInfo.warningList?.forEach {
+            tempList.add(it)
+        }
+
+        warningList.value = tempList
+    }
+
+    fun checkStoreInfoUpdateBtn(){
+        _isValidSendBtn.value = (originStoreInfo.name != storeNameTxt.value || originStoreInfo.phone != storePhoneTxt.value ||
+                originStoreInfo.time != storeTime.value || originStoreInfo.detailType != detailTypeTxt.value ||
+                checkNewList(targetList.value,originStoreInfo.targetList) || checkNewList(warningList.value,originStoreInfo.warningList) ||
+                originStoreInfo.plusInfo != plusInfoTxt.value)
+
+    }
+
+    private fun checkNewList(new : MutableList<String>?, origin : MutableList<String>?) : Boolean {
+        if(new?.size != origin?.size) return true
+
+        new?.forEach {
+            Log.d("forEach", it)
+            Log.d("contains", origin?.contains(it).toString())
+            if(origin?.contains(it) != true) return true
+        }
+        return false
     }
 
     fun setTypeTxt(txt:String){
@@ -170,6 +226,9 @@ class ReportViewModel : ViewModel() {
         else tempWarningList.remove(warning)
 
         warningList.value = tempWarningList
+
+        Log.d("주의 사항 클릭",originStoreInfo.warningList.toString())
+        Log.d("주의 사항 클릭",warningList.value.toString())
     }
 
     fun checkValidNextBtn(){

@@ -7,10 +7,10 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
+import com.example.mh_term_app.data.model.OriginStoreInfo
 import com.example.mh_term_app.data.model.ReportPlaceAddress
 import com.example.mh_term_app.data.model.StoreTime
 import com.example.mh_term_app.data.model.Time
-import com.example.mh_term_app.data.model.UpdateStoreInfo
 import com.example.mh_term_app.data.model.request.RequestPlaceStore
 import com.example.mh_term_app.databinding.FragmentDetailReportStoreDataBinding
 import com.example.mh_term_app.databinding.ViewPlaceInfoItemNoneBinding
@@ -32,7 +32,7 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
     private val mapViewModel : MapViewModel by viewModels()
 
     lateinit var storeAddressInfo : ReportPlaceAddress
-    lateinit var storeDetailInfo : UpdateStoreInfo
+    lateinit var storeDetailInfo : OriginStoreInfo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,13 +96,13 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
                     it.longitude
                 )
 
-                storeDetailInfo = UpdateStoreInfo(
+                storeDetailInfo = OriginStoreInfo(
                     it.name,
-                    it.phone,
+                    if(it.phone== "none") "" else it.phone,
                     changeToListValue(it.time),
                     it.detailType,
-                    it.targetList,
-                    it.warningList,
+                    it.targetList ?: mutableListOf(),
+                    it.warningList ?: mutableListOf(),
                     it.plusInfo
                 )
 

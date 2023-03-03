@@ -3,8 +3,7 @@ package com.example.mh_term_app.ui.map.details.update
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
-import com.example.mh_term_app.data.model.ReportPlaceAddress
-import com.example.mh_term_app.data.model.UpdateStoreInfo
+import com.example.mh_term_app.data.model.*
 import com.example.mh_term_app.databinding.ActivityUpdatePlaceInfoBinding
 import com.example.mh_term_app.ui.map.info.ViewPagerAdapter
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
@@ -40,8 +39,28 @@ class UpdatePlaceInfoActivity() : BaseActivity<ActivityUpdatePlaceInfoBinding>()
 
     private fun getDetailInfo(type: String){
         when(type){
-            "매장" -> storeDetailInfo = intent.getParcelableExtra<UpdateStoreInfo>("storeDetailInfo")!!
+            "매장" -> storeDetailInfo = changeDataType(intent.getParcelableExtra<OriginStoreInfo>("storeDetailInfo")!!)
         }
+    }
+
+    private fun changeDataType(originStoreInfo: OriginStoreInfo) : UpdateStoreInfo{
+        return UpdateStoreInfo(
+            originStoreInfo.name,
+            originStoreInfo.phone,
+            StoreTime(
+                changeToTimeData(originStoreInfo.time!![0]),
+                changeToTimeData(originStoreInfo.time[1]),
+                changeToTimeData(originStoreInfo.time[2])
+            ),
+            originStoreInfo.detailType,
+            originStoreInfo.targetList,
+            originStoreInfo.warningList,
+            originStoreInfo.plusInfo
+        )
+    }
+
+    private fun changeToTimeData(data : MutableList<String>): Time {
+        return Time(data[0],data[1],data[2],data[3])
     }
 
     private fun initViewPager(type: String){

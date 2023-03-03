@@ -57,16 +57,16 @@
                     app:layout_constraintStart_toStartOf="@+id/textView48"
                     app:layout_constraintTop_toBottomOf="@+id/textView48" />
 
-                <TextView
-                    android:id="@+id/textView49"
-                    style="@style/MediumText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/txt_store_phone"
-                    android:textSize="18dp"
-                    app:layout_constraintStart_toStartOf="@+id/textView48"
-                    app:layout_constraintTop_toBottomOf="@+id/edt_update_info_store_name" />
+        <TextView
+            android:id="@+id/textView49"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/txt_store_phone"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/textView48"
+            app:layout_constraintTop_toBottomOf="@+id/edt_update_info_store_name" />
 
                 <EditText
                     android:id="@+id/edt_update_info_store_phone"
@@ -87,16 +87,16 @@
                     app:layout_constraintStart_toStartOf="@+id/textView49"
                     app:layout_constraintTop_toBottomOf="@+id/textView49" />
 
-                <TextView
-                    android:id="@+id/textView50"
-                    style="@style/MediumText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/txt_store_time"
-                    android:textSize="18dp"
-                    app:layout_constraintStart_toStartOf="@+id/textView49"
-                    app:layout_constraintTop_toBottomOf="@+id/edt_update_info_store_phone" />
+        <TextView
+            android:id="@+id/textView50"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/txt_store_time"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/textView49"
+            app:layout_constraintTop_toBottomOf="@+id/edt_update_info_store_phone" />
 
                 <TextView
                     android:id="@+id/textView3"
@@ -214,7 +214,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:paddingRight="15dp"
-                        android:text="기타" />
+                        android:text="@string/txt_etc" />
                 </RadioGroup>
 
                 <EditText
@@ -224,7 +224,7 @@
                     android:layout_height="40dp"
                     android:layout_marginEnd="24dp"
                     android:background="@drawable/round_square_line_grey_8"
-                    android:hint="@string/hint_store_name_input"
+                    android:hint="@string/hint_store_type_input"
                     android:inputType="text"
                     android:maxLength="20"
                     android:nextFocusDown="@id/edt_report_info_store_phone"
@@ -254,7 +254,6 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:onClick="onStoreTargetClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_user_type_wheelchair"
                     app:layout_constraintStart_toStartOf="@+id/textView51"
@@ -265,7 +264,6 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:onClick="onStoreTargetClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_user_type_guardian"
                     app:layout_constraintStart_toEndOf="@+id/cb_update_store_target_wheelchair"
@@ -276,7 +274,6 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:onClick="onStoreTargetClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_user_type_handicap"
                     app:layout_constraintStart_toStartOf="@+id/cb_update_store_target_wheelchair"
@@ -287,7 +284,6 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:onClick="onStoreTargetClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_user_type_injured"
                     app:layout_constraintStart_toEndOf="@+id/cb_update_store_target_handicap"
@@ -298,7 +294,6 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:onClick="onStoreTargetClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_user_type_old"
                     app:layout_constraintStart_toStartOf="@+id/cb_update_store_target_handicap"
@@ -320,7 +315,6 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:onClick="onStoreWaningClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_slope"
                     app:layout_constraintStart_toStartOf="@+id/textView40"
@@ -331,7 +325,6 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:onClick="onStoreWaningClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_height"
                     app:layout_constraintStart_toEndOf="@+id/cb_update_store_warning_slope"
@@ -342,7 +335,6 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:onClick="onStoreWaningClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_offset"
                     app:layout_constraintStart_toEndOf="@+id/cb_update_store_warning_height"
@@ -353,7 +345,6 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:onClick="onStoreWaningClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_out"
                     app:layout_constraintStart_toEndOf="@+id/cb_update_store_warning_offset"
@@ -364,7 +355,6 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:onClick="onStoreWaningClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_finish"
                     app:layout_constraintStart_toStartOf="@+id/cb_update_store_warning_slope"
@@ -375,7 +365,6 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:onClick="onStoreWaningClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_info"
                     app:layout_constraintStart_toEndOf="@+id/cb_update_store_warning_finish"
@@ -386,7 +375,6 @@
                     style="@style/checkBoxText"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:onClick="onStoreWaningClicked"
                     android:paddingRight="15dp"
                     android:text="@string/txt_warning_width"
                     app:layout_constraintStart_toEndOf="@+id/cb_update_store_warning_info"
@@ -442,9 +430,9 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginBottom="35dp"
                     android:background="@drawable/selector_sign_btn"
-                    android:enabled="@{vm.isValidStoreCompleteBtn}"
+                    android:enabled="@{vm.isValidSendBtn}"
                     android:onClick="postReportStore"
-                    android:text="@string/txt_complete"
+                    android:text="@string/txt_send"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/edt_update_info_store_plus"

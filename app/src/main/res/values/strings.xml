@@ -93,6 +93,7 @@
     <string name="sub_title_type_detail">상세유형</string>
     <string name="txt_restaurant">음식점</string>
     <string name="txt_cafe">카페</string>
+    <string name="txt_etc">기타</string>
     <string name="sub_title_info_detail">상세정보</string>
     <string name="txt_store_name">매장명</string>
     <string name="txt_store_time">운영시간</string>
@@ -104,6 +105,7 @@
     <string name="hint_saturday_time_input">토요일 시간 선택</string>
     <string name="hint_monday_time_input">일요일 시간 선택</string>
     <string name="hint_store_phone_input">전화번호를 입력해주세요.</string>
+    <string name="hint_store_type_input">매장 업종을 입력해주세요.</string>
     <string name="sub_title_warning">주의사항</string>
     <string name="txt_warning_slope">경사</string>
     <string name="txt_warning_height">높이</string>
