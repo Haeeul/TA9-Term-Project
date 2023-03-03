@@ -12,9 +12,11 @@ import com.example.mh_term_app.data.model.UpdateStoreInfo
 import com.example.mh_term_app.databinding.FragmentUpdateStoreInfoBinding
 import com.example.mh_term_app.ui.menu.report.ReportViewModel
 import com.example.mh_term_app.utils.extension.createStoreTimeDialog
+import com.example.mh_term_app.utils.extension.errorToast
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
+import com.example.mh_term_app.utils.extension.toast
 
-class UpdateStoreInfoFragment(private val storeDetailInfo: UpdateStoreInfo) :
+class UpdateStoreInfoFragment(private val storeId : String, private val storeDetailInfo: UpdateStoreInfo) :
     BaseFragment<FragmentUpdateStoreInfoBinding>() {
     override val layoutResID: Int
         get() = R.layout.fragment_update_store_info
@@ -96,6 +98,14 @@ class UpdateStoreInfoFragment(private val storeDetailInfo: UpdateStoreInfo) :
         reportPlaceViewModel.etcTypeTxt.observe(this){
             if(binding.rbUpdateStoreEtc.isChecked) reportPlaceViewModel.setDetailTypeTxt(it)
         }
+
+        reportPlaceViewModel.isValidUpdateStore.observe(this){
+            if(it) requireContext().toast("제안 완료")
+            else requireContext().errorToast()
+
+            val activity = activity as UpdatePlaceInfoActivity
+            activity.goToBack()
+        }
     }
 
     private fun checkUpdateTxt(data : LiveData<String>){
@@ -132,6 +142,10 @@ class UpdateStoreInfoFragment(private val storeDetailInfo: UpdateStoreInfo) :
         onUpdateStoreWarningClicked(binding.cbUpdateStoreWarningFinish)
         onUpdateStoreWarningClicked(binding.cbUpdateStoreWarningInfo)
         onUpdateStoreWarningClicked(binding.cbUpdateStoreWarningWidth)
+
+        binding.btnUpdateInfoStoreComplete.setSingleOnClickListener {
+            reportPlaceViewModel.postUpdateStoreInfo(storeId)
+        }
     }
 
     private fun onClickTimeListener(type: String, txt: TextView) {

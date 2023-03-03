@@ -8,9 +8,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mh_term_app.MHApplication
-import com.example.mh_term_app.data.model.*
+import com.example.mh_term_app.data.model.ReportPlaceAddress
+import com.example.mh_term_app.data.model.StoreTime
+import com.example.mh_term_app.data.model.Time
+import com.example.mh_term_app.data.model.UpdateStoreInfo
 import com.example.mh_term_app.data.model.request.RequestPlaceFacility
 import com.example.mh_term_app.data.model.request.RequestPlaceStore
+import com.example.mh_term_app.data.model.request.RequestUpdatePlaceAddress
+import com.example.mh_term_app.data.model.request.RequestUpdateStoreInfo
 import com.example.mh_term_app.data.repository.MapRepository
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -74,7 +79,7 @@ class ReportViewModel : ViewModel() {
         setTimeValue("saturday", storeDetailInfo.time.saturdayTime)
         setTimeValue("monday", storeDetailInfo.time.mondayTime)
 
-        if(storeDetailInfo.detailType != "음식점" || storeDetailInfo.detailType != "카페" ) etcTypeTxt.value = storeDetailInfo.detailType
+        if(storeDetailInfo.detailType != "음식점" && storeDetailInfo.detailType != "카페" ) etcTypeTxt.value = storeDetailInfo.detailType
         detailTypeTxt.value = storeDetailInfo.detailType
 
         setTargetList()
@@ -290,7 +295,7 @@ class ReportViewModel : ViewModel() {
 
     fun postUpdateAddress(id : String, placeAddress: ReportPlaceAddress, latitude : Double, longitude : Double){
         viewModelScope.launch {
-            val place = UpdatePlaceAddress(
+            val place = RequestUpdatePlaceAddress(
                 id,
                 "위치",
                 placeAddress.address,
@@ -309,5 +314,28 @@ class ReportViewModel : ViewModel() {
     private fun checkDataValue(item : String):String{
         return if(item == "null" || item.isBlank()) "none"
         else item
+    }
+
+    // 매장 정보 수정 제안 결과
+    private val _isValidUpdateStore = MutableLiveData<Boolean>()
+    val isValidUpdateStore : LiveData<Boolean>
+        get() = _isValidUpdateStore
+
+    fun postUpdateStoreInfo(id : String){
+        viewModelScope.launch {
+            val store = RequestUpdateStoreInfo(
+                id,
+                "상세정보",
+                name = storeNameTxt.value.toString(),
+                phone = checkDataValue(storePhoneTxt.value.toString()),
+                time = storeTime.value!!,
+                detailType = detailTypeTxt.value.toString(),
+                targetList = targetList.value,
+                warningList = warningList.value,
+                plusInfo = plusInfoTxt.value.toString()
+            )
+
+            _isValidUpdateStore.value = mapRepository.postUpdateStoreInfo(store)
+        }
     }
 }

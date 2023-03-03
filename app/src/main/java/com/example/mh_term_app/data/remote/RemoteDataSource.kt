@@ -1,8 +1,9 @@
 package com.example.mh_term_app.data.remote
 
-import com.example.mh_term_app.data.model.UpdatePlaceAddress
 import com.example.mh_term_app.data.model.request.RequestPlaceFacility
 import com.example.mh_term_app.data.model.request.RequestPlaceStore
+import com.example.mh_term_app.data.model.request.RequestUpdatePlaceAddress
+import com.example.mh_term_app.data.model.request.RequestUpdateStoreInfo
 import com.example.mh_term_app.data.model.response.ResponseCategoryList
 
 interface RemoteDataSource {
@@ -27,5 +28,6 @@ interface RemoteDataSource {
     suspend fun getFacilityInfo(id : String) : RequestPlaceFacility
 
     // update place info
-    suspend fun postUpdateAddress(place : UpdatePlaceAddress) : Boolean
+    suspend fun postUpdateAddress(place : RequestUpdatePlaceAddress) : Boolean
+    suspend fun postUpdateStoreInfo(store : RequestUpdateStoreInfo) : Boolean
 }

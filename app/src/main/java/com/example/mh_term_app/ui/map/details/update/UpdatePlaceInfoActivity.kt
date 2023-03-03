@@ -68,7 +68,7 @@ class UpdatePlaceInfoActivity() : BaseActivity<ActivityUpdatePlaceInfoBinding>()
             supportFragmentManager
         )
         viewPagerAdapter.fragments = listOf(
-            if(type == "매장") UpdateStoreInfoFragment(storeDetailInfo) else UpdateFacilityInfoFragment(),
+            if(type == "매장") UpdateStoreInfoFragment(placeId,storeDetailInfo) else UpdateFacilityInfoFragment(),
             UpdateAddressFragment(placeId, placeAddressInfo)
         )
 

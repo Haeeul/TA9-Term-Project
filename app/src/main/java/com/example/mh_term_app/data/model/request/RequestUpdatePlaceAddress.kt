@@ -1,10 +1,10 @@
-package com.example.mh_term_app.data.model
+package com.example.mh_term_app.data.model.request
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class UpdatePlaceAddress(
+data class RequestUpdatePlaceAddress(
     val id : String,
     val type : String,
     val address : String,

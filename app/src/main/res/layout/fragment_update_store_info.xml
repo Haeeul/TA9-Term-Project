@@ -431,7 +431,6 @@
                     android:layout_marginBottom="35dp"
                     android:background="@drawable/selector_sign_btn"
                     android:enabled="@{vm.isValidSendBtn}"
-                    android:onClick="postReportStore"
                     android:text="@string/txt_send"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"

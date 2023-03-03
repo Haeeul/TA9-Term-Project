@@ -2,9 +2,10 @@ package com.example.mh_term_app.data.remote
 
 import android.util.Log
 import com.example.mh_term_app.MHApplication
-import com.example.mh_term_app.data.model.UpdatePlaceAddress
 import com.example.mh_term_app.data.model.request.RequestPlaceFacility
 import com.example.mh_term_app.data.model.request.RequestPlaceStore
+import com.example.mh_term_app.data.model.request.RequestUpdatePlaceAddress
+import com.example.mh_term_app.data.model.request.RequestUpdateStoreInfo
 import com.example.mh_term_app.data.model.response.PlaceInfo
 import com.example.mh_term_app.data.model.response.ResponseCategoryList
 import com.example.mh_term_app.data.model.response.ResponseUser
@@ -238,12 +239,33 @@ class RemoteDataSourceImpl : RemoteDataSource {
         return facility
     }
 
-    override suspend fun postUpdateAddress(place : UpdatePlaceAddress): Boolean {
+    override suspend fun postUpdateAddress(place : RequestUpdatePlaceAddress): Boolean {
         var result = false
 
         try {
             db.collection("updateInfo")
                 .add(place)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                    result = true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error adding documents.", exception)
+                    result = false
+                }.await()
+        }catch (e:FirebaseException){
+            Log.e(TAG, e.message.toString())
+        }
+
+        return result
+    }
+
+    override suspend fun postUpdateStoreInfo(store: RequestUpdateStoreInfo): Boolean {
+        var result = false
+
+        try {
+            db.collection("updateInfo")
+                .add(store)
                 .addOnSuccessListener { documentReference ->
                     Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
                     result = true
