@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="vm"
+            type="com.example.mh_term_app.ui.map.details.review.ReviewViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.map.details.review.DetailAddReviewActivity">
+
+        <include
+            android:id="@+id/tb_add_review"
+            layout="@layout/tb_title_with_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_add_review_place_type"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/imageView40"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tb_add_review" />
+
+        <ImageView
+            android:id="@+id/imageView40"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_add_review_place_type"
+            app:layout_constraintEnd_toStartOf="@+id/txt_add_review_place_name"
+            app:layout_constraintStart_toEndOf="@+id/txt_add_review_place_type"
+            app:layout_constraintTop_toTopOf="@+id/txt_add_review_place_type"
+            app:srcCompat="@color/light_grey" />
+
+        <TextView
+            android:id="@+id/txt_add_review_place_name"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView40"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView40"
+            app:layout_constraintTop_toTopOf="@+id/imageView40" />
+
+        <RatingBar
+            android:id="@+id/rb_add_review"
+            style="@style/Widget.AppCompat.RatingBar.Indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:rating="@={vm.rating}"
+            android:isIndicator="false"
+            android:stepSize="0.5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView40" />
+
+        <EditText
+            android:id="@+id/edt_add_review_content"
+            style="@style/EditHintText"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/round_square_line_grey_8"
+            android:gravity="top"
+            android:hint="@string/hint_review_input"
+            android:inputType="textMultiLine"
+            android:maxLines="10"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="16dp"
+            android:text="@={vm.reviewTxt}"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rb_add_review" />
+
+        <Button
+            android:id="@+id/btn_add_review_complete"
+            style="@style/ButtonText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/selector_sign_btn"
+            android:text="@string/txt_complete"
+            android:textColor="@color/white"
+            android:enabled="@{vm.isValidCompleteBtn}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edt_add_review_content" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

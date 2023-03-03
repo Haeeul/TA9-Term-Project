@@ -1,12 +1,16 @@
 package com.example.mh_term_app.ui.map.review
 
+import android.content.Intent
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
 import com.example.mh_term_app.data.model.response.DetailReviewItem
+import com.example.mh_term_app.data.model.response.ResponseCategoryList
 import com.example.mh_term_app.databinding.FragmentDetailReviewBinding
+import com.example.mh_term_app.ui.map.details.review.DetailAddReviewActivity
+import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 import com.example.mh_term_app.utils.view.DetailReviewItemDecorator
 
-class DetailReviewFragment : BaseFragment<FragmentDetailReviewBinding>() {
+class DetailReviewFragment(val item: ResponseCategoryList) : BaseFragment<FragmentDetailReviewBinding>() {
     override val layoutResID: Int
         get() = R.layout.fragment_detail_review
 
@@ -16,6 +20,18 @@ class DetailReviewFragment : BaseFragment<FragmentDetailReviewBinding>() {
         super.initView()
 
         initReview()
+    }
+
+    override fun initListener() {
+        super.initListener()
+
+        binding.btnReviewAdd.setSingleOnClickListener {
+            val reviewIntent = Intent(context, DetailAddReviewActivity::class.java)
+            reviewIntent.putExtra("id", item.id)
+            reviewIntent.putExtra("type", item.data.detailType)
+            reviewIntent.putExtra("name", item.data.name)
+            startActivity(reviewIntent)
+        }
     }
 
     private fun initReview(){

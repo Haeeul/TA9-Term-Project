@@ -37,13 +37,13 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
                 }
     }
 
-    private fun initViewPager(type: String, id: String){
+    private fun initViewPager(item: ResponseCategoryList){
         viewPagerAdapter = ViewPagerAdapter(
             childFragmentManager
         )
         viewPagerAdapter.fragments = listOf(
-            if(type == "매장") DetailReportStoreDataFragment(id) else DetailReportFacilityDataFragment(id),
-            DetailReviewFragment()
+            if(item.data.type == "매장") DetailReportStoreDataFragment(item.id) else DetailReportFacilityDataFragment(item.id),
+            DetailReviewFragment(item)
         )
 
         expandBinding.vpInfoDetail.adapter = viewPagerAdapter
@@ -82,7 +82,7 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
                 setTypeName(item.data.location, item.data.detailType)
             }
         }
-        initViewPager(item.data.type, item.id)
+        initViewPager(item)
         initTab(item.data.type)
     }
 
