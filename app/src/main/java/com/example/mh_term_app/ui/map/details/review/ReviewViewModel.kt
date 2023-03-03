@@ -1,11 +1,13 @@
 package com.example.mh_term_app.ui.map.details.review
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.data.model.request.RequestReview
+import com.example.mh_term_app.data.model.response.ResponseReviewList
 import com.example.mh_term_app.data.repository.ReviewRepository
 import kotlinx.coroutines.launch
 
@@ -22,6 +24,10 @@ class ReviewViewModel : ViewModel() {
     private val _isValidReview = MutableLiveData<Boolean>()
     val isValidReview : LiveData<Boolean>
         get() = _isValidReview
+
+    private val _reviewList = MutableLiveData<MutableList<ResponseReviewList>>()
+    val reviewList : LiveData<MutableList<ResponseReviewList>>
+        get() = _reviewList
 
     fun checkCompleteBtn(){
         _isValidCompleteBtn.value = reviewTxt.value?.isNotEmpty() == true && rating.value != 0f
@@ -42,6 +48,15 @@ class ReviewViewModel : ViewModel() {
             )
 
             _isValidReview.value = reviewRepository.postReview(review)
+        }
+    }
+
+    fun getReviewList(id:String){
+        viewModelScope.launch {
+            _reviewList.value = reviewRepository.getReviewList(id)
+
+            Log.d("명",reviewTxt.value.toString())
+            Log.d("명1",reviewRepository.getReviewList(id).toString())
         }
     }
 }

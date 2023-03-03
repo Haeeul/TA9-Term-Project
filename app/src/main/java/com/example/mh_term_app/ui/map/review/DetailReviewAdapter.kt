@@ -5,11 +5,16 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mh_term_app.R
-import com.example.mh_term_app.data.model.response.DetailReviewItem
+import com.example.mh_term_app.data.model.response.ResponseReviewList
 import com.example.mh_term_app.databinding.RvItemDetailReviewBinding
 
 class DetailReviewAdapter : RecyclerView.Adapter<DetailReviewAdapter.DetailReviewViewHolder>() {
-    var data = mutableListOf<DetailReviewItem>()
+    var data = mutableListOf<ResponseReviewList>()
+
+    internal fun setReviewList(data: MutableList<ResponseReviewList>?) {
+        if (data != null) this.data = data
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailReviewViewHolder {
         val binding : RvItemDetailReviewBinding = DataBindingUtil.inflate(
@@ -31,7 +36,7 @@ class DetailReviewAdapter : RecyclerView.Adapter<DetailReviewAdapter.DetailRevie
     override fun getItemCount(): Int = data.size
 
     inner class DetailReviewViewHolder(val binding : RvItemDetailReviewBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(item : DetailReviewItem){
+        fun bind(item : ResponseReviewList){
             binding.item = item
         }
     }

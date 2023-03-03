@@ -2,6 +2,7 @@ package com.example.mh_term_app.data.remote
 
 import com.example.mh_term_app.data.model.request.*
 import com.example.mh_term_app.data.model.response.ResponseCategoryList
+import com.example.mh_term_app.data.model.response.ResponseReviewList
 
 interface RemoteDataSource {
     // phone auth
@@ -30,4 +31,5 @@ interface RemoteDataSource {
 
     // review
     suspend fun postReview(review : RequestReview) : Boolean
+    suspend fun getReview(id : String) : MutableList<ResponseReviewList>
 }
