@@ -129,6 +129,9 @@ class ReportViewModel : ViewModel() {
             Log.d("contains", origin?.contains(it).toString())
             if(origin?.contains(it) != true) return true
         }
+
+        if(new != origin) return true
+
         return false
     }
 
