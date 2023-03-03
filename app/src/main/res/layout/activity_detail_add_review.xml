@@ -104,6 +104,7 @@
             android:background="@drawable/selector_sign_btn"
             android:text="@string/txt_complete"
             android:textColor="@color/white"
+            android:onClick="postReview"
             android:enabled="@{vm.isValidCompleteBtn}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
