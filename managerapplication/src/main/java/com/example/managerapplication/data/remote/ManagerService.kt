@@ -1,9 +1,9 @@
 package com.example.managerapplication.data.remote
 
-import com.example.managerapplication.data.model.BaseResponse
-import com.example.managerapplication.data.model.ChargingStationListResponse
-import com.example.managerapplication.data.model.MovementCenterListResponse
-import com.example.managerapplication.data.model.PublicToiletListResponse
+import com.example.managerapplication.data.model.response.BaseResponse
+import com.example.managerapplication.data.model.response.ChargingStationListResponse
+import com.example.managerapplication.data.model.response.MovementCenterListResponse
+import com.example.managerapplication.data.model.response.PublicToiletListResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -21,7 +21,7 @@ interface ManagerService {
     suspend fun getMovementCenterList(
         @Query("serviceKey") serviceKey : String,
         @Query("pageNo") pageNo : Int = 0,
-        @Query("numOfRows") numOfRows : Int = 1,
+        @Query("numOfRows") numOfRows : Int = 3,
         @Query("type") type : String = "json"
     ): BaseResponse<MovementCenterListResponse>
 

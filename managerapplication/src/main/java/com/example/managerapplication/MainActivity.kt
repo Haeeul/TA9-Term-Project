@@ -27,5 +27,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         binding.button3.setSingleOnClickListener {
             viewModel.getPublicToiletList()
         }
+
+        binding.button5.setSingleOnClickListener {
+            viewModel.postMoveCenter()
+        }
     }
 }

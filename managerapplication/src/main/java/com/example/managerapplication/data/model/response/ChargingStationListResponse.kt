@@ -1,4 +1,4 @@
-package com.example.managerapplication.data.model
+package com.example.managerapplication.data.model.response
 
 data class ChargingStationListResponse(
     val fcltyNm : String,

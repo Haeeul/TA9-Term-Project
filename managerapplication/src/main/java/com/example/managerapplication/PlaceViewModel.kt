@@ -1,8 +1,16 @@
 package com.example.managerapplication
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.managerapplication.data.model.request.CenterTime
+import com.example.managerapplication.data.model.request.RequestMovementCenter
+import com.example.managerapplication.data.model.request.Time
+import com.example.managerapplication.data.model.response.ChargingStationListResponse
+import com.example.managerapplication.data.model.response.MovementCenterListResponse
+import com.example.managerapplication.data.model.response.PublicToiletListResponse
 import com.example.managerapplication.data.repository.PlaceRepository
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -14,13 +22,25 @@ class PlaceViewModel : ViewModel() {
     val API_SERVICE_KEY = "NiBhI42sA2qFT6izOTs7XMx%2FDYGfa7LwpVRLdrIcX80aQ4QL%2BdzxcwcgIuiFST6xprT6XZjaPwgP98Q6BE%2FaFg%3D%3D"
     val decodingKey = "NiBhI42sA2qFT6izOTs7XMx/DYGfa7LwpVRLdrIcX80aQ4QL+dzxcwcgIuiFST6xprT6XZjaPwgP98Q6BE/aFg=="
 
+    private val _chargingList = MutableLiveData<MutableList<ChargingStationListResponse>>()
+    val chargingList : LiveData<MutableList<ChargingStationListResponse>>
+        get() = _chargingList
+
+    private val _centerList = MutableLiveData<MutableList<MovementCenterListResponse>>()
+    val centerList : LiveData<MutableList<MovementCenterListResponse>>
+        get() = _centerList
+
+    private val _toiletList = MutableLiveData<MutableList<PublicToiletListResponse>>()
+    val toiletList : LiveData<MutableList<PublicToiletListResponse>>
+        get() = _toiletList
+
 
     fun getChargingStationList(){
         viewModelScope.launch {
             try{
-                Log.d("getChargingStationList : ", repository.getChargingStation(decodingKey).toString())
+                _chargingList.value = repository.getChargingStation(decodingKey).response.body.items
+                Log.d("getChargingStationList : ", _chargingList.value.toString())
 
-//                Log.d("명", repository.getChargingStation(URLDecoder.decode(API_SERVICE_KEY, "UTF-8")).toString()+" / "+URLDecoder.decode(API_SERVICE_KEY, "UTF-8"))
             }catch (e : HttpException){
                 Log.w("getChargingStationList error : ", e.message())
             }
@@ -31,9 +51,9 @@ class PlaceViewModel : ViewModel() {
     fun getMovementList(){
         viewModelScope.launch {
             try{
-                Log.d("getMovementList : ", repository.getMovementCenter(decodingKey).toString())
+                _centerList.value = repository.getMovementCenter(decodingKey).response.body.items
+                Log.d("getMovementList : ", _centerList.value.toString())
 
-//                Log.d("명", repository.getChargingStation(URLDecoder.decode(API_SERVICE_KEY, "UTF-8")).toString()+" / "+URLDecoder.decode(API_SERVICE_KEY, "UTF-8"))
             }catch (e : HttpException){
                 Log.w("getMovementList error : ", e.message())
             }
@@ -44,13 +64,67 @@ class PlaceViewModel : ViewModel() {
     fun getPublicToiletList(){
         viewModelScope.launch {
             try{
-                Log.d("getPublicToiletList : ", repository.getPublicToiletList(decodingKey).toString())
+                _toiletList.value = repository.getPublicToiletList(decodingKey).response.body.items
+                Log.d("getPublicToiletList : ", _toiletList.value.toString())
 
-//                Log.d("명", repository.getChargingStation(URLDecoder.decode(API_SERVICE_KEY, "UTF-8")).toString()+" / "+URLDecoder.decode(API_SERVICE_KEY, "UTF-8"))
             }catch (e : HttpException){
                 Log.w("getPublicToiletList error : ", e.message())
             }
 
         }
+    }
+
+    fun postMoveCenter(){
+        viewModelScope.launch {
+            _centerList.value?.forEach {
+                repository.postCenter(
+                    RequestMovementCenter(
+                        type = "center",
+                        name = it.tfcwkerMvmnCnterNm,
+                        address = it.rdnmadr,
+                        oldAddress = it.lnmadr,
+                        latitude = it.latitude,
+                        longitude = it.longitude,
+                        carCount = it.carHoldCo,
+                        carKind = it.carHoldKnd,
+                        slopeCarCount = it.slopeVhcleCo,
+                        liftCarCount = it.liftVhcleCo,
+                        reservationPhone = it.rceptPhoneNumber,
+                        homepage = it.rceptItnadr,
+                        appName = it.appSvcNm,
+                        reservationTime = CenterTime(
+                            changeTimeValue(it.weekdayRceptOpenHhmm,it.weekdayRceptColseHhmm,"weekday"),
+                            changeTimeValue(it.wkendRceptOpenHhmm, it.wkendRceptCloseHhmm, "holiday")
+                        ),
+                        carRunTime = CenterTime(
+                            changeTimeValue(it.weekdayOperOpenHhmm, it.weekdayOperColseHhmm, "weekday"),
+                            changeTimeValue(it.wkendOperOpenHhmm, it.wkendOperCloseHhmm, "holiday")
+                        ),
+                        aheadTime = it.beffatResvePd,
+                        limit = it.useLmtt,
+                        insideArea = it.insideOpratArea,
+                        outsideArea = it.outsideOpratArea,
+                        useTarget = it.useTrget,
+                        useCharge = it.useCharge,
+                        managementName = it.institutionNm,
+                        phone = it.phoneNumber,
+                        referenceDate = it.referenceDate,
+                        managementCode = it.insttCode
+                    )
+                )
+            }
+        }
+    }
+
+    private fun changeTimeValue(open : String, close : String, type : String) : Time {
+        if(type == "holiday" && open.substring(0,2)=="00" && open.substring(3)=="00" && close.substring(0,2)=="00" && close.substring(3)=="00")
+            return Time("-1","-1","-1","-1")
+
+        return Time(getHour(open), open.substring(3), getHour(close), close.substring(3))
+    }
+
+    private fun getHour(time : String) : String{
+        return if(time[0].toString()=="0") time.substring(1,2)
+        else time.substring(0,2)
     }
 }
