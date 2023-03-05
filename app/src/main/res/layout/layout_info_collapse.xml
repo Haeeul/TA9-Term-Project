@@ -58,19 +58,17 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:isIndicator="true"
-            android:rating="3.5"
             android:stepSize="0.5"
             app:layout_constraintStart_toStartOf="@+id/txt_bottom_info_address"
             app:layout_constraintTop_toBottomOf="@+id/txt_bottom_info_address" />
 
         <TextView
-            android:id="@+id/textView19"
+            android:id="@+id/txt_bottom_info_rating"
             style="@style/MediumText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="2dp"
-            android:text="3.5"
             app:layout_constraintBottom_toBottomOf="@+id/rb_bottom_info"
             app:layout_constraintStart_toEndOf="@+id/rb_bottom_info"
             app:layout_constraintTop_toTopOf="@+id/rb_bottom_info" />

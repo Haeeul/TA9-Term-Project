@@ -166,6 +166,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
     private fun setStoreMarkerClickListener(data : ResponseCategoryList, latLng: LatLng): Overlay.OnClickListener {
         return Overlay.OnClickListener { overlay ->
             mapPersistBottomFragment?.apply {
+                setPlaceRating(data.id)
                 setPlaceData(data)
                 setPlaceDetailData(data)
             }

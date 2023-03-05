@@ -7,7 +7,8 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
-import com.example.mh_term_app.data.model.request.RequestReportFacility
+import com.example.mh_term_app.data.model.ReportPlaceAddress
+import com.example.mh_term_app.data.model.request.RequestPlaceFacility
 import com.example.mh_term_app.databinding.FragmentDetailReportFacilityDataBinding
 import com.example.mh_term_app.databinding.ViewPlaceInfoItemNoneBinding
 import com.example.mh_term_app.ui.map.MapViewModel
@@ -26,6 +27,8 @@ class DetailReportFacilityDataFragment(private val facilityId : String) : BaseFr
     private var rvFacilityWarningAdapter = DetailChipAdapter()
     private val mapViewModel : MapViewModel by viewModels()
 
+    lateinit var facilityAddressInfo : ReportPlaceAddress
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -41,17 +44,34 @@ class DetailReportFacilityDataFragment(private val facilityId : String) : BaseFr
     override fun initListener() {
         super.initListener()
 
-        goToUpdatePlaceInfo(binding.inFacilityTargetNone)
-        goToUpdatePlaceInfo(binding.inFailityDetailWarningNone)
-    }
-
-    private fun goToUpdatePlaceInfo(view : ViewPlaceInfoItemNoneBinding){
-        view.btnAddInfo.setSingleOnClickListener {
-            startActivity(Intent(context, UpdatePlaceInfoActivity::class.java))
+        binding.txtUpdateFacilityInfo.setSingleOnClickListener {
+            goToUpdatePlaceInfo()
         }
+
+        binding.btnUpdateFacilityInfo.setSingleOnClickListener {
+            goToUpdatePlaceInfo()
+        }
+
+        setNoneItemListener(binding.inFacilityTargetNone, getString(R.string.desc_add_target_info))
+        setNoneItemListener(binding.inFailityDetailWarningNone, getString(R.string.desc_add_warning_info))
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    private fun setNoneItemListener(view : ViewPlaceInfoItemNoneBinding, content : String){
+        view.btnAddInfo.setSingleOnClickListener {
+            goToUpdatePlaceInfo()
+        }
+
+        view.txtInfoItemNoneContent.text = content
+    }
+
+    private fun goToUpdatePlaceInfo(){
+        val updateIntent = Intent(context, UpdatePlaceInfoActivity::class.java)
+        updateIntent.putExtra("id",facilityId)
+        updateIntent.putExtra("placeAddressInfo", facilityAddressInfo)
+        startActivity(updateIntent)
+    }
+
+    @SuppressLint("NotifyDataSetChanged", "SetTextI18n")
     override fun initObserver() {
         super.initObserver()
 
@@ -59,7 +79,17 @@ class DetailReportFacilityDataFragment(private val facilityId : String) : BaseFr
             binding.apply {
                 item = it
 
+                facilityAddressInfo = ReportPlaceAddress(
+                    it.type,
+                    it.address,
+                    it.detailAddress,
+                    it.latitude,
+                    it.longitude
+                )
+
                 checkFacilityData(it)
+
+                txtFacilityAddress.text =if(it.detailAddress == "none") it.address else it.address + " " + it.detailAddress
 
                 rvFacilityTargetAdapter.run {
                     replaceAll(it.targetList as ArrayList<String>?)
@@ -111,7 +141,7 @@ class DetailReportFacilityDataFragment(private val facilityId : String) : BaseFr
         }
     }
 
-    private fun checkFacilityData(data : RequestReportFacility){
+    private fun checkFacilityData(data : RequestPlaceFacility){
         if(data.targetList == null || data.targetList.isEmpty()) setFacilityDataVisibility("target")
         if(data.warningList == null || data.warningList.isEmpty()) setFacilityDataVisibility("warning")
     }

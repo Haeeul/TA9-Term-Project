@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="vm"
             type="com.example.mh_term_app.ui.menu.report.ReportViewModel" />
@@ -37,30 +36,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tb_report_place" />
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fl_report_map"
-            android:name="com.naver.maps.map.MapFragment"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/btn_report_place_next"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rg_report_place_type" />
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:layout_constraintBottom_toBottomOf="@+id/fl_report_map"
-            app:layout_constraintEnd_toEndOf="@+id/fl_report_map"
-            app:layout_constraintStart_toStartOf="@+id/fl_report_map"
-            app:layout_constraintTop_toTopOf="@+id/fl_report_map"
-            app:srcCompat="@drawable/ic_marker" />
-
         <EditText
             android:id="@+id/edt_report_place_address"
             style="@style/EditHintText"
@@ -88,12 +63,12 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/round_square_line_grey_8"
             android:hint="@string/hint_address_edt"
+            android:imeOptions="actionDone"
             android:inputType="text"
             android:paddingHorizontal="12dp"
             android:paddingVertical="8dp"
             android:text="@={vm.detailAddressTxt}"
             android:textSize="16dp"
-            android:imeOptions="actionDone"
             app:layout_constraintEnd_toEndOf="@+id/edt_report_place_address"
             app:layout_constraintStart_toStartOf="@+id/edt_report_place_address"
             app:layout_constraintTop_toBottomOf="@+id/edt_report_place_address" />
@@ -113,8 +88,8 @@
                 style="@style/Theme.radioBtn.text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingRight="15dp"
                 android:onClick="@{()->vm.checkValidNextBtn()}"
+                android:paddingRight="15dp"
                 android:text="@string/txt_place_store" />
 
             <RadioButton
@@ -124,6 +99,30 @@
                 android:layout_height="wrap_content"
                 android:text="@string/txt_place_facility" />
         </RadioGroup>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fl_report_map"
+            android:name="com.naver.maps.map.MapFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_report_place_next"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rg_report_place_type" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toBottomOf="@+id/fl_report_map"
+            app:layout_constraintEnd_toEndOf="@+id/fl_report_map"
+            app:layout_constraintStart_toStartOf="@+id/fl_report_map"
+            app:layout_constraintTop_toTopOf="@+id/fl_report_map"
+            app:srcCompat="@drawable/ic_marker" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_report_place_next"

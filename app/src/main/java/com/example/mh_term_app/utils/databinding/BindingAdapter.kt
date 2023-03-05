@@ -1,10 +1,15 @@
 package com.example.mh_term_app.utils.databinding
 
 import android.annotation.SuppressLint
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import androidx.databinding.InverseBindingAdapter
+import androidx.databinding.InverseBindingListener
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
 import com.google.android.material.chip.Chip
@@ -106,5 +111,41 @@ object BindingAdapter {
     fun TextView.setPhoneFormat(phone : String) {
 
         TODO()
+    }
+
+    @JvmStatic
+    @InverseBindingAdapter(attribute = "setReviewContentsText", event = "TextAttrChanged")
+    fun getNoteContentsSizeText(view: EditText): String {
+        return view.text.toString()
+    }
+
+    @JvmStatic
+    @BindingAdapter("setReviewContentsText")
+    fun setReviewContentsText(view: EditText, text: String) {
+        when (text.length) {
+            0 -> {
+                view.setBackgroundResource(R.drawable.round_square_line_fill_grey_8)
+            }
+            else -> {
+                view.setBackgroundResource(R.drawable.round_square_line_grey_8)
+            }
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("TextAttrChanged")
+    fun setTextAttrChanged(view: EditText, listener: InverseBindingListener) {
+        view.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                listener.onChange()
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
     }
 }

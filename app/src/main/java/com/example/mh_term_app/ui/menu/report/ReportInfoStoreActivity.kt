@@ -10,6 +10,7 @@ import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.MainActivity
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
+import com.example.mh_term_app.data.model.ReportPlaceAddress
 import com.example.mh_term_app.databinding.ActivityReportInfoStoreBinding
 import com.example.mh_term_app.utils.extension.*
 
@@ -18,17 +19,12 @@ class ReportInfoStoreActivity : BaseActivity<ActivityReportInfoStoreBinding>() {
         get() = R.layout.activity_report_info_store
     private val reportPlaceViewModel : ReportViewModel by viewModels()
 
-    private var storeType = ""
-    private var storeAddress = ""
-    private var storeLatitude = 0.0
-    private var storeLongitude = 0.0
+    lateinit var storeInfo : ReportPlaceAddress
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        storeType = intent.getStringExtra("type").toString()
-        storeAddress = intent.getStringExtra("address").toString()
-        storeLatitude = intent.getDoubleExtra("latitude",0.0)
-        storeLongitude = intent.getDoubleExtra("longitude",0.0)
+
+        storeInfo = intent.getParcelableExtra<ReportPlaceAddress>("placeAddressInfo")!!
 
         binding.apply {
             vm = reportPlaceViewModel
@@ -103,6 +99,7 @@ class ReportInfoStoreActivity : BaseActivity<ActivityReportInfoStoreBinding>() {
                     binding.edtReportStoreEtcType.visibility = View.GONE
                 }
                 R.id.rb_store_etc -> {
+                    reportPlaceViewModel.setDetailTypeTxt(reportPlaceViewModel.etcTypeTxt.value.toString())
                     binding.edtReportStoreEtcType.visibility = View.VISIBLE
                 }
             }
@@ -117,7 +114,7 @@ class ReportInfoStoreActivity : BaseActivity<ActivityReportInfoStoreBinding>() {
         }
     }
 
-    fun onStoreWaningClicked(view: View) {
+    fun onStoreWarningClicked(view: View) {
         if (view is CheckBox) {
             val checked: Boolean = view.isChecked
 
@@ -126,7 +123,7 @@ class ReportInfoStoreActivity : BaseActivity<ActivityReportInfoStoreBinding>() {
     }
 
     fun postReportStore(view: View){
-        reportPlaceViewModel.postReportStore(storeType,storeAddress,storeLatitude,storeLongitude)
+        reportPlaceViewModel.postReportStore(storeInfo)
     }
 
 }
