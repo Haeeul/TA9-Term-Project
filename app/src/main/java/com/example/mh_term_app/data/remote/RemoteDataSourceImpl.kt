@@ -203,6 +203,27 @@ class RemoteDataSourceImpl : RemoteDataSource {
         return placeList
     }
 
+    override suspend fun getPlaceRating(id: String): Float {
+        var rating = 0f
+        try {
+            db.collection("reviews")
+                .whereEqualTo("placeId", id)
+                .get()
+                .addOnSuccessListener { result ->
+                    for(item in result){
+                        rating += item.data["rating"].toString().toFloat()
+                    }
+                    rating /= result.size()
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
+                }.await()
+        }catch (e:FirebaseException){
+            Log.e(TAG, e.message.toString())
+        }
+        return rating
+    }
+
     override suspend fun getStoreInfo(id: String): RequestPlaceStore {
         var store = RequestPlaceStore()
         try {

@@ -18,7 +18,6 @@ class DetailReviewAdapter : RecyclerView.Adapter<DetailReviewAdapter.DetailRevie
     @SuppressLint("NotifyDataSetChanged")
     internal fun setReviewList(data: MutableList<ResponseReviewList>?) {
         if (data != null) this.data = data
-        Log.d("명 adapter ", data.toString())
         notifyDataSetChanged()
     }
 
