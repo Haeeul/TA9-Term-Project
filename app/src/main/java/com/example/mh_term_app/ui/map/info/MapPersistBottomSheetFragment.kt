@@ -1,17 +1,21 @@
 package com.example.mh_term_app.ui.map.info
 
+import android.util.Log
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.viewModels
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
 import com.example.mh_term_app.data.model.response.ResponseCategoryList
 import com.example.mh_term_app.databinding.LayoutInfoCollapseBinding
 import com.example.mh_term_app.databinding.LayoutInfoExpandBinding
+import com.example.mh_term_app.ui.map.MapViewModel
 import com.example.mh_term_app.ui.map.details.DetailReportFacilityDataFragment
 import com.example.mh_term_app.ui.map.details.DetailReportStoreDataFragment
 import com.example.mh_term_app.ui.map.review.DetailReviewFragment
 import com.example.mh_term_app.utils.listener.TabSelectedListener
 import com.example.mh_term_app.utils.listener.changeTabsFont
+import com.naver.maps.map.MapView
 import kr.co.prnd.persistbottomsheetfragment.PersistBottomSheetFragment
 
 
@@ -21,6 +25,15 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
 ) {
     lateinit var viewPagerAdapter: ViewPagerAdapter
     lateinit var markerId : String
+    private val mapViewModel : MapViewModel by viewModels()
+
+    var placeId = ""
+
+    override fun onResume() {
+        super.onResume()
+
+        mapViewModel.getPlaceRating(placeId)
+    }
 
     companion object {
         private val TAG = MapPersistBottomSheetFragment::class.simpleName
@@ -37,13 +50,13 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
                 }
     }
 
-    private fun initViewPager(type: String, id: String){
+    private fun initViewPager(item: ResponseCategoryList){
         viewPagerAdapter = ViewPagerAdapter(
             childFragmentManager
         )
         viewPagerAdapter.fragments = listOf(
-            if(type == "매장") DetailReportStoreDataFragment(id) else DetailReportFacilityDataFragment(id),
-            DetailReviewFragment()
+            if(item.data.type == "매장") DetailReportStoreDataFragment(item.id) else DetailReportFacilityDataFragment(item.id),
+            DetailReviewFragment(item)
         )
 
         expandBinding.vpInfoDetail.adapter = viewPagerAdapter
@@ -60,6 +73,8 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
     }
 
     fun setPlaceData(item : ResponseCategoryList){
+        placeId = item.id
+
         collapseBinding.item = item
         collapseBinding.apply {
             txtBottomInfoName.text = when(item.data.type){
@@ -82,13 +97,33 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
                 setTypeName(item.data.location, item.data.detailType)
             }
         }
-        initViewPager(item.data.type, item.id)
+        initViewPager(item)
         initTab(item.data.type)
     }
 
     private fun setTypeName(type:String, name:String){
         expandBinding.txtDetailType.text = type
         expandBinding.txtDetailName.text = name
+    }
+
+    fun setPlaceRating(id:String){
+        mapViewModel.placeRating.observe(this){
+            var rating = ""
+
+            rating = if(it.isNaN()) "-"
+            else it.toString()
+
+            collapseBinding.apply {
+                rbBottomInfo.rating = it
+                txtBottomInfoRating.text = rating.toString()
+            }
+            expandBinding.apply {
+                rbDetailInfo.rating = it
+                txtDetailRating.text = rating.toString()
+            }
+        }
+
+        mapViewModel.getPlaceRating(id)
     }
 
 }

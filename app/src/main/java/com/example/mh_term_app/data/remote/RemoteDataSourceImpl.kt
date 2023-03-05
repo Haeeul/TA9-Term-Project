@@ -2,12 +2,10 @@ package com.example.mh_term_app.data.remote
 
 import android.util.Log
 import com.example.mh_term_app.MHApplication
-import com.example.mh_term_app.data.model.request.RequestPlaceFacility
-import com.example.mh_term_app.data.model.request.RequestPlaceStore
-import com.example.mh_term_app.data.model.request.RequestUpdatePlaceAddress
-import com.example.mh_term_app.data.model.request.RequestUpdateStoreInfo
+import com.example.mh_term_app.data.model.request.*
 import com.example.mh_term_app.data.model.response.PlaceInfo
 import com.example.mh_term_app.data.model.response.ResponseCategoryList
+import com.example.mh_term_app.data.model.response.ResponseReviewList
 import com.example.mh_term_app.data.model.response.ResponseUser
 import com.google.firebase.FirebaseException
 import com.google.firebase.firestore.ktx.firestore
@@ -205,6 +203,27 @@ class RemoteDataSourceImpl : RemoteDataSource {
         return placeList
     }
 
+    override suspend fun getPlaceRating(id: String): Float {
+        var rating = 0f
+        try {
+            db.collection("reviews")
+                .whereEqualTo("placeId", id)
+                .get()
+                .addOnSuccessListener { result ->
+                    for(item in result){
+                        rating += item.data["rating"].toString().toFloat()
+                    }
+                    rating /= result.size()
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
+                }.await()
+        }catch (e:FirebaseException){
+            Log.e(TAG, e.message.toString())
+        }
+        return rating
+    }
+
     override suspend fun getStoreInfo(id: String): RequestPlaceStore {
         var store = RequestPlaceStore()
         try {
@@ -279,5 +298,60 @@ class RemoteDataSourceImpl : RemoteDataSource {
         }
 
         return result
+    }
+
+    override suspend fun postReview(review: RequestReview): Boolean {
+        var result = false
+
+        try {
+            db.collection("reviews")
+                .add(review)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                    result = true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error adding documents.", exception)
+                    result = false
+                }.await()
+        }catch (e:FirebaseException){
+            Log.e(TAG, e.message.toString())
+        }
+
+        return result
+    }
+
+    override suspend fun getReview(id: String): MutableList<ResponseReviewList> {
+        var reviewList = mutableListOf<ResponseReviewList>()
+        try {
+            db.collection("reviews")
+                .whereEqualTo("placeId", id)
+                .get()
+                .addOnSuccessListener { result ->
+                    for(review in result){
+                        reviewList.add(
+                            ResponseReviewList(
+                                review.id,
+                                review.data["placeId"].toString(),
+                                review.data["placeName"].toString(),
+                                review.data["placeType"].toString(),
+                                review.data["writer"].toString(),
+                                review.data["writerType"].toString(),
+                                review.data["content"].toString(),
+                                review.data["rating"].toString().toFloat(),
+                                review.data["likeCount"].toString().toDouble(),
+                                review.data["like"] as MutableList<String>?,
+                                review.data["date"].toString()
+                            )
+                        )
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
+                }.await()
+        }catch (e:FirebaseException){
+            Log.e(TAG, e.message.toString())
+        }
+        return reviewList
     }
 }

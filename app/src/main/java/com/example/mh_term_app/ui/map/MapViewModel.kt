@@ -1,5 +1,6 @@
 package com.example.mh_term_app.ui.map
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,6 +18,10 @@ class MapViewModel : ViewModel() {
     val categoryList : LiveData<MutableList<ResponseCategoryList>>
         get() = _categoryList
 
+    private val _placeRating = MutableLiveData<Float>()
+    val placeRating : LiveData<Float>
+        get() = _placeRating
+
     private val _storeInfo = MutableLiveData<RequestPlaceStore>()
     val storeInfo : LiveData<RequestPlaceStore>
         get() = _storeInfo
@@ -28,6 +33,12 @@ class MapViewModel : ViewModel() {
     fun getCategoryList(type : String){
         viewModelScope.launch {
             _categoryList.value = mapRepository.getCategoryList(type)
+        }
+    }
+
+    fun getPlaceRating(id : String){
+        viewModelScope.launch {
+            _placeRating.value = mapRepository.getPlaceRating(id)
         }
     }
 
