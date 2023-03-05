@@ -2,6 +2,9 @@ package com.example.mh_term_app.ui.map.review
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.TextView
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
@@ -16,7 +19,7 @@ class DetailReviewFragment(val item: ResponseCategoryList) : BaseFragment<Fragme
     override val layoutResID: Int
         get() = R.layout.fragment_detail_review
 
-    private val reviewViewModel : ReviewViewModel by viewModels()
+    private val reviewViewModel : ReviewViewModel by activityViewModels()
     lateinit var reviewAdapter: DetailReviewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +31,7 @@ class DetailReviewFragment(val item: ResponseCategoryList) : BaseFragment<Fragme
     override fun initView() {
         super.initView()
 
+        binding.vm = reviewViewModel
         initReview()
     }
 
@@ -36,10 +40,21 @@ class DetailReviewFragment(val item: ResponseCategoryList) : BaseFragment<Fragme
 
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        reviewViewModel.getReviewList(item.id)
+    }
+
     override fun initListener() {
         super.initListener()
 
-        binding.btnReviewAdd.setSingleOnClickListener {
+        goToAddReview(binding.btnReviewAdd)
+        goToAddReview(binding.btnReviewNoneAdd)
+    }
+
+    private fun goToAddReview(textView: TextView){
+        textView.setSingleOnClickListener {
             val reviewIntent = Intent(context, DetailAddReviewActivity::class.java)
             reviewIntent.putExtra("id", item.id)
             reviewIntent.putExtra("type", item.data.detailType)

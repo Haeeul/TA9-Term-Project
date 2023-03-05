@@ -317,14 +317,13 @@ class RemoteDataSourceImpl : RemoteDataSource {
                                 review.data["writer"].toString(),
                                 review.data["writerType"].toString(),
                                 review.data["content"].toString(),
-                                review.data["rating"].toString().toDouble(),
+                                review.data["rating"].toString().toFloat(),
                                 review.data["likeCount"].toString().toDouble(),
-                                review.data["like"] as MutableList<String>?
+                                review.data["like"] as MutableList<String>?,
+                                review.data["date"].toString()
                             )
                         )
-                        Log.d("명 review",review.toString())
                     }
-                    Log.d("명 reviewList",reviewList.toString())
                 }
                 .addOnFailureListener { exception ->
                     Log.w(TAG, "Error getting documents.", exception)

@@ -1,5 +1,6 @@
 package com.example.mh_term_app.ui.map.review
 
+import android.util.Log
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mh_term_app.data.model.response.ResponseReviewList

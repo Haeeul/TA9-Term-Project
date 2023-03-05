@@ -9,5 +9,6 @@ data class RequestReview(
     val content : String,
     val rating : Double,
     val likeCount : Double,
-    val like : MutableList<String>?
+    val like : MutableList<String>?,
+    val date : String
 )

@@ -8,7 +8,8 @@ data class ResponseReviewList(
     val writer : String,
     val writerType : String,
     val content : String,
-    val rating : Double,
+    val rating : Float,
     val likeCount : Double,
-    val like : MutableList<String>?
+    val like : MutableList<String>?,
+    val date : String
 )

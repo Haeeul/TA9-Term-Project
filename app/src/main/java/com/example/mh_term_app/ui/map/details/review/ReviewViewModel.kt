@@ -1,6 +1,8 @@
 package com.example.mh_term_app.ui.map.details.review
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +12,7 @@ import com.example.mh_term_app.data.model.request.RequestReview
 import com.example.mh_term_app.data.model.response.ResponseReviewList
 import com.example.mh_term_app.data.repository.ReviewRepository
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 class ReviewViewModel : ViewModel() {
     private val reviewRepository = ReviewRepository()
@@ -29,10 +32,15 @@ class ReviewViewModel : ViewModel() {
     val reviewList : LiveData<MutableList<ResponseReviewList>>
         get() = _reviewList
 
+    private val _isValidReviewList = MutableLiveData(false)
+    val isValidReviewList : LiveData<Boolean>
+        get() = _isValidReviewList
+
     fun checkCompleteBtn(){
         _isValidCompleteBtn.value = reviewTxt.value?.isNotEmpty() == true && rating.value != 0f
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun postReview(placeId: String, placeType : String, placeName : String){
         viewModelScope.launch {
             val review = RequestReview(
@@ -44,7 +52,8 @@ class ReviewViewModel : ViewModel() {
                 content = reviewTxt.value.toString(),
                 rating = rating.value.toString().toDouble(),
                 likeCount = 0.0,
-                like = null
+                like = null,
+                date = LocalDate.now().toString()
             )
 
             _isValidReview.value = reviewRepository.postReview(review)
@@ -55,8 +64,7 @@ class ReviewViewModel : ViewModel() {
         viewModelScope.launch {
             _reviewList.value = reviewRepository.getReviewList(id)
 
-            Log.d("명",reviewTxt.value.toString())
-            Log.d("명1",reviewRepository.getReviewList(id).toString())
+            _isValidReviewList.value = _reviewList.value!!.size > 0
         }
     }
 }

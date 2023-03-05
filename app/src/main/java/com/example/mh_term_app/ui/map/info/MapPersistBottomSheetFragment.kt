@@ -1,5 +1,6 @@
 package com.example.mh_term_app.ui.map.info
 
+import android.util.Log
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
 import com.example.mh_term_app.MHApplication

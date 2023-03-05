@@ -1,18 +1,24 @@
 package com.example.mh_term_app.ui.map.review
 
+import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
 import com.example.mh_term_app.data.model.response.ResponseReviewList
 import com.example.mh_term_app.databinding.RvItemDetailReviewBinding
+import com.example.mh_term_app.utils.databinding.BindingAdapter.setReviewIcon
 
 class DetailReviewAdapter : RecyclerView.Adapter<DetailReviewAdapter.DetailReviewViewHolder>() {
     var data = mutableListOf<ResponseReviewList>()
 
+    @SuppressLint("NotifyDataSetChanged")
     internal fun setReviewList(data: MutableList<ResponseReviewList>?) {
         if (data != null) this.data = data
+        Log.d("명 adapter ", data.toString())
         notifyDataSetChanged()
     }
 
@@ -38,6 +44,14 @@ class DetailReviewAdapter : RecyclerView.Adapter<DetailReviewAdapter.DetailRevie
     inner class DetailReviewViewHolder(val binding : RvItemDetailReviewBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item : ResponseReviewList){
             binding.item = item
+
+            if(item.like != null && item.like.contains(MHApplication.prefManager.userNickname)){
+                binding.btnReviewLike.setReviewIcon(true)
+            }else{
+                binding.btnReviewLike.setReviewIcon(false)
+            }
         }
+
+
     }
 }
