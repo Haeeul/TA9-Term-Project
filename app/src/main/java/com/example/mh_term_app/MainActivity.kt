@@ -18,6 +18,7 @@ import com.example.mh_term_app.ui.map.info.MapPersistBottomSheetFragment
 import com.example.mh_term_app.utils.extension.toast
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
+import com.naver.maps.map.NaverMap.LAYER_GROUP_TRANSIT
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.util.FusedLocationSource
@@ -110,6 +111,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
             ), 15.0
         )
         naverMap.cameraPosition = cameraPosition
+
+//        naverMap.mapType = NaverMap.MapType.Basic
+        naverMap.setLayerGroupEnabled(LAYER_GROUP_TRANSIT, true)
 
         naverMap.setOnMapClickListener { _, _ ->
             setInfoWindowVisibility(false)

@@ -44,10 +44,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="24dp"
                     android:layout_marginEnd="24dp"
                     android:text="@string/desc_user_info"
-                    android:textSize="26dp"
+                    android:textSize="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tb_user_info" />
@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:text="@string/sub_title_nickname"
-                    android:textSize="22dp"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="@+id/textView7"
                     app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:text="*"
                     android:textColor="@color/red"
-                    android:textSize="22dp"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toEndOf="@+id/textView8"
                     app:layout_constraintTop_toTopOf="@+id/textView8" />
 
@@ -78,7 +78,7 @@
                     android:id="@+id/edt_user_info_nick"
                     style="@style/EditHintText"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:background="@drawable/round_square_line_grey_8"
@@ -87,7 +87,7 @@
                     android:onTextChanged="@{vm.inputNickname}"
                     android:paddingHorizontal="16dp"
                     android:text="@={vm.nicknameTxt}"
-                    android:textSize="18dp"
+                    android:textSize="16dp"
                     app:layout_constraintEnd_toStartOf="@+id/btn_nick_double_check"
                     app:layout_constraintStart_toStartOf="@+id/textView8"
                     app:layout_constraintTop_toBottomOf="@+id/textView8" />
@@ -106,8 +106,8 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_nick_double_check"
                     style="@style/MediumText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="0dp"
                     android:layout_marginEnd="24dp"
                     android:background="@drawable/selector_sign_request_btn"
                     android:enabled="@{vm.isValidNickCheckBtn}"
@@ -127,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:text="@{vm.nicknameNotice}"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:visibility="@{vm.isValidNickNotice ? View.VISIBLE : View.GONE}"
                     app:layout_constraintStart_toStartOf="@+id/edt_user_info_nick"
                     app:layout_constraintTop_toBottomOf="@+id/edt_user_info_nick" />
@@ -139,7 +139,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/txt_user_type"
-                    android:textSize="22dp"
+                    android:textSize="20dp"
                     app:layout_constraintStart_toStartOf="@+id/textView8"
                     app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
@@ -289,7 +289,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="32dp"
                     android:layout_marginEnd="24dp"
                     android:layout_marginBottom="35dp"
                     android:background="@drawable/selector_sign_btn"
@@ -299,8 +298,7 @@
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rg_user_type" />
+                    app:layout_constraintStart_toStartOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

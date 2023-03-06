@@ -375,4 +375,42 @@ class RemoteDataSourceImpl : RemoteDataSource {
         }
         return reviewList
     }
+
+    override suspend fun postNewUserInfo(id: String, nickname: String, type: String): Boolean {
+        var result = false
+
+        try {
+            db.collection("users")
+                .document(id)
+                .update("nickname", nickname)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                    result = true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error adding documents.", exception)
+                    result = false
+                }.await()
+        }catch (e:FirebaseException){
+            Log.e(TAG, e.message.toString())
+        }
+
+        try {
+            db.collection("users")
+                .document(id)
+                .update("type", type)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                    result = true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error adding documents.", exception)
+                    result = false
+                }.await()
+        }catch (e:FirebaseException){
+            Log.e(TAG, e.message.toString())
+        }
+
+        return result
+    }
 }
