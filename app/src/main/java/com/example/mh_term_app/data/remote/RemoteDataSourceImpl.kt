@@ -356,8 +356,8 @@ class RemoteDataSourceImpl : RemoteDataSource {
                                 review.data["placeId"].toString(),
                                 review.data["placeName"].toString(),
                                 review.data["placeType"].toString(),
-                                review.data["writer"].toString(),
-                                review.data["writerType"].toString(),
+                                review.data["userNickname"].toString(),
+                                review.data["userType"].toString(),
                                 review.data["content"].toString(),
                                 review.data["rating"].toString().toFloat(),
                                 review.data["likeCount"].toString().toDouble(),
@@ -366,6 +366,42 @@ class RemoteDataSourceImpl : RemoteDataSource {
                             )
                         )
                     }
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
+                }.await()
+        }catch (e:FirebaseException){
+            Log.e(TAG, e.message.toString())
+        }
+        return reviewList
+    }
+
+    override suspend fun getUserReview(nickname: String): MutableList<ResponseReviewList> {
+        var reviewList = mutableListOf<ResponseReviewList>()
+        try {
+            db.collection("reviews")
+                .whereEqualTo("userNickname", nickname)
+                .get()
+                .addOnSuccessListener { result ->
+                    for(review in result){
+                        reviewList.add(
+                            ResponseReviewList(
+                                review.id,
+                                review.data["placeId"].toString(),
+                                review.data["placeName"].toString(),
+                                review.data["placeType"].toString(),
+                                review.data["userNickname"].toString(),
+                                review.data["userType"].toString(),
+                                review.data["content"].toString(),
+                                review.data["rating"].toString().toFloat(),
+                                review.data["likeCount"].toString().toDouble(),
+                                review.data["like"] as MutableList<String>?,
+                                review.data["date"].toString()
+                            )
+                        )
+                        Log.d("명 review", review.data.toString())
+                    }
+                    Log.d("명 review list", reviewList.toString())
                 }
                 .addOnFailureListener { exception ->
                     Log.w(TAG, "Error getting documents.", exception)

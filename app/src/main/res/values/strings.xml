@@ -151,9 +151,11 @@
     <string name="txt_send">보내기</string>
 
     <!-- review -->
+    <string name="title_user_review">작성 리뷰 내역</string>
     <string name="title_review_add">리뷰 작성</string>
     <string name="hint_review_input">내용을 입력해주세요.</string>
     <string name="desc_review_none">아직 등록된 리뷰가 없습니다.\n이곳의 첫 번째 리뷰를 작성해보세요:)</string>
+    <string name="desc_user_review_none">작성한 리뷰가 없습니다.\n방문했던 곳의 리뷰를 작성해보세요:)</string>
 
     <!-- etc -->
     <string name="txt_server_error">서버 점검중입니다.</string>

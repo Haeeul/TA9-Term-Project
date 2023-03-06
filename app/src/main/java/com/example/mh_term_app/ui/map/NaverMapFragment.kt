@@ -15,8 +15,8 @@ import com.example.mh_term_app.base.BaseFragment
 import com.example.mh_term_app.databinding.FragmentNaverMapBinding
 import com.example.mh_term_app.ui.menu.EditUserInfoActivity
 import com.example.mh_term_app.ui.menu.UserFavotireActivity
-import com.example.mh_term_app.ui.menu.UserReviewActivity
 import com.example.mh_term_app.ui.menu.report.ReportPlaceActivity
+import com.example.mh_term_app.ui.menu.review.UserReviewActivity
 import com.example.mh_term_app.ui.sign.`in`.SignInActivity
 import com.example.mh_term_app.ui.sign.up.SignUpActivity
 import com.example.mh_term_app.utils.databinding.BindingAdapter.setUserTypeChip

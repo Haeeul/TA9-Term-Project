@@ -9,4 +9,5 @@ class ReviewRepository {
 
     suspend fun postReview(review: RequestReview) = remoteDataSource.postReview(review)
     suspend fun getReviewList(id : String) = remoteDataSource.getReview(id)
+    suspend fun getUserReviewList(nickname : String) = remoteDataSource.getUserReview(nickname)
 }

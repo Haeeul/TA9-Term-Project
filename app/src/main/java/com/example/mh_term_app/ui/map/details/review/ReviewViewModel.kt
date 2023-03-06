@@ -47,8 +47,8 @@ class ReviewViewModel : ViewModel() {
                 placeId = placeId,
                 placeName = placeName,
                 placeType = placeType,
-                writer = MHApplication.prefManager.userId,
-                writerType = MHApplication.prefManager.userType,
+                userNickname = MHApplication.prefManager.userNickname,
+                userType = MHApplication.prefManager.userType,
                 content = reviewTxt.value.toString(),
                 rating = rating.value.toString().toDouble(),
                 likeCount = 0.0,
@@ -65,6 +65,24 @@ class ReviewViewModel : ViewModel() {
             _reviewList.value = reviewRepository.getReviewList(id)
 
             _isValidReviewList.value = _reviewList.value!!.size > 0
+        }
+    }
+
+    private val _userReviewList = MutableLiveData<MutableList<ResponseReviewList>>()
+    val userReviewList : LiveData<MutableList<ResponseReviewList>>
+        get() = _userReviewList
+
+    private val _isValidUserReviewList = MutableLiveData(false)
+    val isValidUserReviewList : LiveData<Boolean>
+        get() = _isValidUserReviewList
+
+    fun getUserReview(){
+        viewModelScope.launch {
+            _userReviewList.value = reviewRepository.getUserReviewList(MHApplication.prefManager.userNickname)
+
+            _isValidUserReviewList.value = _userReviewList.value!!.size > 0
+
+            Log.d("명", _userReviewList.value.toString())
         }
     }
 }

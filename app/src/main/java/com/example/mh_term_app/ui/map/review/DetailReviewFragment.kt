@@ -2,10 +2,8 @@ package com.example.mh_term_app.ui.map.review
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
 import com.example.mh_term_app.data.model.response.ResponseCategoryList
@@ -57,8 +55,14 @@ class DetailReviewFragment(val item: ResponseCategoryList) : BaseFragment<Fragme
         textView.setSingleOnClickListener {
             val reviewIntent = Intent(context, DetailAddReviewActivity::class.java)
             reviewIntent.putExtra("id", item.id)
-            reviewIntent.putExtra("type", item.data.detailType)
-            reviewIntent.putExtra("name", item.data.name)
+            if(item.data.type == "매장") {
+                reviewIntent.putExtra("type", item.data.detailType)
+                reviewIntent.putExtra("name", item.data.name)
+            }else{
+                reviewIntent.putExtra("type", item.data.location)
+                reviewIntent.putExtra("name", item.data.detailType)
+            }
+
             startActivity(reviewIntent)
         }
     }

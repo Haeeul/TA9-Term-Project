@@ -48,13 +48,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.menu.report.ReportTypeActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".ui.menu.report.ReportPlaceActivity"
             android:exported="false">
             <meta-data
@@ -69,7 +62,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.menu.UserReviewActivity"
+            android:name=".ui.menu.review.UserReviewActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
