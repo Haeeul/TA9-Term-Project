@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="com.example.mh_term_app.ui.menu.report.ReportViewModel" />
@@ -14,48 +15,48 @@
         android:layout_height="wrap_content"
         tools:context=".ui.map.details.update.UpdateStoreInfoFragment">
 
-                <TextView
-                    android:id="@+id/textView48"
-                    style="@style/MediumText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:text="@string/txt_store_name"
-                    android:textSize="18dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textView48"
+            style="@style/MediumText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/txt_store_name"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView53"
-                    style="@style/MediumText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="*"
-                    android:textColor="@color/red"
-                    android:textSize="18dp"
-                    app:layout_constraintStart_toEndOf="@+id/textView48"
-                    app:layout_constraintTop_toTopOf="@+id/textView48" />
+        <TextView
+            android:id="@+id/textView53"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:textColor="@color/red"
+            android:textSize="18dp"
+            app:layout_constraintStart_toEndOf="@+id/textView48"
+            app:layout_constraintTop_toTopOf="@+id/textView48" />
 
-                <EditText
-                    android:id="@+id/edt_update_info_store_name"
-                    style="@style/EditHintText"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="@drawable/round_square_line_grey_8"
-                    android:hint="@string/hint_store_name_input"
-                    android:inputType="text"
-                    android:maxLength="20"
-                    android:nextFocusDown="@id/edt_report_info_store_phone"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="8dp"
-                    android:text="@={vm.storeNameTxt}"
-                    android:textSize="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView48"
-                    app:layout_constraintTop_toBottomOf="@+id/textView48" />
+        <EditText
+            android:id="@+id/edt_update_info_store_name"
+            style="@style/EditHintText"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/round_square_line_grey_8"
+            android:hint="@string/hint_store_name_input"
+            android:inputType="text"
+            android:maxLength="20"
+            android:nextFocusDown="@id/edt_report_info_store_phone"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:text="@={vm.storeNameTxt}"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView48"
+            app:layout_constraintTop_toBottomOf="@+id/textView48" />
 
         <TextView
             android:id="@+id/textView49"
@@ -68,24 +69,24 @@
             app:layout_constraintStart_toStartOf="@+id/textView48"
             app:layout_constraintTop_toBottomOf="@+id/edt_update_info_store_name" />
 
-                <EditText
-                    android:id="@+id/edt_update_info_store_phone"
-                    style="@style/EditHintText"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/round_square_line_grey_8"
-                    android:hint="@string/hint_store_phone_input"
-                    android:inputType="number"
-                    android:maxLength="11"
-                    android:paddingHorizontal="16dp"
-                    android:text="@={vm.storePhoneTxt}"
-                    android:textSize="16dp"
-                    android:imeOptions="actionDone"
-                    app:layout_constraintEnd_toEndOf="@+id/edt_update_info_store_name"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/textView49"
-                    app:layout_constraintTop_toBottomOf="@+id/textView49" />
+        <EditText
+            android:id="@+id/edt_update_info_store_phone"
+            style="@style/EditHintText"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/round_square_line_grey_8"
+            android:hint="@string/hint_store_phone_input"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLength="11"
+            android:paddingHorizontal="16dp"
+            android:text="@={vm.storePhoneTxt}"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/edt_update_info_store_name"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView49"
+            app:layout_constraintTop_toBottomOf="@+id/textView49" />
 
         <TextView
             android:id="@+id/textView50"
@@ -98,345 +99,345 @@
             app:layout_constraintStart_toStartOf="@+id/textView49"
             app:layout_constraintTop_toBottomOf="@+id/edt_update_info_store_phone" />
 
-                <TextView
-                    android:id="@+id/textView3"
-                    style="@style/MediumText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="(평일, 토요일, 일요일)"
-                    android:textColor="@color/deep_dark_grey"
-                    android:textSize="12dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView50"
-                    app:layout_constraintStart_toEndOf="@+id/textView50"
-                    app:layout_constraintTop_toTopOf="@+id/textView50" />
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(평일, 토요일, 일요일)"
+            android:textColor="@color/deep_dark_grey"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView50"
+            app:layout_constraintStart_toEndOf="@+id/textView50"
+            app:layout_constraintTop_toTopOf="@+id/textView50" />
 
-                <TextView
-                    android:id="@+id/txt_update_info_store_week_time"
-                    style="@style/EditHintText"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/round_square_line_grey_8"
-                    android:gravity="center_vertical"
-                    android:hint="@string/hint_week_time_input"
-                    android:inputType="textMultiLine"
-                    android:paddingHorizontal="16dp"
-                    android:text="@={vm.storeWeekTimeTxt}"
-                    android:textSize="16dp"
-                    app:layout_constraintEnd_toEndOf="@+id/edt_update_info_store_phone"
-                    app:layout_constraintStart_toStartOf="@+id/textView50"
-                    app:layout_constraintTop_toBottomOf="@+id/textView50" />
+        <TextView
+            android:id="@+id/txt_update_info_store_week_time"
+            style="@style/EditHintText"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/round_square_line_grey_8"
+            android:gravity="center_vertical"
+            android:hint="@string/hint_week_time_input"
+            android:inputType="textMultiLine"
+            android:paddingHorizontal="16dp"
+            android:text="@={vm.storeWeekTimeTxt}"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/edt_update_info_store_phone"
+            app:layout_constraintStart_toStartOf="@+id/textView50"
+            app:layout_constraintTop_toBottomOf="@+id/textView50" />
 
-                <TextView
-                    android:id="@+id/txt_update_info_store_saturday_time"
-                    style="@style/EditHintText"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/round_square_line_grey_8"
-                    android:gravity="center_vertical"
-                    android:hint="@string/hint_saturday_time_input"
-                    android:inputType="textMultiLine"
-                    android:paddingHorizontal="16dp"
-                    android:text="@={vm.storeSaturdayTimeTxt}"
-                    android:textSize="16dp"
-                    app:layout_constraintEnd_toEndOf="@+id/txt_update_info_store_week_time"
-                    app:layout_constraintStart_toStartOf="@+id/txt_update_info_store_week_time"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_update_info_store_week_time" />
+        <TextView
+            android:id="@+id/txt_update_info_store_saturday_time"
+            style="@style/EditHintText"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/round_square_line_grey_8"
+            android:gravity="center_vertical"
+            android:hint="@string/hint_saturday_time_input"
+            android:inputType="textMultiLine"
+            android:paddingHorizontal="16dp"
+            android:text="@={vm.storeSaturdayTimeTxt}"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/txt_update_info_store_week_time"
+            app:layout_constraintStart_toStartOf="@+id/txt_update_info_store_week_time"
+            app:layout_constraintTop_toBottomOf="@+id/txt_update_info_store_week_time" />
 
-                <TextView
-                    android:id="@+id/txt_update_info_store_monday_time"
-                    style="@style/EditHintText"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/round_square_line_grey_8"
-                    android:gravity="center_vertical"
-                    android:hint="@string/hint_monday_time_input"
-                    android:inputType="textMultiLine"
-                    android:paddingHorizontal="16dp"
-                    android:text="@={vm.storeMondayTimeTxt}"
-                    android:textSize="16dp"
-                    app:layout_constraintEnd_toEndOf="@+id/txt_update_info_store_saturday_time"
-                    app:layout_constraintStart_toStartOf="@+id/txt_update_info_store_saturday_time"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_update_info_store_saturday_time" />
+        <TextView
+            android:id="@+id/txt_update_info_store_monday_time"
+            style="@style/EditHintText"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/round_square_line_grey_8"
+            android:gravity="center_vertical"
+            android:hint="@string/hint_monday_time_input"
+            android:inputType="textMultiLine"
+            android:paddingHorizontal="16dp"
+            android:text="@={vm.storeMondayTimeTxt}"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/txt_update_info_store_saturday_time"
+            app:layout_constraintStart_toStartOf="@+id/txt_update_info_store_saturday_time"
+            app:layout_constraintTop_toBottomOf="@+id/txt_update_info_store_saturday_time" />
 
-                <TextView
-                    android:id="@+id/textView43"
-                    style="@style/MediumText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:text="@string/sub_title_type_detail"
-                    android:textSize="18dp"
-                    app:layout_constraintStart_toStartOf="@+id/textView48"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_update_info_store_monday_time" />
+        <TextView
+            android:id="@+id/textView43"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/sub_title_type_detail"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/textView48"
+            app:layout_constraintTop_toBottomOf="@+id/txt_update_info_store_monday_time" />
 
-                <TextView
-                    android:id="@+id/textView54"
-                    style="@style/MediumText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="*"
-                    android:textColor="@color/red"
-                    android:textSize="18dp"
-                    app:layout_constraintStart_toEndOf="@+id/textView43"
-                    app:layout_constraintTop_toTopOf="@+id/textView43" />
+        <TextView
+            android:id="@+id/textView54"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:textColor="@color/red"
+            android:textSize="18dp"
+            app:layout_constraintStart_toEndOf="@+id/textView43"
+            app:layout_constraintTop_toTopOf="@+id/textView43" />
 
-                <RadioGroup
-                    android:id="@+id/rg_update_info_store_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:shadowColor="@color/light_grey"
-                    app:layout_constraintStart_toStartOf="@+id/textView43"
-                    app:layout_constraintTop_toBottomOf="@+id/textView43">
+        <RadioGroup
+            android:id="@+id/rg_update_info_store_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:shadowColor="@color/light_grey"
+            app:layout_constraintStart_toStartOf="@+id/textView43"
+            app:layout_constraintTop_toBottomOf="@+id/textView43">
 
-                    <RadioButton
-                        android:id="@+id/rb_update_store_restaurant"
-                        style="@style/Theme.radioBtn.text"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:paddingRight="15dp"
-                        android:text="@string/txt_restaurant" />
+            <RadioButton
+                android:id="@+id/rb_update_store_restaurant"
+                style="@style/Theme.radioBtn.text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingRight="15dp"
+                android:text="@string/txt_restaurant" />
 
-                    <RadioButton
-                        android:id="@+id/rb_update_store_cafe"
-                        style="@style/Theme.radioBtn.text"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:paddingRight="15dp"
-                        android:text="@string/txt_cafe" />
+            <RadioButton
+                android:id="@+id/rb_update_store_cafe"
+                style="@style/Theme.radioBtn.text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingRight="15dp"
+                android:text="@string/txt_cafe" />
 
-                    <RadioButton
-                        android:id="@+id/rb_update_store_etc"
-                        style="@style/Theme.radioBtn.text"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:paddingRight="15dp"
-                        android:text="@string/txt_etc" />
-                </RadioGroup>
+            <RadioButton
+                android:id="@+id/rb_update_store_etc"
+                style="@style/Theme.radioBtn.text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingRight="15dp"
+                android:text="@string/txt_etc" />
+        </RadioGroup>
 
-                <EditText
-                    android:id="@+id/edt_update_store_etc_type"
-                    style="@style/EditHintText"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="@drawable/round_square_line_grey_8"
-                    android:hint="@string/hint_store_type_input"
-                    android:inputType="text"
-                    android:maxLength="20"
-                    android:nextFocusDown="@id/edt_report_info_store_phone"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="8dp"
-                    android:text="@={vm.etcTypeTxt}"
-                    android:textSize="16dp"
-                    android:visibility="gone"
-                    android:imeOptions="actionDone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/rg_update_info_store_type"
-                    app:layout_constraintTop_toBottomOf="@+id/rg_update_info_store_type" />
+        <EditText
+            android:id="@+id/edt_update_store_etc_type"
+            style="@style/EditHintText"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/round_square_line_grey_8"
+            android:hint="@string/hint_store_type_input"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:maxLength="20"
+            android:nextFocusDown="@id/edt_report_info_store_phone"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:text="@={vm.etcTypeTxt}"
+            android:textSize="16dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/rg_update_info_store_type"
+            app:layout_constraintTop_toBottomOf="@+id/rg_update_info_store_type" />
 
-                <TextView
-                    android:id="@+id/textView51"
-                    style="@style/MediumText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="@string/sub_title_warning_target"
-                    android:textSize="18dp"
-                    app:layout_constraintStart_toStartOf="@+id/textView43"
-                    app:layout_constraintTop_toBottomOf="@+id/edt_update_store_etc_type" />
+        <TextView
+            android:id="@+id/textView51"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/sub_title_warning_target"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/textView43"
+            app:layout_constraintTop_toBottomOf="@+id/edt_update_store_etc_type" />
 
-                <CheckBox
-                    android:id="@+id/cb_update_store_target_wheelchair"
-                    style="@style/checkBoxText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:paddingRight="15dp"
-                    android:text="@string/txt_user_type_wheelchair"
-                    app:layout_constraintStart_toStartOf="@+id/textView51"
-                    app:layout_constraintTop_toBottomOf="@+id/textView51" />
+        <CheckBox
+            android:id="@+id/cb_update_store_target_wheelchair"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_user_type_wheelchair"
+            app:layout_constraintStart_toStartOf="@+id/textView51"
+            app:layout_constraintTop_toBottomOf="@+id/textView51" />
 
-                <CheckBox
-                    android:id="@+id/cb_update_store_target_guardian"
-                    style="@style/checkBoxText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:paddingRight="15dp"
-                    android:text="@string/txt_user_type_guardian"
-                    app:layout_constraintStart_toEndOf="@+id/cb_update_store_target_wheelchair"
-                    app:layout_constraintTop_toTopOf="@+id/cb_update_store_target_wheelchair" />
+        <CheckBox
+            android:id="@+id/cb_update_store_target_guardian"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_user_type_guardian"
+            app:layout_constraintStart_toEndOf="@+id/cb_update_store_target_wheelchair"
+            app:layout_constraintTop_toTopOf="@+id/cb_update_store_target_wheelchair" />
 
-                <CheckBox
-                    android:id="@+id/cb_update_store_target_handicap"
-                    style="@style/checkBoxText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:paddingRight="15dp"
-                    android:text="@string/txt_user_type_handicap"
-                    app:layout_constraintStart_toStartOf="@+id/cb_update_store_target_wheelchair"
-                    app:layout_constraintTop_toBottomOf="@+id/cb_update_store_target_wheelchair" />
+        <CheckBox
+            android:id="@+id/cb_update_store_target_handicap"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_user_type_handicap"
+            app:layout_constraintStart_toStartOf="@+id/cb_update_store_target_wheelchair"
+            app:layout_constraintTop_toBottomOf="@+id/cb_update_store_target_wheelchair" />
 
-                <CheckBox
-                    android:id="@+id/cb_update_store_target_injured"
-                    style="@style/checkBoxText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:paddingRight="15dp"
-                    android:text="@string/txt_user_type_injured"
-                    app:layout_constraintStart_toEndOf="@+id/cb_update_store_target_handicap"
-                    app:layout_constraintTop_toBottomOf="@+id/cb_update_store_target_guardian" />
+        <CheckBox
+            android:id="@+id/cb_update_store_target_injured"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_user_type_injured"
+            app:layout_constraintStart_toEndOf="@+id/cb_update_store_target_handicap"
+            app:layout_constraintTop_toBottomOf="@+id/cb_update_store_target_guardian" />
 
-                <CheckBox
-                    android:id="@+id/cb_update_store_target_old"
-                    style="@style/checkBoxText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:paddingRight="15dp"
-                    android:text="@string/txt_user_type_old"
-                    app:layout_constraintStart_toStartOf="@+id/cb_update_store_target_handicap"
-                    app:layout_constraintTop_toBottomOf="@+id/cb_update_store_target_handicap" />
+        <CheckBox
+            android:id="@+id/cb_update_store_target_old"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_user_type_old"
+            app:layout_constraintStart_toStartOf="@+id/cb_update_store_target_handicap"
+            app:layout_constraintTop_toBottomOf="@+id/cb_update_store_target_handicap" />
 
-                <TextView
-                    android:id="@+id/textView40"
-                    style="@style/MediumText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="@string/sub_title_warning"
-                    android:textSize="18dp"
-                    app:layout_constraintStart_toStartOf="@+id/textView51"
-                    app:layout_constraintTop_toBottomOf="@+id/cb_update_store_target_old" />
+        <TextView
+            android:id="@+id/textView40"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/sub_title_warning"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/textView51"
+            app:layout_constraintTop_toBottomOf="@+id/cb_update_store_target_old" />
 
-                <CheckBox
-                    android:id="@+id/cb_update_store_warning_slope"
-                    style="@style/checkBoxText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:paddingRight="15dp"
-                    android:text="@string/txt_warning_slope"
-                    app:layout_constraintStart_toStartOf="@+id/textView40"
-                    app:layout_constraintTop_toBottomOf="@+id/textView40" />
+        <CheckBox
+            android:id="@+id/cb_update_store_warning_slope"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_warning_slope"
+            app:layout_constraintStart_toStartOf="@+id/textView40"
+            app:layout_constraintTop_toBottomOf="@+id/textView40" />
 
-                <CheckBox
-                    android:id="@+id/cb_update_store_warning_height"
-                    style="@style/checkBoxText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:paddingRight="15dp"
-                    android:text="@string/txt_warning_height"
-                    app:layout_constraintStart_toEndOf="@+id/cb_update_store_warning_slope"
-                    app:layout_constraintTop_toTopOf="@+id/cb_update_store_warning_slope" />
+        <CheckBox
+            android:id="@+id/cb_update_store_warning_height"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_warning_height"
+            app:layout_constraintStart_toEndOf="@+id/cb_update_store_warning_slope"
+            app:layout_constraintTop_toTopOf="@+id/cb_update_store_warning_slope" />
 
-                <CheckBox
-                    android:id="@+id/cb_update_store_warning_offset"
-                    style="@style/checkBoxText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:paddingRight="15dp"
-                    android:text="@string/txt_warning_offset"
-                    app:layout_constraintStart_toEndOf="@+id/cb_update_store_warning_height"
-                    app:layout_constraintTop_toTopOf="@+id/cb_update_store_warning_height" />
+        <CheckBox
+            android:id="@+id/cb_update_store_warning_offset"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_warning_offset"
+            app:layout_constraintStart_toEndOf="@+id/cb_update_store_warning_height"
+            app:layout_constraintTop_toTopOf="@+id/cb_update_store_warning_height" />
 
-                <CheckBox
-                    android:id="@+id/cb_update_store_warning_out"
-                    style="@style/checkBoxText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:paddingRight="15dp"
-                    android:text="@string/txt_warning_out"
-                    app:layout_constraintStart_toEndOf="@+id/cb_update_store_warning_offset"
-                    app:layout_constraintTop_toTopOf="@+id/cb_update_store_warning_offset" />
+        <CheckBox
+            android:id="@+id/cb_update_store_warning_out"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_warning_out"
+            app:layout_constraintStart_toEndOf="@+id/cb_update_store_warning_offset"
+            app:layout_constraintTop_toTopOf="@+id/cb_update_store_warning_offset" />
 
-                <CheckBox
-                    android:id="@+id/cb_update_store_warning_finish"
-                    style="@style/checkBoxText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:paddingRight="15dp"
-                    android:text="@string/txt_warning_finish"
-                    app:layout_constraintStart_toStartOf="@+id/cb_update_store_warning_slope"
-                    app:layout_constraintTop_toBottomOf="@+id/cb_update_store_warning_slope" />
+        <CheckBox
+            android:id="@+id/cb_update_store_warning_finish"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_warning_finish"
+            app:layout_constraintStart_toStartOf="@+id/cb_update_store_warning_slope"
+            app:layout_constraintTop_toBottomOf="@+id/cb_update_store_warning_slope" />
 
-                <CheckBox
-                    android:id="@+id/cb_update_store_warning_info"
-                    style="@style/checkBoxText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:paddingRight="15dp"
-                    android:text="@string/txt_warning_info"
-                    app:layout_constraintStart_toEndOf="@+id/cb_update_store_warning_finish"
-                    app:layout_constraintTop_toTopOf="@+id/cb_update_store_warning_finish" />
+        <CheckBox
+            android:id="@+id/cb_update_store_warning_info"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_warning_info"
+            app:layout_constraintStart_toEndOf="@+id/cb_update_store_warning_finish"
+            app:layout_constraintTop_toTopOf="@+id/cb_update_store_warning_finish" />
 
-                <CheckBox
-                    android:id="@+id/cb_update_store_warning_width"
-                    style="@style/checkBoxText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:paddingRight="15dp"
-                    android:text="@string/txt_warning_width"
-                    app:layout_constraintStart_toEndOf="@+id/cb_update_store_warning_info"
-                    app:layout_constraintTop_toTopOf="@+id/cb_update_store_warning_info" />
+        <CheckBox
+            android:id="@+id/cb_update_store_warning_width"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_warning_width"
+            app:layout_constraintStart_toEndOf="@+id/cb_update_store_warning_info"
+            app:layout_constraintTop_toTopOf="@+id/cb_update_store_warning_info" />
 
-                <TextView
-                    android:id="@+id/textView41"
-                    style="@style/MediumText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="@string/sub_title_info_plus"
-                    android:textSize="18dp"
-                    app:layout_constraintStart_toStartOf="@+id/textView40"
-                    app:layout_constraintTop_toBottomOf="@+id/cb_update_store_warning_finish" />
+        <TextView
+            android:id="@+id/textView41"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/sub_title_info_plus"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/textView40"
+            app:layout_constraintTop_toBottomOf="@+id/cb_update_store_warning_finish" />
 
-                <TextView
-                    android:id="@+id/textView55"
-                    style="@style/MediumText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="*"
-                    android:textColor="@color/red"
-                    android:textSize="18dp"
-                    app:layout_constraintStart_toEndOf="@+id/textView41"
-                    app:layout_constraintTop_toTopOf="@+id/textView41" />
+        <TextView
+            android:id="@+id/textView55"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:textColor="@color/red"
+            android:textSize="18dp"
+            app:layout_constraintStart_toEndOf="@+id/textView41"
+            app:layout_constraintTop_toTopOf="@+id/textView41" />
 
-                <EditText
-                    android:id="@+id/edt_update_info_store_plus"
-                    style="@style/EditHintText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="@drawable/round_square_line_grey_8"
-                    android:hint="@string/hint_info_plus_input"
-                    android:inputType="textMultiLine"
-                    android:maxLines="10"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="16dp"
-                    android:scrollHorizontally="false"
-                    android:text="@={vm.plusInfoTxt}"
-                    android:textSize="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView41"
-                    app:layout_constraintTop_toBottomOf="@+id/textView41" />
+        <EditText
+            android:id="@+id/edt_update_info_store_plus"
+            style="@style/EditHintText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/round_square_line_grey_8"
+            android:hint="@string/hint_info_plus_input"
+            android:inputType="textMultiLine"
+            android:maxLines="10"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="16dp"
+            android:scrollHorizontally="false"
+            android:text="@={vm.plusInfoTxt}"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView41"
+            app:layout_constraintTop_toBottomOf="@+id/textView41" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_update_info_store_complete"
-                    style="@style/ButtonText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginBottom="35dp"
-                    android:background="@drawable/selector_sign_btn"
-                    android:enabled="@{vm.isValidSendBtn}"
-                    android:text="@string/txt_send"
-                    android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/edt_update_info_store_plus"
-                    app:layout_constraintStart_toStartOf="@+id/edt_update_info_store_plus"
-                    app:layout_constraintTop_toBottomOf="@+id/edt_update_info_store_plus" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_update_info_store_complete"
+            style="@style/ButtonText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="35dp"
+            android:background="@drawable/selector_sign_btn"
+            android:enabled="@{vm.isValidSendBtn}"
+            android:text="@string/txt_send"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/edt_update_info_store_plus"
+            app:layout_constraintStart_toStartOf="@+id/edt_update_info_store_plus"
+            app:layout_constraintTop_toBottomOf="@+id/edt_update_info_store_plus" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

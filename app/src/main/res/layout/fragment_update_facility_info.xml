@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.example.mh_term_app.ui.menu.report.ReportViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -8,9 +16,339 @@
         tools:context=".ui.map.details.update.UpdateFacilityInfoFragment">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="시설물 정보 수정" />
+            android:id="@+id/textView63"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/sub_title_location_detail"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView64"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:textColor="@color/red"
+            android:textSize="18dp"
+            app:layout_constraintStart_toEndOf="@+id/textView63"
+            app:layout_constraintTop_toTopOf="@+id/textView63" />
+
+        <RadioGroup
+            android:id="@+id/rg_update_location_facility"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:shadowColor="@color/light_grey"
+            app:layout_constraintStart_toStartOf="@+id/textView63"
+            app:layout_constraintTop_toBottomOf="@+id/textView63">
+
+            <RadioButton
+                android:id="@+id/rb_update_facility_inside"
+                style="@style/Theme.radioBtn.text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingRight="15dp"
+                android:text="@string/txt_inside" />
+
+            <RadioButton
+                android:id="@+id/rb_update_facility_outside"
+                style="@style/Theme.radioBtn.text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingRight="15dp"
+                android:text="@string/txt_outside" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView65"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/sub_title_type_detail"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/textView63"
+            app:layout_constraintTop_toBottomOf="@+id/rg_update_location_facility" />
+
+        <TextView
+            android:id="@+id/textView66"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:textColor="@color/red"
+            android:textSize="18dp"
+            app:layout_constraintStart_toEndOf="@+id/textView65"
+            app:layout_constraintTop_toTopOf="@+id/textView65" />
+
+
+        <RadioButton
+            android:id="@+id/rb_update_facility_bollard"
+            style="@style/Theme.radioBtn.text"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_bollard"
+            app:layout_constraintStart_toStartOf="@+id/textView65"
+            app:layout_constraintTop_toBottomOf="@+id/textView65" />
+
+        <RadioButton
+            android:id="@+id/rb_update_facility_street"
+            style="@style/Theme.radioBtn.text"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_street"
+            app:layout_constraintStart_toEndOf="@+id/rb_update_facility_bollard"
+            app:layout_constraintTop_toTopOf="@+id/rb_update_facility_bollard" />
+
+        <RadioButton
+            android:id="@+id/rb_update_facility_block"
+            style="@style/Theme.radioBtn.text"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_block"
+            app:layout_constraintStart_toEndOf="@+id/rb_update_facility_street"
+            app:layout_constraintTop_toTopOf="@+id/rb_update_facility_street" />
+
+
+        <RadioButton
+            android:id="@+id/rb_update_facility_car_area"
+            style="@style/Theme.radioBtn.text"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_car_area"
+            app:layout_constraintStart_toStartOf="@+id/rb_update_facility_bollard"
+            app:layout_constraintTop_toBottomOf="@+id/rb_update_facility_bollard" />
+
+        <RadioButton
+            android:id="@+id/rb_upbdate_facility_crosswalk"
+            style="@style/Theme.radioBtn.text"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_crosswalk"
+            app:layout_constraintStart_toEndOf="@+id/rb_update_facility_car_area"
+            app:layout_constraintTop_toTopOf="@+id/rb_update_facility_car_area" />
+
+
+        <RadioButton
+            android:id="@+id/rb_update_facility_pass"
+            style="@style/Theme.radioBtn.text"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_pass"
+            app:layout_constraintStart_toStartOf="@+id/rb_update_facility_car_area"
+            app:layout_constraintTop_toBottomOf="@+id/rb_update_facility_car_area" />
+
+
+        <TextView
+            android:id="@+id/textView67"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/sub_title_warning_target"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/textView65"
+            app:layout_constraintTop_toBottomOf="@+id/rb_update_facility_pass" />
+
+        <CheckBox
+            android:id="@+id/cb_update_facility_target_wheelchair"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_user_type_wheelchair"
+            app:layout_constraintStart_toStartOf="@+id/textView67"
+            app:layout_constraintTop_toBottomOf="@+id/textView67" />
+
+        <CheckBox
+            android:id="@+id/cb_update_facility_target_guardian"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_user_type_guardian"
+            app:layout_constraintStart_toEndOf="@+id/cb_update_facility_target_wheelchair"
+            app:layout_constraintTop_toTopOf="@+id/cb_update_facility_target_wheelchair" />
+
+        <CheckBox
+            android:id="@+id/cb_update_facility_target_handicap"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_user_type_handicap"
+            app:layout_constraintStart_toStartOf="@+id/cb_update_facility_target_wheelchair"
+            app:layout_constraintTop_toBottomOf="@+id/cb_update_facility_target_wheelchair" />
+
+        <CheckBox
+            android:id="@+id/cb_update_facility_target_injured"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_user_type_injured"
+            app:layout_constraintStart_toEndOf="@+id/cb_update_facility_target_handicap"
+            app:layout_constraintTop_toBottomOf="@+id/cb_update_facility_target_guardian" />
+
+        <CheckBox
+            android:id="@+id/cb_update_facility_target_old"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_user_type_old"
+            app:layout_constraintStart_toStartOf="@+id/cb_update_facility_target_handicap"
+            app:layout_constraintTop_toBottomOf="@+id/cb_update_facility_target_handicap" />
+
+        <TextView
+            android:id="@+id/textView68"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/sub_title_warning"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/textView65"
+            app:layout_constraintTop_toBottomOf="@+id/cb_update_facility_target_old" />
+
+        <CheckBox
+            android:id="@+id/cb_update_facility_warning_slope"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_warning_slope"
+            app:layout_constraintStart_toStartOf="@+id/textView68"
+            app:layout_constraintTop_toBottomOf="@+id/textView68" />
+
+        <CheckBox
+            android:id="@+id/cb_update_facility_warning_height"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_warning_height"
+            app:layout_constraintStart_toEndOf="@+id/cb_update_facility_warning_slope"
+            app:layout_constraintTop_toTopOf="@+id/cb_update_facility_warning_slope" />
+
+        <CheckBox
+            android:id="@+id/cb_update_facility_warning_offset"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_warning_offset"
+            app:layout_constraintStart_toEndOf="@+id/cb_update_facility_warning_height"
+            app:layout_constraintTop_toTopOf="@+id/cb_update_facility_warning_height" />
+
+        <CheckBox
+            android:id="@+id/cb_update_facility_warning_out"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_warning_out"
+            app:layout_constraintStart_toEndOf="@+id/cb_update_facility_warning_offset"
+            app:layout_constraintTop_toTopOf="@+id/cb_update_facility_warning_offset" />
+
+        <CheckBox
+            android:id="@+id/cb_update_facility_warning_finish"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_warning_finish"
+            app:layout_constraintStart_toStartOf="@+id/cb_update_facility_warning_slope"
+            app:layout_constraintTop_toBottomOf="@+id/cb_update_facility_warning_slope" />
+
+        <CheckBox
+            android:id="@+id/cb_update_facility_warning_info"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_warning_info"
+            app:layout_constraintStart_toEndOf="@+id/cb_update_facility_warning_finish"
+            app:layout_constraintTop_toTopOf="@+id/cb_update_facility_warning_finish" />
+
+        <CheckBox
+            android:id="@+id/cb_update_facility_warning_width"
+            style="@style/checkBoxText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingRight="15dp"
+            android:text="@string/txt_warning_width"
+            app:layout_constraintStart_toEndOf="@+id/cb_update_facility_warning_info"
+            app:layout_constraintTop_toTopOf="@+id/cb_update_facility_warning_info" />
+
+        <TextView
+            android:id="@+id/textView69"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/sub_title_info_plus"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/cb_update_facility_warning_finish"
+            app:layout_constraintTop_toBottomOf="@+id/cb_update_facility_warning_finish" />
+
+        <TextView
+            android:id="@+id/textView70"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:textColor="@color/red"
+            android:textSize="18dp"
+            app:layout_constraintStart_toEndOf="@+id/textView69"
+            app:layout_constraintTop_toTopOf="@+id/textView69" />
+
+        <EditText
+            android:id="@+id/edt_update_info_facility_plus"
+            style="@style/EditHintText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/round_square_line_grey_8"
+            android:hint="@string/hint_info_plus_input"
+            android:inputType="textMultiLine"
+            android:maxLines="10"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="16dp"
+            android:text="@={vm.plusInfoTxt}"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView69"
+            app:layout_constraintTop_toBottomOf="@+id/textView69" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_update_info_facility_complete"
+            style="@style/ButtonText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="35dp"
+            android:background="@drawable/selector_sign_btn"
+            android:enabled="@{vm.isValidSendBtn}"
+            android:text="@string/txt_send"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/edt_update_info_facility_plus"
+            app:layout_constraintStart_toStartOf="@+id/edt_update_info_facility_plus"
+            app:layout_constraintTop_toBottomOf="@+id/edt_update_info_facility_plus" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
