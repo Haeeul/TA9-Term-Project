@@ -15,11 +15,12 @@ data class ChargingStationListResponse(
     val satOperOperOpenHhmm : String,
     val satOperCloseHhmm : String,
     val holidayOperOpenHhmm	 : String,
+    val holidayCloseOpenHhmm : String,
     val smtmUseCo : String,
     val airInjectorYn : String,
     val moblphonChrstnYn : String,
     val institutionNm : String,
     val institutionPhoneNumber : String,
     val referenceDate : String,
-    val instt_code : String
+    val insttCode : String
 )

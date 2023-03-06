@@ -12,7 +12,7 @@ interface ManagerService {
     suspend fun getChargingStationList(
         @Query("serviceKey") serviceKey : String,
         @Query("pageNo") pageNo : Int = 0,
-        @Query("numOfRows") numOfRows : Int = 1,
+        @Query("numOfRows") numOfRows : Int = 3,
         @Query("type") type : String = "json",
         @Query("ctprvnNm") ctprvnNm : String = "서울특별시"
     ): BaseResponse<ChargingStationListResponse>

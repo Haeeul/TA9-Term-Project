@@ -5,9 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.managerapplication.data.model.request.CenterTime
+import com.example.managerapplication.data.model.CenterTime
+import com.example.managerapplication.data.model.ChargingTime
+import com.example.managerapplication.data.model.Time
+import com.example.managerapplication.data.model.request.RequestChargingStation
 import com.example.managerapplication.data.model.request.RequestMovementCenter
-import com.example.managerapplication.data.model.request.Time
 import com.example.managerapplication.data.model.response.ChargingStationListResponse
 import com.example.managerapplication.data.model.response.MovementCenterListResponse
 import com.example.managerapplication.data.model.response.PublicToiletListResponse
@@ -74,6 +76,36 @@ class PlaceViewModel : ViewModel() {
         }
     }
 
+    fun postChargingStation(){
+        viewModelScope.launch {
+            _chargingList.value?.forEach {
+                repository.postCharging(
+                    RequestChargingStation(
+                        type = "charging",
+                        name = it.fcltyNm,
+                        address = it.rdnmadr,
+                        oldAddress = it.lnmadr,
+                        latitude = it.latitude,
+                        longitude = it.longitude,
+                        description = it.instlLcDesc,
+                        time = ChargingTime(
+                            changeTimeValue(it.weekdayOperOpenHhmm,it.weekdayOperColseHhmm,"weekday"),
+                            changeTimeValue(it.satOperOperOpenHhmm, it.satOperCloseHhmm, "holiday"),
+                            changeTimeValue(it.holidayOperOpenHhmm, it.holidayCloseOpenHhmm, "holiday")
+                        ),
+                        sameUse = it.smtmUseCo,
+                        airUse = it.airInjectorYn,
+                        phoneUser = it.moblphonChrstnYn,
+                        managementName = it.institutionNm,
+                        phone = it.institutionPhoneNumber,
+                        referenceDate = it.referenceDate,
+                        managementCode = it.insttCode
+                    )
+                )
+            }
+        }
+    }
+
     fun postMoveCenter(){
         viewModelScope.launch {
             _centerList.value?.forEach {
@@ -117,8 +149,10 @@ class PlaceViewModel : ViewModel() {
     }
 
     private fun changeTimeValue(open : String, close : String, type : String) : Time {
-        if(type == "holiday" && open.substring(0,2)=="00" && open.substring(3)=="00" && close.substring(0,2)=="00" && close.substring(3)=="00")
-            return Time("-1","-1","-1","-1")
+        if(open.substring(0,2)=="00" && open.substring(3)=="00" && close.substring(0,2)=="00" && close.substring(3)=="00"){
+            return if(type == "holiday") Time("-1","-1","-1","-1")
+            else Time("-2","-2","-2","-2")
+        }
 
         return Time(getHour(open), open.substring(3), getHour(close), close.substring(3))
     }

@@ -28,6 +28,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             viewModel.getPublicToiletList()
         }
 
+        binding.button4.setSingleOnClickListener {
+            viewModel.postChargingStation()
+        }
+
         binding.button5.setSingleOnClickListener {
             viewModel.postMoveCenter()
         }

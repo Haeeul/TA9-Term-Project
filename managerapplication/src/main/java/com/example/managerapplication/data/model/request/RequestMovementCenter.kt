@@ -1,5 +1,7 @@
 package com.example.managerapplication.data.model.request
 
+import com.example.managerapplication.data.model.CenterTime
+
 data class RequestMovementCenter(
     val type: String = "",
     val name : String,
@@ -26,16 +28,4 @@ data class RequestMovementCenter(
     val phone : String,
     val referenceDate : String,
     val managementCode : String
-)
-
-data class CenterTime(
-    var weekTime : Time = Time("-2","-2","-2","-2"),
-    var holidayTime : Time = Time("-2","-2","-2","-2"),
-)
-
-data class Time(
-    var openHourTxt : String = "",
-    var openMinuteTxt : String = "",
-    var closeHourTxt : String = "",
-    var closeMinuteTxt : String = ""
 )
