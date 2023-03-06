@@ -197,7 +197,27 @@ class UpdateFacilityInfoFragment(private val facilityId : String, private val fa
 
             reportPlaceViewModel.clickWarningBtn(checked, checkBox.text.toString())
         }
-
     }
+
+//    private fun onUpdateFacilityBackBtn(){
+//        requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+//            override fun handleOnBackPressed() {
+//                goToBackListener()
+//            }
+//        })
+//    }
+//
+//    fun goToBackListener(){
+//        val activity = activity as UpdatePlaceInfoActivity
+//
+//        if(reportPlaceViewModel.isValidSendBtn.value == true)
+//            requireContext().createGoToDialog(childFragmentManager, "update",
+//                {
+//                    activity.goToBack()
+//                },
+//                {}
+//            )
+//        else activity.goToBack()
+//    }
 
 }
