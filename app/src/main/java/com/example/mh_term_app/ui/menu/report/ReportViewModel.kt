@@ -8,10 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mh_term_app.MHApplication
-import com.example.mh_term_app.data.model.ReportPlaceAddress
-import com.example.mh_term_app.data.model.StoreTime
-import com.example.mh_term_app.data.model.Time
-import com.example.mh_term_app.data.model.UpdateStoreInfo
+import com.example.mh_term_app.data.model.*
 import com.example.mh_term_app.data.model.request.RequestPlaceFacility
 import com.example.mh_term_app.data.model.request.RequestPlaceStore
 import com.example.mh_term_app.data.model.request.RequestUpdatePlaceAddress
@@ -68,8 +65,9 @@ class ReportViewModel : ViewModel() {
         get() = _isValidSendBtn
 
     private var originStoreInfo = UpdateStoreInfo()
+    private var originFacilityInfo = UpdateFacilityInfo()
 
-    fun setInfo(storeDetailInfo : UpdateStoreInfo){
+    fun setStoreInfo(storeDetailInfo : UpdateStoreInfo){
         originStoreInfo = storeDetailInfo
 
         storeNameTxt.value = storeDetailInfo.name
@@ -82,10 +80,22 @@ class ReportViewModel : ViewModel() {
         if(storeDetailInfo.detailType != "음식점" && storeDetailInfo.detailType != "카페" ) etcTypeTxt.value = storeDetailInfo.detailType
         detailTypeTxt.value = storeDetailInfo.detailType
 
-        setTargetList()
-        setWarningList()
+        setTargetList(storeDetailInfo.targetList)
+        setWarningList(storeDetailInfo.warningList)
 
         plusInfoTxt.value = storeDetailInfo.plusInfo
+    }
+
+    fun setFacilityInfo(facilityInfo : UpdateFacilityInfo){
+        originFacilityInfo = facilityInfo
+
+        locationTxt.value = facilityInfo.location
+        detailTypeTxt.value = facilityInfo.detailType
+
+        setTargetList(facilityInfo.targetList)
+        setWarningList(facilityInfo.warningList)
+
+        plusInfoTxt.value = facilityInfo.plusInfo
     }
 
     private fun checkNoneData(data : String) : String{
@@ -93,20 +103,20 @@ class ReportViewModel : ViewModel() {
         else data
     }
 
-    private fun setTargetList(){
+    private fun setTargetList(list : MutableList<String>?){
         var tempList = mutableListOf<String>()
 
-        originStoreInfo.targetList?.forEach {
+        list?.forEach {
             tempList.add(it)
         }
 
         targetList.value = tempList
     }
 
-    private fun setWarningList(){
+    private fun setWarningList(list : MutableList<String>?){
         var tempList = mutableListOf<String>()
 
-        originStoreInfo.warningList?.forEach {
+        list?.forEach {
             tempList.add(it)
         }
 
@@ -119,6 +129,12 @@ class ReportViewModel : ViewModel() {
                 checkNewList(targetList.value,originStoreInfo.targetList) || checkNewList(warningList.value,originStoreInfo.warningList) ||
                 originStoreInfo.plusInfo != plusInfoTxt.value)
 
+    }
+
+    fun checkFacilityInfoUpdateBtn(){
+        _isValidSendBtn.value = (originFacilityInfo.location != locationTxt.value || originFacilityInfo.detailType != detailTypeTxt.value ||
+                checkNewList(targetList.value,originFacilityInfo.targetList) || checkNewList(warningList.value,originFacilityInfo.warningList) ||
+                originFacilityInfo.plusInfo != plusInfoTxt.value)
     }
 
     private fun checkNewList(new : MutableList<String>?, origin : MutableList<String>?) : Boolean {
