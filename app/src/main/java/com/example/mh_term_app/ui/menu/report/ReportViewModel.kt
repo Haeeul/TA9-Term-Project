@@ -9,10 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.data.model.*
-import com.example.mh_term_app.data.model.request.RequestPlaceFacility
-import com.example.mh_term_app.data.model.request.RequestPlaceStore
-import com.example.mh_term_app.data.model.request.RequestUpdatePlaceAddress
-import com.example.mh_term_app.data.model.request.RequestUpdateStoreInfo
+import com.example.mh_term_app.data.model.request.*
 import com.example.mh_term_app.data.repository.MapRepository
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -355,6 +352,27 @@ class ReportViewModel : ViewModel() {
             )
 
             _isValidUpdateStore.value = mapRepository.postUpdateStoreInfo(store)
+        }
+    }
+
+    // 시설물 정보 수정 제안 결과
+    private val _isValidUpdateFacility = MutableLiveData<Boolean>()
+    val isValidUpdateFacility : LiveData<Boolean>
+        get() = _isValidUpdateFacility
+
+    fun postUpdateFacilityInfo(id : String){
+        viewModelScope.launch {
+            val facility = RequestUpdateFacilityInfo(
+                id,
+                "상세정보",
+                location = locationTxt.value.toString(),
+                detailType = detailTypeTxt.value.toString(),
+                targetList = targetList.value,
+                warningList = warningList.value,
+                plusInfo = plusInfoTxt.value.toString()
+            )
+
+            _isValidUpdateFacility.value = mapRepository.postUpdateFacilityInfo(facility)
         }
     }
 }

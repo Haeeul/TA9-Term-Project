@@ -10,7 +10,9 @@ import com.example.mh_term_app.base.BaseFragment
 import com.example.mh_term_app.data.model.UpdateFacilityInfo
 import com.example.mh_term_app.databinding.FragmentUpdateFacilityInfoBinding
 import com.example.mh_term_app.ui.menu.report.ReportViewModel
+import com.example.mh_term_app.utils.extension.errorToast
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
+import com.example.mh_term_app.utils.extension.toast
 
 class UpdateFacilityInfoFragment(private val facilityId : String, private val facilityDetailInfo: UpdateFacilityInfo) :
     BaseFragment<FragmentUpdateFacilityInfoBinding>() {
@@ -109,6 +111,14 @@ class UpdateFacilityInfoFragment(private val facilityId : String, private val fa
 
         checkUpdateList(reportPlaceViewModel.targetList)
         checkUpdateList(reportPlaceViewModel.warningList)
+
+        reportPlaceViewModel.isValidUpdateFacility.observe(this){
+            if(it) requireContext().toast("제안 완료")
+            else requireContext().errorToast()
+
+            val activity = activity as UpdatePlaceInfoActivity
+            activity.goToBack()
+        }
     }
 
     private fun checkUpdateTxt(data : LiveData<String>){
@@ -150,7 +160,7 @@ class UpdateFacilityInfoFragment(private val facilityId : String, private val fa
         onUpdateFacilityWarningClicked(binding.cbUpdateFacilityWarningWidth)
 
         binding.btnUpdateInfoFacilityComplete.setSingleOnClickListener {
-//            reportPlaceViewModel.postUpdateStoreInfo(storeId)
+            reportPlaceViewModel.postUpdateFacilityInfo(facilityId)
         }
     }
 

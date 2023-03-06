@@ -5,7 +5,7 @@ import com.example.mh_term_app.data.model.Time
 
 data class RequestUpdateStoreInfo (
     val id : String = "",
-    val type : String = "",
+    val type : String = "상세정보",
     val name: String = "",
     val phone: String = "",
     val time: StoreTime = StoreTime(

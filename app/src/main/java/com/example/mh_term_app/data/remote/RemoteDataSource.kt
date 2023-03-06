@@ -29,6 +29,7 @@ interface RemoteDataSource {
     // update place info
     suspend fun postUpdateAddress(place : RequestUpdatePlaceAddress) : Boolean
     suspend fun postUpdateStoreInfo(store : RequestUpdateStoreInfo) : Boolean
+    suspend fun postUpdateFacilityInfo(facility : RequestUpdateFacilityInfo) : Boolean
 
     // review
     suspend fun postReview(review : RequestReview) : Boolean
