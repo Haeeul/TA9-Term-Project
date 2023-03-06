@@ -32,6 +32,7 @@
             app:tabIndicatorHeight="4dp"
             app:tabMaxWidth="0dp"
             app:tabMode="fixed"
+            android:background="@drawable/background_tab_line"
             app:tabSelectedTextColor="@color/black"
             app:tabTextAppearance="@style/Theme.info.Tab"
             app:tabTextColor="@color/dark_grey">

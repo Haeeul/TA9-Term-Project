@@ -17,6 +17,7 @@ class UpdatePlaceInfoActivity() : BaseActivity<ActivityUpdatePlaceInfoBinding>()
     private lateinit var viewPagerAdapter: ViewPagerAdapter
     private lateinit var placeAddressInfo : ReportPlaceAddress
     private lateinit var storeDetailInfo : UpdateStoreInfo
+    private lateinit var facilityDetailInfo : UpdateFacilityInfo
     private var placeId = ""
 
     override fun initView() {
@@ -40,6 +41,7 @@ class UpdatePlaceInfoActivity() : BaseActivity<ActivityUpdatePlaceInfoBinding>()
     private fun getDetailInfo(type: String){
         when(type){
             "매장" -> storeDetailInfo = changeDataType(intent.getParcelableExtra<OriginStoreInfo>("storeDetailInfo")!!)
+            "시설물" -> facilityDetailInfo = intent.getParcelableExtra<UpdateFacilityInfo>("facilityDetailInfo")!!
         }
     }
 
@@ -68,7 +70,7 @@ class UpdatePlaceInfoActivity() : BaseActivity<ActivityUpdatePlaceInfoBinding>()
             supportFragmentManager
         )
         viewPagerAdapter.fragments = listOf(
-            if(type == "매장") UpdateStoreInfoFragment(placeId,storeDetailInfo) else UpdateFacilityInfoFragment(),
+            if(type == "매장") UpdateStoreInfoFragment(placeId,storeDetailInfo) else UpdateFacilityInfoFragment(placeId,facilityDetailInfo),
             UpdateAddressFragment(placeId, placeAddressInfo)
         )
 

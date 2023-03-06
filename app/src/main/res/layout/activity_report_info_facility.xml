@@ -119,94 +119,78 @@
                     app:layout_constraintStart_toEndOf="@+id/textView57"
                     app:layout_constraintTop_toTopOf="@+id/textView57" />
 
-                <RadioGroup
-                    android:id="@+id/rg_facility_type_1"
+                <RadioButton
+                    android:id="@+id/rb_facility_bollard"
+                    style="@style/Theme.radioBtn.text"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:shadowColor="@color/light_grey"
+                    android:layout_height="50dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/txt_bollard"
                     app:layout_constraintStart_toStartOf="@+id/textView57"
-                    app:layout_constraintTop_toBottomOf="@+id/textView57">
+                    app:layout_constraintTop_toBottomOf="@+id/textView57" />
 
-                    <RadioButton
-                        android:id="@+id/rb_facility_bollard"
-                        style="@style/Theme.radioBtn.text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingRight="15dp"
-                        android:text="@string/txt_bollard" />
+                <RadioButton
+                    android:id="@+id/rb_facility_street"
+                    style="@style/Theme.radioBtn.text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/txt_street"
+                    app:layout_constraintStart_toEndOf="@+id/rb_facility_bollard"
+                    app:layout_constraintTop_toTopOf="@+id/rb_facility_bollard" />
 
-                    <RadioButton
-                        android:id="@+id/rb_facility_street"
-                        style="@style/Theme.radioBtn.text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingRight="15dp"
-                        android:text="@string/txt_street" />
+                <RadioButton
+                    android:id="@+id/rb_facility_block"
+                    style="@style/Theme.radioBtn.text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/txt_block"
+                    app:layout_constraintStart_toEndOf="@+id/rb_facility_street"
+                    app:layout_constraintTop_toTopOf="@+id/rb_facility_street" />
 
-                    <RadioButton
-                        android:id="@+id/rb_facility_block"
-                        style="@style/Theme.radioBtn.text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingRight="15dp"
-                        android:text="@string/txt_block" />
-                </RadioGroup>
 
-                <RadioGroup
-                    android:id="@+id/rg_facility_type_2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:shadowColor="@color/light_grey"
-                    app:layout_constraintStart_toStartOf="@+id/rg_facility_type_1"
-                    app:layout_constraintTop_toBottomOf="@+id/rg_facility_type_1">
+                <RadioButton
+                    android:id="@+id/rb_facility_car_area"
+                    style="@style/Theme.radioBtn.text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/txt_car_area"
+                    app:layout_constraintStart_toStartOf="@+id/rb_facility_bollard"
+                    app:layout_constraintTop_toBottomOf="@+id/rb_facility_bollard" />
 
-                    <RadioButton
-                        android:id="@+id/rb_facility_car_area"
-                        style="@style/Theme.radioBtn.text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingRight="15dp"
-                        android:text="@string/txt_car_area" />
 
-                    <RadioButton
-                        android:id="@+id/rb_facility_crosswalk"
-                        style="@style/Theme.radioBtn.text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingRight="15dp"
-                        android:text="@string/txt_crosswalk" />
-                </RadioGroup>
+                <RadioButton
+                    android:id="@+id/rb_facility_crosswalk"
+                    style="@style/Theme.radioBtn.text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/txt_crosswalk"
+                    app:layout_constraintStart_toEndOf="@+id/rb_facility_car_area"
+                    app:layout_constraintTop_toTopOf="@+id/rb_facility_car_area" />
 
-                <RadioGroup
-                    android:id="@+id/rg_facility_type_3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:shadowColor="@color/light_grey"
-                    app:layout_constraintStart_toStartOf="@+id/rg_facility_type_2"
-                    app:layout_constraintTop_toBottomOf="@+id/rg_facility_type_2">
-
-                    <RadioButton
-                        android:id="@+id/rb_facility_pass"
-                        style="@style/Theme.radioBtn.text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:paddingRight="15dp"
-                        android:text="@string/txt_pass" />
-                </RadioGroup>
+                <RadioButton
+                    android:id="@+id/rb_facility_pass"
+                    style="@style/Theme.radioBtn.text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/txt_pass"
+                    app:layout_constraintStart_toStartOf="@+id/rb_facility_car_area"
+                    app:layout_constraintTop_toBottomOf="@+id/rb_facility_car_area" />
 
                 <TextView
                     android:id="@+id/textView59"
                     style="@style/MediumText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:text="@string/sub_title_warning_target"
                     android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="@+id/textView57"
-                    app:layout_constraintTop_toBottomOf="@+id/rg_facility_type_3" />
+                    app:layout_constraintTop_toBottomOf="@+id/rb_facility_pass" />
 
                 <CheckBox
                     android:id="@+id/cb_facility_target_wheelchair"
@@ -268,7 +252,7 @@
                     style="@style/MediumText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:text="@string/sub_title_warning"
                     android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="@+id/textView59"
@@ -356,7 +340,7 @@
                     style="@style/MediumText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:text="@string/sub_title_info_plus"
                     android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="@+id/cb_facility_warning_finish"

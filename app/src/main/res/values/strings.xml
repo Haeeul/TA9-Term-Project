@@ -42,6 +42,7 @@
     <!-- sign guide dialog -->
     <string name="desc_go_to_sign_up">해당 번호로 가입된 계정이 없습니다.\n회원가입으로 이동하시겠습니까?</string>
     <string name="desc_go_to_sign_in">해당 번호로 가입된 계정이 있습니다.\n로그인으로 이동하시겠습니까?</string>
+    <string name="desc_update_back">수정 사항이 있습니다.\n저장하지 않고 이동하시겠습니까?</string>
 
     <!-- user info -->
     <string name="desc_user_info">리뷰 작성을 위해\n추가 정보를 입력해주세요.</string>

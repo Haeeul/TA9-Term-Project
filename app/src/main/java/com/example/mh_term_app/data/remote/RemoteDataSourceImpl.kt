@@ -300,6 +300,27 @@ class RemoteDataSourceImpl : RemoteDataSource {
         return result
     }
 
+    override suspend fun postUpdateFacilityInfo(facility: RequestUpdateFacilityInfo): Boolean {
+        var result = false
+
+        try {
+            db.collection("updateInfo")
+                .add(facility)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                    result = true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error adding documents.", exception)
+                    result = false
+                }.await()
+        }catch (e:FirebaseException){
+            Log.e(TAG, e.message.toString())
+        }
+
+        return result
+    }
+
     override suspend fun postReview(review: RequestReview): Boolean {
         var result = false
 

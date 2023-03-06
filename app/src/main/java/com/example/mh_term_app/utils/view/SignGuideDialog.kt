@@ -47,6 +47,9 @@ class SignGuideDialog : DialogFragment(), View.OnClickListener {
             "goToSignUp" -> {
                 setContents(R.string.desc_go_to_sign_up, "이동")
             }
+            "update" -> {
+                setContents(R.string.desc_update_back, "이동")
+            }
         }
 
         binding.btnSignGuideConfirm.setSingleOnClickListener {

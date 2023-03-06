@@ -3,6 +3,7 @@ package com.example.mh_term_app.ui.menu.report
 import android.os.Bundle
 import android.view.View
 import android.widget.CheckBox
+import android.widget.RadioButton
 import androidx.activity.viewModels
 import androidx.lifecycle.LiveData
 import com.example.mh_term_app.MHApplication
@@ -20,14 +21,17 @@ class ReportInfoFacilityActivity : BaseActivity<ActivityReportInfoFacilityBindin
     private val reportPlaceViewModel: ReportViewModel by viewModels()
 
     lateinit var facilityInfo : ReportPlaceAddress
-
-    private var checkedGroup : Int = 0
-    private var checkedId: Int = 0
+    private lateinit var detailTypeButtons : List<RadioButton>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         facilityInfo = intent.getParcelableExtra<ReportPlaceAddress>("placeAddressInfo")!!
+
+        detailTypeButtons = listOf(
+            binding.rbFacilityBollard,binding.rbFacilityStreet,binding.rbFacilityBlock,
+            binding.rbFacilityCarArea,binding.rbFacilityCrosswalk,binding.rbFacilityPass
+        )
 
         binding.apply {
             vm = reportPlaceViewModel
@@ -77,7 +81,13 @@ class ReportInfoFacilityActivity : BaseActivity<ActivityReportInfoFacilityBindin
         super.initListener()
 
         getFacilityDetailLocation()
-        getFacilityDetailType()
+
+        setRadioBtnListener(binding.rbFacilityBollard)
+        setRadioBtnListener(binding.rbFacilityStreet)
+        setRadioBtnListener(binding.rbFacilityBlock)
+        setRadioBtnListener(binding.rbFacilityCarArea)
+        setRadioBtnListener(binding.rbFacilityCrosswalk)
+        setRadioBtnListener(binding.rbFacilityPass)
     }
 
     private fun getFacilityDetailLocation() {
@@ -89,57 +99,12 @@ class ReportInfoFacilityActivity : BaseActivity<ActivityReportInfoFacilityBindin
         }
     }
 
-    private fun getFacilityDetailType() {
-        binding.rgFacilityType1.setOnCheckedChangeListener { group, checkedId ->
-            if(checkedId != -1 && checkedGroup != group.id){
-                binding.rgFacilityType2.clearCheck()
-                binding.rgFacilityType3.clearCheck()
-                this.checkedId = checkedId
-                checkedGroup = group.id
+    private fun setRadioBtnListener(button : RadioButton){
+        button.setSingleOnClickListener { button
+            detailTypeButtons.forEach {
+                it.isChecked = it.id == button.id
             }
-
-            when (checkedId) {
-                R.id.rb_facility_bollard -> {
-                    reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_bollard))
-                }
-                R.id.rb_facility_street -> {
-                    reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_street))
-                }
-                R.id.rb_facility_block -> {
-                    reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_block))
-                }
-            }
-        }
-
-        binding.rgFacilityType2.setOnCheckedChangeListener { group, checkedId ->
-            if(checkedId != -1 && checkedGroup != group.id){
-                binding.rgFacilityType1.clearCheck()
-                binding.rgFacilityType3.clearCheck()
-                this.checkedId = checkedId
-                checkedGroup = group.id
-            }
-            when (checkedId) {
-                R.id.rb_facility_car_area -> {
-                    reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_car_area))
-                }
-                R.id.rb_facility_crosswalk -> {
-                    reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_crosswalk))
-                }
-            }
-        }
-
-        binding.rgFacilityType3.setOnCheckedChangeListener { group, checkedId ->
-            if(checkedId != -1&& checkedGroup != group.id){
-                binding.rgFacilityType1.clearCheck()
-                binding.rgFacilityType2.clearCheck()
-                this.checkedId = checkedId
-                checkedGroup = group.id
-            }
-            when (checkedId) {
-                R.id.rb_facility_pass -> {
-                    reportPlaceViewModel.setDetailTypeTxt(getString(R.string.txt_pass))
-                }
-            }
+            reportPlaceViewModel.setDetailTypeTxt(button.text.toString())
         }
     }
 

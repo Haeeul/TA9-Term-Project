@@ -30,7 +30,7 @@ class UpdateStoreInfoFragment(private val storeId : String, private val storeDet
             vm = reportPlaceViewModel
         }
 
-        reportPlaceViewModel.setInfo(storeDetailInfo)
+        reportPlaceViewModel.setStoreInfo(storeDetailInfo)
 
         checkDetailTypeInfo()
         checkTargetInfo()

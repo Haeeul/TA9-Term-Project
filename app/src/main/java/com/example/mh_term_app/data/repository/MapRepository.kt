@@ -1,9 +1,6 @@
 package com.example.mh_term_app.data.repository
 
-import com.example.mh_term_app.data.model.request.RequestPlaceFacility
-import com.example.mh_term_app.data.model.request.RequestPlaceStore
-import com.example.mh_term_app.data.model.request.RequestUpdatePlaceAddress
-import com.example.mh_term_app.data.model.request.RequestUpdateStoreInfo
+import com.example.mh_term_app.data.model.request.*
 import com.example.mh_term_app.data.remote.RemoteDataSource
 import com.example.mh_term_app.data.remote.RemoteDataSourceImpl
 
@@ -20,4 +17,5 @@ class MapRepository {
 
     suspend fun postUpdateAddress(place : RequestUpdatePlaceAddress) = remoteDataSource.postUpdateAddress(place)
     suspend fun postUpdateStoreInfo(store : RequestUpdateStoreInfo) = remoteDataSource.postUpdateStoreInfo(store)
+    suspend fun postUpdateFacilityInfo(facility : RequestUpdateFacilityInfo) = remoteDataSource.postUpdateFacilityInfo(facility)
 }
