@@ -3,7 +3,7 @@ package com.example.managerapplication.data.model.request
 import com.example.managerapplication.data.model.CenterTime
 
 data class RequestMovementCenter(
-    val type: String = "",
+    val type: String,
     val name : String,
     val address : String,
     val oldAddress : String,
@@ -26,6 +26,5 @@ data class RequestMovementCenter(
     val useCharge : String,
     val managementName : String,
     val phone : String,
-    val referenceDate : String,
-    val managementCode : String
+    val referenceDate : String
 )

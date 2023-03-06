@@ -16,6 +16,5 @@ data class RequestChargingStation (
     val phoneUser : String,
     val managementName : String,
     val phone : String,
-    val referenceDate : String,
-    val managementCode : String
+    val referenceDate : String
 )

@@ -10,6 +10,7 @@ import com.example.managerapplication.data.model.ChargingTime
 import com.example.managerapplication.data.model.Time
 import com.example.managerapplication.data.model.request.RequestChargingStation
 import com.example.managerapplication.data.model.request.RequestMovementCenter
+import com.example.managerapplication.data.model.request.RequestPublicToilet
 import com.example.managerapplication.data.model.response.ChargingStationListResponse
 import com.example.managerapplication.data.model.response.MovementCenterListResponse
 import com.example.managerapplication.data.model.response.PublicToiletListResponse
@@ -98,8 +99,7 @@ class PlaceViewModel : ViewModel() {
                         phoneUser = it.moblphonChrstnYn,
                         managementName = it.institutionNm,
                         phone = it.institutionPhoneNumber,
-                        referenceDate = it.referenceDate,
-                        managementCode = it.insttCode
+                        referenceDate = it.referenceDate
                     )
                 )
             }
@@ -140,8 +140,40 @@ class PlaceViewModel : ViewModel() {
                         useCharge = it.useCharge,
                         managementName = it.institutionNm,
                         phone = it.phoneNumber,
-                        referenceDate = it.referenceDate,
-                        managementCode = it.insttCode
+                        referenceDate = it.referenceDate
+                    )
+                )
+            }
+        }
+    }
+
+    fun postPublicToilet(){
+        var cnt = 1
+        viewModelScope.launch {
+            _toiletList.value?.forEach {
+                repository.postToilet(
+                    RequestPublicToilet(
+                        type = "toilets",
+                        detailType = it.toiletType,
+                        name = it.toiletNm,
+                        address = it.rdnmadr,
+                        oldAddress = it.lnmadr,
+                        unisex = it.unisexToiletYn,
+                        menBow = it.menToiletBowlNumber,
+                        menUrine = it.menUrineNumber,
+                        menHandicapBow = it.menHandicapToiletBowlNumber,
+                        menHandicapUrine = it.menHandicapUrinalNumber,
+                        menChildrenBow = it.menChildrenToiletBowlNumber,
+                        menChildrenUrine = it.menChildrenUrinalNumber,
+                        womenBow = it.ladiesToiletBowlNumber,
+                        womenHandicapBow = it.ladiesHandicapToiletBowlNumber,
+                        womenChildrenBow = it.ladiesChildrenToiletBowlNumber,
+                        managementName = it.institutionNm,
+                        phone = it.phoneNumber,
+                        time = getToiletTime(it.openTime),
+                        latitude = it.latitude,
+                        longitude = it.longitude,
+                        referenceDate = it.referenceDate
                     )
                 )
             }
@@ -160,5 +192,10 @@ class PlaceViewModel : ViewModel() {
     private fun getHour(time : String) : String{
         return if(time[0].toString()=="0") time.substring(1,2)
         else time.substring(0,2)
+    }
+
+    private fun getToiletTime(time : String) : Time {
+        return if(time == "24시간") Time("0","0","23","59")
+        else Time(getHour(time), time.substring(3,5), getHour(time.substring(6,8)), time.substring(9))
     }
 }

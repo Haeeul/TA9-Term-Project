@@ -2,6 +2,7 @@ package com.example.managerapplication.data.repository
 
 import com.example.managerapplication.data.model.request.RequestChargingStation
 import com.example.managerapplication.data.model.request.RequestMovementCenter
+import com.example.managerapplication.data.model.request.RequestPublicToilet
 import com.example.managerapplication.data.remote.ManagerServiceImpl
 import com.example.managerapplication.data.remote.RemoteDataSource
 import com.example.managerapplication.data.remote.RemoteDataSourceImpl
@@ -16,4 +17,5 @@ class PlaceRepository {
 
     suspend fun postCharging(charging : RequestChargingStation) = firebaseRemoteDataSource.postChargingStation(charging)
     suspend fun postCenter(center : RequestMovementCenter) = firebaseRemoteDataSource.postCenterList(center)
+    suspend fun postToilet(toilet: RequestPublicToilet) = firebaseRemoteDataSource.postToiletList(toilet)
 }
