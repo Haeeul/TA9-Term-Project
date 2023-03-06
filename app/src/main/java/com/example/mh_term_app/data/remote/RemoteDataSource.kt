@@ -34,4 +34,7 @@ interface RemoteDataSource {
     // review
     suspend fun postReview(review : RequestReview) : Boolean
     suspend fun getReview(id : String) : MutableList<ResponseReviewList>
+
+    // update user info
+    suspend fun postNewUserInfo(id : String, nickname: String, type: String) : Boolean
 }

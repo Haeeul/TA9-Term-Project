@@ -34,6 +34,7 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
     override fun onResume() {
         super.onResume()
         binding.drawerLayout.closeDrawers()
+        inflateMenu()
     }
 
     override fun onAttach(context: Context) {
@@ -125,6 +126,11 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
     @SuppressLint("SetTextI18n")
     private fun inflateMenu(){
         binding.nvDrawerMenu.removeHeaderView(binding.nvDrawerMenu.getHeaderView(0))
+        binding.nvDrawerMenu.menu.removeItem(R.id.edit_user_info)
+        binding.nvDrawerMenu.menu.removeItem(R.id.review_list)
+        binding.nvDrawerMenu.menu.removeItem(R.id.favorite_list)
+        binding.nvDrawerMenu.menu.removeItem(R.id.report)
+        binding.nvDrawerMenu.menu.removeItem(R.id.logout)
 
         if(MHApplication.prefManager.haveAccount()) {
             binding.nvDrawerMenu.inflateMenu(R.menu.nv_drawer_menu_user)
@@ -140,12 +146,6 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
             }
 
         }else{
-            binding.nvDrawerMenu.menu.removeItem(R.id.edit_user_info)
-            binding.nvDrawerMenu.menu.removeItem(R.id.review_list)
-            binding.nvDrawerMenu.menu.removeItem(R.id.favorite_list)
-            binding.nvDrawerMenu.menu.removeItem(R.id.report)
-            binding.nvDrawerMenu.menu.removeItem(R.id.logout)
-
             binding.nvDrawerMenu.inflateMenu(R.menu.nv_drawer_menu_none)
             binding.nvDrawerMenu.inflateHeaderView(R.layout.nv_drawer_header_none)
         }
