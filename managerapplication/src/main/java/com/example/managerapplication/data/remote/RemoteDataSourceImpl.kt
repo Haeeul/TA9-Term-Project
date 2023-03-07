@@ -16,7 +16,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
         var result = false
 
         try {
-            db.collection("chargings")
+            db.collection("places")
                 .add(charging)
                 .addOnSuccessListener { documentReference ->
                     Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
@@ -37,7 +37,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
         var result = false
 
         try {
-            db.collection("centers")
+            db.collection("places")
                 .add(center)
                 .addOnSuccessListener { documentReference ->
                     Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
@@ -58,7 +58,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
         var result = false
 
         try {
-            db.collection("toilets")
+            db.collection("places")
                 .add(toilet)
                 .addOnSuccessListener { documentReference ->
                     Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")

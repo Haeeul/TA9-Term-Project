@@ -195,7 +195,7 @@ class PlaceViewModel : ViewModel() {
     }
 
     private fun getToiletTime(time : String) : Time {
-        return if(time == "24시간"||time =="상시") Time("0","0","23","59")
+        return if(time == "24시간"||time =="상시"||time =="연중무휴") Time("0","0","23","59")
         else Time(getHour(time), time.substring(3,5), getHour(time.substring(6,8)), time.substring(9))
     }
 }

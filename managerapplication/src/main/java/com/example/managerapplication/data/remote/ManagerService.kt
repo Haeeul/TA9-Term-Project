@@ -12,7 +12,7 @@ interface ManagerService {
     suspend fun getChargingStationList(
         @Query("serviceKey") serviceKey : String,
         @Query("pageNo") pageNo : Int = 0,
-        @Query("numOfRows") numOfRows : Int = 20,
+        @Query("numOfRows") numOfRows : Int = 5,
         @Query("type") type : String = "json",
         @Query("signguNm") ctprvnNm : String = "중구"
     ): BaseResponse<ChargingStationListResponse>
@@ -21,7 +21,7 @@ interface ManagerService {
     suspend fun getMovementCenterList(
         @Query("serviceKey") serviceKey : String,
         @Query("pageNo") pageNo : Int = 0,
-        @Query("numOfRows") numOfRows : Int = 20,
+        @Query("numOfRows") numOfRows : Int = 5,
         @Query("type") type : String = "json"
     ): BaseResponse<MovementCenterListResponse>
 
@@ -29,8 +29,8 @@ interface ManagerService {
     suspend fun getPublicToiletList(
         @Query("serviceKey") serviceKey : String,
         @Query("pageNo") pageNo : Int = 0,
-        @Query("numOfRows") numOfRows : Int = 20,
+        @Query("numOfRows") numOfRows : Int = 5,
         @Query("type") type : String = "json",
-        @Query("institutionNm") institutionNm : String = "서울특별시 종로구청"
+        @Query("institutionNm") institutionNm : String = "서울특별시 용산구청"
     ): BaseResponse<PublicToiletListResponse>
 }
