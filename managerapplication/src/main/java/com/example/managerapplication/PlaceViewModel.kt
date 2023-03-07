@@ -82,7 +82,7 @@ class PlaceViewModel : ViewModel() {
             _chargingList.value?.forEach {
                 repository.postCharging(
                     RequestChargingStation(
-                        type = "charging",
+                        type = "충전소",
                         name = it.fcltyNm,
                         address = it.rdnmadr,
                         oldAddress = it.lnmadr,
@@ -111,7 +111,7 @@ class PlaceViewModel : ViewModel() {
             _centerList.value?.forEach {
                 repository.postCenter(
                     RequestMovementCenter(
-                        type = "center",
+                        type = "이동지원센터",
                         name = it.tfcwkerMvmnCnterNm,
                         address = it.rdnmadr,
                         oldAddress = it.lnmadr,
@@ -153,7 +153,7 @@ class PlaceViewModel : ViewModel() {
             _toiletList.value?.forEach {
                 repository.postToilet(
                     RequestPublicToilet(
-                        type = "toilets",
+                        type = "화장실",
                         detailType = it.toiletType,
                         name = it.toiletNm,
                         address = it.rdnmadr,
@@ -195,7 +195,7 @@ class PlaceViewModel : ViewModel() {
     }
 
     private fun getToiletTime(time : String) : Time {
-        return if(time == "24시간") Time("0","0","23","59")
+        return if(time == "24시간"||time =="상시") Time("0","0","23","59")
         else Time(getHour(time), time.substring(3,5), getHour(time.substring(6,8)), time.substring(9))
     }
 }

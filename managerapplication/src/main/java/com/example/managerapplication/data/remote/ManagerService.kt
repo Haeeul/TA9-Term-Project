@@ -14,7 +14,7 @@ interface ManagerService {
         @Query("pageNo") pageNo : Int = 0,
         @Query("numOfRows") numOfRows : Int = 20,
         @Query("type") type : String = "json",
-        @Query("ctprvnNm") ctprvnNm : String = "서울특별시"
+        @Query("signguNm") ctprvnNm : String = "중구"
     ): BaseResponse<ChargingStationListResponse>
 
     @GET("tn_pubr_public_tfcwker_mvmn_cnter_api")
@@ -31,6 +31,6 @@ interface ManagerService {
         @Query("pageNo") pageNo : Int = 0,
         @Query("numOfRows") numOfRows : Int = 20,
         @Query("type") type : String = "json",
-        @Query("institutionNm") institutionNm : String = "서울특별시 강서구청"
+        @Query("institutionNm") institutionNm : String = "서울특별시 종로구청"
     ): BaseResponse<PublicToiletListResponse>
 }
