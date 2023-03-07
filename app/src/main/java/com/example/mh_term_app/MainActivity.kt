@@ -13,7 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.data.model.MarkerList
-import com.example.mh_term_app.data.model.response.ResponseCategoryList
+import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
 import com.example.mh_term_app.databinding.ActivityMainBinding
 import com.example.mh_term_app.ui.map.MapViewModel
 import com.example.mh_term_app.ui.map.info.MapPersistBottomSheetFragment
@@ -36,11 +36,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
 
     private lateinit var locationSource: FusedLocationSource
     private lateinit var naverMap: NaverMap
-    private var categoryMarkers : MutableList<MarkerList<ResponseCategoryList>> = mutableListOf()
+    private var categoryMarkers : MutableList<MarkerList<ResponseCategoryPlace>> = mutableListOf()
 
     private var mapPersistBottomFragment: MapPersistBottomSheetFragment? = null
     private lateinit var mapFragment : MapFragment
-
 
     private lateinit var navController: NavController
 
@@ -122,7 +121,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
         }
     }
 
-    fun setCategoryMarkerList(data: MutableList<ResponseCategoryList>){
+    fun setCategoryMarkerList(data: MutableList<ResponseCategoryPlace>){
         resetMarkers()
 
         data.forEach {
@@ -141,6 +140,21 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
                 onClickListener = setStoreMarkerClickListener(it.data, position)
             }
         }
+    }
+
+    fun setSearchPlaceMarker(place: ResponseCategoryPlace){
+        setCategoryMarkerList(mutableListOf(place))
+
+        mapPersistBottomFragment?.apply {
+            setPlaceRating(place.id)
+            setPlaceData(place)
+            setPlaceDetailData(place)
+        }
+        setInfoWindowVisibility(true)
+
+        val cameraUpdate = CameraUpdate.scrollTo(LatLng(place.data.latitude,place.data.longitude))
+            .animate(CameraAnimation.Fly, 2000)
+        naverMap.moveCamera(cameraUpdate)
     }
 
     private fun resetMarkers(){
@@ -169,7 +183,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
             naverMap.locationTrackingMode = LocationTrackingMode.None
     }
 
-    private fun setStoreMarkerClickListener(data : ResponseCategoryList, latLng: LatLng): Overlay.OnClickListener {
+    private fun setStoreMarkerClickListener(data : ResponseCategoryPlace, latLng: LatLng): Overlay.OnClickListener {
         return Overlay.OnClickListener { overlay ->
             mapPersistBottomFragment?.apply {
                 setPlaceRating(data.id)

@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
-import com.example.mh_term_app.data.model.response.ResponseCategoryList
+import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
 import com.example.mh_term_app.databinding.LayoutInfoCollapseBinding
 import com.example.mh_term_app.databinding.LayoutInfoExpandBinding
 import com.example.mh_term_app.ui.map.MapViewModel
@@ -68,7 +68,7 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
         }
     }
 
-    private fun initViewPager(item: ResponseCategoryList){
+    private fun initViewPager(item: ResponseCategoryPlace){
         viewPagerAdapter = ViewPagerAdapter(
             childFragmentManager
         )
@@ -90,7 +90,7 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
         expandBinding.tlInfoDetail.changeTabsFont(0)
     }
 
-    fun setPlaceData(item : ResponseCategoryList){
+    fun setPlaceData(item : ResponseCategoryPlace){
         placeId = item.id
 
         collapseBinding.item = item
@@ -103,7 +103,7 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
         }
     }
 
-    fun setPlaceDetailData(item : ResponseCategoryList) {
+    fun setPlaceDetailData(item : ResponseCategoryPlace) {
         expandBinding.item = item
 
         when (item.data.type) {

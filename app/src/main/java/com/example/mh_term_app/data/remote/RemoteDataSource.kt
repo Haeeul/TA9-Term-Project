@@ -1,7 +1,7 @@
 package com.example.mh_term_app.data.remote
 
 import com.example.mh_term_app.data.model.request.*
-import com.example.mh_term_app.data.model.response.ResponseCategoryList
+import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
 import com.example.mh_term_app.data.model.response.ResponseReviewList
 
 interface RemoteDataSource {
@@ -21,7 +21,7 @@ interface RemoteDataSource {
     suspend fun postReportFacility(facility: RequestPlaceFacility) : Boolean
 
     // place
-    suspend fun getCategoryList(type: String) : MutableList<ResponseCategoryList>
+    suspend fun getCategoryList(type: String) : MutableList<ResponseCategoryPlace>
     suspend fun getPlaceRating(id : String) : Float
     suspend fun getStoreInfo(id : String) : RequestPlaceStore
     suspend fun getFacilityInfo(id : String) : RequestPlaceFacility
@@ -38,4 +38,7 @@ interface RemoteDataSource {
 
     // update user info
     suspend fun postNewUserInfo(id : String, nickname: String, type: String) : Boolean
+
+    // search
+    suspend fun getSearchInfo(name : String) : ResponseCategoryPlace
 }

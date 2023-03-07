@@ -4,7 +4,7 @@ import android.util.Log
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.data.model.request.*
 import com.example.mh_term_app.data.model.response.PlaceInfo
-import com.example.mh_term_app.data.model.response.ResponseCategoryList
+import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
 import com.example.mh_term_app.data.model.response.ResponseReviewList
 import com.example.mh_term_app.data.model.response.ResponseUser
 import com.google.firebase.FirebaseException
@@ -30,7 +30,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 .addOnFailureListener { exception ->
                     Log.w(TAG, "Error getting documents.", exception)
                 }.await()
-        }catch (e:FirebaseException){
+        } catch (e: FirebaseException) {
             Log.e(TAG, e.message.toString())
         }
         return valid
@@ -48,13 +48,18 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 .addOnFailureListener { exception ->
                     Log.w(TAG, "Error getting documents.", exception)
                 }.await()
-        }catch (e:FirebaseException){
+        } catch (e: FirebaseException) {
             Log.e(TAG, e.message.toString())
         }
         return valid
     }
 
-    override suspend fun postSignUp(id: String, password: String, nickname: String, type: String) : Boolean {
+    override suspend fun postSignUp(
+        id: String,
+        password: String,
+        nickname: String,
+        type: String
+    ): Boolean {
         var result = false
 
         val user = hashMapOf(
@@ -76,7 +81,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                     Log.w(TAG, "Error adding documents.", exception)
                     result = false
                 }.await()
-        }catch (e:FirebaseException){
+        } catch (e: FirebaseException) {
             Log.e(TAG, e.message.toString())
         }
 
@@ -95,7 +100,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 .addOnFailureListener { exception ->
                     Log.w(TAG, "Error getting documents.", exception)
                 }.await()
-        }catch (e:FirebaseException){
+        } catch (e: FirebaseException) {
             Log.e(TAG, e.message.toString())
         }
         return valid
@@ -109,7 +114,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 .addOnSuccessListener { result ->
                     val user = result.toObject<ResponseUser>()
                     valid = user?.password == password
-                    if(valid) {
+                    if (valid) {
                         if (user != null) {
                             MHApplication.prefManager.userId = user.id
                             MHApplication.prefManager.userPassword = user.password
@@ -121,7 +126,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 .addOnFailureListener { exception ->
                     Log.w(TAG, "Error getting documents.", exception)
                 }.await()
-        }catch (e:FirebaseException){
+        } catch (e: FirebaseException) {
             Log.e(TAG, e.message.toString())
         }
         return valid
@@ -141,7 +146,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                     Log.w(TAG, "Error adding documents.", exception)
                     result = false
                 }.await()
-        }catch (e:FirebaseException){
+        } catch (e: FirebaseException) {
             Log.e(TAG, e.message.toString())
         }
 
@@ -162,23 +167,23 @@ class RemoteDataSourceImpl : RemoteDataSource {
                     Log.w(TAG, "Error adding documents.", exception)
                     result = false
                 }.await()
-        }catch (e:FirebaseException){
+        } catch (e: FirebaseException) {
             Log.e(TAG, e.message.toString())
         }
 
         return result
     }
 
-    override suspend fun getCategoryList(type: String): MutableList<ResponseCategoryList> {
-        var placeList = mutableListOf<ResponseCategoryList>()
+    override suspend fun getCategoryList(type: String): MutableList<ResponseCategoryPlace> {
+        var placeList = mutableListOf<ResponseCategoryPlace>()
         try {
             db.collection("places")
                 .whereEqualTo("type", type)
                 .get()
                 .addOnSuccessListener { result ->
-                    for(place in result){
+                    for (place in result) {
                         placeList.add(
-                            ResponseCategoryList(
+                            ResponseCategoryPlace(
                                 place.id,
                                 PlaceInfo(
                                     place.data["type"].toString(),
@@ -197,7 +202,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 .addOnFailureListener { exception ->
                     Log.w(TAG, "Error getting documents.", exception)
                 }.await()
-        }catch (e:FirebaseException){
+        } catch (e: FirebaseException) {
             Log.e(TAG, e.message.toString())
         }
         return placeList
@@ -210,7 +215,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 .whereEqualTo("placeId", id)
                 .get()
                 .addOnSuccessListener { result ->
-                    for(item in result){
+                    for (item in result) {
                         rating += item.data["rating"].toString().toFloat()
                     }
                     rating /= result.size()
@@ -218,7 +223,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 .addOnFailureListener { exception ->
                     Log.w(TAG, "Error getting documents.", exception)
                 }.await()
-        }catch (e:FirebaseException){
+        } catch (e: FirebaseException) {
             Log.e(TAG, e.message.toString())
         }
         return rating
@@ -235,7 +240,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 .addOnFailureListener { exception ->
                     Log.w(TAG, "Error getting documents.", exception)
                 }.await()
-        }catch (e:FirebaseException){
+        } catch (e: FirebaseException) {
             Log.e(TAG, e.message.toString())
         }
         return store
@@ -252,13 +257,13 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 .addOnFailureListener { exception ->
                     Log.w(TAG, "Error getting documents.", exception)
                 }.await()
-        }catch (e:FirebaseException){
+        } catch (e: FirebaseException) {
             Log.e(TAG, e.message.toString())
         }
         return facility
     }
 
-    override suspend fun postUpdateAddress(place : RequestUpdatePlaceAddress): Boolean {
+    override suspend fun postUpdateAddress(place: RequestUpdatePlaceAddress): Boolean {
         var result = false
 
         try {
@@ -272,7 +277,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                     Log.w(TAG, "Error adding documents.", exception)
                     result = false
                 }.await()
-        }catch (e:FirebaseException){
+        } catch (e: FirebaseException) {
             Log.e(TAG, e.message.toString())
         }
 
@@ -293,7 +298,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                     Log.w(TAG, "Error adding documents.", exception)
                     result = false
                 }.await()
-        }catch (e:FirebaseException){
+        } catch (e: FirebaseException) {
             Log.e(TAG, e.message.toString())
         }
 
@@ -314,7 +319,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                     Log.w(TAG, "Error adding documents.", exception)
                     result = false
                 }.await()
-        }catch (e:FirebaseException){
+        } catch (e: FirebaseException) {
             Log.e(TAG, e.message.toString())
         }
 
@@ -335,7 +340,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                     Log.w(TAG, "Error adding documents.", exception)
                     result = false
                 }.await()
-        }catch (e:FirebaseException){
+        } catch (e: FirebaseException) {
             Log.e(TAG, e.message.toString())
         }
 
@@ -349,7 +354,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 .whereEqualTo("placeId", placeId)
                 .get()
                 .addOnSuccessListener { result ->
-                    for(review in result){
+                    for (review in result) {
                         reviewList.add(
                             ResponseReviewList(
                                 review.id,
@@ -371,7 +376,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 .addOnFailureListener { exception ->
                     Log.w(TAG, "Error getting documents.", exception)
                 }.await()
-        }catch (e:FirebaseException){
+        } catch (e: FirebaseException) {
             Log.e(TAG, e.message.toString())
         }
         return reviewList
@@ -384,7 +389,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 .whereEqualTo("userId", userId)
                 .get()
                 .addOnSuccessListener { result ->
-                    for(review in result){
+                    for (review in result) {
                         reviewList.add(
                             ResponseReviewList(
                                 review.id,
@@ -406,7 +411,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 .addOnFailureListener { exception ->
                     Log.w(TAG, "Error getting documents.", exception)
                 }.await()
-        }catch (e:FirebaseException){
+        } catch (e: FirebaseException) {
             Log.e(TAG, e.message.toString())
         }
         return reviewList
@@ -427,7 +432,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                     Log.w(TAG, "Error adding documents.", exception)
                     result = false
                 }.await()
-        }catch (e:FirebaseException){
+        } catch (e: FirebaseException) {
             Log.e(TAG, e.message.toString())
         }
 
@@ -443,10 +448,44 @@ class RemoteDataSourceImpl : RemoteDataSource {
                     Log.w(TAG, "Error adding documents.", exception)
                     result = false
                 }.await()
-        }catch (e:FirebaseException){
+        } catch (e: FirebaseException) {
             Log.e(TAG, e.message.toString())
         }
 
         return result
+    }
+
+    override suspend fun getSearchInfo(name: String): ResponseCategoryPlace {
+        var placeInfo = ResponseCategoryPlace("",PlaceInfo())
+        try {
+            db.collection("places")
+                .whereEqualTo("name", name)
+                .get()
+                .addOnSuccessListener { result ->
+                    if(!result.isEmpty){
+                        val info = result.documents[0].data!!
+                        placeInfo =
+                            ResponseCategoryPlace(
+                                result.documents[0].id,
+                                PlaceInfo(
+                                    info["type"].toString(),
+                                    info["address"].toString(),
+                                    info["latitude"].toString().toDouble(),
+                                    info["longitude"].toString().toDouble(),
+                                    info["name"].toString(),
+                                    info["phone"].toString(),
+                                    info["detailType"].toString(),
+                                    info["location"].toString()
+                                )
+                            )
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
+                }.await()
+        } catch (e: FirebaseException) {
+            Log.e(TAG, e.message.toString())
+        }
+        return placeInfo
     }
 }

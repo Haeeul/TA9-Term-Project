@@ -6,15 +6,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mh_term_app.data.model.request.RequestPlaceFacility
 import com.example.mh_term_app.data.model.request.RequestPlaceStore
-import com.example.mh_term_app.data.model.response.ResponseCategoryList
+import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
 import com.example.mh_term_app.data.repository.MapRepository
 import kotlinx.coroutines.launch
 
 class MapViewModel : ViewModel() {
     private val mapRepository = MapRepository()
 
-    private val _categoryList = MutableLiveData<MutableList<ResponseCategoryList>>()
-    val categoryList : LiveData<MutableList<ResponseCategoryList>>
+    private val _categoryList = MutableLiveData<MutableList<ResponseCategoryPlace>>()
+    val categoryList : LiveData<MutableList<ResponseCategoryPlace>>
         get() = _categoryList
 
     private val _placeRating = MutableLiveData<Float>()
