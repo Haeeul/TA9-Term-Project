@@ -342,11 +342,11 @@ class RemoteDataSourceImpl : RemoteDataSource {
         return result
     }
 
-    override suspend fun getReview(id: String): MutableList<ResponseReviewList> {
+    override suspend fun getReview(placeId: String): MutableList<ResponseReviewList> {
         var reviewList = mutableListOf<ResponseReviewList>()
         try {
             db.collection("reviews")
-                .whereEqualTo("placeId", id)
+                .whereEqualTo("placeId", placeId)
                 .get()
                 .addOnSuccessListener { result ->
                     for(review in result){
@@ -356,8 +356,9 @@ class RemoteDataSourceImpl : RemoteDataSource {
                                 review.data["placeId"].toString(),
                                 review.data["placeName"].toString(),
                                 review.data["placeType"].toString(),
-                                review.data["writer"].toString(),
-                                review.data["writerType"].toString(),
+                                review.data["userId"].toString(),
+                                review.data["userNickname"].toString(),
+                                review.data["userType"].toString(),
                                 review.data["content"].toString(),
                                 review.data["rating"].toString().toFloat(),
                                 review.data["likeCount"].toString().toDouble(),
@@ -366,6 +367,43 @@ class RemoteDataSourceImpl : RemoteDataSource {
                             )
                         )
                     }
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
+                }.await()
+        }catch (e:FirebaseException){
+            Log.e(TAG, e.message.toString())
+        }
+        return reviewList
+    }
+
+    override suspend fun getUserReview(userId: String): MutableList<ResponseReviewList> {
+        var reviewList = mutableListOf<ResponseReviewList>()
+        try {
+            db.collection("reviews")
+                .whereEqualTo("userId", userId)
+                .get()
+                .addOnSuccessListener { result ->
+                    for(review in result){
+                        reviewList.add(
+                            ResponseReviewList(
+                                review.id,
+                                review.data["placeId"].toString(),
+                                review.data["placeName"].toString(),
+                                review.data["placeType"].toString(),
+                                review.data["userId"].toString(),
+                                review.data["userNickname"].toString(),
+                                review.data["userType"].toString(),
+                                review.data["content"].toString(),
+                                review.data["rating"].toString().toFloat(),
+                                review.data["likeCount"].toString().toDouble(),
+                                review.data["like"] as MutableList<String>?,
+                                review.data["date"].toString()
+                            )
+                        )
+                        Log.d("명 review", review.data.toString())
+                    }
+                    Log.d("명 review list", reviewList.toString())
                 }
                 .addOnFailureListener { exception ->
                     Log.w(TAG, "Error getting documents.", exception)

@@ -78,7 +78,7 @@ class EditUserInfoActivity : BaseActivity<ActivityEditUserInfoBinding>() {
 
         userInfoViewModel.isValidUpdateInfo.observe(this){
             if(it){
-                toast("수정 성공")
+                toast("정보 수정 성공")
                 MHApplication.prefManager.userNickname = userInfoViewModel.nicknameTxt.value.toString()
                 MHApplication.prefManager.userType = if(userInfoViewModel.typeTxt.value.toString()== "null"){"none"} else {userInfoViewModel.typeTxt.value.toString()}
                 finish()
