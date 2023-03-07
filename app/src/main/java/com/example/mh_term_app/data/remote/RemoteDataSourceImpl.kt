@@ -401,9 +401,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                                 review.data["date"].toString()
                             )
                         )
-                        Log.d("명 review", review.data.toString())
                     }
-                    Log.d("명 review list", reviewList.toString())
                 }
                 .addOnFailureListener { exception ->
                     Log.w(TAG, "Error getting documents.", exception)

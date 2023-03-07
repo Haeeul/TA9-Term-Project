@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
 import com.example.mh_term_app.data.model.OriginStoreInfo
@@ -16,6 +17,8 @@ import com.example.mh_term_app.databinding.FragmentDetailReportStoreDataBinding
 import com.example.mh_term_app.databinding.ViewPlaceInfoItemNoneBinding
 import com.example.mh_term_app.ui.map.MapViewModel
 import com.example.mh_term_app.ui.map.details.update.UpdatePlaceInfoActivity
+import com.example.mh_term_app.ui.sign.`in`.SignInActivity
+import com.example.mh_term_app.utils.extension.createGoToDialog
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexDirection
@@ -50,11 +53,11 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
         super.initListener()
 
         binding.txtUpdateStoreInfo.setSingleOnClickListener {
-            goToUpdatePlaceInfo()
+            checkUserListener()
         }
 
         binding.btnUpdateStoreInfo.setSingleOnClickListener {
-            goToUpdatePlaceInfo()
+            checkUserListener()
         }
 
         setNoneItemListener(binding.inStoreDetailWeekdayNone, getString(R.string.desc_add_time_info))
@@ -67,9 +70,21 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
 
     private fun setNoneItemListener(view : ViewPlaceInfoItemNoneBinding, content : String){
         view.btnAddInfo.setSingleOnClickListener {
-            goToUpdatePlaceInfo()
+            checkUserListener()
         }
         view.txtInfoItemNoneContent.text = content
+    }
+
+    private fun checkUserListener(){
+        if(MHApplication.prefManager.haveAccount()) goToUpdatePlaceInfo()
+        else{
+            requireContext().createGoToDialog(childFragmentManager, "login",
+                {
+                    val loginIntent = Intent(context, SignInActivity::class.java)
+                    loginIntent.putExtra("type", "login")
+                    startActivity(loginIntent)
+                }, {})
+        }
     }
 
     private fun goToUpdatePlaceInfo(){
@@ -84,46 +99,49 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
     override fun initObserver() {
         super.initObserver()
 
-        mapViewModel.storeInfo.observe(this){
-            binding.apply {
-                item = it
+        mapViewModel.storeInfo.observe(viewLifecycleOwner){
+            if(it.latitude != 0.0) {
+                binding.apply {
+                    item = it
 
-                storeAddressInfo = ReportPlaceAddress(
-                    it.type,
-                    it.address,
-                    it.detailAddress,
-                    it.latitude,
-                    it.longitude
-                )
+                    storeAddressInfo = ReportPlaceAddress(
+                        it.type,
+                        it.address,
+                        it.detailAddress,
+                        it.latitude,
+                        it.longitude
+                    )
 
-                storeDetailInfo = OriginStoreInfo(
-                    it.name,
-                    if(it.phone== "none") "" else it.phone,
-                    changeToListValue(it.time),
-                    it.detailType,
-                    it.targetList ?: mutableListOf(),
-                    it.warningList ?: mutableListOf(),
-                    it.plusInfo
-                )
+                    storeDetailInfo = OriginStoreInfo(
+                        it.name,
+                        if (it.phone == "none") "" else it.phone,
+                        changeToListValue(it.time),
+                        it.detailType,
+                        it.targetList ?: mutableListOf(),
+                        it.warningList ?: mutableListOf(),
+                        it.plusInfo
+                    )
 
-                checkStoreData(it)
+                    checkStoreData(it)
 
-                txtStoreAddress.text = if(it.detailAddress == "none") it.address else it.address + " " + it.detailAddress
+                    txtStoreAddress.text =
+                        if (it.detailAddress == "none") it.address else it.address + " " + it.detailAddress
 
-                txtStoreDetailWeekdayTime.text = setStoreTime(it.time.weekTime, "weekday")
-                txtStoreDetailSaturdayTime.text = setStoreTime(it.time.saturdayTime, "saturday")
-                txtStoreDetailMondayTime.text = setStoreTime(it.time.mondayTime, "monday")
+                    txtStoreDetailWeekdayTime.text = setStoreTime(it.time.weekTime, "weekday")
+                    txtStoreDetailSaturdayTime.text = setStoreTime(it.time.saturdayTime, "saturday")
+                    txtStoreDetailMondayTime.text = setStoreTime(it.time.mondayTime, "monday")
 
-                rvStoreTargetAdapter.run {
-                    replaceAll(it.targetList as ArrayList<String>?)
-                    notifyDataSetChanged()
+                    rvStoreTargetAdapter.run {
+                        replaceAll(it.targetList as ArrayList<String>?)
+                        notifyDataSetChanged()
+                    }
+
+                    rvStoreWarningAdapter.run {
+                        replaceAll(it.warningList as ArrayList<String>?)
+                        notifyDataSetChanged()
+                    }
                 }
-
-                rvStoreWarningAdapter.run {
-                    replaceAll(it.warningList as ArrayList<String>?)
-                    notifyDataSetChanged()
-                }
-            }
+            }else mapViewModel.getStoreInfo(storeId)
         }
     }
 
@@ -166,7 +184,7 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
                 ""
             }
             else -> {
-                if(time.openMinuteTxt == "0" && time.closeHourTxt == "11" && time.closeMinuteTxt == "59") "24시간 영업"
+                if(time.openMinuteTxt == "0" && time.closeHourTxt == "23" && time.closeMinuteTxt == "59") "24시간 영업"
                 else setTimeFormat(time.openHourTxt) + " : " + setTimeFormat(time.openMinuteTxt) + " ~ " +
                         setTimeFormat(time.closeHourTxt) + " : " + setTimeFormat(time.closeMinuteTxt)
             }

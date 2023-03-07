@@ -1,7 +1,6 @@
 package com.example.mh_term_app.ui.map.details.review
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -82,8 +81,6 @@ class ReviewViewModel : ViewModel() {
             _userReviewList.value = reviewRepository.getUserReviewList(MHApplication.prefManager.userId)
 
             _isValidUserReviewList.value = _userReviewList.value!!.size > 0
-
-            Log.d("명", _userReviewList.value.toString())
         }
     }
 }

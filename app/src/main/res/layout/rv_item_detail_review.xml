@@ -99,6 +99,7 @@
             setUserTypeChip="@{item.userType}"
             app:chipBackgroundColor="@color/green"
             android:textAppearance="@style/UserChipText"
+            android:clickable="false"
             app:layout_constraintBottom_toBottomOf="@+id/textView20"
             app:layout_constraintEnd_toEndOf="@+id/textView18"
             app:layout_constraintTop_toTopOf="@+id/textView20" />

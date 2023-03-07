@@ -1,7 +1,6 @@
 package com.example.mh_term_app.ui.menu.review
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -17,7 +16,6 @@ class UserReviewAdapter : RecyclerView.Adapter<UserReviewAdapter.UserReviewViewH
     internal fun setReviewList(data: MutableList<ResponseReviewList>?) {
         if (data != null) this.data = data
         notifyDataSetChanged()
-        Log.d("명 adapter", data.toString())
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserReviewViewHolder {

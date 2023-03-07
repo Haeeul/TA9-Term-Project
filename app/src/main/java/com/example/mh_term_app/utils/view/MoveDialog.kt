@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.mh_term_app.R
-import com.example.mh_term_app.databinding.DialogSignGuideBinding
+import com.example.mh_term_app.databinding.DialogMoveBinding
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 
-class SignGuideDialog : DialogFragment(), View.OnClickListener {
-    lateinit var binding : DialogSignGuideBinding
+class MoveDialog : DialogFragment(), View.OnClickListener {
+    lateinit var binding : DialogMoveBinding
     var listener: CustomDialogListener? = null
 
     override fun onCreateView(
@@ -18,7 +18,7 @@ class SignGuideDialog : DialogFragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DialogSignGuideBinding.inflate(inflater, container, false)
+        binding = DialogMoveBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
         this.setDrawable()
@@ -38,7 +38,7 @@ class SignGuideDialog : DialogFragment(), View.OnClickListener {
         processBundle(binding)
     }
 
-    private fun processBundle(binding: DialogSignGuideBinding) {
+    private fun processBundle(binding: DialogMoveBinding) {
         val bundle = arguments
         when (bundle?.getString("type", "")) {
             "goToSignIn" -> {
@@ -50,14 +50,17 @@ class SignGuideDialog : DialogFragment(), View.OnClickListener {
             "update" -> {
                 setContents(R.string.desc_update_back, "이동")
             }
+            "login" -> {
+                setContents(R.string.desc_need_login, "이동")
+            }
         }
 
-        binding.btnSignGuideConfirm.setSingleOnClickListener {
+        binding.btnMoveDialogConfirm.setSingleOnClickListener {
             dismiss()
             listener?.onPositiveClicked()
         }
 
-        binding.btnSignGuideCancel.setSingleOnClickListener {
+        binding.btnMoveDialogCancel.setSingleOnClickListener {
             dismiss()
         }
     }
@@ -67,19 +70,19 @@ class SignGuideDialog : DialogFragment(), View.OnClickListener {
     }
 
     private fun setContents(title: Int, confirm: String){
-        binding.txtSignGuideContent.text = getString(title)
-        binding.btnSignGuideConfirm.text = confirm
+        binding.txtMoveDialogContent.text = getString(title)
+        binding.btnMoveDialogConfirm.text = confirm
     }
 
     inner class CustomDialogBuilder {
-        private val dialog = SignGuideDialog()
+        private val dialog = MoveDialog()
 
         fun setBtnClickListener(listener: CustomDialogListener): CustomDialogBuilder {
             dialog.listener = listener
             return this
         }
 
-        fun getInstance(): SignGuideDialog {
+        fun getInstance(): MoveDialog {
             return dialog
         }
     }

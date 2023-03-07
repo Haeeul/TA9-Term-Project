@@ -19,12 +19,16 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>() {
         get() = R.layout.activity_sign_in
     private val signInViewModel : SignInViewModel by viewModels()
 
+    var type = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.apply {
             vm = signInViewModel
             edtSignInId.requestFocus()
         }
+
+        type = intent.getStringExtra("type").toString()
     }
 
     override fun initView() {
@@ -42,7 +46,8 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>() {
         signInViewModel.isValidSignIn.observe(this){
             if (it) {
                 toast("로그인 성공")
-                startActivityWithAffinity(MainActivity::class.java)
+                if(type == "login") finish()
+                else startActivityWithAffinity(MainActivity::class.java)
             }
         }
     }
