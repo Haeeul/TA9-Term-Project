@@ -63,7 +63,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.menu.UserFavotireActivity"
+            android:name=".ui.menu.UserFavoriteActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
