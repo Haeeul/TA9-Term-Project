@@ -32,9 +32,20 @@ class SearchPlaceActivity : BaseActivity<ActivitySearchPlaceBinding>() {
         super.initObserver()
 
         searchViewModel.placeInfo.observe(this){
+            if(it.id.isEmpty()) searchViewModel.getSearchAddress()
+            else{
+                val searchResultIntent = Intent(this, NaverMapFragment::class.java)
+                searchResultIntent.putExtra("searchResult",it)
+                setResult(RESULT_OK,searchResultIntent)
+                finish()
+            }
+        }
+
+        searchViewModel.coordInfo.observe(this){
             val searchResultIntent = Intent(this, NaverMapFragment::class.java)
-            searchResultIntent.putExtra("searchResult",it)
-            setResult(RESULT_OK,searchResultIntent)
+            searchResultIntent.putExtra("latitude",it.latitude)
+            searchResultIntent.putExtra("longitude",it.longitude)
+            setResult(100,searchResultIntent)
             finish()
         }
     }
@@ -49,7 +60,7 @@ class SearchPlaceActivity : BaseActivity<ActivitySearchPlaceBinding>() {
         binding.edtSearchContent.setOnEditorActionListener { v, actionId, event ->
             var handled = false
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                searchViewModel.getSearchInfo()
+                searchViewModel.getSearchName()
                 handled = true
             }
             handled

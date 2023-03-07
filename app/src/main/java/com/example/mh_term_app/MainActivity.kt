@@ -157,6 +157,20 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
         naverMap.moveCamera(cameraUpdate)
     }
 
+    fun setSearchLatLngMarker(latlng: LatLng){
+        val marker = Marker().apply {
+            position = latlng
+            icon = MarkerIcons.RED
+            icon = MarkerIcons.BLACK
+            iconTintColor = Color.GRAY
+            map = naverMap
+        }
+
+        val cameraUpdate = CameraUpdate.scrollTo(latlng)
+            .animate(CameraAnimation.Fly, 2000)
+        naverMap.moveCamera(cameraUpdate)
+    }
+
     private fun resetMarkers(){
         categoryMarkers.forEach {
             it.marker.apply {

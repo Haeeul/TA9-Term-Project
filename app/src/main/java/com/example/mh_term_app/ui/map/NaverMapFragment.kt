@@ -30,6 +30,7 @@ import com.example.mh_term_app.utils.extension.intent
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 import com.example.mh_term_app.utils.extension.toast
 import com.google.android.material.chip.Chip
+import com.naver.maps.geometry.LatLng
 
 class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
     override val layoutResID
@@ -190,6 +191,17 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
                 else{
                     val activity = activity as MainActivity
                     activity.setSearchPlaceMarker(data)
+                }
+            }else if(result.resultCode == 100){
+                val data = LatLng(
+                    result.data?.getDoubleExtra("latitude",0.0)!!,
+                    result.data?.getDoubleExtra("longitude",0.0)!!
+                )
+
+                if(data.longitude == 0.0) context?.toast(getString(R.string.txt_search_result_none))
+                else{
+                    val activity = activity as MainActivity
+                    activity.setSearchLatLngMarker(data)
                 }
             }
         }
