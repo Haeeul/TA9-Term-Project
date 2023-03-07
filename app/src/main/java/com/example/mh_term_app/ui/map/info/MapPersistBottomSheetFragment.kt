@@ -52,19 +52,22 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
 
     private fun initObserver(){
         mapViewModel.placeRating.observe(viewLifecycleOwner){
-            var rating = ""
+            if(it != 0f){
+                var rating = ""
 
-            rating = if(it.isNaN()) "-"
-            else it.toString()
+                rating = if(it.isNaN()) "-"
+                else it.toString()
 
-            collapseBinding.apply {
-                rbBottomInfo.rating = it
-                txtBottomInfoRating.text = rating.toString()
-            }
-            expandBinding.apply {
-                rbDetailInfo.rating = it
-                txtDetailRating.text = rating.toString()
-            }
+                collapseBinding.apply {
+                    rbBottomInfo.rating = it
+                    txtBottomInfoRating.text = rating.toString()
+                }
+                expandBinding.apply {
+                    rbDetailInfo.rating = it
+                    txtDetailRating.text = rating.toString()
+                }
+            }else mapViewModel.getPlaceRating(placeId)
+
         }
     }
 
