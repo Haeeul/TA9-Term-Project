@@ -8,6 +8,6 @@ class ReviewRepository {
     private val remoteDataSource : RemoteDataSource = RemoteDataSourceImpl()
 
     suspend fun postReview(review: RequestReview) = remoteDataSource.postReview(review)
-    suspend fun getReviewList(id : String) = remoteDataSource.getReview(id)
-    suspend fun getUserReviewList(nickname : String) = remoteDataSource.getUserReview(nickname)
+    suspend fun getReviewList(placeId : String) = remoteDataSource.getReview(placeId)
+    suspend fun getUserReviewList(userId : String) = remoteDataSource.getUserReview(userId)
 }

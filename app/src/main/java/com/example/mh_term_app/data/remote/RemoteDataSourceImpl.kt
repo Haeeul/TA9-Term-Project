@@ -342,11 +342,11 @@ class RemoteDataSourceImpl : RemoteDataSource {
         return result
     }
 
-    override suspend fun getReview(id: String): MutableList<ResponseReviewList> {
+    override suspend fun getReview(placeId: String): MutableList<ResponseReviewList> {
         var reviewList = mutableListOf<ResponseReviewList>()
         try {
             db.collection("reviews")
-                .whereEqualTo("placeId", id)
+                .whereEqualTo("placeId", placeId)
                 .get()
                 .addOnSuccessListener { result ->
                     for(review in result){
@@ -356,6 +356,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                                 review.data["placeId"].toString(),
                                 review.data["placeName"].toString(),
                                 review.data["placeType"].toString(),
+                                review.data["userId"].toString(),
                                 review.data["userNickname"].toString(),
                                 review.data["userType"].toString(),
                                 review.data["content"].toString(),
@@ -376,11 +377,11 @@ class RemoteDataSourceImpl : RemoteDataSource {
         return reviewList
     }
 
-    override suspend fun getUserReview(nickname: String): MutableList<ResponseReviewList> {
+    override suspend fun getUserReview(userId: String): MutableList<ResponseReviewList> {
         var reviewList = mutableListOf<ResponseReviewList>()
         try {
             db.collection("reviews")
-                .whereEqualTo("userNickname", nickname)
+                .whereEqualTo("userId", userId)
                 .get()
                 .addOnSuccessListener { result ->
                     for(review in result){
@@ -390,6 +391,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                                 review.data["placeId"].toString(),
                                 review.data["placeName"].toString(),
                                 review.data["placeType"].toString(),
+                                review.data["userId"].toString(),
                                 review.data["userNickname"].toString(),
                                 review.data["userType"].toString(),
                                 review.data["content"].toString(),

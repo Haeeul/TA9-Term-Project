@@ -47,6 +47,7 @@ class ReviewViewModel : ViewModel() {
                 placeId = placeId,
                 placeName = placeName,
                 placeType = placeType,
+                userId = MHApplication.prefManager.userId,
                 userNickname = MHApplication.prefManager.userNickname,
                 userType = MHApplication.prefManager.userType,
                 content = reviewTxt.value.toString(),
@@ -60,9 +61,9 @@ class ReviewViewModel : ViewModel() {
         }
     }
 
-    fun getReviewList(id:String){
+    fun getReviewList(placeId:String){
         viewModelScope.launch {
-            _reviewList.value = reviewRepository.getReviewList(id)
+            _reviewList.value = reviewRepository.getReviewList(placeId)
 
             _isValidReviewList.value = _reviewList.value!!.size > 0
         }
@@ -78,7 +79,7 @@ class ReviewViewModel : ViewModel() {
 
     fun getUserReview(){
         viewModelScope.launch {
-            _userReviewList.value = reviewRepository.getUserReviewList(MHApplication.prefManager.userNickname)
+            _userReviewList.value = reviewRepository.getUserReviewList(MHApplication.prefManager.userId)
 
             _isValidUserReviewList.value = _userReviewList.value!!.size > 0
 

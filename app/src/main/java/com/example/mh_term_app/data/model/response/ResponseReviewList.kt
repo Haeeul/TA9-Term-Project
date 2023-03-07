@@ -5,6 +5,7 @@ data class ResponseReviewList(
     val placeId : String,
     val placeName : String,
     val placeType : String,
+    val userId : String,
     val userNickname : String,
     val userType : String,
     val content : String,
