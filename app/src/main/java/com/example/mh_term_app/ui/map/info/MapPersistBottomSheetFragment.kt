@@ -1,6 +1,7 @@
 package com.example.mh_term_app.ui.map.info
 
-import android.util.Log
+import android.os.Bundle
+import android.view.View
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
@@ -15,7 +16,6 @@ import com.example.mh_term_app.ui.map.details.DetailReportStoreDataFragment
 import com.example.mh_term_app.ui.map.review.DetailReviewFragment
 import com.example.mh_term_app.utils.listener.TabSelectedListener
 import com.example.mh_term_app.utils.listener.changeTabsFont
-import com.naver.maps.map.MapView
 import kr.co.prnd.persistbottomsheetfragment.PersistBottomSheetFragment
 
 
@@ -29,10 +29,10 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
 
     var placeId = ""
 
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        mapViewModel.getPlaceRating(placeId)
+        initObserver()
     }
 
     companion object {
@@ -48,6 +48,24 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
                         .replace(containerViewId, this, TAG)
                         .commitAllowingStateLoss()
                 }
+    }
+
+    private fun initObserver(){
+        mapViewModel.placeRating.observe(viewLifecycleOwner){
+            var rating = ""
+
+            rating = if(it.isNaN()) "-"
+            else it.toString()
+
+            collapseBinding.apply {
+                rbBottomInfo.rating = it
+                txtBottomInfoRating.text = rating.toString()
+            }
+            expandBinding.apply {
+                rbDetailInfo.rating = it
+                txtDetailRating.text = rating.toString()
+            }
+        }
     }
 
     private fun initViewPager(item: ResponseCategoryList){
@@ -107,22 +125,6 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
     }
 
     fun setPlaceRating(id:String){
-        mapViewModel.placeRating.observe(this){
-            var rating = ""
-
-            rating = if(it.isNaN()) "-"
-            else it.toString()
-
-            collapseBinding.apply {
-                rbBottomInfo.rating = it
-                txtBottomInfoRating.text = rating.toString()
-            }
-            expandBinding.apply {
-                rbDetailInfo.rating = it
-                txtDetailRating.text = rating.toString()
-            }
-        }
-
         mapViewModel.getPlaceRating(id)
     }
 

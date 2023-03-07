@@ -78,7 +78,7 @@ class DetailReportFacilityDataFragment(private val facilityId : String) : BaseFr
     override fun initObserver() {
         super.initObserver()
 
-        mapViewModel.facilityInfo.observe(this){
+        mapViewModel.facilityInfo.observe(viewLifecycleOwner){
             binding.apply {
                 item = it
 

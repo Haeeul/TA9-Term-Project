@@ -3,6 +3,7 @@ package com.example.mh_term_app.ui.map.details
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.mh_term_app.R
@@ -84,7 +85,8 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
     override fun initObserver() {
         super.initObserver()
 
-        mapViewModel.storeInfo.observe(this){
+        mapViewModel.storeInfo.observe(viewLifecycleOwner){
+            Log.d("명 store observer",it.toString() )
             binding.apply {
                 item = it
 
