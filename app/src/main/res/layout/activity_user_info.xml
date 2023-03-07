@@ -284,7 +284,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/button2"
+                    android:id="@+id/btn_user_info_complete"
                     style="@style/ButtonText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -293,7 +293,7 @@
                     android:layout_marginBottom="35dp"
                     android:background="@drawable/selector_sign_btn"
                     android:enabled="@{vm.isValidNickname}"
-                    android:onClick="@{() -> vm.postSignUp()}"
+                    android:onClick="postSignUp"
                     android:text="@string/txt_complete"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"

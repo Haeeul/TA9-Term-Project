@@ -40,7 +40,6 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
 
     override fun onDetach() {
         super.onDetach()
-        callback.remove()
     }
 
     override fun initObserver() {

@@ -258,7 +258,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView45" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button2"
+            android:id="@+id/btn_user_info_complete"
             style="@style/ButtonText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

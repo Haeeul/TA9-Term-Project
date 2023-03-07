@@ -81,15 +81,13 @@ class UserInfoViewModel : ViewModel() {
         typeTxt.value = txt
     }
 
-    fun postSignUp(){
+    fun postSignUp(id : String, password : String){
         viewModelScope.launch {
-            MHApplication.prefManager.userNickname = nicknameTxt.value.toString()
-            MHApplication.prefManager.userType = if(typeTxt.value.toString()== "null"){"none"} else {typeTxt.value.toString()}
             _isValidSignUp.value = userRepository.postSignUp(
-                MHApplication.prefManager.userId,
-                MHApplication.prefManager.userPassword,
-                MHApplication.prefManager.userNickname,
-                MHApplication.prefManager.userType
+                id,
+                password,
+                nicknameTxt.value.toString(),
+                if(typeTxt.value.toString()== "null"){"none"} else {typeTxt.value.toString()}
             )
         }
     }
