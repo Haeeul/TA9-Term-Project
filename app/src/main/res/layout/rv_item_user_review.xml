@@ -88,7 +88,7 @@
                 android:layout_marginTop="1dp"
                 android:text="@{Float.toString(item.rating)}"
                 android:textColor="@color/black"
-                android:textSize="16dp"
+                android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="@+id/ratingBar2"
                 app:layout_constraintStart_toEndOf="@+id/ratingBar2"
                 app:layout_constraintTop_toTopOf="@+id/ratingBar2" />
@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{item.date}"
                 android:textColor="@color/black"
-                android:textSize="16dp"
+                android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView39"
                 app:layout_constraintEnd_toEndOf="@+id/textView33"
                 app:layout_constraintTop_toTopOf="@+id/textView39" />
