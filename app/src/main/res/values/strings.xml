@@ -161,5 +161,6 @@
     <!-- etc -->
     <string name="txt_server_error">서버 점검중입니다.</string>
     <string name="txt_search_result_none">검색 결과가 없습니다.</string>
+    <string name="txt_phone_number_none">번호 정보가 없습니다.</string>
 
 </resources>
