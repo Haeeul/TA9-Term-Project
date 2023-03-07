@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.FragmentManager
 import com.example.mh_term_app.ui.menu.report.ReportViewModel
 import com.example.mh_term_app.utils.view.DialogViewModel
-import com.example.mh_term_app.utils.view.SignGuideDialog
+import com.example.mh_term_app.utils.view.MoveDialog
 import com.example.mh_term_app.utils.view.StoreTimeDialog
 import com.example.mh_term_app.utils.view.TimePickerDialog
 
@@ -13,7 +13,7 @@ import com.example.mh_term_app.utils.view.TimePickerDialog
 fun Context.createDialog(fragmentManager: FragmentManager, type: String) {
     val bundle = Bundle()
     bundle.putString("type", type)
-    val dialog: SignGuideDialog = SignGuideDialog().CustomDialogBuilder().getInstance()
+    val dialog: MoveDialog = MoveDialog().CustomDialogBuilder().getInstance()
     dialog.arguments = bundle
     dialog.show(fragmentManager, dialog.tag)
 }
@@ -21,8 +21,8 @@ fun Context.createDialog(fragmentManager: FragmentManager, type: String) {
 fun Context.createGoToDialog(fragmentManager: FragmentManager, type: String, positiveClicked:(() -> Unit)?, negativeClicked: (() -> Unit)?) {
     val bundle = Bundle()
     bundle.putString("type", type)
-    val dialog: SignGuideDialog = SignGuideDialog().CustomDialogBuilder()
-        .setBtnClickListener(object : SignGuideDialog.CustomDialogListener {
+    val dialog: MoveDialog = MoveDialog().CustomDialogBuilder()
+        .setBtnClickListener(object : MoveDialog.CustomDialogListener {
             override fun onPositiveClicked() {
                 if (positiveClicked != null) {
                     positiveClicked()

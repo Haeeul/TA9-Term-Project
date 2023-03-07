@@ -7,7 +7,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/txt_sign_guide_content"
+            android:id="@+id/txt_move_dialog_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -21,7 +21,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_sign_guide_cancel"
+            android:id="@+id/btn_move_dialog_cancel"
             style="@style/MediumText"
             android:layout_width="0dp"
             android:layout_height="52dp"
@@ -32,12 +32,12 @@
             android:insetBottom="0dp"
             app:cornerRadius="0dp"
             android:backgroundTint="@color/light_grey"
-            app:layout_constraintEnd_toStartOf="@+id/btn_sign_guide_confirm"
+            app:layout_constraintEnd_toStartOf="@+id/btn_move_dialog_confirm"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_sign_guide_content" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_move_dialog_content" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_sign_guide_confirm"
+            android:id="@+id/btn_move_dialog_confirm"
             style="@style/MediumText"
             android:layout_width="0dp"
             android:layout_height="52dp"
@@ -49,7 +49,7 @@
             app:cornerRadius="0dp"
             android:backgroundTint="@color/blue"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btn_sign_guide_cancel"
-            app:layout_constraintTop_toTopOf="@+id/btn_sign_guide_cancel" />
+            app:layout_constraintStart_toEndOf="@+id/btn_move_dialog_cancel"
+            app:layout_constraintTop_toTopOf="@+id/btn_move_dialog_cancel" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
