@@ -1,5 +1,6 @@
 package com.example.mh_term_app.ui.sign.up
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -7,7 +8,6 @@ import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivitySignUpBinding
-import com.example.mh_term_app.utils.extension.clearStartActivity
 import com.example.mh_term_app.utils.extension.setKeyboardObserver
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 
@@ -56,7 +56,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
     }
 
     fun goToUserInfoListener(view: View){
-        signUpViewModel.addUserInfo()
-        this.clearStartActivity(UserInfoActivity::class.java)
+        val infoIntent = Intent(this, UserInfoActivity::class.java)
+        infoIntent.putExtra("id", signUpViewModel.idTxt.value)
+        infoIntent.putExtra("password", signUpViewModel.passwordTxt.value)
+        startActivity(infoIntent)
     }
 }

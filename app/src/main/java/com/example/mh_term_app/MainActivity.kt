@@ -7,6 +7,8 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.annotation.UiThread
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.mh_term_app.base.BaseActivity
@@ -85,7 +87,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
     }
 
-    fun setNaverMap(){
+    private fun setNaverMap(){
         val fm = supportFragmentManager
         mapFragment = fm.findFragmentById(R.id.fm_map) as MapFragment?
             ?: MapFragment.newInstance().also {
@@ -195,7 +197,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
         } else {
             if (binding.flBottomContainer.visibility == View.VISIBLE) {
                 setInfoWindowVisibility(false)
-            } else {
+            }else if(binding.flMainContainer.findViewById<DrawerLayout>(R.id.drawerLayout) != null &&
+                binding.flMainContainer.findViewById<DrawerLayout>(R.id.drawerLayout).isDrawerOpen(GravityCompat.START)){
+                binding.flMainContainer.findViewById<DrawerLayout>(R.id.drawerLayout).closeDrawers()
+            }else {
                 if (supportFragmentManager.backStackEntryCount == 0) {
                     var tempTime = System.currentTimeMillis()
                     var intervalTime = tempTime - backPressedTime

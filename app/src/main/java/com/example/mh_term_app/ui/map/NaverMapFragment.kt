@@ -1,7 +1,7 @@
 package com.example.mh_term_app.ui.map
 
 import android.annotation.SuppressLint
-import android.content.Context
+import android.content.Intent
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,6 +13,7 @@ import com.example.mh_term_app.MainActivity
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
 import com.example.mh_term_app.databinding.FragmentNaverMapBinding
+import com.example.mh_term_app.ui.map.search.SearchPlaceActivity
 import com.example.mh_term_app.ui.menu.EditUserInfoActivity
 import com.example.mh_term_app.ui.menu.UserFavotireActivity
 import com.example.mh_term_app.ui.menu.report.ReportPlaceActivity
@@ -37,26 +38,8 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
         inflateMenu()
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        callback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if(binding.drawerLayout.isDrawerOpen(GravityCompat.START)){
-                    binding.drawerLayout.closeDrawers()
-                }else{
-                    // 백스택 구현
-                    super.remove()
-                    (activity as MainActivity).onBackPressed()
-                }
-            }
-        }
-
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
-    }
-
     override fun onDetach() {
         super.onDetach()
-        callback.remove()
     }
 
     override fun initObserver() {
@@ -78,9 +61,12 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
         super.initListener()
 
         binding.edtMapSearch.setSingleOnClickListener {
-            val activity = activity as MainActivity
-            activity.goToSearchListener()
-            activity.setInfoWindowVisibility(false)
+//            val activity = activity as MainActivity
+//            activity.goToSearchListener()
+//            activity.setInfoWindowVisibility(false)
+
+            val searchIntent = Intent(requireContext(), SearchPlaceActivity::class.java)
+            startActivity(searchIntent)
         }
 
         binding.chipFacility.setSingleOnClickListener {
@@ -131,6 +117,8 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
         binding.nvDrawerMenu.menu.removeItem(R.id.favorite_list)
         binding.nvDrawerMenu.menu.removeItem(R.id.report)
         binding.nvDrawerMenu.menu.removeItem(R.id.logout)
+        binding.nvDrawerMenu.menu.removeItem(R.id.go_to_sign_up)
+        binding.nvDrawerMenu.menu.removeItem(R.id.go_to_sign_in)
 
         if(MHApplication.prefManager.haveAccount()) {
             binding.nvDrawerMenu.inflateMenu(R.menu.nv_drawer_menu_user)
@@ -144,10 +132,16 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
                     View.GONE
                 }
             }
+            binding.nvDrawerMenu.getHeaderView(0).findViewById<ImageView>(R.id.btn_menu_close).setSingleOnClickListener {
+                binding.drawerLayout.closeDrawers()
+            }
 
         }else{
             binding.nvDrawerMenu.inflateMenu(R.menu.nv_drawer_menu_none)
             binding.nvDrawerMenu.inflateHeaderView(R.layout.nv_drawer_header_none)
+            binding.nvDrawerMenu.getHeaderView(0).findViewById<ImageView>(R.id.btn_menu_close).setSingleOnClickListener {
+                binding.drawerLayout.closeDrawers()
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 package com.example.mh_term_app.ui.sign.up
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.MainActivity
@@ -14,6 +15,9 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding>() {
         get() = R.layout.activity_user_info
     private val userInfoViewModel: UserInfoViewModel by viewModels()
 
+    var id = ""
+    var password = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -21,6 +25,9 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding>() {
             vm = userInfoViewModel
             edtUserInfoNick.requestFocus()
         }
+
+        id = intent.getStringExtra("id").toString()
+        password = intent.getStringExtra("password").toString()
     }
 
     override fun initView() {
@@ -39,6 +46,10 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding>() {
 
         userInfoViewModel.isValidSignUp.observe(this) {
             if (it) {
+                MHApplication.prefManager.userId = id
+                MHApplication.prefManager.userPassword = password
+                MHApplication.prefManager.userNickname = userInfoViewModel.nicknameTxt.value.toString()
+                MHApplication.prefManager.userType = if(userInfoViewModel.typeTxt.value.toString()== "null"){"none"} else {userInfoViewModel.typeTxt.value.toString()}
                 toast("회원가입 성공")
                 startActivityWithAffinity(MainActivity::class.java)
             } else {
@@ -63,5 +74,9 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding>() {
                 R.id.rb_type_old -> userInfoViewModel.setTypeTxt(getString(R.string.txt_user_type_old))
             }
         }
+    }
+
+    fun postSignUp(view : View){
+        userInfoViewModel.postSignUp(id,password)
     }
 }
