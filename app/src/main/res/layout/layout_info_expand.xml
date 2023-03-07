@@ -7,7 +7,7 @@
     <data>
         <variable
             name="item"
-            type="com.example.mh_term_app.data.model.response.ResponseCategoryList" />
+            type="com.example.mh_term_app.data.model.response.ResponseCategoryPlace" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

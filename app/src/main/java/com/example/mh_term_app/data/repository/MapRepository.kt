@@ -18,4 +18,6 @@ class MapRepository {
     suspend fun postUpdateAddress(place : RequestUpdatePlaceAddress) = remoteDataSource.postUpdateAddress(place)
     suspend fun postUpdateStoreInfo(store : RequestUpdateStoreInfo) = remoteDataSource.postUpdateStoreInfo(store)
     suspend fun postUpdateFacilityInfo(facility : RequestUpdateFacilityInfo) = remoteDataSource.postUpdateFacilityInfo(facility)
+
+    suspend fun getSearchInfo(name : String) = remoteDataSource.getSearchInfo(name)
 }

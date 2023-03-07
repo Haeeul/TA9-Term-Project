@@ -7,7 +7,7 @@ import androidx.fragment.app.activityViewModels
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
-import com.example.mh_term_app.data.model.response.ResponseCategoryList
+import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
 import com.example.mh_term_app.databinding.FragmentDetailReviewBinding
 import com.example.mh_term_app.ui.map.details.review.DetailAddReviewActivity
 import com.example.mh_term_app.ui.map.details.review.ReviewViewModel
@@ -16,7 +16,7 @@ import com.example.mh_term_app.utils.extension.createGoToDialog
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 import com.example.mh_term_app.utils.view.DetailReviewItemDecorator
 
-class DetailReviewFragment(val item: ResponseCategoryList) : BaseFragment<FragmentDetailReviewBinding>() {
+class DetailReviewFragment(val item: ResponseCategoryPlace) : BaseFragment<FragmentDetailReviewBinding>() {
     override val layoutResID: Int
         get() = R.layout.fragment_detail_review
 

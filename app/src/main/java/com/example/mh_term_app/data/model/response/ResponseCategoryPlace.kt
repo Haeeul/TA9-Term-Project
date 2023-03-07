@@ -1,10 +1,15 @@
 package com.example.mh_term_app.data.model.response
 
-data class ResponseCategoryList(
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class ResponseCategoryPlace(
     val id : String = "",
     val data : PlaceInfo
-)
+) : Parcelable
 
+@Parcelize
 data class PlaceInfo(
     val type: String = "",
     val address: String = "",
@@ -14,4 +19,4 @@ data class PlaceInfo(
     val phone: String = "",
     val detailType : String = "",
     val location : String = ""
-)
+) : Parcelable

@@ -1,17 +1,22 @@
 package com.example.mh_term_app.ui.map
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.viewModels
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.MainActivity
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
+import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
 import com.example.mh_term_app.databinding.FragmentNaverMapBinding
 import com.example.mh_term_app.ui.map.search.SearchPlaceActivity
 import com.example.mh_term_app.ui.menu.EditUserInfoActivity
@@ -32,14 +37,18 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
     private lateinit var callback: OnBackPressedCallback
     private val mapViewModel : MapViewModel by viewModels()
 
+    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setResultSearch()
+    }
+
     override fun onResume() {
         super.onResume()
         binding.drawerLayout.closeDrawers()
         inflateMenu()
-    }
-
-    override fun onDetach() {
-        super.onDetach()
     }
 
     override fun initObserver() {
@@ -66,7 +75,7 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
 //            activity.setInfoWindowVisibility(false)
 
             val searchIntent = Intent(requireContext(), SearchPlaceActivity::class.java)
-            startActivity(searchIntent)
+            resultLauncher.launch(searchIntent)
         }
 
         binding.chipFacility.setSingleOnClickListener {
@@ -169,6 +178,20 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
     private fun clickBtnCancel(){
         binding.nvDrawerMenu.getHeaderView(0).findViewById<ImageView>(R.id.btn_menu_close).setSingleOnClickListener {
             binding.drawerLayout.closeDrawers()
+        }
+    }
+
+    private fun setResultSearch(){
+        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
+            if (result.resultCode == Activity.RESULT_OK){
+                val data = result.data?.getParcelableExtra<ResponseCategoryPlace>("searchResult")!!
+
+                if(data.id.isEmpty()) context?.toast(getString(R.string.txt_search_result_none))
+                else{
+                    val activity = activity as MainActivity
+                    activity.setSearchPlaceMarker(data)
+                }
+            }
         }
     }
 }
