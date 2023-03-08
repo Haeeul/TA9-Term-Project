@@ -162,6 +162,8 @@
     <string name="txt_car_pay">이용 요금</string>
     <string name="txt_car_target">이용 대상</string>
     <string name="txt_limit_info">제한 사항</string>
+    <string name="txt_facility_item_info">시설 안내</string>
+    <string name="txt_management_info">관리 기관 안내</string>
 
     <!-- update info-->
     <string name="desc_add_time_info">이용시간을 알려주세요.</string>

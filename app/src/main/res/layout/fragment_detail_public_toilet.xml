@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.example.mh_term_app.data.model.response.ResponsePublicToilet" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ui.map.details.open.DetailPublicToiletFragment">
+
+        <ImageView
+            android:id="@+id/imageView54"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_location"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView105"
+            style="@style/MediumText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="16dp"
+            android:text="@{item.address}"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView54"
+            app:layout_constraintTop_toTopOf="@+id/imageView54" />
+
+        <ImageView
+            android:id="@+id/imageView55"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView105"
+            app:srcCompat="@color/light_grey" />
+
+        <TextView
+            android:id="@+id/textView106"
+            style="@style/BoldText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="운영 정보"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/imageView55"
+            app:layout_constraintTop_toBottomOf="@+id/imageView55" />
+
+        <ImageView
+            android:id="@+id/imageView58"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@+id/imageView55"
+            app:layout_constraintTop_toBottomOf="@+id/textView106"
+            app:srcCompat="@drawable/ic_clock" />
+
+        <TextView
+            android:id="@+id/textView107"
+            style="@style/MediumText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/txt_weekday"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView58"
+            app:layout_constraintStart_toEndOf="@+id/imageView58"
+            app:layout_constraintTop_toTopOf="@+id/imageView58" />
+
+        <TextView
+            android:id="@+id/txt_toilet_detail_time"
+            style="@style/MediumText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textColor="@color/dark_grey"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView107"
+            app:layout_constraintEnd_toEndOf="@+id/in_toilet_detail_time_none"
+            app:layout_constraintStart_toStartOf="@+id/in_toilet_detail_time_none"
+            app:layout_constraintTop_toTopOf="@+id/textView107" />
+
+        <include
+            android:id="@+id/in_toilet_detail_time_none"
+            layout="@layout/view_place_info_item_none"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="24dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/textView107"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView107"
+            app:layout_constraintTop_toTopOf="@+id/textView107" />
+
+
+        <ImageView
+            android:id="@+id/imageView59"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="24dp"
+            android:src="@color/light_grey"
+            app:layout_constraintEnd_toEndOf="@+id/imageView55"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/imageView55"
+            app:layout_constraintTop_toBottomOf="@+id/txt_toilet_detail_time" />
+
+        <TextView
+            android:id="@+id/textView108"
+            style="@style/BoldText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/txt_facility_item_info"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/textView106"
+            app:layout_constraintTop_toBottomOf="@+id/imageView59" />
+
+        <ImageView
+            android:id="@+id/imageView60"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_plus"
+            app:layout_constraintStart_toStartOf="@+id/imageView56"
+            app:layout_constraintTop_toBottomOf="@+id/textView108" />
+
+        <TextView
+            android:id="@+id/textView109"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="남녀 공용 여부"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView60"
+            app:layout_constraintStart_toEndOf="@+id/imageView60"
+            app:layout_constraintTop_toTopOf="@+id/imageView60" />
+
+        <TextView
+            android:id="@+id/textView110"
+            style="@style/MediumText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="24dp"
+            android:gravity="end"
+            android:textSize="16dp"
+            android:textColor="@color/dark_grey"
+            app:layout_constraintBottom_toBottomOf="@+id/textView109"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView109"
+            app:layout_constraintTop_toTopOf="@+id/textView109" />
+
+        <ImageView
+            android:id="@+id/imageView67"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/ic_man"
+            app:layout_constraintStart_toStartOf="@+id/imageView60"
+            app:layout_constraintTop_toBottomOf="@+id/imageView60" />
+
+
+        <TextView
+            android:id="@+id/textView111"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="남성용 소변기 수"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView67"
+            app:layout_constraintStart_toStartOf="@+id/textView109"
+            app:layout_constraintTop_toTopOf="@+id/imageView67" />
+
+        <TextView
+            android:id="@+id/textView112"
+            style="@style/MediumText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:gravity="end"
+            android:text="@{item.menUrine}"
+            android:textColor="@color/dark_grey"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView111"
+            app:layout_constraintEnd_toEndOf="@+id/textView110"
+            app:layout_constraintStart_toEndOf="@+id/textView111"
+            app:layout_constraintTop_toTopOf="@+id/textView111" />
+
+        <TextView
+            android:id="@+id/textView113"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="남성용 대변기 수"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="@+id/textView111"
+            app:layout_constraintTop_toBottomOf="@+id/textView111" />
+
+        <TextView
+            android:id="@+id/textView115"
+            style="@style/MediumText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:gravity="end"
+            android:text="@{item.menUrine}"
+            android:textColor="@color/dark_grey"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView113"
+            app:layout_constraintEnd_toEndOf="@+id/textView112"
+            app:layout_constraintStart_toEndOf="@+id/textView113"
+            app:layout_constraintTop_toTopOf="@+id/textView113" />
+
+        <TextView
+            android:id="@+id/textView117"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="장애인용 소변기 수"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="@+id/textView113"
+            app:layout_constraintTop_toBottomOf="@+id/textView113" />
+
+        <TextView
+            android:id="@+id/textView118"
+            style="@style/MediumText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:gravity="end"
+            android:text="@{item.menHandicapUrine}"
+            android:textColor="@color/dark_grey"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView117"
+            app:layout_constraintEnd_toEndOf="@+id/textView115"
+            app:layout_constraintStart_toEndOf="@+id/textView117"
+            app:layout_constraintTop_toTopOf="@+id/textView117" />
+
+        <TextView
+            android:id="@+id/textView119"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="장애인용 대변기 수"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="@+id/textView117"
+            app:layout_constraintTop_toBottomOf="@+id/textView117" />
+
+        <TextView
+            android:id="@+id/textView120"
+            style="@style/MediumText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:gravity="end"
+            android:text="@{item.menHandicapBow}"
+            android:textColor="@color/dark_grey"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView119"
+            app:layout_constraintEnd_toEndOf="@+id/textView118"
+            app:layout_constraintStart_toEndOf="@+id/textView119"
+            app:layout_constraintTop_toTopOf="@+id/textView119" />
+
+        <ImageView
+            android:id="@+id/imageView70"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/ic_woman"
+            app:layout_constraintStart_toStartOf="@+id/imageView67"
+            app:layout_constraintTop_toBottomOf="@+id/textView119" />
+
+        <TextView
+            android:id="@+id/textView121"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="여성용 대변기 수"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView70"
+            app:layout_constraintStart_toEndOf="@+id/imageView70"
+            app:layout_constraintTop_toTopOf="@+id/imageView70" />
+
+        <TextView
+            android:id="@+id/textView122"
+            style="@style/MediumText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="24dp"
+            android:gravity="end"
+            android:text="@{item.womenBow}"
+            android:textColor="@color/dark_grey"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView121"
+            app:layout_constraintTop_toTopOf="@+id/textView121" />
+
+        <TextView
+            android:id="@+id/textView123"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="장애인용 대변기 수"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="@+id/textView121"
+            app:layout_constraintTop_toBottomOf="@+id/textView121" />
+
+        <TextView
+            android:id="@+id/textView124"
+            style="@style/MediumText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:gravity="end"
+            android:text="@{item.womenHandicapBow}"
+            android:textColor="@color/dark_grey"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView123"
+            app:layout_constraintEnd_toEndOf="@+id/textView122"
+            app:layout_constraintStart_toEndOf="@+id/textView123"
+            app:layout_constraintTop_toTopOf="@+id/textView123" />
+
+        <ImageView
+            android:id="@+id/imageView71"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="24dp"
+            android:src="@color/light_grey"
+            app:layout_constraintEnd_toEndOf="@+id/imageView59"
+            app:layout_constraintStart_toStartOf="@+id/imageView59"
+            app:layout_constraintTop_toBottomOf="@+id/textView123" />
+
+        <TextView
+            android:id="@+id/textView125"
+            style="@style/BoldText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/txt_management_info"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/textView108"
+            app:layout_constraintTop_toBottomOf="@+id/imageView71" />
+
+        <ImageView
+            android:id="@+id/imageView72"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_office"
+            app:layout_constraintStart_toStartOf="@+id/textView125"
+            app:layout_constraintTop_toBottomOf="@+id/textView125" />
+
+        <TextView
+            android:id="@+id/textView126"
+            style="@style/MediumText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="24dp"
+            android:textSize="16dp"
+            android:text="@{item.managementName}"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView72"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView72"
+            app:layout_constraintTop_toTopOf="@+id/imageView72" />
+
+        <ImageView
+            android:id="@+id/imageView56"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@+id/imageView55"
+            app:layout_constraintTop_toBottomOf="@+id/imageView72"
+            app:srcCompat="@drawable/ic_phone" />
+
+        <TextView
+            android:id="@+id/txt_toilet_detail_phone"
+            style="@style/MediumText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{item.phone}"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView56"
+            app:layout_constraintStart_toEndOf="@+id/imageView56"
+            app:layout_constraintTop_toTopOf="@+id/imageView56"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageView
+            android:id="@+id/imageView57"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView55"
+            app:layout_constraintStart_toStartOf="@+id/imageView55"
+            app:layout_constraintTop_toBottomOf="@+id/imageView56"
+            app:srcCompat="@color/light_grey" />
+
+        <include
+            android:id="@+id/in_toilet_detail_phone_none"
+            layout="@layout/view_place_info_item_none"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="24dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView56"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView56"
+            app:layout_constraintTop_toTopOf="@+id/imageView56" />
+
+        <TextView
+            android:id="@+id/textView127"
+            style="@style/LightText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/txt_source"
+            android:textColor="@color/grey"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView57" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

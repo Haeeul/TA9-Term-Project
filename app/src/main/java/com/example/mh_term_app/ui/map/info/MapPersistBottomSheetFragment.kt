@@ -15,6 +15,7 @@ import com.example.mh_term_app.databinding.LayoutInfoExpandBinding
 import com.example.mh_term_app.ui.map.MapViewModel
 import com.example.mh_term_app.ui.map.details.open.DetailChargingStationFragment
 import com.example.mh_term_app.ui.map.details.open.DetailMoveCenterFragment
+import com.example.mh_term_app.ui.map.details.open.DetailPublicToiletFragment
 import com.example.mh_term_app.ui.map.details.report.DetailReportFacilityDataFragment
 import com.example.mh_term_app.ui.map.details.report.DetailReportStoreDataFragment
 import com.example.mh_term_app.ui.map.details.review.DetailReviewFragment
@@ -87,7 +88,8 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
                 "매장" -> DetailReportStoreDataFragment(item.id)
                 "시설물" -> DetailReportFacilityDataFragment(item.id)
                 "충전소" -> DetailChargingStationFragment(item.id)
-                else -> DetailMoveCenterFragment(item.id)
+                "이동지원센터" -> DetailMoveCenterFragment(item.id)
+                else -> DetailPublicToiletFragment(item.id)
             },
             DetailReviewFragment(item)
         )
@@ -102,7 +104,8 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
                 "매장" -> getString(R.string.txt_store_info)
                 "시설물" -> getString(R.string.txt_facility_info)
                 "충전소" -> getString(R.string.txt_charging_info)
-                else -> getString(R.string.txt_center_info)
+                "이동지원센터" -> getString(R.string.txt_center_info)
+                else -> "화장실 정보"
             }
             getTabAt(1)?.text = getString(R.string.txt_review)
 
