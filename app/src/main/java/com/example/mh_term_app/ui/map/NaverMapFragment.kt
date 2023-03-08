@@ -190,6 +190,9 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
 
                 if(data.id.isEmpty()) context?.toast(getString(R.string.txt_search_result_none))
                 else{
+                    mapViewModel.insertSearchPlace(data)
+                    mapViewModel.getSearchPlaces()
+
                     val activity = activity as MainActivity
                     activity.setSearchPlaceMarker(data)
                 }

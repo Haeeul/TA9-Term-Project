@@ -5,6 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mh_term_app.MHApplication
+import com.example.mh_term_app.data.local.SearchPlaceDatabase
+import com.example.mh_term_app.data.local.entity.SearchPlace
 import com.example.mh_term_app.data.model.request.RequestPlaceFacility
 import com.example.mh_term_app.data.model.request.RequestPlaceStore
 import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
@@ -12,9 +15,14 @@ import com.example.mh_term_app.data.model.response.ResponseChargingStation
 import com.example.mh_term_app.data.model.response.ResponseMoveCenter
 import com.example.mh_term_app.data.model.response.ResponsePublicToilet
 import com.example.mh_term_app.data.repository.MapRepository
+import com.example.mh_term_app.data.repository.SearchRepository
 import kotlinx.coroutines.launch
 
 class MapViewModel : ViewModel() {
+    private val db = SearchPlaceDatabase.getInstance(MHApplication.getApplicationContext())
+    private val searchRepo = SearchRepository(db.searchPlaceDao())
+    var centers = searchRepo.places
+
     private val mapRepository = MapRepository()
 
     private val _categoryList = MutableLiveData<MutableList<ResponseCategoryPlace>>()
@@ -85,5 +93,16 @@ class MapViewModel : ViewModel() {
         viewModelScope.launch {
             _toiletInfo.value = mapRepository.getToiletInfo(id)
         }
+    }
+
+    fun insertSearchPlace(place: ResponseCategoryPlace) = viewModelScope.launch {
+        searchRepo.insert(
+            SearchPlace(
+            place.id, place.data.type, place.data.address, place.data.latitude, place.data.longitude, place.data.name, place.data.phone, place.data.detailType)
+        )
+    }
+
+    fun getSearchPlaces() {
+        Log.d("명", searchRepo.places.toString())
     }
 }
