@@ -2,7 +2,6 @@ package com.example.mh_term_app.utils.extension
 
 import android.content.Context
 import android.widget.Toast
-import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
 
 fun Context.toast(msg: String) {
@@ -14,5 +13,5 @@ fun Context.toastLong(msg: String) {
 }
 
 fun Context.errorToast() {
-    Toast.makeText(this, MHApplication.getApplicationContext().getString(R.string.txt_server_error), Toast.LENGTH_SHORT).show()
+    Toast.makeText(this, getString(R.string.txt_server_error), Toast.LENGTH_SHORT).show()
 }

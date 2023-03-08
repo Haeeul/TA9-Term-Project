@@ -1,6 +1,5 @@
 package com.example.mh_term_app.ui.map.details.update
 
-import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.data.model.*
@@ -28,7 +27,7 @@ class UpdatePlaceInfoActivity() : BaseActivity<ActivityUpdatePlaceInfoBinding>()
         getDetailInfo(placeAddressInfo.type)
 
         binding.tbUptaePlaceInfo.apply {
-            title = MHApplication.getApplicationContext().getString(R.string.title_update_place_info)
+            title = getString(R.string.title_update_place_info)
             btnTbBack.setSingleOnClickListener {
                 finish()
             }

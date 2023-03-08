@@ -7,7 +7,6 @@ import android.view.View
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
-import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
 import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
 import com.example.mh_term_app.databinding.LayoutInfoCollapseBinding
@@ -96,8 +95,13 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
     private fun initTab(type: String){
         expandBinding.tlInfoDetail.setupWithViewPager(expandBinding.vpInfoDetail)
         expandBinding.tlInfoDetail.apply {
-            getTabAt(0)?.text = if(type == "매장") MHApplication.getApplicationContext().getString(R.string.txt_store_info) else MHApplication.getApplicationContext().getString(R.string.txt_facility_info)
-            getTabAt(1)?.text = MHApplication.getApplicationContext().getString(R.string.txt_review)
+            getTabAt(0)?.text = when(type) {
+                "매장" -> getString(R.string.txt_store_info)
+                "시설물" -> getString(R.string.txt_facility_info)
+                else -> getString(R.string.txt_charging_info)
+            }
+            getTabAt(1)?.text = getString(R.string.txt_review)
+
         }
         expandBinding.tlInfoDetail.addOnTabSelectedListener(TabSelectedListener(expandBinding.tlInfoDetail))
         expandBinding.tlInfoDetail.changeTabsFont(0)
@@ -110,15 +114,14 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
         setPlaceDetailData(item)
     }
 
-    fun setPlaceInfo(item : ResponseCategoryPlace){
+    private fun setPlaceInfo(item : ResponseCategoryPlace){
         placeId = item.id
 
         collapseBinding.item = item
         collapseBinding.apply {
             txtBottomInfoName.text = when(item.data.type){
-                "매장" -> item.data.name
                 "시설물" -> item.data.location + " | " + item.data.detailType
-                else -> ""
+                else -> item.data.name
             }
         }
 
@@ -127,23 +130,17 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
         }
     }
 
-    fun setPlaceDetailData(item : ResponseCategoryPlace) {
+    private fun setPlaceDetailData(item : ResponseCategoryPlace) {
         expandBinding.item = item
 
         when (item.data.type) {
-            "매장" -> {
-                setTypeName(item.data.detailType, item.data.name)
-
-            }
-            "시설물" -> {
-                setTypeName(item.data.location, item.data.detailType)
-            }
+            "매장" -> setTypeName(item.data.detailType, item.data.name)
+            "시설물" -> setTypeName(item.data.location, item.data.detailType)
+            else -> setTypeName(item.data.type, item.data.name)
         }
 
         initViewPager(item)
         initTab(item.data.type)
-
-
 
         expandBinding.btnDetailCall.setSingleOnClickListener {
             goToCall(item.data.phone)

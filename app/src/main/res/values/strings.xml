@@ -137,6 +137,9 @@
     <!-- details -->
     <string name="txt_store_info">매장 정보</string>
     <string name="txt_facility_info">시설물 정보</string>
+    <string name="txt_charging_info">충전소 정보</string>
+    <string name="txt_center_info">센터 정보</string>
+    <string name="txt_toilet_info">화장실 정보</string>
     <string name="txt_review">리뷰</string>
     <string name="txt_weekday">평일</string>
     <string name="txt_saturday">토요일</string>

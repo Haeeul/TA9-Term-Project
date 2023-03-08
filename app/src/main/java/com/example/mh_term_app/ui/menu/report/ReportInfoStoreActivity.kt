@@ -6,7 +6,6 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.lifecycle.LiveData
-import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.MainActivity
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
@@ -29,8 +28,8 @@ class ReportInfoStoreActivity : BaseActivity<ActivityReportInfoStoreBinding>() {
         binding.apply {
             vm = reportPlaceViewModel
             txtReportInfoStoreTitle.changeKeywordColor(
-                MHApplication.getApplicationContext().getString(R.string.desc_report_type_store_start),
-                MHApplication.getApplicationContext().getString(R.string.desc_report_type_store_end),
+                getString(R.string.desc_report_type_store_start),
+                getString(R.string.desc_report_type_store_end),
                 7,9,2,5
             )
         }
@@ -40,7 +39,7 @@ class ReportInfoStoreActivity : BaseActivity<ActivityReportInfoStoreBinding>() {
         super.initView()
 
         binding.tbReportInfoStore.apply {
-            title = MHApplication.getApplicationContext().getString(R.string.title_menu_report)
+            title = getString(R.string.title_menu_report)
             btnTbBack.setSingleOnClickListener {
                 finish()
             }

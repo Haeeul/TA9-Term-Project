@@ -3,7 +3,6 @@ package com.example.mh_term_app.ui.sign.`in`
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
-import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.MainActivity
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
@@ -35,7 +34,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>() {
         super.initView()
 
         binding.tbSignIn.apply {
-            title = MHApplication.getApplicationContext().getString(R.string.title_sign_in)
+            title = getString(R.string.title_sign_in)
             btnTbBack.setSingleOnClickListener {
                 finish()
             }
