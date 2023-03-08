@@ -294,6 +294,23 @@ class RemoteDataSourceImpl : RemoteDataSource {
         return center
     }
 
+    override suspend fun getToiletInfo(id: String): ResponsePublicToilet {
+        var toilet = ResponsePublicToilet()
+        try {
+            db.collection("places").document(id)
+                .get()
+                .addOnSuccessListener { result ->
+                    toilet = result.toObject<ResponsePublicToilet>()!!
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
+                }.await()
+        } catch (e: FirebaseException) {
+            Log.e(TAG, e.message.toString())
+        }
+        return toilet
+    }
+
     override suspend fun postUpdateAddress(place: RequestUpdatePlaceAddress): Boolean {
         var result = false
 

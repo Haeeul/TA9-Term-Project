@@ -176,4 +176,16 @@ object BindingAdapter {
             setTextColor(ContextCompat.getColor(this.context, R.color.red))
         }
     }
+
+    @JvmStatic
+    @BindingAdapter("setUnisexTxt")
+    fun TextView.setUnisexTxt(unisex: String) {
+        text = unisex
+
+        if(unisex == "Y"){
+            setTextColor(ContextCompat.getColor(this.context, R.color.dark_green))
+        }else{
+            setTextColor(ContextCompat.getColor(this.context, R.color.red))
+        }
+    }
 }

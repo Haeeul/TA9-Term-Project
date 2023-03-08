@@ -1,10 +1,7 @@
 package com.example.mh_term_app.data.remote
 
 import com.example.mh_term_app.data.model.request.*
-import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
-import com.example.mh_term_app.data.model.response.ResponseChargingStation
-import com.example.mh_term_app.data.model.response.ResponseMoveCenter
-import com.example.mh_term_app.data.model.response.ResponseReviewList
+import com.example.mh_term_app.data.model.response.*
 
 interface RemoteDataSource {
     // phone auth
@@ -29,6 +26,7 @@ interface RemoteDataSource {
     suspend fun getFacilityInfo(id : String) : RequestPlaceFacility
     suspend fun getChargingInfo(id : String) : ResponseChargingStation
     suspend fun getCenterInfo(id : String) : ResponseMoveCenter
+    suspend fun getToiletInfo(id : String) : ResponsePublicToilet
 
     // update place info
     suspend fun postUpdateAddress(place : RequestUpdatePlaceAddress) : Boolean
