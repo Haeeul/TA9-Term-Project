@@ -88,7 +88,7 @@ object BindingAdapter {
             "시각 장애인" -> color = R.color.yellow
             "목발 사용 등 부상자" -> color = R.color.purple
             "노약자" -> color = R.color.back_light_grey
-            else -> this.visibility = View.GONE
+            "none" -> this.visibility = View.GONE
         }
 
         setChipBackgroundColorResource(color)
