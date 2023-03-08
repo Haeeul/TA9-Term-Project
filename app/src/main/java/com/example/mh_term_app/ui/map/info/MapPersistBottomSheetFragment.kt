@@ -11,6 +11,7 @@ import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
 import com.example.mh_term_app.databinding.LayoutInfoCollapseBinding
 import com.example.mh_term_app.databinding.LayoutInfoExpandBinding
 import com.example.mh_term_app.ui.map.MapViewModel
+import com.example.mh_term_app.ui.map.details.DetailChargingStationFragment
 import com.example.mh_term_app.ui.map.details.DetailReportFacilityDataFragment
 import com.example.mh_term_app.ui.map.details.DetailReportStoreDataFragment
 import com.example.mh_term_app.ui.map.review.DetailReviewFragment
@@ -76,7 +77,11 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
             childFragmentManager
         )
         viewPagerAdapter.fragments = listOf(
-            if(item.data.type == "매장") DetailReportStoreDataFragment(item.id) else DetailReportFacilityDataFragment(item.id),
+            when(item.data.type){
+                "매장" -> DetailReportStoreDataFragment(item.id)
+                "시설물" -> DetailReportFacilityDataFragment(item.id)
+                else -> DetailChargingStationFragment(item.id)
+            },
             DetailReviewFragment(item)
         )
 

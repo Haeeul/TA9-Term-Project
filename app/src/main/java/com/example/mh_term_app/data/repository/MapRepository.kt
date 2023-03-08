@@ -14,6 +14,7 @@ class MapRepository {
     suspend fun getPlaceRating(id : String) = remoteDataSource.getPlaceRating(id)
     suspend fun getStoreInfo(id : String) = remoteDataSource.getStoreInfo(id)
     suspend fun getFacilityInfo(id : String) = remoteDataSource.getFacilityInfo(id)
+    suspend fun getChargingInfo(id : String) = remoteDataSource.getChargingInfo(id)
 
     suspend fun postUpdateAddress(place : RequestUpdatePlaceAddress) = remoteDataSource.postUpdateAddress(place)
     suspend fun postUpdateStoreInfo(store : RequestUpdateStoreInfo) = remoteDataSource.postUpdateStoreInfo(store)

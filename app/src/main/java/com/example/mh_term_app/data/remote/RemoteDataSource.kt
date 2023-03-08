@@ -2,6 +2,7 @@ package com.example.mh_term_app.data.remote
 
 import com.example.mh_term_app.data.model.request.*
 import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
+import com.example.mh_term_app.data.model.response.ResponseChargingStation
 import com.example.mh_term_app.data.model.response.ResponseReviewList
 
 interface RemoteDataSource {
@@ -25,6 +26,7 @@ interface RemoteDataSource {
     suspend fun getPlaceRating(id : String) : Float
     suspend fun getStoreInfo(id : String) : RequestPlaceStore
     suspend fun getFacilityInfo(id : String) : RequestPlaceFacility
+    suspend fun getChargingInfo(id : String) : ResponseChargingStation
 
     // update place info
     suspend fun postUpdateAddress(place : RequestUpdatePlaceAddress) : Boolean

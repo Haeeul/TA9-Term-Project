@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.mh_term_app.data.model.request.RequestPlaceFacility
 import com.example.mh_term_app.data.model.request.RequestPlaceStore
 import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
+import com.example.mh_term_app.data.model.response.ResponseChargingStation
 import com.example.mh_term_app.data.repository.MapRepository
 import kotlinx.coroutines.launch
 
@@ -29,6 +30,10 @@ class MapViewModel : ViewModel() {
     val facilityInfo : LiveData<RequestPlaceFacility>
         get() = _facilityInfo
 
+    private val _chargingInfo = MutableLiveData<ResponseChargingStation>()
+    val chargingInfo : LiveData<ResponseChargingStation>
+        get() = _chargingInfo
+
     fun getCategoryList(type : String){
         viewModelScope.launch {
             _categoryList.value = mapRepository.getCategoryList(type)
@@ -50,6 +55,12 @@ class MapViewModel : ViewModel() {
     fun getFacilityInfo(id : String){
         viewModelScope.launch {
             _facilityInfo.value = mapRepository.getFacilityInfo(id)
+        }
+    }
+
+    fun getChargingInfo(id : String){
+        viewModelScope.launch {
+            _chargingInfo.value = mapRepository.getChargingInfo(id)
         }
     }
 }
