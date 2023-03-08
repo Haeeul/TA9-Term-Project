@@ -10,6 +10,7 @@ import com.example.mh_term_app.data.model.request.RequestPlaceStore
 import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
 import com.example.mh_term_app.data.model.response.ResponseChargingStation
 import com.example.mh_term_app.data.model.response.ResponseMoveCenter
+import com.example.mh_term_app.data.model.response.ResponsePublicToilet
 import com.example.mh_term_app.data.repository.MapRepository
 import kotlinx.coroutines.launch
 
@@ -39,6 +40,10 @@ class MapViewModel : ViewModel() {
     private val _centerInfo = MutableLiveData<ResponseMoveCenter>()
     val centerInfo : LiveData<ResponseMoveCenter>
         get() = _centerInfo
+
+    private val _toiletInfo = MutableLiveData<ResponsePublicToilet>()
+    val toiletInfo : LiveData<ResponsePublicToilet>
+        get() = _toiletInfo
 
     fun getCategoryList(type : String){
         viewModelScope.launch {
@@ -73,7 +78,12 @@ class MapViewModel : ViewModel() {
     fun getCenterInfo(id : String){
         viewModelScope.launch {
             _centerInfo.value = mapRepository.getCenterInfo(id)
-            Log.d("명 _chargingInfo", _centerInfo.value.toString())
+        }
+    }
+
+    fun getToiletInfo(id : String){
+        viewModelScope.launch {
+            _toiletInfo.value = mapRepository.getToiletInfo(id)
         }
     }
 }
