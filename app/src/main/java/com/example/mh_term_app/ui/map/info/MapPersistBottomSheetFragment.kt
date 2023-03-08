@@ -1,5 +1,7 @@
 package com.example.mh_term_app.ui.map.info
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.IdRes
@@ -15,6 +17,9 @@ import com.example.mh_term_app.ui.map.details.DetailChargingStationFragment
 import com.example.mh_term_app.ui.map.details.DetailReportFacilityDataFragment
 import com.example.mh_term_app.ui.map.details.DetailReportStoreDataFragment
 import com.example.mh_term_app.ui.map.review.DetailReviewFragment
+import com.example.mh_term_app.utils.databinding.BindingAdapter.setCallIcon
+import com.example.mh_term_app.utils.databinding.BindingAdapter.setCallTxt
+import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 import com.example.mh_term_app.utils.listener.TabSelectedListener
 import com.example.mh_term_app.utils.listener.changeTabsFont
 import kr.co.prnd.persistbottomsheetfragment.PersistBottomSheetFragment
@@ -99,6 +104,13 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
     }
 
     fun setPlaceData(item : ResponseCategoryPlace){
+        setPlaceRating(item.id)
+        setCallBtnVisibility(item.data.phone)
+        setPlaceInfo(item)
+        setPlaceDetailData(item)
+    }
+
+    fun setPlaceInfo(item : ResponseCategoryPlace){
         placeId = item.id
 
         collapseBinding.item = item
@@ -108,6 +120,10 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
                 "시설물" -> item.data.location + " | " + item.data.detailType
                 else -> ""
             }
+        }
+
+        collapseBinding.btnBottomInfoCall.setSingleOnClickListener {
+            goToCall(item.data.phone)
         }
     }
 
@@ -123,8 +139,15 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
                 setTypeName(item.data.location, item.data.detailType)
             }
         }
+
         initViewPager(item)
         initTab(item.data.type)
+
+
+
+        expandBinding.btnDetailCall.setSingleOnClickListener {
+            goToCall(item.data.phone)
+        }
     }
 
     private fun setTypeName(type:String, name:String){
@@ -132,8 +155,24 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
         expandBinding.txtDetailName.text = name
     }
 
-    fun setPlaceRating(id:String){
+    private fun setPlaceRating(id:String){
         mapViewModel.getPlaceRating(id)
+    }
+
+    private fun setCallBtnVisibility(phoneNum : String){
+        collapseBinding.btnBottomInfoCall.setCallIcon(phoneNum)
+        expandBinding.apply {
+            btnDetailCall.setCallIcon(phoneNum)
+            txtDetailCall.setCallTxt(phoneNum)
+            imgExpandLine.setCallIcon(phoneNum)
+        }
+    }
+
+    private fun goToCall(phoneNum : String){
+//        if(phoneNum == "none") context?.toast(getString(R.string.txt_phone_number_none))
+        val callIntent = Intent(Intent.ACTION_DIAL)
+        callIntent.data = Uri.parse("tel:$phoneNum")
+        startActivity(callIntent)
     }
 
 }

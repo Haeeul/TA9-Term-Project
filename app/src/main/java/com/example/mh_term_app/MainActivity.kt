@@ -146,17 +146,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
         naverMap.moveCamera(cameraUpdate)
     }
 
-    fun setSearchPlaceMarker(place: ResponseCategoryPlace){
-        setCategoryMarkerList(mutableListOf(place))
+    fun setSearchPlaceMarker(data: ResponseCategoryPlace){
+        setCategoryMarkerList(mutableListOf(data))
 
         mapPersistBottomFragment?.apply {
-            setPlaceRating(place.id)
-            setPlaceData(place)
-            setPlaceDetailData(place)
+            setPlaceData(data)
         }
         setInfoWindowVisibility(true)
 
-        val cameraUpdate = CameraUpdate.scrollTo(LatLng(place.data.latitude,place.data.longitude))
+        val cameraUpdate = CameraUpdate.scrollTo(LatLng(data.data.latitude,data.data.longitude))
             .animate(CameraAnimation.Fly, 2000)
         naverMap.moveCamera(cameraUpdate)
     }
@@ -193,9 +191,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
     private fun setStoreMarkerClickListener(data : ResponseCategoryPlace, latLng: LatLng): Overlay.OnClickListener {
         return Overlay.OnClickListener { overlay ->
             mapPersistBottomFragment?.apply {
-                setPlaceRating(data.id)
                 setPlaceData(data)
-                setPlaceDetailData(data)
             }
             setInfoWindowVisibility(true)
 

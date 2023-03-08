@@ -150,4 +150,18 @@ object BindingAdapter {
             }
         })
     }
+
+    @JvmStatic
+    @BindingAdapter("setCallIcon")
+    fun ImageView.setCallIcon(phone: String) {
+        if(phone == "none") this.visibility = View.GONE
+        else this.visibility = View.VISIBLE
+    }
+
+    @JvmStatic
+    @BindingAdapter("setCallTxt")
+    fun TextView.setCallTxt(phone: String) {
+        if(phone == "none") this.visibility = View.GONE
+        else this.visibility = View.VISIBLE
+    }
 }
