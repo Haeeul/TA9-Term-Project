@@ -1,4 +1,4 @@
-package com.example.mh_term_app.ui.map.details.update
+package com.example.mh_term_app.ui.map.update
 
 import android.view.View
 import android.widget.CheckBox

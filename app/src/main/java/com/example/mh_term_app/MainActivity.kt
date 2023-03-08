@@ -140,6 +140,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
                 onClickListener = setStoreMarkerClickListener(it.data, position)
             }
         }
+
+        if(data.isNotEmpty()){
+            val cameraUpdate = CameraUpdate.scrollTo(LatLng(data[0].data.latitude,data[0].data.longitude))
+                .animate(CameraAnimation.Fly, 2000)
+            naverMap.moveCamera(cameraUpdate)
+
+            mapPersistBottomFragment?.apply {
+                setPlaceData(data[0])
+            }
+            setInfoWindowVisibility(true)
+        }
+
     }
 
     fun setSearchPlaceMarker(data: ResponseCategoryPlace){
@@ -169,6 +181,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
         return when(type){
             "매장" -> Color.RED
             "시설물" -> ContextCompat.getColor(this, R.color.yellow)
+            "충전소" -> ContextCompat.getColor(this, R.color.green)
+            "이동지원센터" -> ContextCompat.getColor(this, R.color.pink)
+            "화장실" -> ContextCompat.getColor(this, R.color.beige)
             else -> Color.BLACK
         }
     }

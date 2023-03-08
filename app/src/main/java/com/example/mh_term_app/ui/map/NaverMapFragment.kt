@@ -55,8 +55,10 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
         super.initObserver()
 
         mapViewModel.categoryList.observe(this){
-            val activity = activity as MainActivity
-            activity.setCategoryMarkerList(it)
+            if(it.isNotEmpty()){
+                val activity = activity as MainActivity
+                activity.setCategoryMarkerList(it)
+            }
         }
     }
 
@@ -87,15 +89,15 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
         }
 
         binding.chipChargingStation.setSingleOnClickListener {
-            context?.toast("장소 준비중")
+            setOnChipListener("충전소")
         }
 
         binding.chipRestroom.setSingleOnClickListener {
-            context?.toast("장소 준비중")
+            setOnChipListener("화장실")
         }
 
         binding.chipSupportCenter.setSingleOnClickListener {
-            context?.toast("장소 준비중")
+            setOnChipListener("이동지원센터")
         }
     }
 

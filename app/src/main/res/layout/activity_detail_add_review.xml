@@ -7,13 +7,13 @@
         <import type="android.view.View"/>
         <variable
             name="vm"
-            type="com.example.mh_term_app.ui.map.details.review.ReviewViewModel" />
+            type="com.example.mh_term_app.ui.map.review.ReviewViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.map.details.review.DetailAddReviewActivity">
+        tools:context=".ui.map.review.DetailAddReviewActivity">
 
         <include
             android:id="@+id/tb_add_review"

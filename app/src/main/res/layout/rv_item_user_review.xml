@@ -94,7 +94,7 @@
                 app:layout_constraintTop_toTopOf="@+id/ratingBar2" />
 
             <TextView
-                android:id="@+id/textView45"
+                android:id="@+id/txt_charging_detail_air"
                 style="@style/LightText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

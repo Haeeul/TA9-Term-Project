@@ -1,4 +1,4 @@
-package com.example.mh_term_app.ui.map.details
+package com.example.mh_term_app.ui.map.details.report
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -14,7 +14,8 @@ import com.example.mh_term_app.data.model.request.RequestPlaceFacility
 import com.example.mh_term_app.databinding.FragmentDetailReportFacilityDataBinding
 import com.example.mh_term_app.databinding.ViewPlaceInfoItemNoneBinding
 import com.example.mh_term_app.ui.map.MapViewModel
-import com.example.mh_term_app.ui.map.details.update.UpdatePlaceInfoActivity
+import com.example.mh_term_app.ui.map.details.DetailChipAdapter
+import com.example.mh_term_app.ui.map.update.UpdatePlaceInfoActivity
 import com.example.mh_term_app.ui.sign.`in`.SignInActivity
 import com.example.mh_term_app.utils.extension.createGoToDialog
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener

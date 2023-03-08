@@ -1,6 +1,9 @@
 package com.example.managerapplication.data.remote
 
-import com.example.managerapplication.data.model.ChargingStationListResponse
+import com.example.managerapplication.data.model.response.BaseResponse
+import com.example.managerapplication.data.model.response.ChargingStationListResponse
+import com.example.managerapplication.data.model.response.MovementCenterListResponse
+import com.example.managerapplication.data.model.response.PublicToiletListResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -9,7 +12,25 @@ interface ManagerService {
     suspend fun getChargingStationList(
         @Query("serviceKey") serviceKey : String,
         @Query("pageNo") pageNo : Int = 0,
-        @Query("numOfRows") numOfRows : Int = 10,
+        @Query("numOfRows") numOfRows : Int = 5,
+        @Query("type") type : String = "json",
+        @Query("signguNm") ctprvnNm : String = "중구"
+    ): BaseResponse<ChargingStationListResponse>
+
+    @GET("tn_pubr_public_tfcwker_mvmn_cnter_api")
+    suspend fun getMovementCenterList(
+        @Query("serviceKey") serviceKey : String,
+        @Query("pageNo") pageNo : Int = 0,
+        @Query("numOfRows") numOfRows : Int = 5,
         @Query("type") type : String = "json"
-    ): ChargingStationListResponse
+    ): BaseResponse<MovementCenterListResponse>
+
+    @GET("tn_pubr_public_toilet_api")
+    suspend fun getPublicToiletList(
+        @Query("serviceKey") serviceKey : String,
+        @Query("pageNo") pageNo : Int = 0,
+        @Query("numOfRows") numOfRows : Int = 5,
+        @Query("type") type : String = "json",
+        @Query("institutionNm") institutionNm : String = "서울특별시 용산구청"
+    ): BaseResponse<PublicToiletListResponse>
 }

@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.map.details.update.UpdateAddressFragment">
+        tools:context=".ui.map.update.UpdateAddressFragment">
 
         <EditText
             android:id="@+id/edt_update_place_address"

@@ -8,7 +8,6 @@ import androidx.activity.viewModels
 import androidx.annotation.UiThread
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
-import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.MainActivity
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
@@ -37,8 +36,8 @@ class ReportPlaceActivity : BaseActivity<ActivityReportPlaceBinding>(), OnMapRea
         binding.apply {
             vm = reportPlaceViewModel
             txtReportPlaceTitle.changeKeywordColor(
-                MHApplication.getApplicationContext().getString(R.string.desc_report_place_start),
-                MHApplication.getApplicationContext().getString(R.string.desc_report_place_end),
+                getString(R.string.desc_report_place_start),
+                getString(R.string.desc_report_place_end),
                 3, 5, 2, 4
             )
         }
@@ -75,7 +74,7 @@ class ReportPlaceActivity : BaseActivity<ActivityReportPlaceBinding>(), OnMapRea
         super.initView()
 
         binding.tbReportPlace.apply {
-            title = MHApplication.getApplicationContext().getString(R.string.title_menu_report)
+            title = getString(R.string.title_menu_report)
             btnTbBack.setSingleOnClickListener {
                 finish()
             }

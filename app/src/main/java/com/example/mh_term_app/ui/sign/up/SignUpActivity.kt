@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
-import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivitySignUpBinding
@@ -30,7 +29,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
         super.initView()
 
         binding.tbSignUp.apply {
-            title = MHApplication.getApplicationContext().getString(R.string.title_sign_up)
+            title = getString(R.string.title_sign_up)
             btnTbBack.setSingleOnClickListener {
                 finish()
             }

@@ -3,10 +3,7 @@ package com.example.mh_term_app.data.remote
 import android.util.Log
 import com.example.mh_term_app.MHApplication
 import com.example.mh_term_app.data.model.request.*
-import com.example.mh_term_app.data.model.response.PlaceInfo
-import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
-import com.example.mh_term_app.data.model.response.ResponseReviewList
-import com.example.mh_term_app.data.model.response.ResponseUser
+import com.example.mh_term_app.data.model.response.*
 import com.google.firebase.FirebaseException
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
@@ -261,6 +258,40 @@ class RemoteDataSourceImpl : RemoteDataSource {
             Log.e(TAG, e.message.toString())
         }
         return facility
+    }
+
+    override suspend fun getChargingInfo(id: String): ResponseChargingStation {
+        var charging = ResponseChargingStation()
+        try {
+            db.collection("places").document(id)
+                .get()
+                .addOnSuccessListener { result ->
+                    charging = result.toObject<ResponseChargingStation>()!!
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
+                }.await()
+        } catch (e: FirebaseException) {
+            Log.e(TAG, e.message.toString())
+        }
+        return charging
+    }
+
+    override suspend fun getCenterInfo(id: String): ResponseMoveCenter {
+        var center = ResponseMoveCenter()
+        try {
+            db.collection("places").document(id)
+                .get()
+                .addOnSuccessListener { result ->
+                    center = result.toObject<ResponseMoveCenter>()!!
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
+                }.await()
+        } catch (e: FirebaseException) {
+            Log.e(TAG, e.message.toString())
+        }
+        return center
     }
 
     override suspend fun postUpdateAddress(place: RequestUpdatePlaceAddress): Boolean {

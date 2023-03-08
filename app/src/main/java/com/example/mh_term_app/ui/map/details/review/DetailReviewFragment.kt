@@ -1,4 +1,4 @@
-package com.example.mh_term_app.ui.map.review
+package com.example.mh_term_app.ui.map.details.review
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,8 +9,8 @@ import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
 import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
 import com.example.mh_term_app.databinding.FragmentDetailReviewBinding
-import com.example.mh_term_app.ui.map.details.review.DetailAddReviewActivity
-import com.example.mh_term_app.ui.map.details.review.ReviewViewModel
+import com.example.mh_term_app.ui.map.review.DetailAddReviewActivity
+import com.example.mh_term_app.ui.map.review.ReviewViewModel
 import com.example.mh_term_app.ui.sign.`in`.SignInActivity
 import com.example.mh_term_app.utils.extension.createGoToDialog
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener

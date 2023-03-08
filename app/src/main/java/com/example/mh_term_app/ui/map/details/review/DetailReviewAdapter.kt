@@ -1,4 +1,4 @@
-package com.example.mh_term_app.ui.map.review
+package com.example.mh_term_app.ui.map.details.review
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

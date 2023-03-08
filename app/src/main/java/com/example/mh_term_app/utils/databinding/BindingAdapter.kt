@@ -88,7 +88,7 @@ object BindingAdapter {
             "시각 장애인" -> color = R.color.yellow
             "목발 사용 등 부상자" -> color = R.color.purple
             "노약자" -> color = R.color.back_light_grey
-            else -> this.visibility = View.GONE
+            "none" -> this.visibility = View.GONE
         }
 
         setChipBackgroundColorResource(color)
@@ -154,14 +154,26 @@ object BindingAdapter {
     @JvmStatic
     @BindingAdapter("setCallIcon")
     fun ImageView.setCallIcon(phone: String) {
-        if(phone == "none") this.visibility = View.GONE
+        if(phone == "none" || phone == "null") this.visibility = View.GONE
         else this.visibility = View.VISIBLE
     }
 
     @JvmStatic
     @BindingAdapter("setCallTxt")
     fun TextView.setCallTxt(phone: String) {
-        if(phone == "none") this.visibility = View.GONE
+        if(phone == "none"|| phone == "null") this.visibility = View.GONE
         else this.visibility = View.VISIBLE
+    }
+
+    @JvmStatic
+    @BindingAdapter("setBooleanTxt")
+    fun TextView.setBooleanTxt(boolean: String) {
+        if(boolean == "Y"){
+            text = MHApplication.getApplicationContext().getString(R.string.txt_possible)
+            setTextColor(ContextCompat.getColor(this.context, R.color.dark_green))
+        }else{
+            text = MHApplication.getApplicationContext().getString(R.string.txt_impossible)
+            setTextColor(ContextCompat.getColor(this.context, R.color.red))
+        }
     }
 }

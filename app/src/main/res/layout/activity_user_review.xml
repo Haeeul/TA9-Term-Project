@@ -8,7 +8,7 @@
         <import type="android.view.View"/>
         <variable
             name="vm"
-            type="com.example.mh_term_app.ui.map.details.review.ReviewViewModel" />
+            type="com.example.mh_term_app.ui.map.review.ReviewViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

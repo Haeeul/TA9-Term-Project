@@ -27,14 +27,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.map.details.review.DetailAddReviewActivity"
+            android:name=".ui.map.review.DetailAddReviewActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.map.details.update.UpdatePlaceInfoActivity"
+            android:name=".ui.map.update.UpdatePlaceInfoActivity"
             android:exported="false"
             android:hardwareAccelerated="false">
             <meta-data
