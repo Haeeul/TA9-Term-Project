@@ -1,4 +1,4 @@
-package com.example.mh_term_app.ui.map.details
+package com.example.mh_term_app.ui.map.details.open
 
 import android.annotation.SuppressLint
 import android.os.Bundle

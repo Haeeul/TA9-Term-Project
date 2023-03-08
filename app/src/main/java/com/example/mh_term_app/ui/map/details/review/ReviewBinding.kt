@@ -1,4 +1,4 @@
-package com.example.mh_term_app.ui.map.review
+package com.example.mh_term_app.ui.map.details.review
 
 import android.util.Log
 import androidx.databinding.BindingAdapter

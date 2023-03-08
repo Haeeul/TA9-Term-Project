@@ -12,10 +12,10 @@ import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
 import com.example.mh_term_app.databinding.LayoutInfoCollapseBinding
 import com.example.mh_term_app.databinding.LayoutInfoExpandBinding
 import com.example.mh_term_app.ui.map.MapViewModel
-import com.example.mh_term_app.ui.map.details.DetailChargingStationFragment
-import com.example.mh_term_app.ui.map.details.DetailReportFacilityDataFragment
-import com.example.mh_term_app.ui.map.details.DetailReportStoreDataFragment
-import com.example.mh_term_app.ui.map.review.DetailReviewFragment
+import com.example.mh_term_app.ui.map.details.open.DetailChargingStationFragment
+import com.example.mh_term_app.ui.map.details.report.DetailReportFacilityDataFragment
+import com.example.mh_term_app.ui.map.details.report.DetailReportStoreDataFragment
+import com.example.mh_term_app.ui.map.details.review.DetailReviewFragment
 import com.example.mh_term_app.utils.databinding.BindingAdapter.setCallIcon
 import com.example.mh_term_app.utils.databinding.BindingAdapter.setCallTxt
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener

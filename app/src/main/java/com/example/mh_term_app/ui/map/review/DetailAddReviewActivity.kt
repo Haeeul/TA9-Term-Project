@@ -1,7 +1,9 @@
-package com.example.mh_term_app.ui.map.details.review
+package com.example.mh_term_app.ui.map.review
 
+import android.os.Build
 import android.view.View
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivityDetailAddReviewBinding
@@ -61,6 +63,7 @@ class DetailAddReviewActivity : BaseActivity<ActivityDetailAddReviewBinding>() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun postReview(view : View){
         reviewViewModel.postReview(placeId, placeType, placeName)
     }

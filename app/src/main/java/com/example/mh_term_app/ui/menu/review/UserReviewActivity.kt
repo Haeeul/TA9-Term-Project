@@ -5,7 +5,7 @@ import androidx.activity.viewModels
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivityUserReviewBinding
-import com.example.mh_term_app.ui.map.details.review.ReviewViewModel
+import com.example.mh_term_app.ui.map.review.ReviewViewModel
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 import com.example.mh_term_app.utils.view.DetailReviewItemDecorator
 

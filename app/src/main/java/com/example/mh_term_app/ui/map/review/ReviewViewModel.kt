@@ -1,4 +1,4 @@
-package com.example.mh_term_app.ui.map.details.review
+package com.example.mh_term_app.ui.map.review
 
 import android.os.Build
 import androidx.annotation.RequiresApi
