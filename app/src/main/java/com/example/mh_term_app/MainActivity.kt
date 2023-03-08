@@ -141,9 +141,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
             }
         }
 
-        val cameraUpdate = CameraUpdate.scrollTo(LatLng(data[0].data.latitude,data[0].data.longitude))
-            .animate(CameraAnimation.Fly, 2000)
-        naverMap.moveCamera(cameraUpdate)
+        if(data.isNotEmpty()){
+            val cameraUpdate = CameraUpdate.scrollTo(LatLng(data[0].data.latitude,data[0].data.longitude))
+                .animate(CameraAnimation.Fly, 2000)
+            naverMap.moveCamera(cameraUpdate)
+
+            mapPersistBottomFragment?.apply {
+                setPlaceData(data[0])
+            }
+            setInfoWindowVisibility(true)
+        }
+
     }
 
     fun setSearchPlaceMarker(data: ResponseCategoryPlace){

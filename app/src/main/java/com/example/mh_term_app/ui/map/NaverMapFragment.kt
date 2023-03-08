@@ -55,8 +55,10 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
         super.initObserver()
 
         mapViewModel.categoryList.observe(this){
-            val activity = activity as MainActivity
-            activity.setCategoryMarkerList(it)
+            if(it.isNotEmpty()){
+                val activity = activity as MainActivity
+                activity.setCategoryMarkerList(it)
+            }
         }
     }
 

@@ -7,7 +7,7 @@
     <data>
         <variable
             name="item"
-            type="com.example.mh_term_app.data.model.request.RequestPlaceStore" />
+            type="com.example.mh_term_app.data.model.response.ResponseChargingStation" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,6 +33,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="1dp"
             android:layout_marginEnd="16dp"
+            android:text="@{item.address}"
             android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView41"
@@ -43,7 +44,9 @@
             style="@style/MediumText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="12dp"
+            android:text="@{item.description}"
+            android:textColor="@color/dark_grey"
             android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="@+id/textView19"
             app:layout_constraintStart_toStartOf="@+id/textView19"
@@ -86,10 +89,12 @@
         <TextView
             android:id="@+id/txt_charging_detail_weekday_time"
             style="@style/MediumText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:gravity="end"
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView63"
+            app:layout_constraintEnd_toEndOf="@+id/txt_charging_detail_saturday_time"
             app:layout_constraintStart_toStartOf="@+id/txt_charging_detail_saturday_time"
             app:layout_constraintTop_toTopOf="@+id/textView63" />
 
@@ -119,10 +124,12 @@
         <TextView
             android:id="@+id/txt_charging_detail_saturday_time"
             style="@style/MediumText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:gravity="end"
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView64"
+            app:layout_constraintEnd_toEndOf="@+id/txt_charging_detail_monday_time"
             app:layout_constraintStart_toStartOf="@+id/txt_charging_detail_monday_time"
             app:layout_constraintTop_toTopOf="@+id/textView64" />
 
@@ -135,7 +142,7 @@
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/textView64"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/in_store_detail_monday_none"
+            app:layout_constraintStart_toStartOf="@+id/txt_charging_detail_monday_time"
             app:layout_constraintTop_toTopOf="@+id/textView64" />
 
         <TextView
@@ -152,16 +159,19 @@
         <TextView
             android:id="@+id/txt_charging_detail_monday_time"
             style="@style/MediumText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginEnd="24dp"
+            android:gravity="end"
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView65"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView65"
             app:layout_constraintTop_toTopOf="@+id/textView65" />
 
         <include
-            android:id="@+id/in_store_detail_monday_none"
+            android:id="@+id/in_charging_detail_monday_none"
             layout="@layout/view_place_info_item_none"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -181,7 +191,7 @@
             android:src="@color/light_grey"
             app:layout_constraintEnd_toEndOf="@+id/imageView42"
             app:layout_constraintStart_toStartOf="@+id/imageView42"
-            app:layout_constraintTop_toBottomOf="@+id/in_store_detail_monday_none" />
+            app:layout_constraintTop_toBottomOf="@+id/in_charging_detail_monday_none" />
 
         <ImageView
             android:id="@+id/imageView45"
@@ -251,14 +261,15 @@
             app:layout_constraintTop_toTopOf="@+id/imageView47" />
 
         <TextView
-            android:id="@+id/textView45"
+            android:id="@+id/txt_charging_detail_air"
             style="@style/MediumText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:textSize="16dp"
+            android:gravity="end"
             app:layout_constraintBottom_toBottomOf="@+id/textView39"
-            app:layout_constraintStart_toEndOf="@+id/textView39"
+            app:layout_constraintEnd_toEndOf="@+id/txt_charging_detail_same"
+            app:layout_constraintStart_toStartOf="@+id/txt_charging_detail_same"
             app:layout_constraintTop_toTopOf="@+id/textView39" />
 
         <TextView
@@ -273,14 +284,15 @@
             app:layout_constraintTop_toBottomOf="@+id/textView39" />
 
         <TextView
-            android:id="@+id/textView67"
+            android:id="@+id/txt_charging_detail_same"
             style="@style/MediumText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:textSize="16dp"
+            android:gravity="end"
             app:layout_constraintBottom_toBottomOf="@+id/textView66"
-            app:layout_constraintStart_toEndOf="@+id/textView66" />
+            app:layout_constraintEnd_toEndOf="@+id/txt_charging_detail_phone_use"
+            app:layout_constraintStart_toStartOf="@+id/txt_charging_detail_phone_use" />
 
         <TextView
             android:id="@+id/textView68"
@@ -294,13 +306,16 @@
             app:layout_constraintTop_toBottomOf="@+id/textView66" />
 
         <TextView
-            android:id="@+id/textView69"
+            android:id="@+id/txt_charging_detail_phone_use"
             style="@style/MediumText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginEnd="24dp"
             android:textSize="16dp"
+            android:gravity="end"
             app:layout_constraintBottom_toBottomOf="@+id/textView68"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView68" />
 
         <ImageView
@@ -318,6 +333,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="16dp"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/imageView47"
             app:layout_constraintTop_toBottomOf="@+id/imageView44"
             app:srcCompat="@drawable/ic_office" />
@@ -330,7 +346,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="1dp"
             android:layout_marginEnd="16dp"
+            android:text="@{item.managementName}"
             android:textSize="16dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView49"
             app:layout_constraintTop_toTopOf="@+id/imageView49" />
@@ -340,6 +358,7 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/imageView48"
             app:layout_constraintStart_toStartOf="@+id/imageView48"
             app:layout_constraintTop_toBottomOf="@+id/textView70"
@@ -354,6 +373,7 @@
             android:text="정보 수정 제안"
             android:textColor="@color/dark_grey"
             android:textSize="16dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@+id/btn_update_charging_info"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
@@ -365,6 +385,7 @@
             android:layout_height="18dp"
             android:layout_marginStart="8dp"
             android:src="@drawable/ic_next"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/txt_update_charging_info"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/txt_update_charging_info"
@@ -375,9 +396,9 @@
             style="@style/LightText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="24dp"
             android:text="@string/txt_source"
             android:textColor="@color/grey"
             android:textSize="14dp"

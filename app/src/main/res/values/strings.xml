@@ -147,6 +147,8 @@
     <string name="txt_air_use">공기주입 가능 여부</string>
     <string name="txt_same_use">동시 사용 가능 대수</string>
     <string name="txt_phone_use">휴대전화 충전 가능 여부</string>
+    <string name="txt_possible">가능</string>
+    <string name="txt_impossible">불가능</string>
 
     <!-- update info-->
     <string name="desc_add_time_info">이용시간을 알려주세요.</string>

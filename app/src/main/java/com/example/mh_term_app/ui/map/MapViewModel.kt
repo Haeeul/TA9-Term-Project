@@ -1,5 +1,6 @@
 package com.example.mh_term_app.ui.map
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -61,6 +62,7 @@ class MapViewModel : ViewModel() {
     fun getChargingInfo(id : String){
         viewModelScope.launch {
             _chargingInfo.value = mapRepository.getChargingInfo(id)
+            Log.d("명 _chargingInfo", _chargingInfo.value.toString())
         }
     }
 }

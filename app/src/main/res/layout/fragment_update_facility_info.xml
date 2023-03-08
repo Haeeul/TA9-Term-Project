@@ -151,7 +151,7 @@
 
 
         <TextView
-            android:id="@+id/textView67"
+            android:id="@+id/txt_charging_detail_same"
             style="@style/MediumText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -168,8 +168,8 @@
             android:layout_height="50dp"
             android:paddingRight="15dp"
             android:text="@string/txt_user_type_wheelchair"
-            app:layout_constraintStart_toStartOf="@+id/textView67"
-            app:layout_constraintTop_toBottomOf="@+id/textView67" />
+            app:layout_constraintStart_toStartOf="@+id/txt_charging_detail_same"
+            app:layout_constraintTop_toBottomOf="@+id/txt_charging_detail_same" />
 
         <CheckBox
             android:id="@+id/cb_update_facility_target_guardian"
@@ -293,7 +293,7 @@
             app:layout_constraintTop_toTopOf="@+id/cb_update_facility_warning_info" />
 
         <TextView
-            android:id="@+id/textView69"
+            android:id="@+id/txt_charging_detail_phone_use"
             style="@style/MediumText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -311,8 +311,8 @@
             android:text="*"
             android:textColor="@color/red"
             android:textSize="18dp"
-            app:layout_constraintStart_toEndOf="@+id/textView69"
-            app:layout_constraintTop_toTopOf="@+id/textView69" />
+            app:layout_constraintStart_toEndOf="@+id/txt_charging_detail_phone_use"
+            app:layout_constraintTop_toTopOf="@+id/txt_charging_detail_phone_use" />
 
         <EditText
             android:id="@+id/edt_update_info_facility_plus"
@@ -330,8 +330,8 @@
             android:text="@={vm.plusInfoTxt}"
             android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView69"
-            app:layout_constraintTop_toBottomOf="@+id/textView69" />
+            app:layout_constraintStart_toStartOf="@+id/txt_charging_detail_phone_use"
+            app:layout_constraintTop_toBottomOf="@+id/txt_charging_detail_phone_use" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_update_info_facility_complete"

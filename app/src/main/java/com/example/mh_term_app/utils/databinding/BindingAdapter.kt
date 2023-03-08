@@ -164,4 +164,16 @@ object BindingAdapter {
         if(phone == "none") this.visibility = View.GONE
         else this.visibility = View.VISIBLE
     }
+
+    @JvmStatic
+    @BindingAdapter("setBooleanTxt")
+    fun TextView.setBooleanTxt(boolean: String) {
+        if(boolean == "Y"){
+            text = MHApplication.getApplicationContext().getString(R.string.txt_possible)
+            setTextColor(ContextCompat.getColor(this.context, R.color.dark_green))
+        }else{
+            text = MHApplication.getApplicationContext().getString(R.string.txt_impossible)
+            setTextColor(ContextCompat.getColor(this.context, R.color.red))
+        }
+    }
 }

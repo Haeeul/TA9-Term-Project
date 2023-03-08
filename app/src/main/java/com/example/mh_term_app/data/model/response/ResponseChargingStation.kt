@@ -10,13 +10,10 @@ data class ResponseChargingStation (
     val latitude : String = "",
     val longitude : String = "",
     val description : String = "",
-    val time : ChargingTime = ChargingTime(
-        Time("-2","-2","-2","-2"),
-        Time("-2","-2","-2","-2"), Time("-2","-2","-2","-2")
-    ),
+    val time : ChargingTime = ChargingTime(),
     val sameUse : String = "",
     val airUse : String = "",
-    val phoneUser : String = "",
+    val phoneUse : String = "",
     val managementName : String = "",
     val phone : String = "",
     val referenceDate : String = ""
