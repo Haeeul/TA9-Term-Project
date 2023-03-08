@@ -70,7 +70,7 @@
             android:layout_height="20dp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="@+id/imageView41"
-            app:layout_constraintTop_toBottomOf="@+id/imageView42"
+            app:layout_constraintTop_toBottomOf="@+id/textView102"
             app:srcCompat="@drawable/ic_clock" />
 
         <TextView
@@ -93,6 +93,7 @@
             android:layout_height="wrap_content"
             android:gravity="end"
             android:textSize="16dp"
+            android:textColor="@color/dark_grey"
             app:layout_constraintBottom_toBottomOf="@+id/textView63"
             app:layout_constraintEnd_toEndOf="@+id/txt_charging_detail_saturday_time"
             app:layout_constraintStart_toStartOf="@+id/txt_charging_detail_saturday_time"
@@ -128,6 +129,7 @@
             android:layout_height="wrap_content"
             android:gravity="end"
             android:textSize="16dp"
+            android:textColor="@color/dark_grey"
             app:layout_constraintBottom_toBottomOf="@+id/textView64"
             app:layout_constraintEnd_toEndOf="@+id/txt_charging_detail_monday_time"
             app:layout_constraintStart_toStartOf="@+id/txt_charging_detail_monday_time"
@@ -165,6 +167,7 @@
             android:layout_marginEnd="24dp"
             android:gravity="end"
             android:textSize="16dp"
+            android:textColor="@color/dark_grey"
             app:layout_constraintBottom_toBottomOf="@+id/textView65"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView65"
@@ -187,7 +190,7 @@
             android:id="@+id/imageView44"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:src="@color/light_grey"
             app:layout_constraintEnd_toEndOf="@+id/imageView42"
             app:layout_constraintStart_toStartOf="@+id/imageView42"
@@ -198,8 +201,8 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="@+id/imageView43"
-            app:layout_constraintTop_toBottomOf="@+id/imageView50"
+            app:layout_constraintStart_toStartOf="@+id/imageView41"
+            app:layout_constraintTop_toBottomOf="@+id/imageView42"
             app:srcCompat="@drawable/ic_phone" />
 
         <TextView
@@ -246,7 +249,7 @@
             android:layout_marginTop="16dp"
             android:src="@drawable/ic_plus"
             app:layout_constraintStart_toStartOf="@+id/imageView45"
-            app:layout_constraintTop_toBottomOf="@+id/imageView46" />
+            app:layout_constraintTop_toBottomOf="@+id/textView103" />
 
         <TextView
             android:id="@+id/textView39"
@@ -322,7 +325,7 @@
             android:id="@+id/imageView48"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="@+id/imageView46"
             app:layout_constraintStart_toStartOf="@+id/imageView46"
             app:layout_constraintTop_toBottomOf="@+id/textView68"
@@ -341,8 +344,8 @@
         <TextView
             android:id="@+id/textView70"
             style="@style/MediumText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="3dp"
+            android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="1dp"
             android:layout_marginEnd="16dp"
@@ -405,6 +408,28 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_update_charging_info" />
+
+        <TextView
+            android:id="@+id/textView102"
+            style="@style/BoldText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="운영 정보"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/imageView42"
+            app:layout_constraintTop_toBottomOf="@+id/imageView46" />
+
+        <TextView
+            android:id="@+id/textView103"
+            style="@style/BoldText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="이용 안내"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/textView102"
+            app:layout_constraintTop_toBottomOf="@+id/imageView44" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
