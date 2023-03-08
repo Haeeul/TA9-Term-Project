@@ -62,7 +62,7 @@
     <string name="txt_complete">완료</string>
 
     <!-- map -->
-    <string name="hint_search_place">장소명, 주소 검색</string>
+    <string name="hint_search_place">장소명 검색</string>
     <string name="txt_place_facility">시설물</string>
     <string name="txt_place_store">매장</string>
     <string name="txt_place_charging_station">충전소</string>
