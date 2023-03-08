@@ -3,6 +3,7 @@ package com.example.mh_term_app.ui.map.info
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
@@ -108,6 +109,7 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
     }
 
     fun setPlaceData(item : ResponseCategoryPlace){
+        Log.d("명",item.data.toString())
         setPlaceRating(item.id)
         setCallBtnVisibility(item.data.phone)
         setPlaceInfo(item)
@@ -157,6 +159,7 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
     }
 
     private fun setCallBtnVisibility(phoneNum : String){
+        Log.d("명명", phoneNum)
         collapseBinding.btnBottomInfoCall.setCallIcon(phoneNum)
         expandBinding.apply {
             btnDetailCall.setCallIcon(phoneNum)
