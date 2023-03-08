@@ -20,7 +20,7 @@ import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
 import com.example.mh_term_app.databinding.FragmentNaverMapBinding
 import com.example.mh_term_app.ui.map.search.SearchPlaceActivity
 import com.example.mh_term_app.ui.menu.EditUserInfoActivity
-import com.example.mh_term_app.ui.menu.UserFavotireActivity
+import com.example.mh_term_app.ui.menu.UserFavoriteActivity
 import com.example.mh_term_app.ui.menu.report.ReportPlaceActivity
 import com.example.mh_term_app.ui.menu.review.UserReviewActivity
 import com.example.mh_term_app.ui.sign.`in`.SignInActivity
@@ -160,7 +160,7 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
             when (menuItem.itemId) {
                 R.id.edit_user_info -> intent(EditUserInfoActivity::class.java)
                 R.id.review_list -> intent(UserReviewActivity::class.java)
-                R.id.favorite_list -> intent(UserFavotireActivity::class.java)
+                R.id.favorite_list -> intent(UserFavoriteActivity::class.java)
                 R.id.report -> intent(ReportPlaceActivity::class.java)
                 R.id.go_to_sign_in -> intent(SignInActivity::class.java)
                 R.id.go_to_sign_up -> intent(SignUpActivity::class.java)
