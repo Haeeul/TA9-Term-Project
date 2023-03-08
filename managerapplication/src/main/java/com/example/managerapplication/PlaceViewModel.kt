@@ -120,7 +120,7 @@ class PlaceViewModel : ViewModel() {
                         carKind = it.carHoldKnd,
                         slopeCarCount = it.slopeVhcleCo,
                         liftCarCount = it.liftVhcleCo,
-                        reservationPhone = it.rceptPhoneNumber,
+                        phone = it.rceptPhoneNumber,
                         homepage = it.rceptItnadr,
                         appName = it.appSvcNm,
                         reservationTime = CenterTime(
@@ -138,7 +138,7 @@ class PlaceViewModel : ViewModel() {
                         useTarget = it.useTrget,
                         useCharge = it.useCharge,
                         managementName = it.institutionNm,
-                        phone = it.phoneNumber,
+                        managementPhone = it.phoneNumber,
                         referenceDate = it.referenceDate
                     )
                 )

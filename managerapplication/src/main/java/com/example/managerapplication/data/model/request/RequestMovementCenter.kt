@@ -13,7 +13,7 @@ data class RequestMovementCenter(
     val carKind : String,
     val slopeCarCount : String,
     val liftCarCount : String,
-    val reservationPhone : String,
+    val phone : String,
     val homepage : String,
     val appName : String,
     val reservationTime : CenterTime,
@@ -25,6 +25,6 @@ data class RequestMovementCenter(
     val useTarget : String,
     val useCharge : String,
     val managementName : String,
-    val phone : String,
+    val managementPhone : String,
     val referenceDate : String
 )
