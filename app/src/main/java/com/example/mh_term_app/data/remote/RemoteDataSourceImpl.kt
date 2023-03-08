@@ -277,6 +277,23 @@ class RemoteDataSourceImpl : RemoteDataSource {
         return charging
     }
 
+    override suspend fun getCenterInfo(id: String): ResponseMoveCenter {
+        var center = ResponseMoveCenter()
+        try {
+            db.collection("places").document(id)
+                .get()
+                .addOnSuccessListener { result ->
+                    center = result.toObject<ResponseMoveCenter>()!!
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents.", exception)
+                }.await()
+        } catch (e: FirebaseException) {
+            Log.e(TAG, e.message.toString())
+        }
+        return center
+    }
+
     override suspend fun postUpdateAddress(place: RequestUpdatePlaceAddress): Boolean {
         var result = false
 

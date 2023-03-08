@@ -14,6 +14,7 @@ import com.example.mh_term_app.databinding.LayoutInfoCollapseBinding
 import com.example.mh_term_app.databinding.LayoutInfoExpandBinding
 import com.example.mh_term_app.ui.map.MapViewModel
 import com.example.mh_term_app.ui.map.details.open.DetailChargingStationFragment
+import com.example.mh_term_app.ui.map.details.open.DetailMoveCenterFragment
 import com.example.mh_term_app.ui.map.details.report.DetailReportFacilityDataFragment
 import com.example.mh_term_app.ui.map.details.report.DetailReportStoreDataFragment
 import com.example.mh_term_app.ui.map.details.review.DetailReviewFragment
@@ -85,7 +86,8 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
             when(item.data.type){
                 "매장" -> DetailReportStoreDataFragment(item.id)
                 "시설물" -> DetailReportFacilityDataFragment(item.id)
-                else -> DetailChargingStationFragment(item.id)
+                "충전소" -> DetailChargingStationFragment(item.id)
+                else -> DetailMoveCenterFragment(item.id)
             },
             DetailReviewFragment(item)
         )
@@ -99,7 +101,8 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
             getTabAt(0)?.text = when(type) {
                 "매장" -> getString(R.string.txt_store_info)
                 "시설물" -> getString(R.string.txt_facility_info)
-                else -> getString(R.string.txt_charging_info)
+                "충전소" -> getString(R.string.txt_charging_info)
+                else -> getString(R.string.txt_center_info)
             }
             getTabAt(1)?.text = getString(R.string.txt_review)
 
@@ -159,7 +162,6 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
     }
 
     private fun setCallBtnVisibility(phoneNum : String){
-        Log.d("명명", phoneNum)
         collapseBinding.btnBottomInfoCall.setCallIcon(phoneNum)
         expandBinding.apply {
             btnDetailCall.setCallIcon(phoneNum)

@@ -144,11 +144,24 @@
     <string name="txt_weekday">평일</string>
     <string name="txt_saturday">토요일</string>
     <string name="txt_monday">일요일</string>
+    <string name="txt_holiday">주말</string>
     <string name="txt_air_use">공기주입 가능 여부</string>
     <string name="txt_same_use">동시 사용 가능 대수</string>
     <string name="txt_phone_use">휴대전화 충전 가능 여부</string>
     <string name="txt_possible">가능</string>
     <string name="txt_impossible">불가능</string>
+    <string name="txt_reservation">예약 정보</string>
+    <string name="txt_ahead_time">사전예약</string>
+    <string name="txt_car_run">운행 정보</string>
+    <string name="txt_car_info">보유 차량 종류 및 대수</string>
+    <string name="txt_car_slope">슬로프형 휠체어 차량</string>
+    <string name="txt_car_lift">리프트형 휠체어 차량</string>
+    <string name="txt_car_inside_area">차량 관내 운행지역</string>
+    <string name="txt_car_outside_area">차량 관외 운행지역</string>
+    <string name="txt_user_info">이용 안내</string>
+    <string name="txt_car_pay">이용 요금</string>
+    <string name="txt_car_target">이용 대상</string>
+    <string name="txt_limit_info">제한 사항</string>
 
     <!-- update info-->
     <string name="desc_add_time_info">이용시간을 알려주세요.</string>

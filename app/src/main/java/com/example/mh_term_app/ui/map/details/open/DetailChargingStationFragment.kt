@@ -48,7 +48,7 @@ class DetailChargingStationFragment(private val chargingId : String) : BaseFragm
         return when(time.openHourTxt){
             "-1" -> "휴무"
             "-2" -> {
-                setChargingDataVisibility(type)
+//                setChargingDataVisibility(type)
                 ""
             }
             else -> {
