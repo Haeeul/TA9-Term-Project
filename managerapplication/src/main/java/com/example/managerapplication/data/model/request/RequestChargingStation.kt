@@ -13,7 +13,7 @@ data class RequestChargingStation (
     val time : ChargingTime,
     val sameUse : String,
     val airUse : String,
-    val phoneUser : String,
+    val phoneUse : String,
     val managementName : String,
     val phone : String,
     val referenceDate : String

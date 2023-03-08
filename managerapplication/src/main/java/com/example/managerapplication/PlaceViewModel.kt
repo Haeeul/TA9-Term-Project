@@ -17,7 +17,6 @@ import com.example.managerapplication.data.model.response.PublicToiletListRespon
 import com.example.managerapplication.data.repository.PlaceRepository
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import java.net.URLDecoder
 
 class PlaceViewModel : ViewModel() {
     private val repository = PlaceRepository()
@@ -96,7 +95,7 @@ class PlaceViewModel : ViewModel() {
                         ),
                         sameUse = it.smtmUseCo,
                         airUse = it.airInjectorYn,
-                        phoneUser = it.moblphonChrstnYn,
+                        phoneUse = it.moblphonChrstnYn,
                         managementName = it.institutionNm,
                         phone = it.institutionPhoneNumber,
                         referenceDate = it.referenceDate
