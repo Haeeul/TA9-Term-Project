@@ -5,8 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class SearchPlace(
-    @PrimaryKey val placeId: String,
+data class RecentSearch(
+    @ColumnInfo(name = "placeId") val placeId: String,
     @ColumnInfo(name = "type") val type: String,
     @ColumnInfo(name = "address") val address: String,
     @ColumnInfo(name = "latitude") val latitude: Double,
@@ -14,4 +14,7 @@ data class SearchPlace(
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "phone") val phone: String?,
     @ColumnInfo(name = "detailType") val detailType: String?
-)
+){
+    @PrimaryKey(autoGenerate = true)
+    var idx: Int = 0
+}
