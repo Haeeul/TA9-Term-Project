@@ -34,6 +34,15 @@ class SignInViewModel : ViewModel() {
     // 입력값 확인
     fun inputSignInInfo(s: CharSequence?, start: Int, before: Int, count: Int){
         Handler(Looper.getMainLooper()).postDelayed({ checkValidNextBtn() }, 0L)
+
+        resetValid()
+    }
+
+    private fun resetValid(){
+        if(_isValidSignInNotice.value == true){
+            _isValidSignInNotice.value = false
+            _isValidNextBtn.value = false
+        }
     }
 
     // 다음 버튼 활성화 확인
