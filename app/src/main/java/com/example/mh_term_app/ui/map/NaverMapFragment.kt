@@ -3,6 +3,7 @@ package com.example.mh_term_app.ui.map
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -10,6 +11,7 @@ import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.viewModels
 import com.example.mh_term_app.MHApplication
@@ -39,6 +41,7 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
 
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -183,6 +186,7 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setResultSearch(){
         resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
             if (result.resultCode == Activity.RESULT_OK){

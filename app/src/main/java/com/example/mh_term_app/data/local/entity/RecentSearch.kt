@@ -6,15 +6,17 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class RecentSearch(
-    @ColumnInfo(name = "placeId") val placeId: String,
+    @PrimaryKey val placeId: String,
     @ColumnInfo(name = "type") val type: String,
     @ColumnInfo(name = "address") val address: String,
     @ColumnInfo(name = "latitude") val latitude: Double,
     @ColumnInfo(name = "longitude") val longitude: Double,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "phone") val phone: String?,
-    @ColumnInfo(name = "detailType") val detailType: String?
-){
-    @PrimaryKey(autoGenerate = true)
-    var idx: Int = 0
-}
+    @ColumnInfo(name = "detailType") val detailType: String?,
+    @ColumnInfo(name = "data") val data: String?
+)
+//){
+//    @PrimaryKey(autoGenerate = true)
+//    var idx: Int = 0
+//}

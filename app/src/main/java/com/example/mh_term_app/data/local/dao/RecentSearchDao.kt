@@ -15,7 +15,7 @@ interface RecentSearchDao {
     @Query("DELETE FROM recentsearch WHERE placeId = :placeId")
     suspend fun deletePlace(placeId: String)
 
-    @Query("SELECT * FROM recentsearch ORDER BY idx DESC")
+    @Query("SELECT * FROM recentsearch ORDER BY data DESC")
     fun getAllCenter(): LiveData<List<RecentSearch>>
 
     @Query("DELETE FROM recentsearch")

@@ -1,6 +1,8 @@
 package com.example.mh_term_app.ui.map
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,6 +19,8 @@ import com.example.mh_term_app.data.model.response.ResponsePublicToilet
 import com.example.mh_term_app.data.repository.MapRepository
 import com.example.mh_term_app.data.repository.SearchRepository
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 class MapViewModel : ViewModel() {
     private val db = RecentSearchDatabase.getInstance(MHApplication.getApplicationContext())
@@ -94,10 +98,11 @@ class MapViewModel : ViewModel() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun insertSearchPlace(place: ResponseCategoryPlace) = viewModelScope.launch {
         searchRepo.insert(
             RecentSearch(
-            place.id, place.data.type, place.data.address, place.data.latitude, place.data.longitude, place.data.name, place.data.phone, place.data.detailType)
+            place.id, place.data.type, place.data.address, place.data.latitude, place.data.longitude, place.data.name, place.data.phone, place.data.detailType, LocalDateTime.now().toString())
         )
     }
 }
