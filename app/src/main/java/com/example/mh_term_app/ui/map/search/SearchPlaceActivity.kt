@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
+import com.example.mh_term_app.MainActivity
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.data.local.entity.RecentSearch
+import com.example.mh_term_app.data.model.response.PlaceInfo
+import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
 import com.example.mh_term_app.databinding.ActivitySearchPlaceBinding
 import com.example.mh_term_app.ui.map.NaverMapFragment
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
@@ -83,7 +86,7 @@ class SearchPlaceActivity : BaseActivity<ActivitySearchPlaceBinding>() {
     }
 
     private fun initRecentSearchRv(){
-        recentSearchAdapter = RecentSearchAdapter(searchViewModel)
+        recentSearchAdapter = RecentSearchAdapter(searchViewModel){data -> clickRecentSearchItem(data)}
 
         binding.rvRecentSearch.run {
             adapter = recentSearchAdapter
@@ -91,5 +94,25 @@ class SearchPlaceActivity : BaseActivity<ActivitySearchPlaceBinding>() {
         }
 
         recentSearchAdapter.notifyDataSetChanged()
+    }
+
+    private fun clickRecentSearchItem(data : RecentSearch){
+        val result = ResponseCategoryPlace(
+            data.placeId,
+            PlaceInfo(
+                data.type,
+                data.address,
+                data.latitude,
+                data.longitude,
+                data.name,
+                data.phone ?: "",
+                data.detailType?: "",
+                ""
+            )
+        )
+        val resentSearchIntent = Intent(this, NaverMapFragment::class.java)
+        resentSearchIntent.putExtra("searchResult",result)
+        setResult(RESULT_OK,resentSearchIntent)
+        finish()
     }
 }

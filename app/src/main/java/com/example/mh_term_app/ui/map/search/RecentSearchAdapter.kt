@@ -19,7 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
-class RecentSearchAdapter(val vm : SearchViewModel) : RecyclerView.Adapter<RecentSearchAdapter.RecentSearchViewHolder>() {
+class RecentSearchAdapter(val vm : SearchViewModel, val clickRecentSearchItem:(RecentSearch) -> Unit) : RecyclerView.Adapter<RecentSearchAdapter.RecentSearchViewHolder>() {
     var data = mutableListOf<RecentSearch>()
 
     fun replaceAll(array: ArrayList<RecentSearch>?) {
@@ -65,6 +65,10 @@ class RecentSearchAdapter(val vm : SearchViewModel) : RecyclerView.Adapter<Recen
                 CoroutineScope(Dispatchers.IO).launch {
                     vm.deleteDataRecentSearch(item.placeId)
                 }
+            }
+
+            itemView.setSingleOnClickListener {
+                clickRecentSearchItem(item)
             }
         }
     }
