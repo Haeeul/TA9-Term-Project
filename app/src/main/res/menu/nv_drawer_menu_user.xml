@@ -8,10 +8,10 @@
         android:id="@+id/review_list"
         android:title="@string/title_menu_review_list"
         android:checked="false"/>
-    <item
-        android:id="@+id/favorite_list"
-        android:title="@string/title_menu_favorite_list"
-        android:checked="false"/>
+<!--    <item-->
+<!--        android:id="@+id/favorite_list"-->
+<!--        android:title="@string/title_menu_favorite_list"-->
+<!--        android:checked="false"/>-->
     <item
         android:id="@+id/report"
         android:title="@string/title_menu_report"

@@ -24,7 +24,6 @@ import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
 import com.example.mh_term_app.databinding.FragmentNaverMapBinding
 import com.example.mh_term_app.ui.map.search.SearchPlaceActivity
 import com.example.mh_term_app.ui.menu.EditUserInfoActivity
-import com.example.mh_term_app.ui.menu.UserFavoriteActivity
 import com.example.mh_term_app.ui.menu.report.ReportPlaceActivity
 import com.example.mh_term_app.ui.menu.review.UserReviewActivity
 import com.example.mh_term_app.ui.sign.`in`.SignInActivity
@@ -138,7 +137,7 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
         binding.nvDrawerMenu.removeHeaderView(binding.nvDrawerMenu.getHeaderView(0))
         binding.nvDrawerMenu.menu.removeItem(R.id.edit_user_info)
         binding.nvDrawerMenu.menu.removeItem(R.id.review_list)
-        binding.nvDrawerMenu.menu.removeItem(R.id.favorite_list)
+//        binding.nvDrawerMenu.menu.removeItem(R.id.favorite_list)
         binding.nvDrawerMenu.menu.removeItem(R.id.report)
         binding.nvDrawerMenu.menu.removeItem(R.id.logout)
         binding.nvDrawerMenu.menu.removeItem(R.id.go_to_sign_up)
@@ -175,7 +174,7 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
             when (menuItem.itemId) {
                 R.id.edit_user_info -> intent(EditUserInfoActivity::class.java)
                 R.id.review_list -> intent(UserReviewActivity::class.java)
-                R.id.favorite_list -> intent(UserFavoriteActivity::class.java)
+//                R.id.favorite_list -> intent(UserFavoriteActivity::class.java)
                 R.id.report -> intent(ReportPlaceActivity::class.java)
                 R.id.go_to_sign_in -> intent(SignInActivity::class.java)
                 R.id.go_to_sign_up -> intent(SignUpActivity::class.java)
