@@ -64,7 +64,7 @@
                     <ImageView
                         android:id="@+id/btn_map_menu"
                         android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_height="0dp"
                         android:layout_marginStart="16dp"
                         app:layout_constraintBottom_toBottomOf="@+id/edt_map_search"
                         app:layout_constraintStart_toStartOf="@+id/edt_map_search"
@@ -154,9 +154,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            app:itemTextColor="@color/black"
-            android:paddingHorizontal="14dp"
             android:overScrollMode="never"
-            app:itemTextAppearance="@style/Theme.menu.text" />
+            android:paddingHorizontal="14dp"
+            app:itemTextAppearance="@style/Theme.menu.text"
+            app:itemTextColor="@color/black" />
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>
