@@ -1,10 +1,15 @@
 package com.example.mh_term_app.ui.map
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mh_term_app.MHApplication
+import com.example.mh_term_app.data.local.RecentSearchDatabase
+import com.example.mh_term_app.data.local.entity.RecentSearch
 import com.example.mh_term_app.data.model.request.RequestPlaceFacility
 import com.example.mh_term_app.data.model.request.RequestPlaceStore
 import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
@@ -12,9 +17,15 @@ import com.example.mh_term_app.data.model.response.ResponseChargingStation
 import com.example.mh_term_app.data.model.response.ResponseMoveCenter
 import com.example.mh_term_app.data.model.response.ResponsePublicToilet
 import com.example.mh_term_app.data.repository.MapRepository
+import com.example.mh_term_app.data.repository.SearchRepository
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 class MapViewModel : ViewModel() {
+    private val db = RecentSearchDatabase.getInstance(MHApplication.getApplicationContext())
+    private val searchRepo = SearchRepository(db.searchPlaceDao())
+
     private val mapRepository = MapRepository()
 
     private val _categoryList = MutableLiveData<MutableList<ResponseCategoryPlace>>()
@@ -93,5 +104,13 @@ class MapViewModel : ViewModel() {
         viewModelScope.launch {
             _toiletInfo.value = mapRepository.getToiletInfo(id)
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun insertSearchPlace(place: ResponseCategoryPlace) = viewModelScope.launch {
+        searchRepo.insert(
+            RecentSearch(
+            place.id, place.data.type, place.data.address, place.data.latitude, place.data.longitude, place.data.name, place.data.phone, place.data.detailType, LocalDateTime.now().toString())
+        )
     }
 }

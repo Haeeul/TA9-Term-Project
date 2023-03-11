@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="vm"
             type="com.example.mh_term_app.ui.map.search.SearchViewModel" />
@@ -64,6 +65,58 @@
             app:layout_constraintTop_toTopOf="@+id/btn_search_back"
             app:srcCompat="@drawable/ic_search" />
 
+        <TextView
+            android:id="@+id/btn_recent_search_all_delete"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:text="전체삭제"
+            android:visibility="@{vm.isValidRecentList ? View.VISIBLE : View.GONE}"
+            android:textColor="@color/grey"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView13" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_recent_search"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:visibility="@{vm.isValidRecentList ? View.VISIBLE : View.GONE}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_recent_search_all_delete"
+            tools:listitem="@layout/rv_item_recent_search" />
+
+        <TextView
+            android:id="@+id/textView104"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="@string/desc_recent_search_none"
+            android:textSize="16dp"
+            android:textColor="@color/grey"
+            android:visibility="@{vm.isValidRecentList ? View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView13" />
+
+        <TextView
+            android:id="@+id/textView110"
+            style="@style/MediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="최근 검색"
+            android:visibility="@{vm.isValidRecentList ? View.VISIBLE : View.GONE}"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_recent_search_all_delete" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
