@@ -7,8 +7,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mh_term_app.MHApplication
+import com.example.mh_term_app.R
 import com.example.mh_term_app.data.repository.UserRepository
 import kotlinx.coroutines.launch
+import java.util.regex.Pattern
 
 class SignUpViewModel : ViewModel() {
     private val userRepository = UserRepository()
@@ -20,6 +22,7 @@ class SignUpViewModel : ViewModel() {
 
     // 안내 문구
     val idNotice = MutableLiveData("")
+    val passwordNotice = MutableLiveData("")
 
     // ID 중복확인 - 버튼 표시
     private val _isValidIdBtn = MutableLiveData(false)
@@ -27,7 +30,7 @@ class SignUpViewModel : ViewModel() {
         get() = _isValidIdBtn
 
     // ID 유효성 검사
-    private val _isValidId = MutableLiveData<Boolean>()
+    private val _isValidId = MutableLiveData<Boolean>(false)
     val isValidId : LiveData<Boolean>
         get() = _isValidId
 
@@ -58,18 +61,31 @@ class SignUpViewModel : ViewModel() {
 
     // ID 입력칸 확인
     fun inputId(s: CharSequence?, start: Int, before: Int, count: Int){
-        Handler(Looper.getMainLooper()).postDelayed({ checkValidIdBtn() }, 0L)
+//        Handler(Looper.getMainLooper()).postDelayed({ checkIdForm() }, 0L)
+        Handler(Looper.getMainLooper()).postDelayed({ checkEmptyId() }, 0L)
 
         resetValidId()
     }
 
+    private fun checkIdForm() {
+        idNotice.value = MHApplication.getApplicationContext().getString(R.string.notice_id_input)
+
+        _isValidIdNotice.value = !android.util.Patterns.EMAIL_ADDRESS.matcher(idTxt.value.toString()).matches()
+        _isValidIdBtn.value = android.util.Patterns.EMAIL_ADDRESS.matcher(idTxt.value.toString()).matches()
+    }
+
     // ID 입력칸 빈칸확인
-    private fun checkValidIdBtn(){
-        _isValidIdBtn.value = idTxt.value?.length != 0
+    private fun checkEmptyId(){
+        if(idTxt.value?.length == 0){
+            _isValidIdBtn.value = false
+            _isValidIdNotice.value = false
+        }else{
+            checkIdForm()
+        }
     }
 
     fun setDeleteBtnListener(){
-        if(_isValidId.value == false) idTxt.value = ""
+        if(_isValidId.value == false || idNotice.value == MHApplication.getApplicationContext().getString(R.string.notice_id_input)) idTxt.value = ""
     }
 
     fun checkValidId(){
@@ -80,7 +96,7 @@ class SignUpViewModel : ViewModel() {
     }
 
     private fun resetValidId(){
-        if(_isValidIdNotice.value == true){
+        if(_isValidId.value == true){
             _isValidIdNotice.value = false
             _isValidIdBtn.value = true
             _isValidId.value = false
@@ -89,20 +105,20 @@ class SignUpViewModel : ViewModel() {
 
     // 비밀번호 자릿수 확인
     fun inputPassword(s: CharSequence?, start: Int, before: Int, count: Int){
-        Handler(Looper.getMainLooper()).postDelayed({ checkPasswordForm() }, 0L)
+        Handler(Looper.getMainLooper()).postDelayed({ checkPasswordLength() }, 0L)
     }
 
     private fun checkPasswordForm() {
+        val passwordPattern: Pattern = Pattern.compile("""^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^+\-=])(?=\S+$).*$""")
+
+        _isValidPasswordNotice.value = !passwordPattern.matcher(passwordTxt.value.toString()).matches() || passwordTxt.value?.length!! <= 7
+//        }
+    }
+
+    private fun checkPasswordLength() {
         when(passwordTxt.value?.length){
             0 -> _isValidPasswordNotice.value = false
-            in 1..3 -> {
-                _isValidPasswordNotice.value = true
-                _isValidPassword.value = false
-            }
-            else -> {
-                _isValidPasswordNotice.value = false
-                _isValidPassword.value = true
-            }
+            else -> checkPasswordForm()
         }
         checkPasswordEqual()
     }
@@ -130,7 +146,7 @@ class SignUpViewModel : ViewModel() {
 
     // 다음 버튼 활성화 확인
     fun checkValidNextBtn(){
-        _isValidNextBtn.value = _isValidId.value == true && passwordTxt.value?.length!! >= 4 && passwordTxt.value == checkPasswordTxt.value
+        _isValidNextBtn.value = _isValidId.value == true && passwordTxt.value!!.isNotEmpty() && _isValidPasswordNotice.value == false && passwordTxt.value == checkPasswordTxt.value
     }
 
     // data 저장
