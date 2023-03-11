@@ -39,10 +39,13 @@ class DetailReportFacilityDataFragment(private val facilityId : String) : BaseFr
         super.onCreate(savedInstanceState)
 
         mapViewModel.getFacilityInfo(facilityId)
+        mapViewModel.setLoading(true)
     }
 
     override fun initView() {
         super.initView()
+
+        binding.vm = mapViewModel
 
         initRv()
     }
@@ -128,6 +131,8 @@ class DetailReportFacilityDataFragment(private val facilityId : String) : BaseFr
                         replaceAll(it.warningList as ArrayList<String>?)
                         notifyDataSetChanged()
                     }
+
+                    mapViewModel.setLoading(false)
                 }
             }else mapViewModel.getFacilityInfo(facilityId)
         }

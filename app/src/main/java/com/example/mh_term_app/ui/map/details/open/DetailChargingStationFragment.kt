@@ -21,6 +21,13 @@ class DetailChargingStationFragment(private val chargingId : String) : BaseFragm
         super.onCreate(savedInstanceState)
 
         mapViewModel.getChargingInfo(chargingId)
+        mapViewModel.setLoading(true)
+    }
+
+    override fun initView() {
+        super.initView()
+
+        binding.vm = mapViewModel
     }
 
     @SuppressLint("SetTextI18n")
@@ -40,6 +47,8 @@ class DetailChargingStationFragment(private val chargingId : String) : BaseFragm
                     txtChargingDetailSaturdayTime.text = setChargingTime(it.time.saturdayTime, "saturday")
                     txtChargingDetailMondayTime.text = setChargingTime(it.time.mondayTime, "monday")
                 }
+
+                mapViewModel.setLoading(false)
             }else mapViewModel.getChargingInfo(chargingId)
         }
     }

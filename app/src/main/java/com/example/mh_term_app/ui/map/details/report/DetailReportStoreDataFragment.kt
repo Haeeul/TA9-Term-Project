@@ -42,10 +42,13 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
         super.onCreate(savedInstanceState)
 
         mapViewModel.getStoreInfo(storeId)
+        mapViewModel.setLoading(true)
     }
 
     override fun initView() {
         super.initView()
+
+        binding.vm = mapViewModel
 
         initRv()
     }
@@ -141,6 +144,8 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
                         replaceAll(it.warningList as ArrayList<String>?)
                         notifyDataSetChanged()
                     }
+
+                    mapViewModel.setLoading(false)
                 }
             }else mapViewModel.getStoreInfo(storeId)
         }
