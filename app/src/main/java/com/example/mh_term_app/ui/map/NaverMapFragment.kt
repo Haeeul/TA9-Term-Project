@@ -2,9 +2,11 @@ package com.example.mh_term_app.ui.map
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -31,7 +33,9 @@ import com.example.mh_term_app.utils.databinding.BindingAdapter.setUserTypeChip
 import com.example.mh_term_app.utils.extension.intent
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 import com.example.mh_term_app.utils.extension.toast
+import com.example.mh_term_app.utils.view.LoadingDialog
 import com.google.android.material.chip.Chip
+
 
 class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
     override val layoutResID
@@ -40,7 +44,8 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
     private val mapViewModel : MapViewModel by viewModels()
 
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
-
+    private lateinit var loadingDialog : LoadingDialog
+    
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,6 +64,7 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
 
         mapViewModel.categoryList.observe(this){
             if(it.isNotEmpty()){
+                loadingDialog.dismiss()
                 val activity = activity as MainActivity
                 activity.setCategoryMarkerList(it)
             }
@@ -67,6 +73,8 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
 
     override fun initView() {
         super.initView()
+
+        loadingDialog = LoadingDialog(requireContext())
 
         initDrawer()
     }
@@ -105,11 +113,13 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
     }
 
     private fun setOnChipListener(type : String){
+        loadingDialog.show()
         mapViewModel.getCategoryList(type)
 
         val activity = activity as MainActivity
         activity.setInfoWindowVisibility(false)
     }
+
 
     private fun initDrawer() {
         binding.btnMapMenu.setSingleOnClickListener {

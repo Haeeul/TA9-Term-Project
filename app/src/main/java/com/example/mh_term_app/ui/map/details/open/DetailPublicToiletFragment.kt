@@ -25,6 +25,13 @@ class DetailPublicToiletFragment(private val toiletId : String) : BaseFragment<F
         super.onCreate(savedInstanceState)
 
         mapViewModel.getToiletInfo(toiletId)
+        mapViewModel.setLoading(true)
+    }
+
+    override fun initView() {
+        super.initView()
+
+        binding.vm = mapViewModel
     }
 
     @SuppressLint("SetTextI18n")
@@ -40,6 +47,8 @@ class DetailPublicToiletFragment(private val toiletId : String) : BaseFragment<F
 
                     txtToiletDetailUnisex.setUnisexTxt(it.unisex)
                 }
+
+                mapViewModel.setLoading(false)
             }else mapViewModel.getToiletInfo(toiletId)
         }
     }

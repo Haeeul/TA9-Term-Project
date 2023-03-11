@@ -56,6 +56,14 @@ class MapViewModel : ViewModel() {
     val toiletInfo : LiveData<ResponsePublicToilet>
         get() = _toiletInfo
 
+    private val _loading = MutableLiveData(false)
+    val loading : LiveData<Boolean>
+        get() = _loading
+
+    fun setLoading(visibility : Boolean){
+        _loading.value = visibility
+    }
+
     fun getCategoryList(type : String){
         viewModelScope.launch {
             _categoryList.value = mapRepository.getCategoryList(type)

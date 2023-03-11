@@ -41,6 +41,7 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
         super.onViewCreated(view, savedInstanceState)
 
         initObserver()
+        collapseBinding.vm = mapViewModel
     }
 
     companion object {
@@ -74,8 +75,8 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
                     rbDetailInfo.rating = it
                     txtDetailRating.text = rating.toString()
                 }
+                mapViewModel.setLoading(false)
             }else mapViewModel.getPlaceRating(placeId)
-
         }
     }
 
@@ -162,6 +163,7 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
 
     private fun setPlaceRating(id:String){
         mapViewModel.getPlaceRating(id)
+        mapViewModel.setLoading(true)
     }
 
     private fun setCallBtnVisibility(phoneNum : String){

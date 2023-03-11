@@ -19,6 +19,13 @@ class DetailMoveCenterFragment(private val centerId : String) : BaseFragment<Fra
         super.onCreate(savedInstanceState)
 
         mapViewModel.getCenterInfo(centerId)
+        mapViewModel.setLoading(true)
+    }
+
+    override fun initView() {
+        super.initView()
+
+        binding.vm = mapViewModel
     }
 
     @SuppressLint("SetTextI18n")
@@ -42,6 +49,8 @@ class DetailMoveCenterFragment(private val centerId : String) : BaseFragment<Fra
                     txtCenterDetailTarget.text = getSplitInfo(it.useTarget)
                     txtCenterDetailLimit.text = if(it.limit.isNotEmpty()) getSplitInfo(it.limit) else "없음"
                 }
+
+                mapViewModel.setLoading(false)
             }else mapViewModel.getCenterInfo(centerId)
         }
     }
