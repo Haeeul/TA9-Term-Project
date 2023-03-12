@@ -78,7 +78,8 @@
         </activity>
         <activity
             android:name=".ui.menu.EditUserInfoActivity"
-            android:exported="false">
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

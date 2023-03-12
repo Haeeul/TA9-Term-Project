@@ -9,6 +9,7 @@ import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.databinding.ActivityEditUserInfoBinding
 import com.example.mh_term_app.ui.sign.up.UserInfoViewModel
 import com.example.mh_term_app.utils.extension.errorToast
+import com.example.mh_term_app.utils.extension.setKeyboardObserver
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 import com.example.mh_term_app.utils.extension.toast
 
@@ -70,6 +71,8 @@ class EditUserInfoActivity : BaseActivity<ActivityEditUserInfoBinding>() {
 
     override fun initObserver() {
         super.initObserver()
+
+        setKeyboardObserver(userInfoViewModel.isValidNickname, false)
 
         checkUpdateTxt(userInfoViewModel.nicknameTxt)
         checkUpdateTxt(userInfoViewModel.typeTxt)

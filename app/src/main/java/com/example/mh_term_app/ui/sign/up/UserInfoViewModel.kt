@@ -54,7 +54,12 @@ class UserInfoViewModel : ViewModel() {
     // 닉네임 입력 확인
     fun inputNickname(s: CharSequence?, start: Int, before: Int, count: Int){
         Handler(Looper.getMainLooper()).postDelayed({ checkNicknameLength() }, 0L)
-//        Handler(Looper.getMainLooper()).postDelayed({ checkOriginNickname() }, 0L)
+
+        resetValidNickname()
+    }
+
+    fun inputUpdateNickname(s: CharSequence?, start: Int, before: Int, count: Int){
+        Handler(Looper.getMainLooper()).postDelayed({ checkNicknameLength() }, 0L)
 
         resetValidNickname()
     }
@@ -64,7 +69,8 @@ class UserInfoViewModel : ViewModel() {
             _isValidNickCheckBtn.value = false
             _isValidNickNotice.value = false
         }else{
-            checkNickForm()
+            if(nicknameTxt.value != MHApplication.prefManager.userNickname) checkNickForm()
+            else _isValidNickCheckBtn.value = false
         }
     }
 
