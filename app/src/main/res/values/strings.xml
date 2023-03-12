@@ -51,6 +51,7 @@
     <string name="sub_title_nickname">닉네임</string>
     <string name="hint_nickname_input">닉네임을 입력해주세요.</string>
     <string name="txt_double_check">중복확인</string>
+    <string name="notice_nick_input">"특수문자는 사용하실 수 없습니다."</string>
     <string name="notice_nickname_possible">해당 닉네임은 사용 가능합니다.</string>
     <string name="notice_nickname_impossible">해당 닉네임은 사용 불가능합니다.</string>
 

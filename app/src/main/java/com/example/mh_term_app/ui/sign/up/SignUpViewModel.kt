@@ -67,13 +67,6 @@ class SignUpViewModel : ViewModel() {
         resetValidId()
     }
 
-    private fun checkIdForm() {
-        idNotice.value = MHApplication.getApplicationContext().getString(R.string.notice_id_input)
-
-        _isValidIdNotice.value = !android.util.Patterns.EMAIL_ADDRESS.matcher(idTxt.value.toString()).matches()
-        _isValidIdBtn.value = android.util.Patterns.EMAIL_ADDRESS.matcher(idTxt.value.toString()).matches()
-    }
-
     // ID 입력칸 빈칸확인
     private fun checkEmptyId(){
         if(idTxt.value?.length == 0){
@@ -84,8 +77,15 @@ class SignUpViewModel : ViewModel() {
         }
     }
 
+    private fun checkIdForm() {
+        idNotice.value = MHApplication.getApplicationContext().getString(R.string.notice_id_input)
+
+        _isValidIdNotice.value = !android.util.Patterns.EMAIL_ADDRESS.matcher(idTxt.value.toString()).matches()
+        _isValidIdBtn.value = android.util.Patterns.EMAIL_ADDRESS.matcher(idTxt.value.toString()).matches()
+    }
+
     fun setDeleteBtnListener(){
-        if(_isValidId.value == false || idNotice.value == MHApplication.getApplicationContext().getString(R.string.notice_id_input)) idTxt.value = ""
+        if(_isValidId.value == false ) idTxt.value = ""
     }
 
     fun checkValidId(){

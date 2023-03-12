@@ -7,10 +7,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mh_term_app.MHApplication
+import com.example.mh_term_app.R
 import com.example.mh_term_app.data.repository.UserRepository
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
+import java.util.regex.Pattern
 
 class UserInfoViewModel : ViewModel() {
     val auth = Firebase.auth
@@ -52,13 +54,27 @@ class UserInfoViewModel : ViewModel() {
     // 닉네임 입력 확인
     fun inputNickname(s: CharSequence?, start: Int, before: Int, count: Int){
         Handler(Looper.getMainLooper()).postDelayed({ checkNicknameLength() }, 0L)
-        Handler(Looper.getMainLooper()).postDelayed({ checkOriginNickname() }, 0L)
+//        Handler(Looper.getMainLooper()).postDelayed({ checkOriginNickname() }, 0L)
 
         resetValidNickname()
     }
 
     private fun checkNicknameLength(){
-        _isValidNickCheckBtn.value = nicknameTxt.value?.length!! > 0
+        if(nicknameTxt.value?.length!! == 0){
+            _isValidNickCheckBtn.value = false
+            _isValidNickNotice.value = false
+        }else{
+            checkNickForm()
+        }
+    }
+
+
+    private fun checkNickForm() {
+        nicknameNotice.value = MHApplication.getApplicationContext().getString(R.string.notice_nick_input)
+        val nickPattern: Pattern = Pattern.compile("[ㄱ-ㅎ가-힣ㅏ-ㅣa-zA-Z0-9]{0,30}")
+
+        _isValidNickNotice.value = !nickPattern.matcher(nicknameTxt.value.toString()).matches()
+        _isValidNickCheckBtn.value = nickPattern.matcher(nicknameTxt.value.toString()).matches()
     }
 
     fun checkDoubleNickname(){
@@ -75,6 +91,10 @@ class UserInfoViewModel : ViewModel() {
     private fun resetValidNickname(){
         _isValidNickname.value = false
         _isValidNickNotice.value = false
+    }
+
+    fun setNickDeleteBtnListener(){
+        if(_isValidNickname.value == false) nicknameTxt.value = ""
     }
 
     fun setTypeTxt(txt:String){
