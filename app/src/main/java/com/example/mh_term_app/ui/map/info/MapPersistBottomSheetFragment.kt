@@ -22,6 +22,7 @@ import com.example.mh_term_app.ui.map.details.review.DetailReviewFragment
 import com.example.mh_term_app.utils.databinding.BindingAdapter.setCallIcon
 import com.example.mh_term_app.utils.databinding.BindingAdapter.setCallTxt
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
+import com.example.mh_term_app.utils.extension.toast
 import com.example.mh_term_app.utils.listener.TabSelectedListener
 import com.example.mh_term_app.utils.listener.changeTabsFont
 import kr.co.prnd.persistbottomsheetfragment.PersistBottomSheetFragment
@@ -121,6 +122,7 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
         setCallBtnVisibility(item.data.phone)
         setPlaceInfo(item)
         setPlaceDetailData(item)
+        initListener()
     }
 
     private fun setPlaceInfo(item : ResponseCategoryPlace){
@@ -180,6 +182,15 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
         val callIntent = Intent(Intent.ACTION_DIAL)
         callIntent.data = Uri.parse("tel:$phoneNum")
         startActivity(callIntent)
+    }
+
+    private fun initListener(){
+        collapseBinding.btnBottomInfoFavorite.setSingleOnClickListener {
+            requireContext().toast(getString(R.string.txt_anvil_feature))
+        }
+        expandBinding.btnDetailFavorite.setSingleOnClickListener {
+            requireContext().toast(getString(R.string.txt_anvil_feature))
+        }
     }
 
 }
