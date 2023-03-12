@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mh_term_app.MHApplication
+import com.example.mh_term_app.R
 import com.example.mh_term_app.data.repository.UserRepository
 import kotlinx.coroutines.launch
 
@@ -15,6 +17,8 @@ class SignInViewModel : ViewModel() {
     // 사용자 입력 내용
     val idTxt = MutableLiveData("")
     val passwordTxt = MutableLiveData("")
+
+    val noticeTxt = MutableLiveData("")
 
     // 다음 버튼 활성화
     private val _isValidNextBtn = MutableLiveData<Boolean>()
@@ -47,14 +51,22 @@ class SignInViewModel : ViewModel() {
 
     // 다음 버튼 활성화 확인
     private fun checkValidNextBtn(){
-        _isValidNextBtn.value = idTxt.value?.isNotEmpty() == true && passwordTxt.value?.length!! >= 4
+        _isValidNextBtn.value = idTxt.value?.isNotEmpty() == true && passwordTxt.value?.length!! >= 8
     }
 
     fun checkValidSignIn(){
-        viewModelScope.launch {
-            _isValidSignIn.value = userRepository.postSignIn(idTxt.value.toString(), passwordTxt.value.toString())
+        if(!android.util.Patterns.EMAIL_ADDRESS.matcher(idTxt.value.toString()).matches()){
+            noticeTxt.value = MHApplication.getApplicationContext().getString(R.string.notice_id_form)
+            _isValidSignInNotice.value = true
+        }else{
+            noticeTxt.value = MHApplication.getApplicationContext().getString(R.string.notice_sign_in_fail)
 
-            if(_isValidSignIn.value == false) _isValidSignInNotice.value = true
+            viewModelScope.launch {
+                _isValidSignIn.value = userRepository.postSignIn(idTxt.value.toString(), passwordTxt.value.toString())
+
+                if(_isValidSignIn.value == false) _isValidSignInNotice.value = true
+            }
         }
+
     }
 }
