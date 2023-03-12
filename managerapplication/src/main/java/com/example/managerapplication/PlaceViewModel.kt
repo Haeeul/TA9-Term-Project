@@ -22,7 +22,7 @@ class PlaceViewModel : ViewModel() {
     private val repository = PlaceRepository()
 
     val API_SERVICE_KEY = "NiBhI42sA2qFT6izOTs7XMx%2FDYGfa7LwpVRLdrIcX80aQ4QL%2BdzxcwcgIuiFST6xprT6XZjaPwgP98Q6BE%2FaFg%3D%3D"
-    val decodingKey = "NiBhI42sA2qFT6izOTs7XMx/DYGfa7LwpVRLdrIcX80aQ4QL+dzxcwcgIuiFST6xprT6XZjaPwgP98Q6BE/aFg=="
+    val decodingKey = "+SqFOApfQNZgbUN9l8vghoHYLr9ZziKmIf7MiAXH5ZVQQrFSqTKWheTuaDfksCAJCvIZMpWazUK9aCJzBFdQUA=="
 
     private val _chargingList = MutableLiveData<MutableList<ChargingStationListResponse>>()
     val chargingList : LiveData<MutableList<ChargingStationListResponse>>
@@ -42,6 +42,7 @@ class PlaceViewModel : ViewModel() {
             try{
                 _chargingList.value = repository.getChargingStation(decodingKey).response.body.items
                 Log.d("getChargingStationList : ", _chargingList.value.toString())
+                Log.d("getChargingStationList : ", _chargingList.value!!.size.toString())
 
             }catch (e : HttpException){
                 Log.w("getChargingStationList error : ", e.message())
@@ -55,7 +56,7 @@ class PlaceViewModel : ViewModel() {
             try{
                 _centerList.value = repository.getMovementCenter(decodingKey).response.body.items
                 Log.d("getMovementList : ", _centerList.value.toString())
-
+                Log.d("getMovementList : ", _centerList.value!!.size.toString())
             }catch (e : HttpException){
                 Log.w("getMovementList error : ", e.message())
             }
@@ -68,7 +69,7 @@ class PlaceViewModel : ViewModel() {
             try{
                 _toiletList.value = repository.getPublicToiletList(decodingKey).response.body.items
                 Log.d("getPublicToiletList : ", _toiletList.value.toString())
-
+                Log.d("getPublicToiletList : ", _toiletList.value!!.size.toString())
             }catch (e : HttpException){
                 Log.w("getPublicToiletList error : ", e.message())
             }
@@ -77,6 +78,7 @@ class PlaceViewModel : ViewModel() {
     }
 
     fun postChargingStation(){
+        var count = 1
         viewModelScope.launch {
             _chargingList.value?.forEach {
                 repository.postCharging(
@@ -101,11 +103,14 @@ class PlaceViewModel : ViewModel() {
                         referenceDate = it.referenceDate
                     )
                 )
+                Log.d("충전소 : $count", it.toString())
+                count++
             }
         }
     }
 
     fun postMoveCenter(){
+        var count = 1
         viewModelScope.launch {
             _centerList.value?.forEach {
                 repository.postCenter(
@@ -142,12 +147,14 @@ class PlaceViewModel : ViewModel() {
                         referenceDate = it.referenceDate
                     )
                 )
+                Log.d("센터 : $count", it.toString())
+                count++
             }
         }
     }
 
     fun postPublicToilet(){
-        var cnt = 1
+        var count = 1
         viewModelScope.launch {
             _toiletList.value?.forEach {
                 repository.postToilet(
@@ -175,6 +182,8 @@ class PlaceViewModel : ViewModel() {
                         referenceDate = it.referenceDate
                     )
                 )
+                Log.d("화장실 : $count", it.toString())
+                count++
             }
         }
     }
