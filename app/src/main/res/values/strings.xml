@@ -192,5 +192,6 @@
     <string name="txt_phone_number_none">번호 정보가 없습니다.</string>
     <string name="txt_source">공공데이터포털 제공</string>
     <string name="desc_recent_search_none">최근 검색 기록이 없습니다.</string>
+    <string name="txt_anvil_feature">서비스 준비중입니다.</string>
 
 </resources>
