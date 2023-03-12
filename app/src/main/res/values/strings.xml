@@ -18,23 +18,26 @@
     <string name="txt_request_message_fail">인증 번호 요청 실패</string>
 
     <!-- ID,PW auth -->
-    <string name="hint_id_input">아이디를 입력해주세요.</string>
+    <string name="hint_id_input">이메일 형식으로 입력</string>
+    <string name="notice_id_input">이메일 형식으로 입력해주세요.</string>
     <string name="notice_id_possible">해당 아이디는 사용 가능합니다.</string>
     <string name="notice_id_impossible">해당 아이디는 사용 불가능합니다.</string>
-    <string name="hint_password_input">최소 4자리 이상 입력해주세요.</string>
-    <string name="notice_password_length">4자리 이상 입력해주세요.</string>
+    <string name="hint_password_input">영문,숫자,특수문자 조합 8~20자리</string>
+    <string name="notice_password_input">영문,숫자,특수문자 조합 8~20자리로 입력해주세요.</string>
     <string name="hint_check_password_input">틀리지 않도록 주의해주세요.</string>
     <string name="notice_check_password_fail">비밀번호가 일치하지 않습니다.</string>
 
     <!-- sign in -->
     <string name="desc_sign_in">로그인 정보를 입력해주세요.</string>
-    <string name="hint_password">비밀번호를 입력해주세요.</string>
+    <string name="hint_email_id">id@example.com</string>
+    <string name="hint_password">영문,숫자,특수문자 포함 8자리 이상</string>
     <string name="desc_account_null">계정이 없으신가요?</string>
     <string name="notice_sign_in_fail">아이디 또는 비밀번호를 다시 확인해주세요.</string>
+    <string name="notice_id_form">아이디를 이메일 형식으로 입력해주세요.</string>
 
     <!-- sign up -->
     <string name="desc_sign_up">회원가입 정보를 입력해주세요.</string>
-    <string name="sub_title_id">아이디</string>
+    <string name="sub_title_id">이메일 아이디</string>
     <string name="sub_title_password">비밀번호</string>
     <string name="sub_title_check_password">비밀번호 확인</string>
     <string name="sub_title_next">다음</string>
@@ -50,6 +53,7 @@
     <string name="sub_title_nickname">닉네임</string>
     <string name="hint_nickname_input">닉네임을 입력해주세요.</string>
     <string name="txt_double_check">중복확인</string>
+    <string name="notice_nick_input">"특수문자는 사용하실 수 없습니다."</string>
     <string name="notice_nickname_possible">해당 닉네임은 사용 가능합니다.</string>
     <string name="notice_nickname_impossible">해당 닉네임은 사용 불가능합니다.</string>
 

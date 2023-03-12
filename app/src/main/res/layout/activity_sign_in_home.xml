@@ -11,11 +11,20 @@
         android:layout_height="match_parent"
         tools:context=".ui.sign.SignInHomeActivity">
 
+        <ImageView
+            android:id="@+id/imageView78"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_app_icon"
+            app:layout_constraintBottom_toTopOf="@+id/txt_home_title"
+            app:layout_constraintEnd_toEndOf="@+id/txt_home_title"
+            app:layout_constraintStart_toStartOf="@+id/txt_home_title" />
+
         <TextView
             android:id="@+id/txt_home_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="170dp"
+            android:layout_marginTop="200dp"
             android:fontFamily="@font/gyeonggi_cheonnyeon_bold"
             android:includeFontPadding="false"
             android:text="@string/app_title"

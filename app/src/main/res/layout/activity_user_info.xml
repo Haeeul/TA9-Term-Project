@@ -16,27 +16,27 @@
         android:layout_height="match_parent"
         tools:context=".ui.sign.up.UserInfoActivity">
 
+        <include
+            android:id="@+id/tb_user_info"
+            layout="@layout/tb_title_with_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/tb_user_info">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-                <include
-                    android:id="@+id/tb_user_info"
-                    layout="@layout/tb_title_with_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView7"
@@ -50,7 +50,7 @@
                     android:textSize="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tb_user_info" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView8"
@@ -83,12 +83,13 @@
                     android:layout_marginEnd="8dp"
                     android:background="@drawable/round_square_line_grey_8"
                     android:hint="@string/hint_nickname_input"
+                    android:imeOptions="actionDone"
                     android:inputType="text"
+                    android:maxLength="10"
                     android:onTextChanged="@{vm.inputNickname}"
                     android:paddingHorizontal="16dp"
                     android:text="@={vm.nicknameTxt}"
                     android:textSize="16dp"
-                    android:imeOptions="actionDone"
                     app:layout_constraintEnd_toStartOf="@+id/btn_nick_double_check"
                     app:layout_constraintStart_toStartOf="@+id/textView8"
                     app:layout_constraintTop_toBottomOf="@+id/textView8" />
@@ -99,6 +100,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginEnd="16dp"
+                    android:onClick="@{() -> vm.setNickDeleteBtnListener()}"
                     android:visibility="@{vm.isValidNickNotice ? View.VISIBLE : View.GONE}"
                     app:layout_constraintBottom_toBottomOf="@+id/edt_user_info_nick"
                     app:layout_constraintEnd_toEndOf="@+id/edt_user_info_nick"
@@ -290,8 +292,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
+                    android:layout_marginTop="32dp"
                     android:layout_marginEnd="24dp"
-                    android:layout_marginBottom="35dp"
+                    android:layout_marginBottom="32dp"
                     android:background="@drawable/selector_sign_btn"
                     android:enabled="@{vm.isValidNickname}"
                     android:onClick="postSignUp"
@@ -299,7 +302,8 @@
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rg_user_type" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -372,6 +372,7 @@
                     android:paddingVertical="16dp"
                     android:text="@={vm.plusInfoTxt}"
                     android:textSize="16dp"
+                    android:lineSpacingExtra="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView61"
                     app:layout_constraintTop_toBottomOf="@+id/textView61" />

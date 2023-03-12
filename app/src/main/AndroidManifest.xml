@@ -78,7 +78,8 @@
         </activity>
         <activity
             android:name=".ui.menu.EditUserInfoActivity"
-            android:exported="false">
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -91,7 +92,7 @@
         <activity
             android:name=".ui.sign.up.UserInfoActivity"
             android:exported="false"
-            android:windowSoftInputMode="stateVisible">
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -99,7 +100,7 @@
         <activity
             android:name=".ui.sign.up.SignUpActivity"
             android:exported="false"
-            android:windowSoftInputMode="stateVisible">
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
