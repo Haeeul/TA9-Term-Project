@@ -15,6 +15,7 @@ import com.example.mh_term_app.utils.extension.createStoreTimeDialog
 import com.example.mh_term_app.utils.extension.errorToast
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 import com.example.mh_term_app.utils.extension.toast
+import com.example.mh_term_app.utils.view.LoadingDialog
 
 class UpdateStoreInfoFragment(private val storeId : String, private val storeDetailInfo: UpdateStoreInfo) :
     BaseFragment<FragmentUpdateStoreInfoBinding>() {
@@ -22,6 +23,7 @@ class UpdateStoreInfoFragment(private val storeId : String, private val storeDet
         get() = R.layout.fragment_update_store_info
 
     private val reportPlaceViewModel: ReportViewModel by viewModels()
+    private lateinit var loadingDialog : LoadingDialog
 
     override fun initView() {
         super.initView()
@@ -36,6 +38,7 @@ class UpdateStoreInfoFragment(private val storeId : String, private val storeDet
         checkTargetInfo()
         checkWarningInfo()
 
+        loadingDialog = LoadingDialog(requireContext())
     }
 
     private fun checkDetailTypeInfo(){
@@ -100,6 +103,7 @@ class UpdateStoreInfoFragment(private val storeId : String, private val storeDet
         }
 
         reportPlaceViewModel.isValidUpdateStore.observe(this){
+            loadingDialog.dismiss()
             if(it) requireContext().toast("제안 완료")
             else requireContext().errorToast()
 
@@ -144,6 +148,7 @@ class UpdateStoreInfoFragment(private val storeId : String, private val storeDet
         onUpdateStoreWarningClicked(binding.cbUpdateStoreWarningWidth)
 
         binding.btnUpdateInfoStoreComplete.setSingleOnClickListener {
+            loadingDialog.show()
             reportPlaceViewModel.postUpdateStoreInfo(storeId)
         }
     }
