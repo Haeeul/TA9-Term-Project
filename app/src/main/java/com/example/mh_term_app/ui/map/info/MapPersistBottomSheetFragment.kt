@@ -71,7 +71,9 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
                 else {
                     val df = DecimalFormat("#.#")
                     df.roundingMode = RoundingMode.DOWN
-                    df.format(it)
+
+                    if(df.format(it).length == 1) df.format(it)+".0"
+                    else df.format(it)
                 }
 
                 collapseBinding.apply {
