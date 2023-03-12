@@ -12,7 +12,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context=".ui.map.update.UpdateFacilityInfoFragment">
 
         <TextView
@@ -324,6 +324,7 @@
             android:background="@drawable/round_square_line_grey_8"
             android:hint="@string/hint_info_plus_input"
             android:inputType="textMultiLine"
+            android:lineSpacingExtra="8dp"
             android:maxLines="10"
             android:paddingHorizontal="16dp"
             android:paddingVertical="16dp"
@@ -339,7 +340,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:layout_marginBottom="35dp"
+            android:layout_marginBottom="32dp"
             android:background="@drawable/selector_sign_btn"
             android:enabled="@{vm.isValidSendBtn}"
             android:text="@string/txt_send"
