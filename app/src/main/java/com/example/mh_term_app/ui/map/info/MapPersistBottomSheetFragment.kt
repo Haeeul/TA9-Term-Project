@@ -26,6 +26,8 @@ import com.example.mh_term_app.utils.extension.toast
 import com.example.mh_term_app.utils.listener.TabSelectedListener
 import com.example.mh_term_app.utils.listener.changeTabsFont
 import kr.co.prnd.persistbottomsheetfragment.PersistBottomSheetFragment
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 
 class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCollapseBinding, LayoutInfoExpandBinding>(
@@ -66,7 +68,11 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
                 var rating = ""
 
                 rating = if(it.isNaN()) "-"
-                else it.toString()
+                else {
+                    val df = DecimalFormat("#.#")
+                    df.roundingMode = RoundingMode.DOWN
+                    df.format(it)
+                }
 
                 collapseBinding.apply {
                     rbBottomInfo.rating = it
