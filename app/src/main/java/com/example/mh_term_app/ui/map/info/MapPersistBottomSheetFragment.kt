@@ -199,6 +199,9 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
         expandBinding.btnDetailFavorite.setSingleOnClickListener {
             requireContext().toast(getString(R.string.txt_anvil_feature))
         }
+        expandBinding.btnDetailBack.setSingleOnClickListener {
+            handleBackKeyEvent()
+        }
     }
 
 }
