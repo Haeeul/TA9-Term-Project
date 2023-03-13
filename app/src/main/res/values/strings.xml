@@ -193,5 +193,6 @@
     <string name="txt_source">공공데이터포털 제공</string>
     <string name="desc_recent_search_none">최근 검색 기록이 없습니다.</string>
     <string name="txt_anvil_feature">서비스 준비중입니다.</string>
+    <string name="txt_timeout">다시 한번 시도해주세요.</string>
 
 </resources>

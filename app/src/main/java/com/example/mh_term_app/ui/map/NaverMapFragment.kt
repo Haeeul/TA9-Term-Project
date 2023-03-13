@@ -2,11 +2,9 @@ package com.example.mh_term_app.ui.map
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -44,7 +42,9 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
 
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
     private lateinit var loadingDialog : LoadingDialog
-    
+
+    private var time = true
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,9 +63,19 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
 
         mapViewModel.categoryList.observe(this){
             if(it.isNotEmpty()){
+                time = false
+                mapViewModel.setTimeValue()
                 loadingDialog.dismiss()
                 val activity = activity as MainActivity
                 activity.setCategoryMarkerList(it)
+            }
+        }
+
+        mapViewModel.timeOut.observe(this){
+            if(it && loadingDialog.isShowing && time){
+                mapViewModel.setTimeValue()
+                loadingDialog.dismiss()
+                requireContext().toast(getString(R.string.txt_timeout))
             }
         }
     }
@@ -114,6 +124,8 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
     private fun setOnChipListener(type : String){
         loadingDialog.show()
         mapViewModel.getCategoryList(type)
+        time = true
+        mapViewModel.setTimeOut()
 
         val activity = activity as MainActivity
         activity.setInfoWindowVisibility(false)

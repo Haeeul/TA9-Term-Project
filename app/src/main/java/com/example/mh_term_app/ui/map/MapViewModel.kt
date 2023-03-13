@@ -1,7 +1,8 @@
 package com.example.mh_term_app.ui.map
 
 import android.os.Build
-import android.util.Log
+import android.os.Handler
+import android.os.Looper
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,7 +20,6 @@ import com.example.mh_term_app.data.model.response.ResponsePublicToilet
 import com.example.mh_term_app.data.repository.MapRepository
 import com.example.mh_term_app.data.repository.SearchRepository
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 import java.time.LocalDateTime
 
 class MapViewModel : ViewModel() {
@@ -60,8 +60,23 @@ class MapViewModel : ViewModel() {
     val loading : LiveData<Boolean>
         get() = _loading
 
+    private val _timeOut = MutableLiveData(false)
+    val timeOut : LiveData<Boolean>
+        get() = _timeOut
+
     fun setLoading(visibility : Boolean){
         _loading.value = visibility
+    }
+
+    fun setTimeOut(){
+        _timeOut.value = false
+        Handler(Looper.getMainLooper()).postDelayed({
+            _timeOut.value = true
+        }, 5000)
+    }
+
+    fun setTimeValue(){
+        _timeOut.value = false
     }
 
     fun getCategoryList(type : String){
