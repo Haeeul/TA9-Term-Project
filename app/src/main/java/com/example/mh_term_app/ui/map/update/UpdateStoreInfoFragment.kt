@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
 import com.example.mh_term_app.data.model.UpdateStoreInfo
+import com.example.mh_term_app.data.model.response.PlaceBasicInfo
 import com.example.mh_term_app.databinding.FragmentUpdateStoreInfoBinding
 import com.example.mh_term_app.ui.menu.report.ReportViewModel
 import com.example.mh_term_app.utils.extension.createStoreTimeDialog
@@ -108,7 +109,15 @@ class UpdateStoreInfoFragment(private val storeId : String, private val storeDet
             else requireContext().errorToast()
 
             val activity = activity as UpdatePlaceInfoActivity
-            activity.goToBack()
+            activity.goToBackWithStoreData(PlaceBasicInfo(
+                storeId,
+                "매장",
+                reportPlaceViewModel.addressTxt.value.toString(),
+                reportPlaceViewModel.storeNameTxt.value.toString(),
+                reportPlaceViewModel.storePhoneTxt.value.toString(),
+                reportPlaceViewModel.detailTypeTxt.value.toString(),
+                reportPlaceViewModel.locationTxt.value.toString()
+            ))
         }
     }
 

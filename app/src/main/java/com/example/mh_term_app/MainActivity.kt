@@ -13,6 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.data.model.MarkerList
+import com.example.mh_term_app.data.model.response.PlaceBasicInfo
 import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
 import com.example.mh_term_app.databinding.ActivityMainBinding
 import com.example.mh_term_app.ui.map.MapViewModel
@@ -244,5 +245,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
 
     fun goToSearchListener(){
         navController.navigate(R.id.action_naverMapFragment_to_searchFragment)
+    }
+
+    fun setStoreBasicData(data : PlaceBasicInfo){
+        mapPersistBottomFragment?.setBasicData(data)
     }
 }

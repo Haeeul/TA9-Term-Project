@@ -13,5 +13,5 @@ fun Context.toastLong(msg: String) {
 }
 
 fun Context.errorToast() {
-    Toast.makeText(this, getString(R.string.txt_server_error), Toast.LENGTH_SHORT).show()
+    Toast.makeText(this, getString(R.string.txt_timeout), Toast.LENGTH_SHORT).show()
 }

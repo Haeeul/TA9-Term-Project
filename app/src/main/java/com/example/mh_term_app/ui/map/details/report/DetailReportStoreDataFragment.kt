@@ -1,11 +1,17 @@
 package com.example.mh_term_app.ui.map.details.report
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import com.example.mh_term_app.MHApplication
+import com.example.mh_term_app.MainActivity
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
 import com.example.mh_term_app.data.model.OriginStoreInfo
@@ -13,6 +19,7 @@ import com.example.mh_term_app.data.model.ReportPlaceAddress
 import com.example.mh_term_app.data.model.StoreTime
 import com.example.mh_term_app.data.model.Time
 import com.example.mh_term_app.data.model.request.RequestPlaceStore
+import com.example.mh_term_app.data.model.response.PlaceBasicInfo
 import com.example.mh_term_app.databinding.FragmentDetailReportStoreDataBinding
 import com.example.mh_term_app.databinding.ViewPlaceInfoItemNoneBinding
 import com.example.mh_term_app.ui.map.MapViewModel
@@ -35,14 +42,19 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
     private var rvStoreWarningAdapter = DetailChipAdapter()
     private val mapViewModel : MapViewModel by viewModels()
 
+    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+
     lateinit var storeAddressInfo : ReportPlaceAddress
     lateinit var storeDetailInfo : OriginStoreInfo
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         mapViewModel.getStoreInfo(storeId)
         mapViewModel.setLoading(true)
+
+        setResultUpdate()
     }
 
     override fun onResume() {
@@ -103,7 +115,7 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
         updateIntent.putExtra("id",storeId)
         updateIntent.putExtra("placeAddressInfo", storeAddressInfo)
         updateIntent.putExtra("storeDetailInfo", storeDetailInfo)
-        startActivity(updateIntent)
+        resultLauncher.launch(updateIntent)
     }
 
     @SuppressLint("NotifyDataSetChanged", "SetTextI18n")
@@ -233,5 +245,17 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
         if(data.phone == "none") setStoreDataVisibility("phone")
         if(data.targetList == null || data.targetList.isEmpty()) setStoreDataVisibility("target")
         if(data.warningList == null || data.warningList.isEmpty()) setStoreDataVisibility("warning")
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun setResultUpdate(){
+        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
+            if (result.resultCode == Activity.RESULT_OK){
+                val data = result.data?.getParcelableExtra<PlaceBasicInfo>("updateResult")!!
+
+                val activity = activity as MainActivity
+                activity.setStoreBasicData(data)
+            }
+        }
     }
 }

@@ -20,3 +20,15 @@ data class PlaceInfo(
     val detailType : String = "",
     val location : String = ""
 ) : Parcelable
+
+@Parcelize
+data class PlaceBasicInfo(
+    val id : String = "",
+    val type: String = "",
+    val address: String = "",
+    val name: String = "",
+    val phone: String = "",
+    val detailType : String = "",
+    val location : String = ""
+) : Parcelable
+

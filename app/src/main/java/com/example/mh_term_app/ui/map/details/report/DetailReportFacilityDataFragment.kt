@@ -1,16 +1,24 @@
 package com.example.mh_term_app.ui.map.details.report
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import com.example.mh_term_app.MHApplication
+import com.example.mh_term_app.MainActivity
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
 import com.example.mh_term_app.data.model.ReportPlaceAddress
 import com.example.mh_term_app.data.model.UpdateFacilityInfo
 import com.example.mh_term_app.data.model.request.RequestPlaceFacility
+import com.example.mh_term_app.data.model.response.PlaceBasicInfo
 import com.example.mh_term_app.databinding.FragmentDetailReportFacilityDataBinding
 import com.example.mh_term_app.databinding.ViewPlaceInfoItemNoneBinding
 import com.example.mh_term_app.ui.map.MapViewModel
@@ -32,14 +40,19 @@ class DetailReportFacilityDataFragment(private val facilityId : String) : BaseFr
     private var rvFacilityWarningAdapter = DetailChipAdapter()
     private val mapViewModel : MapViewModel by viewModels()
 
+    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+
     lateinit var facilityAddressInfo : ReportPlaceAddress
     lateinit var facilityDetailInfo : UpdateFacilityInfo
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         mapViewModel.getFacilityInfo(facilityId)
         mapViewModel.setLoading(true)
+
+        setResultUpdate()
     }
 
     override fun onResume() {
@@ -97,7 +110,7 @@ class DetailReportFacilityDataFragment(private val facilityId : String) : BaseFr
         updateIntent.putExtra("id",facilityId)
         updateIntent.putExtra("placeAddressInfo", facilityAddressInfo)
         updateIntent.putExtra("facilityDetailInfo", facilityDetailInfo)
-        startActivity(updateIntent)
+        resultLauncher.launch(updateIntent)
     }
 
     @SuppressLint("NotifyDataSetChanged", "SetTextI18n")
@@ -187,4 +200,15 @@ class DetailReportFacilityDataFragment(private val facilityId : String) : BaseFr
         if(data.warningList == null || data.warningList.isEmpty()) setFacilityDataVisibility("warning")
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun setResultUpdate(){
+        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
+            if (result.resultCode == Activity.RESULT_OK){
+                val data = result.data?.getParcelableExtra<PlaceBasicInfo>("updateResult")!!
+
+                val activity = activity as MainActivity
+                activity.setStoreBasicData(data)
+            }
+        }
+    }
 }

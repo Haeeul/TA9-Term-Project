@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseFragment
 import com.example.mh_term_app.data.model.UpdateFacilityInfo
+import com.example.mh_term_app.data.model.response.PlaceBasicInfo
 import com.example.mh_term_app.databinding.FragmentUpdateFacilityInfoBinding
 import com.example.mh_term_app.ui.menu.report.ReportViewModel
 import com.example.mh_term_app.utils.extension.errorToast
@@ -122,7 +123,17 @@ class UpdateFacilityInfoFragment(private val facilityId : String, private val fa
             else requireContext().errorToast()
 
             val activity = activity as UpdatePlaceInfoActivity
-            activity.goToBack()
+            activity.goToBackWithFacilityData(
+                PlaceBasicInfo(
+                facilityId,
+                "시설물",
+                reportPlaceViewModel.addressTxt.value.toString(),
+                reportPlaceViewModel.storeNameTxt.value.toString(),
+                reportPlaceViewModel.storePhoneTxt.value.toString(),
+                reportPlaceViewModel.detailTypeTxt.value.toString(),
+                reportPlaceViewModel.locationTxt.value.toString()
+            )
+            )
         }
     }
 

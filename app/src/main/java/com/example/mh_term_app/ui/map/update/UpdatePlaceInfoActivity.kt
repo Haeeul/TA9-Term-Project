@@ -1,9 +1,13 @@
 package com.example.mh_term_app.ui.map.update
 
+import android.content.Intent
 import com.example.mh_term_app.R
 import com.example.mh_term_app.base.BaseActivity
 import com.example.mh_term_app.data.model.*
+import com.example.mh_term_app.data.model.response.PlaceBasicInfo
 import com.example.mh_term_app.databinding.ActivityUpdatePlaceInfoBinding
+import com.example.mh_term_app.ui.map.details.report.DetailReportFacilityDataFragment
+import com.example.mh_term_app.ui.map.details.report.DetailReportStoreDataFragment
 import com.example.mh_term_app.ui.map.info.ViewPagerAdapter
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 import com.example.mh_term_app.utils.listener.TabSelectedListener
@@ -96,5 +100,20 @@ class UpdatePlaceInfoActivity() : BaseActivity<ActivityUpdatePlaceInfoBinding>()
 
     fun goToBack(){
         finish()
+    }
+
+    fun goToBackWithStoreData(data : PlaceBasicInfo){
+        val updateStoreIntent = Intent(this, DetailReportStoreDataFragment::class.java)
+        updateStoreIntent.putExtra("updateResult",data)
+        setResult(RESULT_OK,updateStoreIntent)
+        finish()
+    }
+
+    fun goToBackWithFacilityData(data : PlaceBasicInfo){
+        val updateFacilityIntent = Intent(this, DetailReportFacilityDataFragment::class.java)
+        updateFacilityIntent.putExtra("updateResult",data)
+        setResult(RESULT_OK,updateFacilityIntent)
+        finish()
+
     }
 }

@@ -9,6 +9,7 @@ import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import com.example.mh_term_app.R
+import com.example.mh_term_app.data.model.response.PlaceBasicInfo
 import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
 import com.example.mh_term_app.databinding.LayoutInfoCollapseBinding
 import com.example.mh_term_app.databinding.LayoutInfoExpandBinding
@@ -60,6 +61,11 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
                         .replace(containerViewId, this, TAG)
                         .commitAllowingStateLoss()
                 }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
     }
 
     private fun initObserver(){
@@ -131,6 +137,33 @@ class MapPersistBottomSheetFragment() : PersistBottomSheetFragment<LayoutInfoCol
         setPlaceInfo(item)
         setPlaceDetailData(item)
         initListener()
+    }
+
+    fun setBasicData(item : PlaceBasicInfo){
+        placeId = item.id
+
+        collapseBinding.apply {
+            txtBottomInfoName.text = when(item.type){
+                "시설물" -> item.location + " | " + item.detailType
+                else -> item.name
+            }
+        }
+
+        collapseBinding.btnBottomInfoCall.setSingleOnClickListener {
+            goToCall(item.phone)
+        }
+
+        when (item.type) {
+            "매장" -> setTypeName(item.detailType, item.name)
+            "시설물" -> setTypeName(item.location, item.detailType)
+            else -> setTypeName(item.type, item.name)
+        }
+
+        setCallBtnVisibility(item.phone)
+
+        expandBinding.btnDetailCall.setSingleOnClickListener {
+            goToCall(item.phone)
+        }
     }
 
     private fun setPlaceInfo(item : ResponseCategoryPlace){
