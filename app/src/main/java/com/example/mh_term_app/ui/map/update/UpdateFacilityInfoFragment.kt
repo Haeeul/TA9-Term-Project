@@ -13,6 +13,7 @@ import com.example.mh_term_app.ui.menu.report.ReportViewModel
 import com.example.mh_term_app.utils.extension.errorToast
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 import com.example.mh_term_app.utils.extension.toast
+import com.example.mh_term_app.utils.view.LoadingDialog
 
 class UpdateFacilityInfoFragment(private val facilityId : String, private val facilityDetailInfo: UpdateFacilityInfo) :
     BaseFragment<FragmentUpdateFacilityInfoBinding>() {
@@ -20,6 +21,7 @@ class UpdateFacilityInfoFragment(private val facilityId : String, private val fa
         get() = R.layout.fragment_update_facility_info
 
     private val reportPlaceViewModel: ReportViewModel by viewModels()
+    private lateinit var loadingDialog : LoadingDialog
 
     private lateinit var detailTypeButtons : List<RadioButton>
 
@@ -39,6 +41,8 @@ class UpdateFacilityInfoFragment(private val facilityId : String, private val fa
         checkDetailTypeInfo()
         checkTargetInfo()
         checkWarningInfo()
+
+        loadingDialog = LoadingDialog(requireContext())
     }
 
     private fun checkDetailLocationInfo(){
@@ -113,6 +117,7 @@ class UpdateFacilityInfoFragment(private val facilityId : String, private val fa
         checkUpdateList(reportPlaceViewModel.warningList)
 
         reportPlaceViewModel.isValidUpdateFacility.observe(this){
+            loadingDialog.dismiss()
             if(it) requireContext().toast("제안 완료")
             else requireContext().errorToast()
 
@@ -160,6 +165,7 @@ class UpdateFacilityInfoFragment(private val facilityId : String, private val fa
         onUpdateFacilityWarningClicked(binding.cbUpdateFacilityWarningWidth)
 
         binding.btnUpdateInfoFacilityComplete.setSingleOnClickListener {
+            loadingDialog.show()
             reportPlaceViewModel.postUpdateFacilityInfo(facilityId)
         }
     }

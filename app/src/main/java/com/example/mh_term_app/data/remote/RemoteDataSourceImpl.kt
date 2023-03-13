@@ -315,8 +315,57 @@ class RemoteDataSourceImpl : RemoteDataSource {
         var result = false
 
         try {
-            db.collection("updateInfo")
-                .add(place)
+            db.collection("places")
+                .document(place.id)
+                .update("address", place.newAddress)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                    result = true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error adding documents.", exception)
+                    result = false
+                }.await()
+        } catch (e: FirebaseException) {
+            Log.e(TAG, e.message.toString())
+        }
+
+        try {
+            db.collection("places")
+                .document(place.id)
+                .update("detailAddress", place.newDetailAddress)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                    result = true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error adding documents.", exception)
+                    result = false
+                }.await()
+        } catch (e: FirebaseException) {
+            Log.e(TAG, e.message.toString())
+        }
+
+        try {
+            db.collection("places")
+                .document(place.id)
+                .update("latitude", place.newLatitude)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                    result = true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error adding documents.", exception)
+                    result = false
+                }.await()
+        } catch (e: FirebaseException) {
+            Log.e(TAG, e.message.toString())
+        }
+
+        try {
+            db.collection("places")
+                .document(place.id)
+                .update("longitude", place.newLongitude)
                 .addOnSuccessListener { documentReference ->
                     Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
                     result = true
@@ -336,8 +385,105 @@ class RemoteDataSourceImpl : RemoteDataSource {
         var result = false
 
         try {
-            db.collection("updateInfo")
-                .add(store)
+            db.collection("places")
+                .document(store.id)
+                .update("detailType", store.detailType)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                    result = true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error adding documents.", exception)
+                    result = false
+                }.await()
+        } catch (e: FirebaseException) {
+            Log.e(TAG, e.message.toString())
+        }
+
+        try {
+            db.collection("places")
+                .document(store.id)
+                .update("name", store.name)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                    result = true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error adding documents.", exception)
+                    result = false
+                }.await()
+        } catch (e: FirebaseException) {
+            Log.e(TAG, e.message.toString())
+        }
+
+        try {
+            db.collection("places")
+                .document(store.id)
+                .update("phone", store.phone)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                    result = true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error adding documents.", exception)
+                    result = false
+                }.await()
+        } catch (e: FirebaseException) {
+            Log.e(TAG, e.message.toString())
+        }
+
+        try {
+            db.collection("places")
+                .document(store.id)
+                .update("time", store.time)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                    result = true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error adding documents.", exception)
+                    result = false
+                }.await()
+        } catch (e: FirebaseException) {
+            Log.e(TAG, e.message.toString())
+        }
+
+        try {
+            db.collection("places")
+                .document(store.id)
+                .update("targetList", store.targetList)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                    result = true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error adding documents.", exception)
+                    result = false
+                }.await()
+        } catch (e: FirebaseException) {
+            Log.e(TAG, e.message.toString())
+        }
+
+        try {
+            db.collection("places")
+                .document(store.id)
+                .update("warningList", store.warningList)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                    result = true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error adding documents.", exception)
+                    result = false
+                }.await()
+        } catch (e: FirebaseException) {
+            Log.e(TAG, e.message.toString())
+        }
+
+        try {
+            db.collection("places")
+                .document(store.id)
+                .update("plusInfo", store.plusInfo)
                 .addOnSuccessListener { documentReference ->
                     Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
                     result = true
@@ -357,8 +503,73 @@ class RemoteDataSourceImpl : RemoteDataSource {
         var result = false
 
         try {
-            db.collection("updateInfo")
-                .add(facility)
+            db.collection("places")
+                .document(facility.id)
+                .update("detailType", facility.detailType)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                    result = true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error adding documents.", exception)
+                    result = false
+                }.await()
+        } catch (e: FirebaseException) {
+            Log.e(TAG, e.message.toString())
+        }
+
+        try {
+            db.collection("places")
+                .document(facility.id)
+                .update("location", facility.location)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                    result = true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error adding documents.", exception)
+                    result = false
+                }.await()
+        } catch (e: FirebaseException) {
+            Log.e(TAG, e.message.toString())
+        }
+
+        try {
+            db.collection("places")
+                .document(facility.id)
+                .update("targetList", facility.targetList)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                    result = true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error adding documents.", exception)
+                    result = false
+                }.await()
+        } catch (e: FirebaseException) {
+            Log.e(TAG, e.message.toString())
+        }
+
+        try {
+            db.collection("places")
+                .document(facility.id)
+                .update("warningList", facility.warningList)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
+                    result = true
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error adding documents.", exception)
+                    result = false
+                }.await()
+        } catch (e: FirebaseException) {
+            Log.e(TAG, e.message.toString())
+        }
+
+        try {
+            db.collection("places")
+                .document(facility.id)
+                .update("plusInfo", facility.plusInfo)
                 .addOnSuccessListener { documentReference ->
                     Log.d(TAG, "DocumentSnapshot added with ID: $documentReference")
                     result = true
