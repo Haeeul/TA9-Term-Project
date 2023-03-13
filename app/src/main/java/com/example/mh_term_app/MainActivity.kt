@@ -143,7 +143,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
         }
 
         var zoom = 13.0
-        if(data[0].data.type == "매장" || data[0].data.type == "시설물") zoom = 15.0
+        if(data[0].data.type == "매장" || data[0].data.type == "시설물") {
+            zoom = 15.0
+
+        }
 
         val cameraPosition = CameraPosition(
             LatLng(

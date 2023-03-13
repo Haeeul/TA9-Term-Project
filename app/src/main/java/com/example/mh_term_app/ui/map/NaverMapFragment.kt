@@ -21,6 +21,7 @@ import com.example.mh_term_app.base.BaseFragment
 import com.example.mh_term_app.data.model.response.ResponseCategoryPlace
 import com.example.mh_term_app.databinding.FragmentNaverMapBinding
 import com.example.mh_term_app.ui.map.search.SearchPlaceActivity
+import com.example.mh_term_app.ui.map.search.SearchViewModel
 import com.example.mh_term_app.ui.menu.EditUserInfoActivity
 import com.example.mh_term_app.ui.menu.report.ReportPlaceActivity
 import com.example.mh_term_app.ui.menu.review.UserReviewActivity
@@ -32,6 +33,9 @@ import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 import com.example.mh_term_app.utils.extension.toast
 import com.example.mh_term_app.utils.view.LoadingDialog
 import com.google.android.material.chip.Chip
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
@@ -39,6 +43,7 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
         get() = R.layout.fragment_naver_map
     private lateinit var callback: OnBackPressedCallback
     private val mapViewModel : MapViewModel by viewModels()
+    private val searchViewModel : SearchViewModel by viewModels()
 
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
     private lateinit var loadingDialog : LoadingDialog
@@ -195,6 +200,9 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
                     context?.toast("로그아웃되었습니다.")
                     inflateMenu()
                     binding.drawerLayout.closeDrawers()
+                    CoroutineScope(Dispatchers.IO).launch{
+                        searchViewModel.deleteAllRecentSearch()
+                    }
                 }
             }
             true
