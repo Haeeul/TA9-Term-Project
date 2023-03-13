@@ -42,6 +42,13 @@ class DetailReportFacilityDataFragment(private val facilityId : String) : BaseFr
         mapViewModel.setLoading(true)
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        mapViewModel.getFacilityInfo(facilityId)
+        mapViewModel.setLoading(true)
+    }
+
     override fun initView() {
         super.initView()
 

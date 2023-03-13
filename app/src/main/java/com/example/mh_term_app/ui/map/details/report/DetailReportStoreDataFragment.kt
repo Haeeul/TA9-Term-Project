@@ -45,6 +45,13 @@ class DetailReportStoreDataFragment(private val storeId : String) : BaseFragment
         mapViewModel.setLoading(true)
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        mapViewModel.getStoreInfo(storeId)
+        mapViewModel.setLoading(true)
+    }
+
     override fun initView() {
         super.initView()
 
