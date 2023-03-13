@@ -142,17 +142,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
             }
         }
 
-        if(data.isNotEmpty()){
-            val cameraUpdate = CameraUpdate.scrollTo(LatLng(data[0].data.latitude,data[0].data.longitude))
-                .animate(CameraAnimation.Fly, 2000)
-            naverMap.moveCamera(cameraUpdate)
+        var zoom = 13.0
+        if(data[0].data.type == "매장" || data[0].data.type == "시설물") zoom = 15.0
 
-            mapPersistBottomFragment?.apply {
-                setPlaceData(data[0])
-            }
-            setInfoWindowVisibility(true)
-        }
-
+        val cameraPosition = CameraPosition(
+            LatLng(
+                naverMap.cameraPosition.target.latitude,
+                naverMap.cameraPosition.target.longitude
+            ), zoom
+        )
+        naverMap.cameraPosition = cameraPosition
     }
 
     fun setSearchPlaceMarker(data: ResponseCategoryPlace){
