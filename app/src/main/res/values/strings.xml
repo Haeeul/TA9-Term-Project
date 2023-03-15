@@ -83,6 +83,7 @@
     <string name="title_menu_logout">로그아웃</string>
     <string name="desc_menu_user_none">로그인 후\n이용해주세요:)</string>
     <string name="desc_favorite_place_click">장소를 클릭하면 자세히 살펴볼 수 있습니다.</string>
+    <string name="desc_logout">정말 로그아웃하시겠습니까?</string>
 
     <!-- menu : report/place -->
     <string name="desc_report_place_start">제보 위치</string>

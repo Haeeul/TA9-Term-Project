@@ -53,6 +53,9 @@ class MoveDialog : DialogFragment(), View.OnClickListener {
             "login" -> {
                 setContents(R.string.desc_need_login, "이동")
             }
+            "logout" -> {
+                setContents(R.string.desc_logout, "로그아웃")
+            }
         }
 
         binding.btnMoveDialogConfirm.setSingleOnClickListener {
@@ -62,6 +65,7 @@ class MoveDialog : DialogFragment(), View.OnClickListener {
 
         binding.btnMoveDialogCancel.setSingleOnClickListener {
             dismiss()
+            listener?.onNegativeClicked()
         }
     }
 

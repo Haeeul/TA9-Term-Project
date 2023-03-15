@@ -28,6 +28,7 @@ import com.example.mh_term_app.ui.menu.review.UserReviewActivity
 import com.example.mh_term_app.ui.sign.`in`.SignInActivity
 import com.example.mh_term_app.ui.sign.up.SignUpActivity
 import com.example.mh_term_app.utils.databinding.BindingAdapter.setUserTypeChip
+import com.example.mh_term_app.utils.extension.createGoToDialog
 import com.example.mh_term_app.utils.extension.intent
 import com.example.mh_term_app.utils.extension.setSingleOnClickListener
 import com.example.mh_term_app.utils.extension.toast
@@ -196,13 +197,15 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(){
                 R.id.go_to_sign_in -> intent(SignInActivity::class.java)
                 R.id.go_to_sign_up -> intent(SignUpActivity::class.java)
                 else -> {
-                    MHApplication.prefManager.clear()
-                    context?.toast("로그아웃되었습니다.")
-                    inflateMenu()
-                    binding.drawerLayout.closeDrawers()
-                    CoroutineScope(Dispatchers.IO).launch{
-                        searchViewModel.deleteAllRecentSearch()
-                    }
+                    requireContext().createGoToDialog(parentFragmentManager, "logout",{
+                        MHApplication.prefManager.clear()
+                        context?.toast("로그아웃되었습니다.")
+                        inflateMenu()
+                        binding.drawerLayout.closeDrawers()
+                        CoroutineScope(Dispatchers.IO).launch{
+                            searchViewModel.deleteAllRecentSearch()
+                        }
+                    },{})
                 }
             }
             true
