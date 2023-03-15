@@ -44,6 +44,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
 
     private lateinit var navController: NavController
 
+    var userLocation = false
+
     companion object {
         const val LOCATION_PERMISSION_REQUEST_CODE = 1000
     }
@@ -66,7 +68,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
             if (!locationSource.isActivated) { // 권한 거부됨
                 toast("위치 권한을 허용해주세요")
                 naverMap.locationTrackingMode = LocationTrackingMode.None
-                naverMap.locationOverlay.isVisible = false
             }else{
                 naverMap.locationTrackingMode = LocationTrackingMode.Follow
                 naverMap.locationOverlay.isVisible = true
@@ -123,7 +124,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
     }
 
     fun setCategoryMarkerList(data: MutableList<ResponseCategoryPlace>){
+        userLocation = true
         resetMarkers()
+        naverMap.locationSource = locationSource
+        checkPermission()
 
         data.forEach {
             val marker = Marker().apply {
@@ -142,19 +146,25 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
             }
         }
 
-        var zoom = 13.0
-        if(data[0].data.type == "매장" || data[0].data.type == "시설물") {
-            zoom = 15.0
+        naverMap.addOnLocationChangeListener { location ->
+            var zoom = 13.0
 
+            if(data[0].data.type == "매장" || data[0].data.type == "시설물") {
+                zoom = 15.0
+            }
+
+            if(userLocation){
+                val cameraPosition = CameraPosition(
+                LatLng(
+                    location.latitude,
+                    location.longitude
+                ), zoom
+                 )
+                naverMap.cameraPosition = cameraPosition
+                userLocation = false
+            }
         }
 
-        val cameraPosition = CameraPosition(
-            LatLng(
-                naverMap.cameraPosition.target.latitude,
-                naverMap.cameraPosition.target.longitude
-            ), zoom
-        )
-        naverMap.cameraPosition = cameraPosition
     }
 
     fun setSearchPlaceMarker(data: ResponseCategoryPlace){
@@ -194,7 +204,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnMapReadyCallback{
     private fun checkPermission(){
         if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+
+        {
             naverMap.locationTrackingMode = LocationTrackingMode.Follow
+
+        }
         else
             naverMap.locationTrackingMode = LocationTrackingMode.None
     }
